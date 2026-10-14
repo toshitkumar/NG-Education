@@ -169,8 +169,7 @@ function initModals() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
-      closeAllModals();
-      showToast(`⚡ ${formType} submitted & logged! Welcome to NG EDUCATION.`);
+      showThankYouPopup(nameVal);
     });
   });
 }
@@ -184,7 +183,13 @@ function openModal(modalId) {
   }
 }
 
+let thankYouTimer = null;
+
 function closeAllModals() {
+  if (thankYouTimer) {
+    clearTimeout(thankYouTimer);
+    thankYouTimer = null;
+  }
   document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
   document.body.style.overflow = '';
 }
@@ -226,13 +231,48 @@ function initContactForm() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
-      showToast(`Thank you, ${name}! Your message is recorded. Toshit & Arpit will connect with you within 24 hours at 8077718423.`);
+      showThankYouPopup(name);
     });
   }
 }
 
 /* =====================================================================
-   4. TOAST NOTIFICATION
+   4. THANK YOU POPUP (2 Seconds Auto-Close Modal)
+   ===================================================================== */
+function showThankYouPopup(customName) {
+  closeAllModals();
+  const modal = document.getElementById('modalThankYou');
+  if (!modal) return;
+
+  const desc = modal.querySelector('.thankyou-desc');
+  if (desc) {
+    if (customName && customName !== 'Lead' && customName !== 'Friend') {
+      desc.textContent = `Thank you, ${customName}! Our representative will connect with you shortly.`;
+    } else {
+      desc.textContent = 'Thank you! Our representative will connect with you shortly.';
+    }
+  }
+
+  // Trigger reflow to restart countdown progress bar animation
+  const fill = modal.querySelector('.thankyou-progress-fill');
+  if (fill) {
+    fill.style.animation = 'none';
+    void fill.offsetWidth;
+    fill.style.animation = 'progressCountdown 2s linear forwards';
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  thankYouTimer = setTimeout(() => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    thankYouTimer = null;
+  }, 2000);
+}
+
+/* =====================================================================
+   5. TOAST NOTIFICATION (Auxiliary Notice)
    ===================================================================== */
 function showToast(message) {
   let toast = document.getElementById('toastNotice');
