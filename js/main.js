@@ -4,12 +4,45 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initTabs();
   initModals();
   initContactForm();
   initMobileNav();
   init3DModelInteractions();
 });
+
+/* =====================================================================
+   0. THEME TOGGLE (Bright Vibrant / Cyber Dark)
+   ===================================================================== */
+function initThemeToggle() {
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  if (!toggleBtn) return;
+
+  const savedTheme = localStorage.getItem('ng_theme') || 'bright';
+  if (savedTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleBtn.textContent = '🌙';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    toggleBtn.textContent = '☀️';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      toggleBtn.textContent = '☀️';
+      localStorage.setItem('ng_theme', 'bright');
+      showToast('☀️ Bright Vibrant Mode Enabled');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      toggleBtn.textContent = '🌙';
+      localStorage.setItem('ng_theme', 'dark');
+      showToast('🌙 Cyber Dark Mode Enabled');
+    }
+  });
+}
 
 /* =====================================================================
    1. COURSE TABS (Single vs Combo Courses)
