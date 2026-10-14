@@ -247,9 +247,9 @@ function showThankYouPopup(customName) {
   const desc = modal.querySelector('.thankyou-desc');
   if (desc) {
     if (customName && customName !== 'Lead' && customName !== 'Friend') {
-      desc.textContent = `Thank you, ${customName}! Our expert will connect with you shortly.`;
+      desc.textContent = `Thank you, ${customName}! Your message is recorded. Our Expert will connect with you within 24 Hours.`;
     } else {
-      desc.textContent = 'Thank you! Our expert will connect with you shortly.';
+      desc.textContent = 'Thank you! Your message is recorded. Our Expert will connect with you within 24 Hours.';
     }
   }
 
@@ -258,7 +258,7 @@ function showThankYouPopup(customName) {
   if (fill) {
     fill.style.animation = 'none';
     void fill.offsetWidth;
-    fill.style.animation = 'progressCountdown 2s linear forwards';
+    fill.style.animation = 'progressCountdown 2.5s linear forwards';
   }
 
   modal.classList.add('active');
@@ -268,7 +268,7 @@ function showThankYouPopup(customName) {
     modal.classList.remove('active');
     document.body.style.overflow = '';
     thankYouTimer = null;
-  }, 2000);
+  }, 2500);
 }
 
 /* =====================================================================
