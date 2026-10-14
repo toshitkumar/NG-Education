@@ -89,32 +89,83 @@
 
       <div class="container hero-main-layout">
         
-        <!-- Left Column: Key Feature Cards -->
+        <!-- Left Column: Interactive Image Slider (Images can be easily replaced in assets/images/) -->
         <div class="hero-visual-col">
-          <div class="hero-feature-chips">
-            <div class="feature-pill-card">
-              <div class="pill-icon-box">🤖</div>
-              <div class="pill-info">
-                <h4>Hands-On Robotics</h4>
-                <p>Arduino sensors, circuits & smart bots</p>
+          <div class="hero-slider-card">
+            
+            <div class="hero-slides-viewport">
+              
+              <!-- SLIDE 1: Hands-On Robotics & Arduino -->
+              <div class="hero-slide active" data-slide="0">
+                <img src="assets/images/slide1_robotics.jpg" alt="Hands-On Robotics & Arduino" class="slide-img">
+                <div class="slide-overlay">
+                  <div class="slide-badge">
+                    <span class="slide-badge-dot"></span>
+                    <span>🤖 Hands-On Robotics</span>
+                  </div>
+                  <div class="slide-text">
+                    <h3 class="slide-title">Arduino & Smart Bots</h3>
+                    <p class="slide-subtitle">Arduino sensors, circuits & smart bots</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SLIDE 2: Artificial Intelligence & Computer Vision -->
+              <div class="hero-slide" data-slide="1">
+                <img src="assets/images/slide2_ai.jpg" alt="Artificial Intelligence & Vision Workstation" class="slide-img">
+                <div class="slide-overlay">
+                  <div class="slide-badge">
+                    <span class="slide-badge-dot"></span>
+                    <span>🧠 Artificial Intelligence</span>
+                  </div>
+                  <div class="slide-text">
+                    <h3 class="slide-title">AI & Computer Vision</h3>
+                    <p class="slide-subtitle">Computer vision & predictive algorithms</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SLIDE 3: STEM School Lab & Open to All -->
+              <div class="hero-slide" data-slide="2">
+                <img src="assets/images/slide3_stem_lab.jpg" alt="Grade 5-10 & College STEM Lab" class="slide-img">
+                <div class="slide-overlay">
+                  <div class="slide-badge">
+                    <span class="slide-badge-dot"></span>
+                    <span>🏫 Grade 5–10 & Open to All</span>
+                  </div>
+                  <div class="slide-text">
+                    <h3 class="slide-title">Hands-On STEM Labs</h3>
+                    <p class="slide-subtitle">School curriculum & college upskilling</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Slider Arrows (Previous & Next) -->
+            <button class="slider-arrow slider-arrow-prev" aria-label="Previous Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button class="slider-arrow slider-arrow-next" aria-label="Next Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+
+            <!-- Slider Bottom Pagination Dots & Counter -->
+            <div class="slider-pagination-bar">
+              <div class="slider-dots-container">
+                <button class="slider-dot active" data-index="0" aria-label="Go to slide 1"></button>
+                <button class="slider-dot" data-index="1" aria-label="Go to slide 2"></button>
+                <button class="slider-dot" data-index="2" aria-label="Go to slide 3"></button>
+              </div>
+              <div class="slider-counter">
+                <span id="sliderCurrentNum">01</span> / <span>03</span>
               </div>
             </div>
 
-            <div class="feature-pill-card">
-              <div class="pill-icon-box">🧠</div>
-              <div class="pill-info">
-                <h4>Artificial Intelligence</h4>
-                <p>Computer vision & predictive algorithms</p>
-              </div>
-            </div>
-
-            <div class="feature-pill-card">
-              <div class="pill-icon-box">🏫</div>
-              <div class="pill-info">
-                <h4>Grade 5–10 & Open to All</h4>
-                <p>School curriculum & college upskilling</p>
-              </div>
-            </div>
           </div>
         </div>
 

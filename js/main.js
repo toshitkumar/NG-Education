@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactForm();
   initMobileNav();
   initCarouselDots();
+  initHeroSlider();
 });
 
 /* =====================================================================
@@ -167,4 +168,121 @@ function initCarouselDots() {
       dot.classList.add('active');
     });
   });
+}
+
+/* =====================================================================
+   7. HERO IMAGE SLIDER (Interactive with Auto-Play & Swipe)
+   ===================================================================== */
+function initHeroSlider() {
+  const slider = document.querySelector('.hero-slider-card');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.hero-slide');
+  const dots = slider.querySelectorAll('.slider-dot');
+  const counter = slider.querySelector('#sliderCurrentNum');
+  const prevBtn = slider.querySelector('.slider-arrow-prev');
+  const nextBtn = slider.querySelector('.slider-arrow-next');
+
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  const slideInterval = 4000; // 4 seconds
+
+  function showSlide(index) {
+    if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+
+    if (counter) {
+      counter.textContent = String(currentIndex + 1).padStart(2, '0');
+    }
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, slideInterval);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+      startAutoplay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+      startAutoplay();
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+      if (!isNaN(targetIndex)) {
+        showSlide(targetIndex);
+        startAutoplay();
+      }
+    });
+  });
+
+  // Pause on hover
+  slider.addEventListener('mouseenter', stopAutoplay);
+  slider.addEventListener('mouseleave', startAutoplay);
+
+  // Mobile Touch Swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slider.addEventListener('touchstart', (e) => {
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+  }, { passive: true });
+
+  slider.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches.length > 0) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }
+  }, { passive: true });
+
+  function handleSwipe() {
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        showSlide(currentIndex + 1); // Swipe left -> next
+      } else {
+        showSlide(currentIndex - 1); // Swipe right -> prev
+      }
+      startAutoplay();
+    }
+  }
+
+  // Initialize first slide and start auto-play
+  showSlide(0);
+  startAutoplay();
 }
