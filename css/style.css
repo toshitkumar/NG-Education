@@ -1425,6 +1425,28 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(4px);
 }
 
+.footer-team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 10px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.footer-team-item {
+  color: #FFFFFF;
+}
+
+.footer-team-role {
+  color: #38BDF8;
+  font-weight: 700;
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;
