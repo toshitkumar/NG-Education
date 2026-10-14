@@ -51,11 +51,25 @@ async function logLeadToGoogleSheet(data) {
     return;
   }
   try {
+    const params = new URLSearchParams();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params.append(key, data[key]);
+      }
+    }
+    // Include field aliases for complete compatibility with Google Apps Script
+    if (data.name) params.append('contactName', data.name);
+    if (data.contact) params.append('contactEmail', data.contact);
+    if (data.interest) params.append('contactSubject', data.interest);
+    if (data.message) params.append('contactMessage', data.message);
+
     await fetch(GOOGLE_SHEET_CONFIG.webAppUrl, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params.toString()
     });
   } catch (err) {
     console.warn('Google Sheet webhook notice:', err);
