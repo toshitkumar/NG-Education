@@ -56,38 +56,35 @@
        ===================================================================== -->
   <section class="hero-wrapper" id="home">
     
-    <!-- Multi-Layer Fluid Wave Transition SVG -->
+    <!-- Multi-Layer Fluid Wave Transition SVG (Hanging from top into white canvas) -->
     <div class="hero-wave-canvas">
-      <!-- Floating 3D Spheres as in Reference -->
+      <!-- Floating Solid Spheres as in Reference -->
       <div class="floating-sphere sphere-1"></div>
       <div class="floating-sphere sphere-2"></div>
       <div class="floating-sphere sphere-3"></div>
       <div class="floating-sphere sphere-4"></div>
       <div class="floating-sphere sphere-5"></div>
 
-      <!-- Layered Fluid Wave Graphic (100% Solid Colors) -->
-      <svg class="wave-svg" viewBox="0 0 1440 280" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Layered Fluid Wave Graphic (100% Solid Colors, hanging from top y=0 into white canvas) -->
+      <svg class="wave-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Back Deep Purple/Indigo Wave Layer -->
-        <path d="M0,40 C180,110 320,0 520,70 C720,140 880,20 1080,80 C1240,130 1360,60 1440,75 L1440,280 L0,280 Z" fill="#3B287E"/>
+        <path d="M0,0 L1440,0 L1440,75 C1280,145 1100,50 920,110 C740,170 560,40 380,120 C220,170 100,60 0,110 Z" fill="#3B287E"/>
         
         <!-- Mid Royal Blue Wave Layer -->
-        <path d="M0,90 C160,180 340,50 560,120 C760,190 920,80 1140,150 C1280,190 1380,120 1440,135 L1440,280 L0,280 Z" fill="#1D4ED8"/>
+        <path d="M0,0 L1440,0 L1440,125 C1300,65 1150,155 960,85 C780,145 620,75 440,155 C260,105 120,165 0,135 Z" fill="#1D4ED8"/>
         
         <!-- Front Sky Blue Wave Layer -->
-        <path d="M0,140 C140,220 300,100 480,165 C660,230 840,130 1020,195 C1200,260 1340,160 1440,180 L1440,280 L0,280 Z" fill="#0284C7"/>
+        <path d="M0,0 L1440,0 L1440,55 C1260,115 1080,35 880,95 C680,135 500,55 320,105 C160,45 0,85 0,55 Z" fill="#0284C7"/>
       </svg>
     </div>
 
-    <!-- White Canvas Hero Area -->
-    <div class="hero-white-canvas">
-      
-      <!-- Delicate Contour Lines as in Reference -->
-      <svg class="contour-lines" viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,210 C80,160 150,230 240,170 C320,120 370,180 410,130" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round"/>
-        <path d="M20,235 C90,195 160,250 250,195 C330,145 380,205 415,160" stroke="#E2E8F0" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
+    <!-- Delicate Contour Lines as in Reference -->
+    <svg class="contour-lines" viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,210 C80,160 150,230 240,170 C320,120 370,180 410,130" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20,235 C90,195 160,250 250,195 C330,145 380,205 415,160" stroke="#E2E8F0" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
 
-      <div class="container hero-main-layout">
+    <div class="container hero-main-layout">
         
         <!-- Left Column: Interactive Image Slider (Images can be easily replaced in assets/images/) -->
         <div class="hero-visual-col">
@@ -198,11 +195,8 @@
             <span class="dot"></span>
             <span class="dot"></span>
           </div>
-        </div>
-
       </div>
     </div>
-
   </section>
 
   <!-- =====================================================================

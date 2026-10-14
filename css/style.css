@@ -292,104 +292,103 @@ h1, h2, h3, h4, h5, h6 {
    2. HERO SECTION WITH SOLID FLUID WAVES & SOLID FLOATING SPHERES
    ===================================================================== */
 .hero-wrapper {
-  background-color: var(--header-bg);
+  background-color: var(--canvas-bg);
   position: relative;
   overflow: hidden;
-  padding-bottom: 80px;
+  padding-top: 20px;
+  padding-bottom: 70px;
 }
 
-/* Fluid Organic SVG Waves Area */
+/* Fluid Organic SVG Waves Area hanging from top */
 .hero-wave-canvas {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 280px;
+  height: 220px;
   overflow: hidden;
   line-height: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .wave-svg {
   width: 100%;
-  height: 280px;
+  height: 220px;
   display: block;
-  filter: drop-shadow(0 15px 25px rgba(12, 11, 39, 0.25));
 }
 
 /* Floating Solid Spheres */
 .floating-sphere {
   position: absolute;
   border-radius: 50%;
-  box-shadow: 0 10px 24px rgba(12, 11, 39, 0.35);
+  box-shadow: 0 10px 24px rgba(12, 11, 39, 0.25);
   pointer-events: none;
-  z-index: 10;
+  z-index: 2;
 }
 
 .sphere-1 {
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   background-color: var(--color-sky);
-  top: 140px;
-  left: 310px;
+  top: 80px;
+  left: 280px;
 }
 
 .sphere-2 {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   background-color: var(--color-blue);
-  top: 175px;
-  left: 250px;
+  top: 120px;
+  left: 210px;
 }
 
 .sphere-3 {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background-color: #2563EB;
-  top: 230px;
-  left: 70px;
+  top: 155px;
+  left: 60px;
 }
 
 .sphere-4 {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background-color: var(--color-purple);
-  top: 100px;
-  left: 480px;
+  top: 60px;
+  left: 450px;
 }
 
 .sphere-5 {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   background-color: var(--color-sky);
-  top: 150px;
+  top: 95px;
   right: 120px;
-}
-
-/* Hero Content Area on Canvas */
-.hero-white-canvas {
-  background-color: var(--canvas-bg);
-  position: relative;
-  padding-top: 40px;
-  padding-bottom: 70px;
 }
 
 /* Organic Contour Lines as in Reference */
 .contour-lines {
   position: absolute;
-  top: 30px;
-  left: 40px;
+  top: 60px;
+  left: 30px;
   width: 420px;
   height: 240px;
   pointer-events: none;
   opacity: 0.55;
+  z-index: 2;
 }
 
 .hero-main-layout {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
+  grid-template-columns: 1.05fr 1fr;
   align-items: center;
   gap: 48px;
   position: relative;
   z-index: 5;
+  padding-top: 24px;
 }
+
 
 .hero-visual-col {
   position: relative;
@@ -1496,21 +1495,22 @@ h1, h2, h3, h4, h5, h6 {
     gap: 36px;
   }
   
-  .hero-text-col {
-    order: 1;
-    align-items: center;
-    text-align: center;
-  }
-  
   .hero-visual-col {
-    order: 2;
+    order: 1;
     justify-content: center;
     width: 100%;
+    margin-bottom: 8px;
   }
 
   .hero-slider-card {
     max-width: 540px;
     margin: 0 auto;
+  }
+
+  .hero-text-col {
+    order: 2;
+    align-items: center;
+    text-align: center;
   }
   
   .hero-buttons-row {
