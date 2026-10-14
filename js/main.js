@@ -1,48 +1,15 @@
 /**
  * NG EDUCATION - Main Interactive Script
- * Futuristic STEM, Robotics & AI Learning Platform
+ * Fluid Wave & Layered Modern Tech UI
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initThemeToggle();
   initTabs();
   initModals();
   initContactForm();
   initMobileNav();
-  init3DModelInteractions();
+  initCarouselDots();
 });
-
-/* =====================================================================
-   0. THEME TOGGLE (Bright Vibrant / Cyber Dark)
-   ===================================================================== */
-function initThemeToggle() {
-  const toggleBtn = document.getElementById('themeToggleBtn');
-  if (!toggleBtn) return;
-
-  const savedTheme = localStorage.getItem('ng_theme') || 'bright';
-  if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleBtn.textContent = '🌙';
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-    toggleBtn.textContent = '☀️';
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      toggleBtn.textContent = '☀️';
-      localStorage.setItem('ng_theme', 'bright');
-      showToast('☀️ Bright Vibrant Mode Enabled');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      toggleBtn.textContent = '🌙';
-      localStorage.setItem('ng_theme', 'dark');
-      showToast('🌙 Cyber Dark Mode Enabled');
-    }
-  });
-}
 
 /* =====================================================================
    1. COURSE TABS (Single vs Combo Courses)
@@ -139,7 +106,7 @@ function initContactForm() {
       e.preventDefault();
       const name = document.getElementById('contactName')?.value || 'Friend';
       contactForm.reset();
-      showToast(`Thank you, ${name}! Toshit & Arpit will connect with you shortly.`);
+      showToast(`Thank you, ${name}! Toshit & Arpit will connect with you within 24 hours at 8077718423.`);
     });
   }
 }
@@ -157,7 +124,7 @@ function showToast(message) {
   }
 
   toast.innerHTML = `
-    <span style="color: var(--teal-neon); font-size: 1.2rem;">✓</span>
+    <span style="color: #1D4ED8; font-size: 1.2rem;">✓</span>
     <span>${message}</span>
   `;
 
@@ -190,14 +157,14 @@ function initMobileNav() {
 }
 
 /* =====================================================================
-   6. 3D MODEL CONTROLS & COMPONENT HIGHLIGHTS
+   6. CAROUSEL DOTS INTERACTION
    ===================================================================== */
-function init3DModelInteractions() {
-  const modelViewer = document.querySelector('model-viewer');
-  if (!modelViewer) return;
-
-  // Enhance camera behavior
-  modelViewer.addEventListener('load', () => {
-    console.log('Arduino Uno 3D Model loaded successfully in NG EDUCATION viewer.');
+function initCarouselDots() {
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
   });
 }
