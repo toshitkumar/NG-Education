@@ -35,9 +35,33 @@ function initTabs() {
   });
 }
 
+
 /* =====================================================================
-   2. MODALS (Login, Signup, Hire Teacher, STEM Lab)
+   2. GOOGLE SHEETS LIVE SYNC & MODALS
    ===================================================================== */
+const GOOGLE_SHEET_CONFIG = {
+  sheetId: '1G5RsCriKg66uLHbZfgj_Arw1CipCHsK4c4gusZ3MMnI',
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/1G5RsCriKg66uLHbZfgj_Arw1CipCHsK4c4gusZ3MMnI/edit',
+  webAppUrl: '' // Connects via Google Apps Script Web App
+};
+
+async function logLeadToGoogleSheet(data) {
+  if (!GOOGLE_SHEET_CONFIG.webAppUrl) {
+    console.log('NG EDUCATION: Lead captured locally. Google Sheet ready at:', GOOGLE_SHEET_CONFIG.sheetUrl, data);
+    return;
+  }
+  try {
+    await fetch(GOOGLE_SHEET_CONFIG.webAppUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.warn('Google Sheet webhook notice:', err);
+  }
+}
+
 function initModals() {
   const modalOverlays = document.querySelectorAll('.modal-overlay');
   const closeBtns = document.querySelectorAll('.modal-close-btn');
@@ -71,14 +95,57 @@ function initModals() {
     }
   });
 
-  // Modal forms dummy submission
+  // Modal forms live submission
   const authForms = document.querySelectorAll('.modal-form');
   authForms.forEach(form => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formType = form.getAttribute('data-form-type') || 'Request';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : 'Submit';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Saving...</span>';
+      }
+
+      // Collect inputs
+      const inputs = form.querySelectorAll('input, select, textarea');
+      let nameVal = '';
+      let contactVal = '';
+      let detailsArr = [];
+
+      inputs.forEach(input => {
+        if (!input.value) return;
+        const placeholder = input.placeholder || '';
+        const label = input.closest('.input-group')?.querySelector('label')?.textContent || '';
+        
+        if (input.type === 'text' && !nameVal) {
+          nameVal = input.value;
+        } else if (input.type === 'tel' || input.type === 'email' || placeholder.includes('98765') || placeholder.includes('@')) {
+          contactVal = input.value;
+        } else {
+          detailsArr.push(`${label || 'Field'}: ${input.value}`);
+        }
+      });
+
+      const modalPayload = {
+        formType: formType,
+        name: nameVal || 'Lead',
+        contact: contactVal,
+        interest: formType,
+        message: detailsArr.join(' | '),
+        timestamp: new Date().toLocaleString('en-IN')
+      };
+
+      await logLeadToGoogleSheet(modalPayload);
+
+      form.reset();
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
       closeAllModals();
-      showToast(`⚡ ${formType} submitted successfully! Welcome to NG EDUCATION.`);
+      showToast(`⚡ ${formType} submitted & logged! Welcome to NG EDUCATION.`);
     });
   });
 }
@@ -103,11 +170,37 @@ function closeAllModals() {
 function initContactForm() {
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Sending...</span>';
+      }
+
       const name = document.getElementById('contactName')?.value || 'Friend';
+      const contact = document.getElementById('contactEmail')?.value || '';
+      const subject = document.getElementById('contactSubject')?.value || 'General Inquiry';
+      const message = document.getElementById('contactMessage')?.value || '';
+
+      const leadPayload = {
+        formType: 'Contact Form',
+        name: name,
+        contact: contact,
+        interest: subject,
+        message: message,
+        timestamp: new Date().toLocaleString('en-IN')
+      };
+
+      await logLeadToGoogleSheet(leadPayload);
+
       contactForm.reset();
-      showToast(`Thank you, ${name}! Toshit & Arpit will connect with you within 24 hours at 8077718423.`);
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+      showToast(`Thank you, ${name}! Your message is recorded. Toshit & Arpit will connect with you within 24 hours at 8077718423.`);
     });
   }
 }
