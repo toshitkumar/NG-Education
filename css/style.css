@@ -1246,37 +1246,77 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-dark);
 }
 
-.founders-card {
+.team-leadership-card {
   background-color: var(--header-bg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
-  padding: 18px 22px;
+  padding: 22px 24px;
+  color: #FFFFFF;
+  margin-top: 24px;
+}
+
+.team-leadership-header {
   display: flex;
   align-items: center;
-  gap: 16px;
-  color: #FFFFFF;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.founders-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-  color: var(--primary-blue);
+.team-leadership-header h4 {
+  font-size: 1.05rem;
+  font-family: var(--font-heading);
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+}
+
+.team-pill {
+  background-color: var(--color-arduino-soft);
+  color: var(--color-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.team-leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.team-member-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.1rem;
+  flex-direction: column;
+  gap: 4px;
+  transition: var(--transition);
 }
 
-.founders-text h4 {
+.team-member-item:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+  border-color: var(--color-arduino);
+}
+
+.member-role-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #38BDF8;
+}
+
+.member-name {
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #FFFFFF;
-  font-size: 1rem;
-}
-
-.founders-text p {
-  color: #93C5FD;
-  font-size: 0.84rem;
 }
 
 /* Contact Form */

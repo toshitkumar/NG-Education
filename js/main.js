@@ -247,9 +247,9 @@ function showThankYouPopup(customName) {
   const desc = modal.querySelector('.thankyou-desc');
   if (desc) {
     if (customName && customName !== 'Lead' && customName !== 'Friend') {
-      desc.textContent = `Thank you, ${customName}! Our representative will connect with you shortly.`;
+      desc.textContent = `Thank you, ${customName}! Our expert will connect with you shortly.`;
     } else {
-      desc.textContent = 'Thank you! Our representative will connect with you shortly.';
+      desc.textContent = 'Thank you! Our expert will connect with you shortly.';
     }
   }
 
