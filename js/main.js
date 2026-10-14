@@ -142,7 +142,18 @@ function initModals() {
         }
       });
 
+      let sectionKey = 'contact';
+      const formTypeLower = formType.toLowerCase();
+      if (formTypeLower.includes('teacher') || formTypeLower.includes('hire')) {
+        sectionKey = 'teacher';
+      } else if (formTypeLower.includes('stem') || formTypeLower.includes('lab')) {
+        sectionKey = 'stem_lab';
+      } else if (formTypeLower.includes('registration') || formTypeLower.includes('signup')) {
+        sectionKey = 'signup';
+      }
+
       const modalPayload = {
+        section: sectionKey,
         formType: formType,
         name: nameVal || 'Lead',
         contact: contactVal,
@@ -199,6 +210,7 @@ function initContactForm() {
       const message = document.getElementById('contactMessage')?.value || '';
 
       const leadPayload = {
+        section: 'contact',
         formType: 'Contact Form',
         name: name,
         contact: contact,
