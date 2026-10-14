@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NG EDUCATION | Futuristic STEM, Robotics & AI Learning Platform</title>
+  <meta name="description" content="Next-Gen STEM, Robotics, AI/ML, DBMS & Tech education for Grade 5-10 school students and open learners of all ages. Hands-on projects, 3D exploration, school labs, and expert mentorship.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300D2B4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'></polygon><polyline points='2 17 12 22 22 17'></polyline><polyline points='2 12 12 17 22 12'></polyline></svg>">
+  
+  <!-- Google Model Viewer (3D glTF/GLB web component) -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient Circuit Grid -->
+  <div class="cyber-grid-overlay"></div>
+
+  <!-- =====================================================================
+       1. HEADER / NAVBAR
+       ===================================================================== -->
+  <header class="site-header">
+    <div class="container navbar">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo">
+        <div class="logo-badge">
+          <!-- Cyber Circuit / Robotics Icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">NG <span>EDUCATION</span></span>
+          <span class="brand-subtitle">Next-Gen STEM & Robotics</span>
+        </div>
+      </a>
+
+      <!-- Center Nav Links -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#courses" class="nav-link active">Courses</a></li>
+          <li><a href="#hire-teacher" class="nav-link">Hire Teacher</a></li>
+          <li><a href="#stem-labs" class="nav-link">School STEM Labs</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Nav Actions (Login & Signup) -->
+      <div class="nav-actions">
+        <button class="btn-nav-login" data-open-modal="modalLogin">Login</button>
+        <button class="btn-nav-signup" data-open-modal="modalSignup">Sign Up</button>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       2. HERO / BANNERS SECTION WITH 3D ARDUINO EXPLORER
+       ===================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      <!-- Left Hero Content -->
+      <div class="hero-content">
+        <div class="badge-futuristic">
+          <span class="badge-pulse-dot"></span>
+          <span>Grade 5–10 Curriculum & Open for All Ages</span>
+        </div>
+
+        <h1 class="hero-title">
+          Build The Future with <br>
+          <span class="gradient-text-dual">Hands-On STEM, Robotics & AI</span>
+        </h1>
+
+        <p class="hero-desc">
+          Step into tomorrow's technology today. From wiring your first Arduino sensor to training computer vision models, mastering programming logic, and building school innovation projects.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group">
+          <a href="#courses" class="btn btn-teal">
+            <span>Explore Courses</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#hire-teacher" class="btn btn-outline-amber">
+            <span>Hire Robotics Teacher</span>
+            <span style="font-size: 0.8rem; opacity: 0.9;">(₹4,999/day)</span>
+          </a>
+          <a href="#stem-labs" class="btn btn-glass">
+            <span>🏫 School STEM Labs</span>
+          </a>
+        </div>
+
+        <!-- Metrics Bar -->
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <span class="metric-num">50<span>+</span></span>
+            <span class="metric-label">Hands-On Projects</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-num">100<span>%</span></span>
+            <span class="metric-label">Practical Learning</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-num">ATL<span>★</span></span>
+            <span class="metric-label">Maker Lab Aligned</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 3D Interactive Model Showcase -->
+      <div class="hero-3d-wrapper">
+        <div class="card-3d-interactive">
+          <div class="model-header-bar">
+            <div class="model-tag">
+              <span class="model-chip-live"></span>
+              <span>LIVE 3D HARDWARE VIEWER</span>
+            </div>
+            <span class="model-controls-hint">Drag 360° to Rotate</span>
+          </div>
+
+          <!-- Google Model Viewer Web Component -->
+          <div class="model-viewer-container">
+            <model-viewer 
+              src="assets/models/arduino_uno.glb" 
+              alt="Interactive 3D Arduino Uno Microcontroller"
+              auto-rotate 
+              rotation-per-second="18deg"
+              camera-controls 
+              shadow-intensity="1.5"
+              shadow-softness="0.8"
+              environment-image="neutral"
+              exposure="1.2"
+              camera-orbit="45deg 60deg 105%"
+              loading="lazy"
+              ar>
+            </model-viewer>
+          </div>
+
+          <!-- Feature Pills beneath 3D Model -->
+          <div class="model-footer-badges">
+            <div class="badge-tech-pill">ATmega328P Core</div>
+            <div class="badge-tech-pill">14 Digital I/O Pins</div>
+            <div class="badge-tech-pill">6 Analog Inputs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. COURSE LIST SECTION (SINGLE & COMBO TOGGLE)
+       ===================================================================== -->
+  <section class="courses-section" id="courses">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Futuristic Curriculum</span>
+        <h2 class="section-title">Explore Next-Gen Learning Tracks</h2>
+        <p class="section-desc">
+          Structured courses crafted for school students (Class 5–10), college hobbyists, and tech creators. Choose individual mastery or bundle for maximum value.
+        </p>
+      </div>
+
+      <!-- Course Switcher (Single vs Combo) -->
+      <div class="course-tabs-wrapper">
+        <div class="course-tabs">
+          <button class="tab-btn active" data-target="single-courses">
+            <span>🎯 Single Courses</span>
+          </button>
+          <button class="tab-btn combo-tab" data-target="combo-courses">
+            <span>📦 Combo Packages (Best Value)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================= SINGLE COURSES GRID ================= -->
+      <div class="tab-content active" id="single-courses">
+        <div class="courses-grid">
+          
+          <!-- Course 1: Robotics & Arduino -->
+          <div class="course-card">
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge">🤖</div>
+                <span class="course-level-tag">Grade 5–10 & Open</span>
+              </div>
+              <h3>Robotics & Arduino Mastery</h3>
+              <p>Explore microcontrollers, circuit design, ultrasonic sensors, DC motors, and build real automated robots.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Breadboard wiring & electrical basics
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Motor drivers & Obstacle-Avoiding Bots
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  IoT Smart Home automation with Bluetooth
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration">12 Modules • 15+ Projects</span>
+                <span class="course-price-badge">₹1,999</span>
+              </div>
+              <button class="btn btn-outline-teal" data-open-modal="modalEnroll">Enroll Track</button>
+            </div>
+          </div>
+
+          <!-- Course 2: AI & Machine Learning -->
+          <div class="course-card">
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge amber-variant">🧠</div>
+                <span class="course-level-tag">Next-Gen Tech</span>
+              </div>
+              <h3>AI & Machine Learning</h3>
+              <p>Understand how computers see, think, and predict. Build face-tracking smart cameras and predictive AI models.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Computer Vision & Object Detection
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Teachable Machine & Python AI basics
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Ethical AI & Future smart assistants
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration">10 Modules • 10+ AI Models</span>
+                <span class="course-price-badge">₹2,499</span>
+              </div>
+              <button class="btn btn-outline-amber" data-open-modal="modalEnroll">Enroll Track</button>
+            </div>
+          </div>
+
+          <!-- Course 3: Computer Science -->
+          <div class="course-card">
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge">💻</div>
+                <span class="course-level-tag">CBSE / IB Aligned</span>
+              </div>
+              <h3>Computer Science Core</h3>
+              <p>Master computational thinking, algorithms, flowcharts, visual programming, and foundational problem-solving.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Scratch visual logic to code syntax
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Algorithm design & flowchart mapping
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Cyber hygiene & digital citizenship
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration">16 Chapters • 50+ Exercises</span>
+                <span class="course-price-badge">₹1,499</span>
+              </div>
+              <button class="btn btn-outline-teal" data-open-modal="modalEnroll">Enroll Track</button>
+            </div>
+          </div>
+
+          <!-- Course 4: DBMS & SQL -->
+          <div class="course-card">
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge amber-variant">🗄️</div>
+                <span class="course-level-tag">Data Architecture</span>
+              </div>
+              <h3>Database Management (DBMS)</h3>
+              <p>Learn how applications store and query millions of data points using structured databases and SQL.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Relational data modeling & ER diagrams
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  SQL CRUD queries, joins, and filters
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Real-world school/library database project
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration">8 Modules • Practical Labs</span>
+                <span class="course-price-badge">₹1,799</span>
+              </div>
+              <button class="btn btn-outline-amber" data-open-modal="modalEnroll">Enroll Track</button>
+            </div>
+          </div>
+
+          <!-- Course 5: Video Editing & Media -->
+          <div class="course-card">
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge">🎬</div>
+                <span class="course-level-tag">Creator Economy</span>
+              </div>
+              <h3>Video Editing & Motion Graphics</h3>
+              <p>Transform raw footage into cinematic project demos and motion promo videos using After Effects and Premiere.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Keyframing, motion blur & easing curves
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Green screen compositing & sound design
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  YouTube/Portfolio project showcase editing
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration">10 Modules • 8 Portfolio Edits</span>
+                <span class="course-price-badge">₹1,999</span>
+              </div>
+              <button class="btn btn-outline-teal" data-open-modal="modalEnroll">Enroll Track</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= COMBO COURSES GRID ================= -->
+      <div class="tab-content" id="combo-courses">
+        <div class="courses-grid">
+          
+          <!-- Combo 1 -->
+          <div class="course-card combo-card">
+            <span class="combo-badge-popular">Grade 5–8 Favorite</span>
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge amber-variant">🚀</div>
+                <span class="course-level-tag">Save 35%</span>
+              </div>
+              <h3>STEM Junior Explorer Combo</h3>
+              <p>The perfect launchpad for young innovators combining core Computer Science with hands-on Arduino Robotics.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Robotics & Arduino Complete Course
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Computer Science Foundation Curriculum
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  15 Mini hardware experiments & digital worksheets
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration"><del style="color: #64748B;">₹3,498</del> Special Combo</span>
+                <span class="course-price-badge" style="color: var(--amber-neon);">₹2,299</span>
+              </div>
+              <button class="btn btn-amber" data-open-modal="modalEnroll">Get Combo</button>
+            </div>
+          </div>
+
+          <!-- Combo 2 -->
+          <div class="course-card combo-card">
+            <span class="combo-badge-popular">High Tech</span>
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge amber-variant">⚡</div>
+                <span class="course-level-tag">Grade 9–10 & College</span>
+              </div>
+              <h3>AI-Powered Robotics Pro Combo</h3>
+              <p>Merge intelligent machine learning algorithms with autonomous robotics hardware and computer vision.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Robotics & Arduino Advanced Track
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Full AI & Machine Learning Track
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Capstone: AI Vision-Guided Autonomous Rover
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration"><del style="color: #64748B;">₹4,498</del> Special Combo</span>
+                <span class="course-price-badge" style="color: var(--amber-neon);">₹2,999</span>
+              </div>
+              <button class="btn btn-amber" data-open-modal="modalEnroll">Get Combo</button>
+            </div>
+          </div>
+
+          <!-- Combo 3 -->
+          <div class="course-card combo-card">
+            <span class="combo-badge-popular">All-in-One</span>
+            <div>
+              <div class="card-header-flex">
+                <div class="course-icon-badge amber-variant">🏆</div>
+                <span class="course-level-tag">Ultimate Access</span>
+              </div>
+              <h3>Next-Gen Tech Master Bundle</h3>
+              <p>Complete unrestricted access to all 5 tracks: Robotics, AI/ML, Computer Science, DBMS, and Video Editing.</p>
+              <ul class="course-highlights">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  All 5 Core Technology Tracks
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  40+ Real-World Hands-on Project Blueprints
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Lifetime updates & 1:1 project guidance
+                </li>
+              </ul>
+            </div>
+            <div class="course-card-footer">
+              <div class="course-meta-info">
+                <span class="course-duration"><del style="color: #64748B;">₹9,795</del> 60% OFF</span>
+                <span class="course-price-badge" style="color: var(--amber-neon);">₹3,999</span>
+              </div>
+              <button class="btn btn-amber" data-open-modal="modalEnroll">Get All-in-One</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4. SCHOOLS SECTION 1: HIRE A ROBOTICS TEACHER
+       ===================================================================== -->
+  <section class="schools-hire-section" id="hire-teacher">
+    <div class="container">
+      <div class="hire-teacher-frame">
+        <div class="hire-grid">
+          <!-- Left Details -->
+          <div class="hire-content">
+            <div class="badge-futuristic" style="border-color: var(--border-teal); color: var(--teal-neon);">
+              🏫 Dedicated School Project Service
+            </div>
+            <h2>
+              Do you want to hire a <span class="gradient-text-teal">Robotics Teacher</span> for a few days for your projects?
+            </h2>
+            <p>
+              Bring verified robotics and STEM experts directly to your school campus. We help your students build, debug, and complete high-impact science exhibitions, RoboFest entries, and ATL innovation projects with 100% hands-on success.
+            </p>
+
+            <!-- Perks Grid -->
+            <div class="hire-perks-grid">
+              <div class="hire-perk-item">
+                <div class="perk-icon-wrap">⚡</div>
+                <div class="perk-text">
+                  <h4>On-Campus Mentorship</h4>
+                  <p>In-person guidance for students from Grade 5 to 12.</p>
+                </div>
+              </div>
+              <div class="hire-perk-item">
+                <div class="perk-icon-wrap">🏆</div>
+                <div class="perk-text">
+                  <h4>Exhibition & RoboFest Prep</h4>
+                  <p>Working functional models ready for inter-school competitions.</p>
+                </div>
+              </div>
+              <div class="hire-perk-item">
+                <div class="perk-icon-wrap">🛠️</div>
+                <div class="perk-text">
+                  <h4>Hardware & Code Debugging</h4>
+                  <p>Circuit wiring, sensor testing, and Arduino C++ troubleshooting.</p>
+                </div>
+              </div>
+              <div class="hire-perk-item">
+                <div class="perk-icon-wrap">📜</div>
+                <div class="perk-text">
+                  <h4>Student Certificates</h4>
+                  <p>Official workshop completion badges for all participants.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Pricing Box -->
+          <div class="hire-pricing-box">
+            <span class="price-pill-tag">Transparent School Pricing</span>
+            <div class="price-amount">
+              ₹4,999 <span>/ Day</span>
+            </div>
+            <p class="price-note">
+              Includes full-day on-campus instruction, project planning, hardware assistance, and student project mentoring.
+            </p>
+            <button class="btn btn-teal" style="width: 100%;" data-open-modal="modalHireTeacher">
+              <span>📅 Book a Robotics Teacher</span>
+            </button>
+            <a href="tel:8077718423" class="btn btn-outline-teal" style="width: 100%; font-size: 0.88rem;">
+              <span>Call: 8077718423</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5. SCHOOLS SECTION 2: STEM LABS FOR SCHOOLS
+       ===================================================================== -->
+  <section class="stem-labs-section" id="stem-labs">
+    <div class="container">
+      <div class="stem-labs-card">
+        <div class="stem-labs-head">
+          <span class="section-eyebrow" style="color: var(--amber-neon);">Infrastructure & Modernization</span>
+          <h2>School, Do You Want a <span class="gradient-text-amber">State-of-the-Art STEM Lab?</span></h2>
+          <p>
+            We help schools establish turnkey Atal Tinkering Lab (ATL) and modern robotics maker spaces with cutting-edge equipment, grade-wise curricula, and ongoing educator training.
+          </p>
+        </div>
+
+        <!-- 4 Pillars of STEM Lab -->
+        <div class="labs-components-grid">
+          <div class="lab-item-box">
+            <div class="lab-icon-sphere">🔌</div>
+            <h4>Electronics & Microcontrollers</h4>
+            <p>Original Arduino Uno boards, Raspberry Pi, sensor banks, motors, relays, breadboards, and power supplies.</p>
+          </div>
+          <div class="lab-item-box">
+            <div class="lab-icon-sphere">🖨️</div>
+            <h4>3D Prototyping & Tools</h4>
+            <p>High-precision 3D printers, safe fabrication toolkits, multimeter stations, and precision mechanical kits.</p>
+          </div>
+          <div class="lab-item-box">
+            <div class="lab-icon-sphere">📚</div>
+            <h4>Grade 5–10 Curriculum</h4>
+            <p>Over 80+ mapped practical lesson plans, illustrated student project workbooks, and teacher guidebooks.</p>
+          </div>
+          <div class="lab-item-box">
+            <div class="lab-icon-sphere">👨‍🏫</div>
+            <h4>Teacher Training & Support</h4>
+            <p>Annual faculty development programs, online doubt support, and continuous curriculum updates.</p>
+          </div>
+        </div>
+
+        <!-- Consultation Banner Bar -->
+        <div class="labs-bottom-bar">
+          <div class="labs-bottom-text">
+            <h4>Ready to upgrade your school with an innovation center?</h4>
+            <p>Get a customized lab architecture plan, equipment inventory, and quote within 24 hours.</p>
+          </div>
+          <button class="btn btn-amber" data-open-modal="modalStemLab">
+            <span>📑 Request STEM Lab Proposal</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6. THE FOUNDATION MISSION BANNER (FREE EDUCATION FOR KIDS)
+       ===================================================================== -->
+  <section class="foundation-section">
+    <div class="container">
+      <div class="foundation-banner">
+        <div class="foundation-icon-wrap">🌱</div>
+        <div class="foundation-text">
+          <h3>Our Driving Vision & Social Commitment</h3>
+          <p>
+            <strong>We work on Foundation soon to provide Free education for Kids.</strong> We believe financial barriers should never stop a child from learning to build robots, understand artificial intelligence, and invent the future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       7. CONTACT US & FOUNDERS SECTION
+       ===================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-grid">
+      <!-- Contact Info -->
+      <div class="contact-info-card">
+        <div>
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2>Connect With NG EDUCATION</h2>
+          <p>
+            Have a question about our courses, need a robotics mentor for your school, or planning a full STEM lab setup? Talk directly with our team.
+          </p>
+
+          <div class="contact-channels-list">
+            <!-- Mobile -->
+            <a href="tel:8077718423" class="channel-item">
+              <div class="channel-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div class="channel-meta">
+                <h4>Direct Phone / WhatsApp</h4>
+                <p>+91 8077718423</p>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a href="mailto:Kumartoshit82@outlook.com" class="channel-item">
+              <div class="channel-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div class="channel-meta">
+                <h4>Official Email Address</h4>
+                <p>Kumartoshit82@outlook.com</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Founders Box -->
+        <div class="founders-box">
+          <div class="founders-avatar-cluster">TA</div>
+          <div class="founders-details">
+            <h4>Founders: Toshit & Arpit</h4>
+            <p>STEM Educators, Robotics Mentors & Technology Visionaries</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Interactive Message Form -->
+      <div class="contact-form-card">
+        <h3>Send Us a Quick Message</h3>
+        <p>Drop your inquiry and Toshit or Arpit will connect with you within 24 hours.</p>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="contactName" class="form-label">Your Name / School Name</label>
+            <input type="text" id="contactName" class="form-input" placeholder="e.g. Modern Public School / Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail" class="form-label">Email or Phone Number</label>
+            <input type="text" id="contactEmail" class="form-input" placeholder="e.g. 9876543210 or name@school.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="contactSubject" class="form-label">I Am Interested In</label>
+            <select id="contactSubject" class="form-select">
+              <option value="TeacherHire">Hiring a Robotics Teacher (₹4,999/day)</option>
+              <option value="StemLab">Setting up a School STEM Lab</option>
+              <option value="Courses">Course Enrollment for Students</option>
+              <option value="Combo">Combo Packages Inquiry</option>
+              <option value="Foundation">Foundation & Free Education Support</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage" class="form-label">Message Details</label>
+            <textarea id="contactMessage" class="form-textarea" placeholder="Tell us about your project requirements or queries..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-teal" style="width: 100%;">
+            <span>Send Message</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       8. FOOTER
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="brand-text-wrap">
+            <span class="brand-title">NG <span>EDUCATION</span></span>
+            <span class="brand-subtitle">Next-Gen STEM & Robotics</span>
+          </div>
+          <p>
+            Empowering the next generation of creators, coders, and robotics engineers with experiential, project-first learning.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Learning Tracks</h4>
+          <ul class="footer-links">
+            <li><a href="#courses">Robotics & Arduino</a></li>
+            <li><a href="#courses">AI & Machine Learning</a></li>
+            <li><a href="#courses">Computer Science Core</a></li>
+            <li><a href="#courses">Database Systems (DBMS)</a></li>
+            <li><a href="#courses">Video Editing & Media</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>School Services</h4>
+          <ul class="footer-links">
+            <li><a href="#hire-teacher">Hire Robotics Teacher (₹4,999/day)</a></li>
+            <li><a href="#stem-labs">STEM & Robotics Lab Setup</a></li>
+            <li><a href="#stem-labs">ATL Compliance & Kits</a></li>
+            <li><a href="#contact">Competition Mentorship</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact & Info</h4>
+          <ul class="footer-links">
+            <li><a href="tel:8077718423">📞 8077718423</a></li>
+            <li><a href="mailto:Kumartoshit82@outlook.com">✉️ Kumartoshit82@outlook.com</a></li>
+            <li><span style="color: var(--amber-neon); font-size: 0.88rem;">Founders: Toshit & Arpit</span></li>
+            <li><a href="#home">Back to Top ↑</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NG EDUCATION. All Rights Reserved. Built with Next-Gen STEM Architecture.</span>
+        <span>Founders: Toshit & Arpit | Free Education Foundation Initiative Coming Soon.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       9. INTERACTIVE MODALS
+       ===================================================================== -->
+
+  <!-- Modal: Login -->
+  <div class="modal-overlay" id="modalLogin">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Login to <span class="gradient-text-teal">NG EDUCATION</span></h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Access your student dashboard, courses, and project files.</p>
+
+      <form class="modal-form" data-form-type="Login">
+        <div class="form-group">
+          <label class="form-label">Email or Username</label>
+          <input type="text" class="form-input" placeholder="e.g. student@ngedu.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 10px;">Login to Portal</button>
+        <p style="text-align: center; font-size: 0.84rem; color: var(--text-muted); margin-top: 16px;">
+          Don't have an account? <a href="#" data-open-modal="modalSignup" style="color: var(--teal-neon);">Sign Up here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Sign Up -->
+  <div class="modal-overlay" id="modalSignup">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Create Your Account</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Join NG EDUCATION to start building STEM & AI projects.</p>
+
+      <form class="modal-form" data-form-type="Registration">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-input" placeholder="e.g. Aarav Sharma" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number</label>
+          <input type="tel" class="form-input" placeholder="e.g. 9876543210" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Role</label>
+          <select class="form-select">
+            <option value="student">Student (Grade 5–10 or Open)</option>
+            <option value="teacher">School Teacher / Principal</option>
+            <option value="hobbyist">College / Open Learner</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Create Password</label>
+          <input type="password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-amber" style="width: 100%; margin-top: 10px;">Create Free Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Hire Teacher Booking -->
+  <div class="modal-overlay" id="modalHireTeacher">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <div class="badge-futuristic" style="margin-bottom: 12px; border-color: var(--border-teal); color: var(--teal-neon);">
+        School Booking • ₹4,999/day
+      </div>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Book an On-Campus Robotics Teacher</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Expert instructor for project execution, competitions & workshops.</p>
+
+      <form class="modal-form" data-form-type="Robotics Teacher Booking">
+        <div class="form-group">
+          <label class="form-label">School / Institution Name</label>
+          <input type="text" class="form-input" placeholder="e.g. St. Xavier's Academy" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contact Person & Phone</label>
+          <input type="text" class="form-input" placeholder="e.g. Principal Sharma (9876543210)" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estimated Days Required</label>
+          <select class="form-select">
+            <option value="1">1 Day Intensive Workshop (₹4,999)</option>
+            <option value="2">2 Days Project Bootcamp (₹9,998)</option>
+            <option value="3">3 Days Competition Prep (₹14,997)</option>
+            <option value="5">5 Days Complete STEM Week (₹24,995)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 8px;">Confirm Booking Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: STEM Lab Request -->
+  <div class="modal-overlay" id="modalStemLab">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <div class="badge-futuristic" style="margin-bottom: 12px; border-color: var(--border-amber); color: var(--amber-neon);">
+        School STEM Lab Setup
+      </div>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Request STEM Lab Proposal</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Full hardware setup, 3D printing tools, and grade-wise curriculum.</p>
+
+      <form class="modal-form" data-form-type="STEM Lab Proposal Request">
+        <div class="form-group">
+          <label class="form-label">School Name & Location</label>
+          <input type="text" class="form-input" placeholder="e.g. Delhi Public School, Jaipur" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Representative Name & Phone</label>
+          <input type="text" class="form-input" placeholder="e.g. Mr. Verma (8077718423)" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Student Capacity</label>
+          <select class="form-select">
+            <option value="100-300">100 - 300 Students</option>
+            <option value="300-800">300 - 800 Students</option>
+            <option value="800+">800+ Students (Full ATL Setup)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-amber" style="width: 100%; margin-top: 8px;">Send Proposal Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: General Course Enroll -->
+  <div class="modal-overlay" id="modalEnroll">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Enroll in <span class="gradient-text-teal">NG Track</span></h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Get instant access to projects, video modules, and circuit guides.</p>
+
+      <form class="modal-form" data-form-type="Course Enrollment">
+        <div class="form-group">
+          <label class="form-label">Student Name</label>
+          <input type="text" class="form-input" placeholder="e.g. Yash Kumar" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp Number</label>
+          <input type="tel" class="form-input" placeholder="e.g. 8077718423" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Selected Track</label>
+          <select class="form-select">
+            <option value="robotics">Robotics & Arduino Mastery (₹1,999)</option>
+            <option value="ai">AI & Machine Learning (₹2,499)</option>
+            <option value="cs">Computer Science Fundamentals (₹1,499)</option>
+            <option value="dbms">DBMS & Data Systems (₹1,799)</option>
+            <option value="video">Video Editing & Media (₹1,999)</option>
+            <option value="stem-combo">STEM Junior Explorer Combo (₹2,299)</option>
+            <option value="ai-robotics-combo">AI-Powered Robotics Pro Combo (₹2,999)</option>
+            <option value="all-in-one">All-in-One Tech Master Bundle (₹3,999)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-teal" style="width: 100%; margin-top: 8px;">Proceed to Enrollment</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotice" class="toast-notice"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="js/main.js"></script>
+</body>
+</html>
