@@ -42,7 +42,7 @@ function initTabs() {
 const GOOGLE_SHEET_CONFIG = {
   sheetId: '1G5RsCriKg66uLHbZfgj_Arw1CipCHsK4c4gusZ3MMnI',
   sheetUrl: 'https://docs.google.com/spreadsheets/d/1G5RsCriKg66uLHbZfgj_Arw1CipCHsK4c4gusZ3MMnI/edit',
-  webAppUrl: 'https://script.google.com/macros/s/AKfycbynk52pRLdzLUfowr7EpVKp5Ro_A3EqdT8TQv9Sj5mm9K7tTyZgb-vpqVmNiPy0HgT-yA/exec'
+  webAppUrl: 'https://script.google.com/macros/s/AKfycbzE4aQeBXIGj3P7IqP6vzPeZOC4XERF2_UWdhzk-JyXHSn2ykwKcaYkulTtffYwBpwaHQ/exec'
 };
 
 async function logLeadToGoogleSheet(data) {
