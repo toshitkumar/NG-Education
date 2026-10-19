@@ -10,7 +10,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.0">
+  <link rel="stylesheet" href="css/style.css?v=3.2">
 </head>
 <body>
 
@@ -227,170 +227,384 @@
 
       <!-- ================= SINGLE COURSES GRID ================= -->
       <div class="tab-content active" id="single-courses">
+
+        <!-- Curriculum Category vs Individual Courses Matrix -->
+        <div class="single-courses-curriculum-box">
+          <div class="curriculum-box-header">
+            <span class="curriculum-badge">Curriculum Matrix</span>
+            <h3>Modular Learning Tracks & Individual Courses</h3>
+            <p>
+              Choose focused subject modules tailored for hands-on mastery. Each track includes complete project kits, source codes, circuit diagrams, and live mentorship.
+            </p>
+          </div>
+
+          <div class="curriculum-table-responsive">
+            <table class="curriculum-table">
+              <thead>
+                <tr>
+                  <th style="width: 24%;">Category</th>
+                  <th style="width: 58%;">Individual Courses & Projects Covered</th>
+                  <th style="width: 18%; text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="category-pill pill-programming">💻 Programming</span></td>
+                  <td>
+                    <strong>Arduino Programming Language</strong>
+                    <span class="course-sub-tag">Embedded C/C++, Logic Flow, Control Loops & Serial Debugging</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-electronics">⚡ Electronics</span></td>
+                  <td>
+                    <strong>Arduino Basics & Electronics</strong>
+                    <span class="course-sub-tag">Circuit Schematics, Breadboard Wiring, Resistors, LEDs & Ohm's Law</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="electronics">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-sensors">📡 Sensors</span></td>
+                  <td>
+                    <strong>Arduino Sensors & Interfacing</strong>
+                    <span class="course-sub-tag">Ultrasonic, PIR Motion, DHT11 Temp/Humidity, Gas & Analog/Digital Sensors</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="sensors">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-motors">⚙️ Motors</span></td>
+                  <td>
+                    <strong>Arduino Motor Control</strong>
+                    <span class="course-sub-tag">DC Motors, Servo Angular Sweeps, Stepper Motors & L298N/L293D Drivers</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="motors">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-robotics">🤖 Robotics</span></td>
+                  <td>
+                    <strong>Obstacle Avoiding Robot, Line Following Robot, Robotic Arm</strong>
+                    <span class="course-sub-tag">3 Real-World Autonomous Robotics Builds with Chassis, Radar & Gripper</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="robotics">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-automation">🏡 Automation</span></td>
+                  <td>
+                    <strong>Home Automation, Smart Agriculture</strong>
+                    <span class="course-sub-tag">AC/DC Relay Appliance Controls, Soil-Moisture Automated Irrigation & Security</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="automation">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-iot">🌐 IoT</span></td>
+                  <td>
+                    <strong>Arduino IoT & Wi-Fi</strong>
+                    <span class="course-sub-tag">ESP8266/ESP32 Cloud Telemetry, Live Dashboards & Mobile Remote Controls</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="iot">Enroll</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="category-pill pill-advanced">🚀 Advanced</span></td>
+                  <td>
+                    <strong>Displays & Communication, Advanced Projects</strong>
+                    <span class="course-sub-tag">I2C OLED, 16x2 LCD, RF/Bluetooth Transceivers & Capstone Engineering Builds</span>
+                  </td>
+                  <td style="text-align: right;">
+                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="advanced">Enroll</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 8 Individual Course Cards Grid -->
         <div class="courses-grid">
           
-          <!-- Course 1 -->
-          <div class="course-card">
-            <div>
-              <div class="card-top-flex">
-                <div class="course-icon-orb">🤖</div>
-                <span class="course-grade-badge">Grade 5–10 & Open</span>
-              </div>
-              <h3>Robotics & Arduino Mastery</h3>
-              <p>Master electronics, breadboards, ultrasonic sensors, DC motors, and build autonomous obstacle-avoiding robots.</p>
-              <ul class="course-points">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Breadboard wiring & circuit fundamentals
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Obstacle avoiding & line follower bots
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  IoT Smart Home automation with Bluetooth
-                </li>
-              </ul>
-            </div>
-            <div class="card-foot">
-              <div class="price-text-wrap">
-                <span class="sub-duration">12 Modules • 15+ Projects</span>
-                <span class="main-price">₹1,999</span>
-              </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll">Enroll</button>
-            </div>
-          </div>
-
-          <!-- Course 2 -->
-          <div class="course-card">
-            <div>
-              <div class="card-top-flex">
-                <div class="course-icon-orb">🧠</div>
-                <span class="course-grade-badge">Next-Gen Tech</span>
-              </div>
-              <h3>AI & Machine Learning</h3>
-              <p>Train smart computer vision models, detect objects, and build intelligent AI projects with Python basics.</p>
-              <ul class="course-points">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Computer vision & image classification
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Teachable Machine & Python algorithms
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Smart AI face tracker capstone project
-                </li>
-              </ul>
-            </div>
-            <div class="card-foot">
-              <div class="price-text-wrap">
-                <span class="sub-duration">10 Modules • 10+ Models</span>
-                <span class="main-price">₹2,499</span>
-              </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll">Enroll</button>
-            </div>
-          </div>
-
-          <!-- Course 3 -->
+          <!-- Card 1: Programming -->
           <div class="course-card">
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">💻</div>
-                <span class="course-grade-badge">CBSE / IB Aligned</span>
+                <span class="category-pill pill-programming">Programming</span>
               </div>
-              <h3>Computer Science Core</h3>
-              <p>Master computational thinking, flowcharts, logic gates, Scratch visual code, and foundational coding principles.</p>
+              <h3>Arduino Programming Language</h3>
+              <span class="course-sub-highlight">C/C++ Embedded Coding & Logic</span>
+              <p>Master the language of microcontrollers. Learn syntax, logic statements, loops, variables, and serial communications for hardware control.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Scratch game logic to code syntax
+                  Arduino C/C++ syntax & pin manipulation
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Algorithm design & flowchart mapping
+                  Conditional logic, loops & math functions
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Cyber hygiene & digital citizenship
+                  Serial monitor debugging & real-time telemetry
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">16 Chapters • 50+ Exercises</span>
-                <span class="main-price">₹1,499</span>
+                <span class="sub-duration">8 Modules • 12+ Scripts</span>
+                <span class="main-price">₹999</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll">Enroll</button>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
             </div>
           </div>
 
-          <!-- Course 4 -->
+          <!-- Card 2: Electronics -->
           <div class="course-card">
             <div>
               <div class="card-top-flex">
-                <div class="course-icon-orb">🗄️</div>
-                <span class="course-grade-badge">Data Architecture</span>
+                <div class="course-icon-orb">⚡</div>
+                <span class="category-pill pill-electronics">Electronics</span>
               </div>
-              <h3>Database Management (DBMS)</h3>
-              <p>Understand relational databases, structured SQL queries, entity modeling, and practical school management datasets.</p>
+              <h3>Arduino Basics & Electronics</h3>
+              <span class="course-sub-highlight">Circuits, Components & Schematics</span>
+              <p>Build strong foundational hardware skills. Learn breadboard prototyping, circuit theory, and electronic components to create safe working designs.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Relational tables & ER schema diagrams
+                  Breadboard wiring, circuits & Ohm’s Law
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  SQL queries, joins, filters & aggregate functions
+                  Resistors, capacitors, LEDs, diodes & transistors
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Real-world library/student record database
+                  Arduino board architecture & power rail safety
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • SQL Labs</span>
-                <span class="main-price">₹1,799</span>
+                <span class="sub-duration">6 Modules • 10+ Hardware Labs</span>
+                <span class="main-price">₹999</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll">Enroll</button>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="electronics">Enroll</button>
             </div>
           </div>
 
-          <!-- Course 5 -->
+          <!-- Card 3: Sensors -->
           <div class="course-card">
             <div>
               <div class="card-top-flex">
-                <div class="course-icon-orb">🎬</div>
-                <span class="course-grade-badge">Creator Economy</span>
+                <div class="course-icon-orb">📡</div>
+                <span class="category-pill pill-sensors">Sensors</span>
               </div>
-              <h3>Video Editing & Media Creation</h3>
-              <p>Create cinematic project showcases, motion promos, keyframe animations, and green screen composites.</p>
+              <h3>Arduino Sensors & Interfacing</h3>
+              <span class="course-sub-highlight">Analog & Digital Sensor Signals</span>
+              <p>Enable microcontrollers to perceive environmental changes. Connect, calibrate, and read data from real-world digital and analog sensory devices.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Keyframing, motion blur & easing curves
+                  Ultrasonic distance & PIR motion sensing
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Green screen compositing & sound design
+                  DHT11/22 temperature & humidity monitoring
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  YouTube & science fair demo videos
+                  LDR light, gas detection & sound sensor modules
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">10 Modules • 8 Practical Edits</span>
+                <span class="sub-duration">8 Modules • 14+ Sensing Labs</span>
+                <span class="main-price">₹1,199</span>
+              </div>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="sensors">Enroll</button>
+            </div>
+          </div>
+
+          <!-- Card 4: Motors -->
+          <div class="course-card">
+            <div>
+              <div class="card-top-flex">
+                <div class="course-icon-orb">⚙️</div>
+                <span class="category-pill pill-motors">Motors</span>
+              </div>
+              <h3>Arduino Motor Control</h3>
+              <span class="course-sub-highlight">DC Motors, Servos & Steppers</span>
+              <p>Control mechanical actuation and motion. Master direction switching, PWM speed regulation, and micro-servo angular control with H-bridge driver ICs.</p>
+              <ul class="course-points">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  DC motor speed & direction with L298N/L293D
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Servo motor precision sweep & angles (0°–180°)
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Stepper motor pulse rotation & driver wiring
+                </li>
+              </ul>
+            </div>
+            <div class="card-foot">
+              <div class="price-text-wrap">
+                <span class="sub-duration">6 Modules • 8+ Motion Projects</span>
+                <span class="main-price">₹1,199</span>
+              </div>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="motors">Enroll</button>
+            </div>
+          </div>
+
+          <!-- Card 5: Robotics -->
+          <div class="course-card">
+            <div>
+              <div class="card-top-flex">
+                <div class="course-icon-orb">🤖</div>
+                <span class="category-pill pill-robotics">Robotics</span>
+              </div>
+              <h3>Robotics: Autonomous Bots & Arm</h3>
+              <span class="course-sub-highlight">Obstacle Bot • Line Follower • Robotic Arm</span>
+              <p>Engineer 3 flagship robotics projects: an autonomous obstacle-avoiding bot, high-precision line-tracking rover, and a multi-axis servo robotic arm.</p>
+              <ul class="course-points">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Obstacle Avoiding Robot:</strong> Servo-ultrasonic radar
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Line Following Robot:</strong> IR sensor array navigation
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Robotic Arm:</strong> Multi-axis servo articulation & gripper
+                </li>
+              </ul>
+            </div>
+            <div class="card-foot">
+              <div class="price-text-wrap">
+                <span class="sub-duration">12 Modules • 3 Complete Robots</span>
                 <span class="main-price">₹1,999</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll">Enroll</button>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="robotics">Enroll</button>
+            </div>
+          </div>
+
+          <!-- Card 6: Automation -->
+          <div class="course-card">
+            <div>
+              <div class="card-top-flex">
+                <div class="course-icon-orb">🏡</div>
+                <span class="category-pill pill-automation">Automation</span>
+              </div>
+              <h3>Home Automation & Smart Agriculture</h3>
+              <span class="course-sub-highlight">Smart Homes • Intelligent Agriculture</span>
+              <p>Automate real-world environments. Build smart home appliance switching systems using relays and automatic soil-moisture irrigation controllers for farming.</p>
+              <ul class="course-points">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Home Automation:</strong> AC/DC relay appliance controls
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Smart Agriculture:</strong> Soil-moisture auto-pump irrigation
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Smart twilight streetlights & automated security alarms
+                </li>
+              </ul>
+            </div>
+            <div class="card-foot">
+              <div class="price-text-wrap">
+                <span class="sub-duration">8 Modules • 6 Automation Systems</span>
+                <span class="main-price">₹1,499</span>
+              </div>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="automation">Enroll</button>
+            </div>
+          </div>
+
+          <!-- Card 7: IoT -->
+          <div class="course-card">
+            <div>
+              <div class="card-top-flex">
+                <div class="course-icon-orb">🌐</div>
+                <span class="category-pill pill-iot">IoT</span>
+              </div>
+              <h3>Arduino IoT & Wi-Fi</h3>
+              <span class="course-sub-highlight">Cloud Telemetry & Mobile Dashboards</span>
+              <p>Bridge embedded hardware with the global cloud using ESP8266 & ESP32. Transmit live telemetry to web dashboards and control pins remotely from your phone.</p>
+              <ul class="course-points">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  ESP8266 & ESP32 Wi-Fi module interfacing
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Live cloud dashboards, MQTT & HTTP data graphs
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Smartphone remote toggles & automated emergency alerts
+                </li>
+              </ul>
+            </div>
+            <div class="card-foot">
+              <div class="price-text-wrap">
+                <span class="sub-duration">8 Modules • 8 Cloud Projects</span>
+                <span class="main-price">₹1,499</span>
+              </div>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="iot">Enroll</button>
+            </div>
+          </div>
+
+          <!-- Card 8: Advanced -->
+          <div class="course-card">
+            <div>
+              <div class="card-top-flex">
+                <div class="course-icon-orb">🚀</div>
+                <span class="category-pill pill-advanced">Advanced</span>
+              </div>
+              <h3>Displays & Advanced Projects</h3>
+              <span class="course-sub-highlight">Displays & Communication • Capstones</span>
+              <p>Master graphic displays, wireless transceivers, multi-protocol communication (SPI/I2C/RF), and integrate complex multi-module engineering systems.</p>
+              <ul class="course-points">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Displays & Communication:</strong> I2C OLED, 16x2 LCD & RF/Bluetooth
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <strong>Advanced Projects:</strong> Weather station & multi-sensor data loggers
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Capstone engineering build & official NG Certification
+                </li>
+              </ul>
+            </div>
+            <div class="card-foot">
+              <div class="price-text-wrap">
+                <span class="sub-duration">10 Modules • 10 Capstone Builds</span>
+                <span class="main-price">₹1,799</span>
+              </div>
+              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="advanced">Enroll</button>
             </div>
           </div>
 
@@ -774,13 +988,16 @@
         </div>
 
         <div class="footer-col">
-          <h4>Learning Tracks</h4>
+          <h4>Single Courses</h4>
           <ul class="footer-links">
-            <li><a href="#courses">Robotics & Arduino</a></li>
-            <li><a href="#courses">AI & Machine Learning</a></li>
-            <li><a href="#courses">Computer Science Core</a></li>
-            <li><a href="#courses">Database Systems (DBMS)</a></li>
-            <li><a href="#courses">Video Editing & Media</a></li>
+            <li><a href="#courses">Programming: Arduino Language</a></li>
+            <li><a href="#courses">Electronics: Basics & Circuits</a></li>
+            <li><a href="#courses">Sensors: Interfacing & Signals</a></li>
+            <li><a href="#courses">Motors: Control & Actuation</a></li>
+            <li><a href="#courses">Robotics: Autonomous Bots & Arm</a></li>
+            <li><a href="#courses">Automation: Home & Agriculture</a></li>
+            <li><a href="#courses">IoT: Arduino IoT & Wi-Fi</a></li>
+            <li><a href="#courses">Advanced: Displays & Projects</a></li>
           </ul>
         </div>
 
@@ -961,16 +1178,23 @@
           <input type="tel" class="text-input" placeholder="e.g. 8077718423" required>
         </div>
         <div class="input-group">
-          <label class="input-label">Selected Track</label>
+          <label class="input-label">Selected Track / Course</label>
           <select class="select-input">
-            <option value="robotics">Robotics & Arduino Mastery (₹1,999)</option>
-            <option value="ai">AI & Machine Learning (₹2,499)</option>
-            <option value="cs">Computer Science Fundamentals (₹1,499)</option>
-            <option value="dbms">DBMS & Data Systems (₹1,799)</option>
-            <option value="video">Video Editing & Media (₹1,999)</option>
-            <option value="stem-combo">STEM Junior Explorer Combo (₹2,299)</option>
-            <option value="ai-robotics-combo">AI-Powered Robotics Pro Combo (₹2,999)</option>
-            <option value="all-in-one">All-in-One Tech Master Bundle (₹3,999)</option>
+            <optgroup label="Single Courses (Categories)">
+              <option value="programming">Programming: Arduino Programming Language (₹999)</option>
+              <option value="electronics">Electronics: Arduino Basics & Electronics (₹999)</option>
+              <option value="sensors">Sensors: Arduino Sensors & Interfacing (₹1,199)</option>
+              <option value="motors">Motors: Arduino Motor Control (₹1,199)</option>
+              <option value="robotics">Robotics: Obstacle Avoiding, Line Follower & Arm (₹1,999)</option>
+              <option value="automation">Automation: Home Automation & Smart Agriculture (₹1,499)</option>
+              <option value="iot">IoT: Arduino IoT & Wi-Fi (₹1,499)</option>
+              <option value="advanced">Advanced: Displays & Communication, Advanced Projects (₹1,799)</option>
+            </optgroup>
+            <optgroup label="Combo Packages (Best Value)">
+              <option value="stem-combo">STEM Junior Explorer Combo (₹2,299)</option>
+              <option value="ai-robotics-combo">AI-Powered Robotics Pro Combo (₹2,999)</option>
+              <option value="all-in-one">All-in-One Tech Master Bundle (₹3,999)</option>
+            </optgroup>
           </select>
         </div>
         <button type="submit" class="btn-pill btn-pill-primary" style="width: 100%; margin-top: 8px;">Proceed to Enrollment</button>
@@ -1001,6 +1225,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=3.0"></script>
+  <script src="js/main.js?v=3.2"></script>
 </body>
 </html>

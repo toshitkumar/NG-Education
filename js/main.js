@@ -86,6 +86,19 @@ function initModals() {
       e.preventDefault();
       const modalId = trigger.getAttribute('data-open-modal');
       openModal(modalId);
+
+      const courseVal = trigger.getAttribute('data-course');
+      if (courseVal && modalId === 'modalEnroll') {
+        const select = document.querySelector('#modalEnroll select');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === courseVal) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
     });
   });
 
