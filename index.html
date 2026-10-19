@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.7">
+  <link rel="stylesheet" href="css/style.css?v=3.8">
 </head>
 <body>
 
@@ -300,13 +300,25 @@
                   Arduino board architecture & power rail regulation
                 </li>
               </ul>
+
+              <!-- Interactive Syllabus Banner -->
+              <div class="card-syllabus-banner" onclick="openModal('modalExploreElectronics')" data-open-modal="modalExploreElectronics" style="background-color: rgba(0, 151, 156, 0.08); border: 1px dashed var(--color-arduino); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem;">⚡</span>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-arduino);">12 Modules Syllabus & Practicals</span>
+                </div>
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary-blue); text-decoration: underline;">View Full Syllabus →</span>
+              </div>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">6 Modules • 10+ Circuits</span>
+                <span class="sub-duration">12 Modules • 12 Practicals</span>
                 <span class="main-price">₹999</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="electronics">Enroll</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-arduino" onclick="openModal('modalExploreElectronics')" data-open-modal="modalExploreElectronics" style="padding: 9px 18px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Explore</button>
+                <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="electronics" style="padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -1465,6 +1477,346 @@
     </div>
   </div>
 
+  <!-- Modal: Arduino Basics & Electronics Detailed Syllabus Explorer (12 Modules) -->
+  <div class="modal-overlay" id="modalExploreElectronics">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Single Course • 12 Hands-on Modules</span>
+        <h3>Arduino Basics & Electronics</h3>
+        <p>Complete electronics fundamentals, Ohm's law, breadboard prototyping, hardware safety, and Arduino Uno board architecture.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Hardware & Tools Required Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Hardware & Tools Required
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Microcontroller Board</span>
+              <span class="syllabus-spec-val"><strong>Arduino Uno R3:</strong> Microcontroller board for understanding hardware architecture and power connections.</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Prototyping Kit</span>
+              <span class="syllabus-spec-val"><strong>Breadboard & Jumper Wires:</strong> For assembling and testing circuits without soldering.</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Core Components</span>
+              <span class="syllabus-spec-val"><strong>Electronic Components:</strong> Resistors, capacitors, LEDs, diodes, transistors and push buttons.</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Testing Equipment</span>
+              <span class="syllabus-spec-val"><strong>Digital Multimeter:</strong> For measuring voltage, resistance and continuity safely.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Completion Outcomes Box -->
+        <div class="syllabus-outcomes-card">
+          <h5>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Course Completion Outcomes
+          </h5>
+          <ul class="syllabus-outcomes-list">
+            <li>Explain fundamental electrical quantities and apply Ohm’s Law.</li>
+            <li>Read basic circuit diagrams and assemble breadboard circuits.</li>
+            <li>Identify resistors, capacitors, LEDs, diodes and transistors.</li>
+            <li>Understand Arduino Uno pins, onboard components and power regulation.</li>
+            <li>Use a multimeter to check connections and measure circuit parameters.</li>
+            <li>Identify common hardware faults and follow safe prototyping practices.</li>
+          </ul>
+        </div>
+
+        <!-- 12 Modules Breakdown -->
+        <div class="syllabus-section-heading">
+          <span>Curriculum Breakdown (Modules 01 – 12)</span>
+          <span class="module-topic-badge">60 Learning Topics • 12 Hands-on Practicals</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Electronics</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is electronics and how electronic systems work</li>
+              <li>Difference between electrical and electronic circuits</li>
+              <li>Conductors, insulators and semiconductors</li>
+              <li>Voltage, current, resistance and power</li>
+              <li>AC vs DC fundamentals</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Identify and classify common electronic components</span>
+            </div>
+          </div>
+
+          <!-- Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Voltage, Current & Ohm’s Law</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Understanding voltage, current and resistance</li>
+              <li>Ohm’s Law: V = I × R</li>
+              <li>Series and parallel circuits</li>
+              <li>Electrical power: P = V × I</li>
+              <li>Basic circuit calculations and measurement</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Calculate resistor values and circuit current</span>
+            </div>
+          </div>
+
+          <!-- Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Breadboard & Circuit Prototyping</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Breadboard layout and internal connections</li>
+              <li>Power rails and terminal strips</li>
+              <li>Building complete circuit loops</li>
+              <li>Connecting components using jumper wires</li>
+              <li>Common wiring mistakes and short circuits</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a basic LED circuit on a breadboard</span>
+            </div>
+          </div>
+
+          <!-- Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Resistors & Color Codes</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Purpose and types of resistors</li>
+              <li>Reading resistor color bands</li>
+              <li>Resistance values and tolerance</li>
+              <li>Current-limiting resistors for LEDs</li>
+              <li>Pull-up and pull-down resistor concepts</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Design an LED circuit with a suitable resistor</span>
+            </div>
+          </div>
+
+          <!-- Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">LEDs, Diodes & Polarity</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>How LEDs produce light</li>
+              <li>Anode, cathode and polarity identification</li>
+              <li>Standard diodes and rectification basics</li>
+              <li>Reverse polarity and component protection</li>
+              <li>Selecting safe operating currents</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a multi-LED indicator circuit</span>
+            </div>
+          </div>
+
+          <!-- Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Capacitors & Energy Storage</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>How capacitors store electrical energy</li>
+              <li>Capacitance and common units</li>
+              <li>Electrolytic and ceramic capacitors</li>
+              <li>Capacitor polarity and voltage ratings</li>
+              <li>Filtering, decoupling and basic timing</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a simple capacitor charge-and-discharge demonstration</span>
+            </div>
+          </div>
+
+          <!-- Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Transistors & Electronic Switching</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to NPN and PNP transistors</li>
+              <li>Base, collector and emitter terminals</li>
+              <li>Transistors as electronic switches</li>
+              <li>Base resistor selection fundamentals</li>
+              <li>Driving suitable loads through switching circuits</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Control an LED or small compatible load using a transistor</span>
+            </div>
+          </div>
+
+          <!-- Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Arduino Uno Board Architecture</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to Arduino Uno R3</li>
+              <li>ATmega328P microcontroller overview</li>
+              <li>Digital pins and analog input pins</li>
+              <li>PWM-capable pins, USB and reset button</li>
+              <li>Power input, voltage regulator and onboard LED</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Identify Arduino Uno components and pin functions</span>
+            </div>
+          </div>
+
+          <!-- Module 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">Arduino Power Supply & Regulation</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>USB power versus external power</li>
+              <li>5V and 3.3V power outputs where available</li>
+              <li>VIN and barrel-jack fundamentals</li>
+              <li>Voltage regulation and power rails</li>
+              <li>Current limits, power budgeting and common ground</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Plan a safe power supply for a basic Arduino circuit</span>
+            </div>
+          </div>
+
+          <!-- Module 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Multimeter & Circuit Measurement</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Multimeter controls and measurement modes</li>
+              <li>Measuring DC voltage and resistance</li>
+              <li>Checking continuity and connections</li>
+              <li>Understanding current measurement safely</li>
+              <li>Troubleshooting open circuits and short circuits</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Test a breadboard circuit and locate a wiring fault</span>
+            </div>
+          </div>
+
+          <!-- Module 11 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">11</span>
+                <h4 class="module-title">Hardware Safety & Troubleshooting</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Preventing short circuits and reverse polarity</li>
+              <li>Avoiding excessive current and overheating</li>
+              <li>Component ratings and datasheet basics</li>
+              <li>Safe handling of batteries and external supplies</li>
+              <li>Systematic circuit fault diagnosis</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Diagnose and correct intentionally introduced circuit errors</span>
+            </div>
+          </div>
+
+          <!-- Module 12 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">12</span>
+                <h4 class="module-title">Final Electronics Practical</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Reading a basic circuit diagram</li>
+              <li>Selecting components for a defined task</li>
+              <li>Assembling a complete breadboard circuit</li>
+              <li>Measuring and validating circuit behavior</li>
+              <li>Documenting the final circuit and results</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build and test a complete LED-based electronic indicator</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Single Course Track • 12 Modules • Certificate Included</span>
+          <span class="main-price">₹999</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" data-open-modal="modalEnroll" data-course="electronics">Enroll in This Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -1529,6 +1881,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=3.7"></script>
+  <script src="js/main.js?v=3.8"></script>
 </body>
 </html>

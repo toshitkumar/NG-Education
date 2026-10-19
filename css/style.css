@@ -1668,6 +1668,51 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.4;
 }
 
+/* Outcomes & Hardware Cards */
+.syllabus-outcomes-card {
+  background-color: rgba(29, 78, 216, 0.04);
+  border: 1px solid rgba(29, 78, 216, 0.2);
+  border-left: 4px solid var(--primary-blue);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.syllabus-outcomes-card h5 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.syllabus-outcomes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px 16px;
+}
+
+.syllabus-outcomes-list li {
+  font-size: 0.86rem;
+  color: var(--text-body);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.syllabus-outcomes-list li::before {
+  content: "✓";
+  color: #10B981;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
 /* 16 Modules List */
 .syllabus-section-heading {
   font-size: 1.15rem;
