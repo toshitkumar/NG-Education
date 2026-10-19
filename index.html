@@ -12,8 +12,13 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
+  <!-- Google Fonts Preconnect for Ultra-Fast Font Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.2">
+  <link rel="stylesheet" href="css/style.css?v=5.3">
 </head>
 <body>
 
@@ -65,14 +70,7 @@
   <section class="hero-wrapper" id="home">
     
     <!-- Multi-Layer Fluid Wave Transition SVG (Hanging from top into white canvas) -->
-    <div class="hero-wave-canvas">
-      <!-- Floating Solid Spheres as in Reference -->
-      <div class="floating-sphere sphere-1"></div>
-      <div class="floating-sphere sphere-2"></div>
-      <div class="floating-sphere sphere-3"></div>
-      <div class="floating-sphere sphere-4"></div>
-      <div class="floating-sphere sphere-5"></div>
-
+    <div class="hero-wave-canvas" aria-hidden="true">
       <!-- Layered Fluid Wave Graphic (100% Solid Colors, hanging from top y=0 into white canvas) -->
       <svg class="wave-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Back Deep Purple/Indigo Wave Layer -->
@@ -86,12 +84,6 @@
       </svg>
     </div>
 
-    <!-- Delicate Contour Lines as in Reference -->
-    <svg class="contour-lines" viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10,210 C80,160 150,230 240,170 C320,120 370,180 410,130" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round"/>
-      <path d="M20,235 C90,195 160,250 250,195 C330,145 380,205 415,160" stroke="#E2E8F0" stroke-width="1.8" stroke-linecap="round"/>
-    </svg>
-
     <div class="container hero-main-layout">
         
         <!-- Left Column: Interactive Image Slider (Images can be easily replaced in assets/images/) -->
@@ -102,45 +94,54 @@
               
               <!-- SLIDE 1: Hands-On Robotics & Arduino -->
               <div class="hero-slide active" data-slide="0">
-                <img src="assets/images/slide1_robotics.jpg" alt="Hands-On Robotics & Arduino" class="slide-img">
+                <picture>
+                  <source srcset="assets/images/slide1_robotics.webp" type="image/webp">
+                  <img src="assets/images/slide1_robotics.jpg" alt="Hands-On Robotics &amp; Arduino" class="slide-img" width="1024" height="571" fetchpriority="high" loading="eager">
+                </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
                     <span class="slide-badge-dot"></span>
                     <span>🤖 Hands-On Robotics</span>
                   </div>
                   <div class="slide-text">
-                    <h3 class="slide-title">Arduino & Smart Bots</h3>
-                    <p class="slide-subtitle">Arduino sensors, circuits & smart bots</p>
+                    <h3 class="slide-title">Arduino &amp; Smart Bots</h3>
+                    <p class="slide-subtitle">Arduino sensors, circuits &amp; smart bots</p>
                   </div>
                 </div>
               </div>
 
               <!-- SLIDE 2: Artificial Intelligence & Computer Vision -->
               <div class="hero-slide" data-slide="1">
-                <img src="assets/images/slide2_ai.jpg" alt="Artificial Intelligence & Vision Workstation" class="slide-img">
+                <picture>
+                  <source srcset="assets/images/slide2_ai.webp" type="image/webp">
+                  <img src="assets/images/slide2_ai.jpg" alt="Artificial Intelligence &amp; Vision Workstation" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
+                </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
                     <span class="slide-badge-dot"></span>
                     <span>🧠 Artificial Intelligence</span>
                   </div>
                   <div class="slide-text">
-                    <h3 class="slide-title">AI & Computer Vision</h3>
-                    <p class="slide-subtitle">Computer vision & predictive algorithms</p>
+                    <h3 class="slide-title">AI &amp; Computer Vision</h3>
+                    <p class="slide-subtitle">Computer vision &amp; predictive algorithms</p>
                   </div>
                 </div>
               </div>
 
               <!-- SLIDE 3: STEM School Lab & Open to All -->
               <div class="hero-slide" data-slide="2">
-                <img src="assets/images/slide3_stem_lab.jpg" alt="Grade 5-10 & College STEM Lab" class="slide-img">
+                <picture>
+                  <source srcset="assets/images/slide3_stem_lab.webp" type="image/webp">
+                  <img src="assets/images/slide3_stem_lab.jpg" alt="Grade 5-10 &amp; College STEM Lab" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
+                </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
                     <span class="slide-badge-dot"></span>
-                    <span>🏫 Grade 5–10 & Open to All</span>
+                    <span>🏫 Grade 5–10 &amp; Open to All</span>
                   </div>
                   <div class="slide-text">
                     <h3 class="slide-title">Hands-On STEM Labs</h3>
-                    <p class="slide-subtitle">School curriculum & college upskilling</p>
+                    <p class="slide-subtitle">School curriculum &amp; college upskilling</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +160,7 @@
               </svg>
             </button>
 
-            <!-- Slider Bottom Pagination Dots & Counter -->
+            <!-- Slider Pagination Bar (Dots & Counter) -->
             <div class="slider-pagination-bar">
               <div class="slider-dots-container">
                 <button class="slider-dot active" data-index="0" aria-label="Go to slide 1"></button>
@@ -956,7 +957,10 @@
           <div class="team-leadership-grid">
             <div class="team-member-item founder-featured">
               <div class="founder-circle-frame">
-                <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="founder-avatar-img">
+                <picture>
+                  <source srcset="assets/images/founder_toshit_avatar.webp" type="image/webp">
+                  <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="founder-avatar-img" width="68" height="68" loading="lazy" decoding="async">
+                </picture>
               </div>
               <div class="member-details">
                 <div class="member-role-badge">🔹 Founder</div>
@@ -1066,7 +1070,10 @@
             <li class="footer-team-list">
               <div class="footer-team-item">
                 <div class="footer-founder-row">
-                  <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="footer-founder-avatar">
+                  <picture>
+                    <source srcset="assets/images/founder_toshit_avatar.webp" type="image/webp">
+                    <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="footer-founder-avatar" width="28" height="28" loading="lazy" decoding="async">
+                  </picture>
                   <span>🔹 <span class="footer-team-role">Founder:</span> Toshit Kumar</span>
                 </div>
               </div>
@@ -5755,6 +5762,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=5.2"></script>
+  <script src="js/main.js?v=5.3"></script>
 </body>
 </html>

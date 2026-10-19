@@ -12,8 +12,13 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
+  <!-- Google Fonts Preconnect for Ultra-Fast Font Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.2">
+  <link rel="stylesheet" href="css/style.css?v=5.3">
 </head>
 <body>
 
@@ -132,7 +137,10 @@
         <div class="trainer-card" data-category="arduino robotics labs">
           <div>
             <div class="trainer-top-meta">
-              <img src="assets/images/founder_toshit_avatar.jpg" alt="Toshit Kumar" class="trainer-avatar-img">
+              <picture>
+                <source srcset="assets/images/founder_toshit_avatar.webp" type="image/webp">
+                <img src="assets/images/founder_toshit_avatar.jpg" alt="Toshit Kumar" class="trainer-avatar-img" width="68" height="68" loading="lazy" decoding="async">
+              </picture>
               <div class="trainer-header-info">
                 <span class="trainer-category-badge">Arduino &amp; Firmware Lead</span>
                 <h3 class="trainer-name">Toshit Kumar</h3>
@@ -511,7 +519,10 @@
             <li class="footer-team-list">
               <div class="footer-team-item">
                 <div class="footer-founder-row">
-                  <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="footer-founder-avatar">
+                  <picture>
+                    <source srcset="assets/images/founder_toshit_avatar.webp" type="image/webp">
+                    <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="footer-founder-avatar" width="28" height="28" loading="lazy" decoding="async">
+                  </picture>
                   <span>🔹 <span class="footer-team-role">Founder:</span> Toshit Kumar</span>
                 </div>
               </div>
@@ -693,6 +704,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=5.2"></script>
+  <script src="js/main.js?v=5.3"></script>
 </body>
 </html>
