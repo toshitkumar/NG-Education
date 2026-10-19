@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.0">
+  <link rel="stylesheet" href="css/style.css?v=5.1">
 </head>
 <body>
 
@@ -659,31 +659,43 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">🚀</div>
-                <span class="course-grade-badge">Save 35%</span>
+                <span class="course-grade-badge">Save 35% • 2 Tracks</span>
               </div>
               <h3>STEM Junior Explorer Combo</h3>
-              <p>The ultimate launchpad combining core Computer Science with hands-on Arduino Robotics.</p>
+              <p>Introduce young learners (Ages 8–14) to Computer Science, electronics, coding, and robotics through a hands-on STEM learning journey combining Scratch, Python, Arduino Uno &amp; autonomous robots.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Complete Robotics & Arduino Track
+                  <strong>Track 1: Computer Science Foundation:</strong> 8 modules covering digital literacy, logic, Scratch, Python &amp; AI concepts
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Computer Science Foundation Curriculum
+                  <strong>Track 2: Robotics &amp; Arduino:</strong> 10 modules covering circuits, breadboards, sensors, motors, obstacle &amp; line robots
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  15 Mini hardware experiments & digital guides
+                  <strong>Dual Capstones:</strong> CS Software Application + Autonomous Hardware Robotics Prototype Demonstration
                 </li>
               </ul>
+
+              <!-- Interactive Syllabus Banner -->
+              <div class="card-syllabus-banner" onclick="openModal('modalExploreStemCombo')" data-open-modal="modalExploreStemCombo" style="background-color: rgba(0, 151, 156, 0.08); border: 1px dashed var(--color-arduino); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem;">🚀</span>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-arduino);">2 Tracks • 18 Modules Curriculum &amp; Projects</span>
+                </div>
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary-blue); text-decoration: underline;">View Full Syllabus →</span>
+              </div>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration"><del style="color: #94A3B8;">₹3,498</del> Special Combo</span>
+                <span class="sub-duration"><del style="color: #94A3B8;">₹3,498</del> 2 Tracks • 40–60 Hours</span>
                 <span class="main-price" style="color: var(--primary-blue);">₹2,299</span>
               </div>
-              <button class="btn-pill btn-pill-primary" style="padding: 9px 24px; font-size: 0.88rem;" data-open-modal="modalEnroll">Get Combo</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-arduino" onclick="openModal('modalExploreStemCombo')" data-open-modal="modalExploreStemCombo" style="padding: 9px 18px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Explore</button>
+                <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="stem-combo" style="padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -5116,6 +5128,572 @@
     </div>
   </div>
 
+  <!-- Modal: STEM Junior Explorer Combo Detailed Syllabus Explorer (2 Tracks, 18 Modules) -->
+  <div class="modal-overlay" id="modalExploreStemCombo">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Combo Package • 2 Tracks (18 Modules) • Grade 5–8 / Ages 8–14</span>
+        <h3>STEM Junior Explorer Combo</h3>
+        <p>Introduce young learners to the exciting world of Computer Science, electronics, coding and robotics through a hands-on STEM learning journey. This combo combines foundational computing skills with Arduino-based projects, logical thinking and engineering challenges.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Combo Specifications Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Combo Specifications &amp; Overview
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Course Name</span>
+              <span class="syllabus-spec-val">STEM Junior Explorer Combo</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Recommended Age</span>
+              <span class="syllabus-spec-val">8–14 years (Grades 5–8)</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Skill Level</span>
+              <span class="syllabus-spec-val">Beginner Level</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Structure</span>
+              <span class="syllabus-spec-val">2 Learning Tracks, 18 Modules Total</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Suggested Duration</span>
+              <span class="syllabus-spec-val">40–60 hours</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Learning Format</span>
+              <span class="syllabus-spec-val">Lessons, guided activities &amp; hands-on projects</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Hardware Used</span>
+              <span class="syllabus-spec-val">Arduino Uno kit &amp; basic electronics components</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Final Outcome</span>
+              <span class="syllabus-spec-val">CS mini project + Robotics capstone demonstration</span>
+            </div>
+            <div class="syllabus-spec-item" style="grid-column: 1 / -1;">
+              <span class="syllabus-spec-label">Recommended Course Positioning</span>
+              <span class="syllabus-spec-val">Marketed as a beginner-friendly STEM combo for students who want to explore both software and hardware before choosing a specialized path in programming, robotics, AI or IoT.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- What the Combo Includes (4 Key Pillars) -->
+        <div class="syllabus-overview-card" style="border-left-color: #10B981; margin-top: 18px;">
+          <div class="syllabus-overview-title" style="color: #059669;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            What the Combo Includes
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px;">
+            <div style="background-color: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.2rem;">💻</span>
+                <strong style="font-size: 0.92rem; color: var(--text-dark);">Computer Science Foundation</strong>
+              </div>
+              <p style="font-size: 0.83rem; color: var(--text-body); margin: 0; line-height: 1.5;">Digital literacy, computational thinking, visual coding, introductory Python and responsible technology use.</p>
+            </div>
+            <div style="background-color: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.2rem;">⚡</span>
+                <strong style="font-size: 0.92rem; color: var(--text-dark);">Arduino &amp; Electronics</strong>
+              </div>
+              <p style="font-size: 0.83rem; color: var(--text-body); margin: 0; line-height: 1.5;">Circuit building, Arduino programming, component identification and sensor interfacing.</p>
+            </div>
+            <div style="background-color: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.2rem;">🤖</span>
+                <strong style="font-size: 0.92rem; color: var(--text-dark);">Hands-on Robotics</strong>
+              </div>
+              <p style="font-size: 0.83rem; color: var(--text-body); margin: 0; line-height: 1.5;">Motor control, obstacle avoidance, line following and practical engineering projects.</p>
+            </div>
+            <div style="background-color: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.2rem;">🏆</span>
+                <strong style="font-size: 0.92rem; color: var(--text-dark);">Assessment &amp; Capstone</strong>
+              </div>
+              <p style="font-size: 0.83rem; color: var(--text-body); margin: 0; line-height: 1.5;">Quizzes, coding assignments, practical demonstrations and a final student project.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Outcomes Card -->
+        <div class="syllabus-overview-card" style="border-left-color: #1D4ED8; margin-top: 18px;">
+          <div class="syllabus-overview-title" style="color: #1D4ED8;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Learning Outcomes — By Completing This Combo, Students Will Be Able To:
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 14px;">
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Understand basic computer operations and digital safety.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Apply computational thinking and create simple programs.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Write beginner-level Python code.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Build basic electronic circuits with Arduino Uno.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Program sensors, LEDs, buzzers and motors.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Assemble and demonstrate a basic autonomous robot.</span>
+            </div>
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; grid-column: 1 / -1;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10B981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark); line-height: 1.4;">Explain their design choices and present a working project.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TRACK 1: COMPUTER SCIENCE FOUNDATION ================= -->
+        <div style="margin: 32px 0 16px; padding: 14px 18px; background: rgba(0, 151, 156, 0.08); border-left: 4px solid var(--color-arduino); border-radius: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-arduino);">Learning Track 1</span>
+            <h4 style="margin: 2px 0 0; font-size: 1.15rem; color: var(--text-dark);">Computer Science Foundation</h4>
+          </div>
+          <span style="font-size: 0.82rem; font-weight: 700; background: #fff; border: 1px solid rgba(0, 151, 156, 0.3); padding: 4px 12px; border-radius: 20px; color: var(--color-arduino);">8 Modules • Digital Literacy, Logic &amp; Coding</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Track 1 - Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Computers &amp; Digital Literacy</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is a computer and how it works</li>
+              <li>Hardware and software fundamentals</li>
+              <li>Input, processing, output and storage</li>
+              <li>Operating systems and file management</li>
+              <li>Keyboard, mouse and basic computer operations</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Create and organize a digital project folder</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Internet, Web &amp; Cyber Safety</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>How the internet works</li>
+              <li>Web browsers and search engines</li>
+              <li>Websites and basic online research</li>
+              <li>Passwords, privacy and personal information</li>
+              <li>Cyberbullying awareness and responsible digital citizenship</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Prepare a digital safety checklist</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Computational Thinking &amp; Logic</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Breaking problems into smaller steps</li>
+              <li>Algorithms and step-by-step instructions</li>
+              <li>Flowcharts and pseudocode</li>
+              <li>Patterns, sequences and logical reasoning</li>
+              <li>Debugging simple instructions</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Create a flowchart for a real-world task</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Block-Based Coding</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to Scratch or a similar visual coding tool</li>
+              <li>Sprites, backgrounds and events</li>
+              <li>Sequences, loops and conditions</li>
+              <li>Variables and simple interactions</li>
+              <li>Debugging and improving programs</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Create an interactive animation or mini-game</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">Introduction to Text-Based Coding</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is a programming language?</li>
+              <li>Introduction to Python syntax</li>
+              <li>Variables, data types and output</li>
+              <li>Conditions and loops</li>
+              <li>Simple functions and problem-solving</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Build a quiz game or number guessing game</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Digital Creativity &amp; Design</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to digital graphics</li>
+              <li>Basic design principles and visual communication</li>
+              <li>Creating presentations and diagrams</li>
+              <li>Designing a simple project poster</li>
+              <li>Presenting technical ideas clearly</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Create a poster explaining a technology concept</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Introduction to AI &amp; Emerging Technologies</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is Artificial Intelligence?</li>
+              <li>Everyday applications of AI</li>
+              <li>How sensors and computers make decisions</li>
+              <li>AI ethics, privacy and responsible use</li>
+              <li>Introduction to robotics, IoT and automation</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Design a concept for an AI-assisted smart device</span>
+            </div>
+          </div>
+
+          <!-- Track 1 - Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Computer Science Mini Project</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Identify a problem to solve</li>
+              <li>Plan the solution using an algorithm</li>
+              <li>Build a small coding project</li>
+              <li>Test and debug the solution</li>
+              <li>Document and present the project</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL ACTIVITY</span>
+              <span>Create a Scratch game or beginner Python application</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TRACK 2: ROBOTICS & ARDUINO ================= -->
+        <div style="margin: 36px 0 16px; padding: 14px 18px; background: rgba(29, 78, 216, 0.08); border-left: 4px solid var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary-blue);">Learning Track 2</span>
+            <h4 style="margin: 2px 0 0; font-size: 1.15rem; color: var(--text-dark);">Robotics &amp; Arduino</h4>
+          </div>
+          <span style="font-size: 0.82rem; font-weight: 700; background: #fff; border: 1px solid rgba(29, 78, 216, 0.3); padding: 4px 12px; border-radius: 20px; color: var(--primary-blue);">10 Modules • Electronics, Sensors, Motors &amp; Robot Building</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Track 2 - Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Robotics &amp; Engineering</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is a robot?</li>
+              <li>Robot components: controller, sensors and actuators</li>
+              <li>Types and applications of robots</li>
+              <li>Introduction to Arduino Uno</li>
+              <li>Engineering design and problem-solving</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Design a simple robot concept</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Electronics &amp; Circuit Building</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Voltage, current and resistance</li>
+              <li>Breadboard connections and circuit loops</li>
+              <li>LEDs, resistors, switches and jumper wires</li>
+              <li>Basic circuit diagrams</li>
+              <li>Hardware safety and polarity</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build an LED traffic light circuit</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Arduino Programming Fundamentals</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Arduino IDE and sketch structure</li>
+              <li>setup() and loop()</li>
+              <li>Variables and data types</li>
+              <li>Conditions and loops</li>
+              <li>Digital inputs and outputs</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Create programmable LED patterns</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Sensors &amp; Environmental Inputs</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Digital and analog sensors</li>
+              <li>Ultrasonic distance measurement</li>
+              <li>IR obstacle detection</li>
+              <li>LDR light sensing</li>
+              <li>Reading and interpreting sensor data</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build a distance meter or automatic night lamp</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">Motors &amp; Movement Control</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>DC motor fundamentals</li>
+              <li>Motor drivers and safe power connections</li>
+              <li>Forward, reverse and stop commands</li>
+              <li>PWM-based speed control</li>
+              <li>Servo motor positioning</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build a motorized mechanism or servo barrier gate</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Obstacle-Avoiding Robot</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Robot chassis and wheel assembly</li>
+              <li>Motor driver wiring</li>
+              <li>Ultrasonic sensor integration</li>
+              <li>Obstacle detection and turning logic</li>
+              <li>Testing and movement calibration</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build a two-wheel obstacle-avoiding robot</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Line-Following Robot</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>IR sensor array fundamentals</li>
+              <li>Line detection and calibration</li>
+              <li>Motor coordination and steering</li>
+              <li>Turning and line-loss recovery</li>
+              <li>Track testing and performance improvement</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build a line-following robot</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Smart Systems &amp; Automation</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Sensor-based automation logic</li>
+              <li>Buzzer and LED alerts</li>
+              <li>Relay and low-voltage switching fundamentals</li>
+              <li>Automatic lighting and security concepts</li>
+              <li>Basic smart agriculture and irrigation</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Build a smart night lamp or soil-moisture monitor</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">IoT &amp; Connected Devices Introduction</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is the Internet of Things?</li>
+              <li>Arduino Uno versus ESP8266 and ESP32</li>
+              <li>Wi-Fi-enabled sensor monitoring concepts</li>
+              <li>Cloud dashboards and remote monitoring</li>
+              <li>Responsible handling of device credentials</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Design a connected sensor monitoring prototype</span>
+            </div>
+          </div>
+
+          <!-- Track 2 - Module 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Robotics Capstone &amp; Demonstration</h4>
+              </div>
+              <span class="module-topic-badge">5 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Select an engineering problem</li>
+              <li>Prepare the circuit and component list</li>
+              <li>Build and program the prototype</li>
+              <li>Test, troubleshoot and improve</li>
+              <li>Present the solution and explain how it works</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL PROJECT</span>
+              <span>Create a student-designed robotics or automation prototype</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Complete 2-Track Combo • 18 Modules • 40–60 Hours • Double Capstone &amp; Verified Certificate</span>
+          <span class="main-price"><del style="font-size: 1.1rem; color: #94A3B8; font-weight: normal; margin-right: 6px;">₹3,498</del> ₹2,299</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="stem-combo">Enroll in This Combo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -5181,6 +5759,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=5.0"></script>
+  <script src="js/main.js?v=5.1"></script>
 </body>
 </html>
