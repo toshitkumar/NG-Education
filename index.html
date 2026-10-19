@@ -10,7 +10,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.2">
+  <link rel="stylesheet" href="css/style.css?v=3.5">
 </head>
 <body>
 
@@ -227,113 +227,6 @@
 
       <!-- ================= SINGLE COURSES GRID ================= -->
       <div class="tab-content active" id="single-courses">
-
-        <!-- Curriculum Category vs Individual Courses Matrix -->
-        <div class="single-courses-curriculum-box">
-          <div class="curriculum-box-header">
-            <span class="curriculum-badge">Curriculum Matrix</span>
-            <h3>Modular Learning Tracks & Individual Courses</h3>
-            <p>
-              Choose focused subject modules tailored for hands-on mastery. Each track includes complete project kits, source codes, circuit diagrams, and live mentorship.
-            </p>
-          </div>
-
-          <div class="curriculum-table-responsive">
-            <table class="curriculum-table">
-              <thead>
-                <tr>
-                  <th style="width: 24%;">Category</th>
-                  <th style="width: 58%;">Individual Courses & Projects Covered</th>
-                  <th style="width: 18%; text-align: right;">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="category-pill pill-programming">💻 Programming</span></td>
-                  <td>
-                    <strong>Arduino Programming Language</strong>
-                    <span class="course-sub-tag">Embedded C/C++, Logic Flow, Control Loops & Serial Debugging</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-electronics">⚡ Electronics</span></td>
-                  <td>
-                    <strong>Arduino Basics & Electronics</strong>
-                    <span class="course-sub-tag">Circuit Schematics, Breadboard Wiring, Resistors, LEDs & Ohm's Law</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="electronics">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-sensors">📡 Sensors</span></td>
-                  <td>
-                    <strong>Arduino Sensors & Interfacing</strong>
-                    <span class="course-sub-tag">Ultrasonic, PIR Motion, DHT11 Temp/Humidity, Gas & Analog/Digital Sensors</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="sensors">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-motors">⚙️ Motors</span></td>
-                  <td>
-                    <strong>Arduino Motor Control</strong>
-                    <span class="course-sub-tag">DC Motors, Servo Angular Sweeps, Stepper Motors & L298N/L293D Drivers</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="motors">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-robotics">🤖 Robotics</span></td>
-                  <td>
-                    <strong>Obstacle Avoiding Robot, Line Following Robot, Robotic Arm</strong>
-                    <span class="course-sub-tag">3 Real-World Autonomous Robotics Builds with Chassis, Radar & Gripper</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="robotics">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-automation">🏡 Automation</span></td>
-                  <td>
-                    <strong>Home Automation, Smart Agriculture</strong>
-                    <span class="course-sub-tag">AC/DC Relay Appliance Controls, Soil-Moisture Automated Irrigation & Security</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="automation">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-iot">🌐 IoT</span></td>
-                  <td>
-                    <strong>Arduino IoT & Wi-Fi</strong>
-                    <span class="course-sub-tag">ESP8266/ESP32 Cloud Telemetry, Live Dashboards & Mobile Remote Controls</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="iot">Enroll</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="category-pill pill-advanced">🚀 Advanced</span></td>
-                  <td>
-                    <strong>Displays & Communication, Advanced Projects</strong>
-                    <span class="course-sub-tag">I2C OLED, 16x2 LCD, RF/Bluetooth Transceivers & Capstone Engineering Builds</span>
-                  </td>
-                  <td style="text-align: right;">
-                    <button class="table-enroll-btn" data-open-modal="modalEnroll" data-course="advanced">Enroll</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 8 Individual Course Cards Grid -->
         <div class="courses-grid">
           
           <!-- Card 1: Programming -->
@@ -341,29 +234,28 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">💻</div>
-                <span class="category-pill pill-programming">Programming</span>
+                <span class="course-grade-badge">Programming</span>
               </div>
               <h3>Arduino Programming Language</h3>
-              <span class="course-sub-highlight">C/C++ Embedded Coding & Logic</span>
-              <p>Master the language of microcontrollers. Learn syntax, logic statements, loops, variables, and serial communications for hardware control.</p>
+              <p>Master the C/C++ embedded coding language designed for microcontrollers. Learn program flow, syntax, loops, variables, and serial communication.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Arduino C/C++ syntax & pin manipulation
+                  C/C++ embedded syntax & pin programming
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Conditional logic, loops & math functions
+                  Conditional logic, loops & custom functions
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Serial monitor debugging & real-time telemetry
+                  Serial Monitor debugging & live telemetry
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 12+ Scripts</span>
+                <span class="sub-duration">8 Modules • 12+ Codes</span>
                 <span class="main-price">₹999</span>
               </div>
               <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
@@ -375,15 +267,14 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">⚡</div>
-                <span class="category-pill pill-electronics">Electronics</span>
+                <span class="course-grade-badge">Electronics</span>
               </div>
               <h3>Arduino Basics & Electronics</h3>
-              <span class="course-sub-highlight">Circuits, Components & Schematics</span>
-              <p>Build strong foundational hardware skills. Learn breadboard prototyping, circuit theory, and electronic components to create safe working designs.</p>
+              <p>Build a rock-solid foundation in electronic circuits, breadboard prototyping, hardware safety, and core electrical components.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Breadboard wiring, circuits & Ohm’s Law
+                  Breadboard wiring, circuit loops & Ohm’s Law
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -391,13 +282,13 @@
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Arduino board architecture & power rail safety
+                  Arduino board architecture & power rail regulation
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">6 Modules • 10+ Hardware Labs</span>
+                <span class="sub-duration">6 Modules • 10+ Circuits</span>
                 <span class="main-price">₹999</span>
               </div>
               <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="electronics">Enroll</button>
@@ -409,11 +300,10 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">📡</div>
-                <span class="category-pill pill-sensors">Sensors</span>
+                <span class="course-grade-badge">Sensors</span>
               </div>
               <h3>Arduino Sensors & Interfacing</h3>
-              <span class="course-sub-highlight">Analog & Digital Sensor Signals</span>
-              <p>Enable microcontrollers to perceive environmental changes. Connect, calibrate, and read data from real-world digital and analog sensory devices.</p>
+              <p>Interface and calibrate real-world analog and digital sensory devices to capture environmental signals with precision.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -431,7 +321,7 @@
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 14+ Sensing Labs</span>
+                <span class="sub-duration">8 Modules • 14+ Sensors</span>
                 <span class="main-price">₹1,199</span>
               </div>
               <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="sensors">Enroll</button>
@@ -443,11 +333,10 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">⚙️</div>
-                <span class="category-pill pill-motors">Motors</span>
+                <span class="course-grade-badge">Motors</span>
               </div>
               <h3>Arduino Motor Control</h3>
-              <span class="course-sub-highlight">DC Motors, Servos & Steppers</span>
-              <p>Control mechanical actuation and motion. Master direction switching, PWM speed regulation, and micro-servo angular control with H-bridge driver ICs.</p>
+              <p>Bring mechanical actuation to your projects. Master motor drivers, PWM speed regulation, and precise micro-servo positioning.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -455,17 +344,17 @@
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Servo motor precision sweep & angles (0°–180°)
+                  Servo motor precision angular sweep (0°–180°)
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Stepper motor pulse rotation & driver wiring
+                  Stepper motor pulse rotation & driver calibration
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">6 Modules • 8+ Motion Projects</span>
+                <span class="sub-duration">6 Modules • 8+ Motion Labs</span>
                 <span class="main-price">₹1,199</span>
               </div>
               <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="motors">Enroll</button>
@@ -477,23 +366,22 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">🤖</div>
-                <span class="category-pill pill-robotics">Robotics</span>
+                <span class="course-grade-badge">Robotics</span>
               </div>
-              <h3>Robotics: Autonomous Bots & Arm</h3>
-              <span class="course-sub-highlight">Obstacle Bot • Line Follower • Robotic Arm</span>
-              <p>Engineer 3 flagship robotics projects: an autonomous obstacle-avoiding bot, high-precision line-tracking rover, and a multi-axis servo robotic arm.</p>
+              <h3>Robotics & Autonomous Bots</h3>
+              <p>Build 3 flagship robotics projects: an autonomous obstacle-avoiding bot, high-speed line tracker, and a multi-axis servo robotic arm.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <strong>Obstacle Avoiding Robot:</strong> Servo-ultrasonic radar
+                  <strong>Obstacle Avoiding Robot</strong> with ultrasonic servo radar
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <strong>Line Following Robot:</strong> IR sensor array navigation
+                  <strong>Line Following Robot</strong> with multi-channel IR sensors
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <strong>Robotic Arm:</strong> Multi-axis servo articulation & gripper
+                  <strong>Robotic Arm</strong> with multi-axis servos & gripper
                 </li>
               </ul>
             </div>
@@ -511,29 +399,28 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">🏡</div>
-                <span class="category-pill pill-automation">Automation</span>
+                <span class="course-grade-badge">Automation</span>
               </div>
               <h3>Home Automation & Smart Agriculture</h3>
-              <span class="course-sub-highlight">Smart Homes • Intelligent Agriculture</span>
-              <p>Automate real-world environments. Build smart home appliance switching systems using relays and automatic soil-moisture irrigation controllers for farming.</p>
+              <p>Build smart automated systems for modern living: relay-driven automated appliances and automatic soil-moisture irrigation systems.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <strong>Home Automation:</strong> AC/DC relay appliance controls
+                  <strong>Home Automation:</strong> AC/DC relay appliance switching
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <strong>Smart Agriculture:</strong> Soil-moisture auto-pump irrigation
+                  <strong>Smart Agriculture:</strong> Soil-moisture auto-irrigation pump
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Smart twilight streetlights & automated security alarms
+                  Automatic night streetlights & intrusion sirens
                 </li>
               </ul>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 6 Automation Systems</span>
+                <span class="sub-duration">8 Modules • 6 Systems</span>
                 <span class="main-price">₹1,499</span>
               </div>
               <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="automation">Enroll</button>
@@ -545,11 +432,10 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">🌐</div>
-                <span class="category-pill pill-iot">IoT</span>
+                <span class="course-grade-badge">IoT</span>
               </div>
               <h3>Arduino IoT & Wi-Fi</h3>
-              <span class="course-sub-highlight">Cloud Telemetry & Mobile Dashboards</span>
-              <p>Bridge embedded hardware with the global cloud using ESP8266 & ESP32. Transmit live telemetry to web dashboards and control pins remotely from your phone.</p>
+              <p>Connect microcontrollers to the global internet. Transmit sensor data to live cloud dashboards and control hardware anywhere via smartphone.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -557,11 +443,11 @@
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Live cloud dashboards, MQTT & HTTP data graphs
+                  Real-time cloud dashboards, MQTT & HTTP telemetry
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Smartphone remote toggles & automated emergency alerts
+                  Smartphone mobile apps & emergency push alerts
                 </li>
               </ul>
             </div>
@@ -579,11 +465,10 @@
             <div>
               <div class="card-top-flex">
                 <div class="course-icon-orb">🚀</div>
-                <span class="category-pill pill-advanced">Advanced</span>
+                <span class="course-grade-badge">Advanced</span>
               </div>
               <h3>Displays & Advanced Projects</h3>
-              <span class="course-sub-highlight">Displays & Communication • Capstones</span>
-              <p>Master graphic displays, wireless transceivers, multi-protocol communication (SPI/I2C/RF), and integrate complex multi-module engineering systems.</p>
+              <p>Master graphic displays, wireless transceivers (RF/Bluetooth), multi-protocol communication (SPI/I2C), and build complex capstone systems.</p>
               <ul class="course-points">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -595,7 +480,7 @@
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  Capstone engineering build & official NG Certification
+                  Capstone engineering build & NG Certification
                 </li>
               </ul>
             </div>
@@ -1225,6 +1110,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=3.2"></script>
+  <script src="js/main.js?v=3.5"></script>
 </body>
 </html>
