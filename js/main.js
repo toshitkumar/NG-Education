@@ -381,105 +381,53 @@ function initHeroSlider() {
   const slider = document.querySelector('.hero-slider-card');
   if (!slider) return;
 
-  const track = slider.querySelector('.hero-slides-track');
-  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+  const slides = slider.querySelectorAll('.hero-slide');
   const dots = slider.querySelectorAll('.slider-dot');
   const counter = slider.querySelector('#sliderCurrentNum');
   const prevBtn = slider.querySelector('.slider-arrow-prev');
   const nextBtn = slider.querySelector('.slider-arrow-next');
   const textColDots = document.querySelectorAll('.carousel-dots .dot');
 
-  if (!track || slides.length === 0) return;
+  if (slides.length === 0) return;
 
-  const realCount = slides.length; // 3 slides
   let currentIndex = 0;
   let autoplayTimer = null;
-  let isTransitioning = false;
-  const slideInterval = 3800; // 3.8s
+  const slideInterval = 4000; // 4.0s
 
-  // Initialize slides: slide 0 is active, all others are prepared on right
-  slides.forEach((slide, i) => {
-    slide.classList.remove('slide-out-left', 'slide-out-right', 'prepare-left', 'prepare-right');
-    if (i === 0) {
-      slide.classList.add('active');
+  function showSlide(index) {
+    if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentIndex = 0;
     } else {
-      slide.classList.remove('active');
-      slide.classList.add('prepare-right');
+      currentIndex = index;
     }
-  });
 
-  function updateIndicators(targetIndex) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
     dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === targetIndex);
+      dot.classList.toggle('active', i === currentIndex);
     });
 
     if (textColDots && textColDots.length) {
       textColDots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === targetIndex);
+        dot.classList.toggle('active', i === currentIndex);
       });
     }
 
     if (counter) {
-      counter.textContent = String(targetIndex + 1).padStart(2, '0');
+      counter.textContent = String(currentIndex + 1).padStart(2, '0');
     }
-  }
-
-  function transitionToSlide(targetIndex, direction = 'next') {
-    if (targetIndex === currentIndex || isTransitioning) return;
-    isTransitioning = true;
-
-    const currentSlide = slides[currentIndex];
-    const targetSlide = slides[targetIndex];
-
-    // 1. Prepare target slide offscreen in incoming direction without transition
-    if (direction === 'next') {
-      targetSlide.classList.remove('slide-out-left', 'slide-out-right', 'active', 'prepare-left');
-      targetSlide.classList.add('prepare-right');
-    } else {
-      targetSlide.classList.remove('slide-out-left', 'slide-out-right', 'active', 'prepare-right');
-      targetSlide.classList.add('prepare-left');
-    }
-
-    // 2. In next animation frame, animate target in and current out
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (direction === 'next') {
-          targetSlide.classList.remove('prepare-right');
-          targetSlide.classList.add('active');
-          currentSlide.classList.remove('active', 'prepare-left', 'prepare-right');
-          currentSlide.classList.add('slide-out-left');
-        } else {
-          targetSlide.classList.remove('prepare-left');
-          targetSlide.classList.add('active');
-          currentSlide.classList.remove('active', 'prepare-left', 'prepare-right');
-          currentSlide.classList.add('slide-out-right');
-        }
-
-        currentIndex = targetIndex;
-        updateIndicators(currentIndex);
-
-        // Reset transition lock after animation completes (450ms)
-        setTimeout(() => {
-          isTransitioning = false;
-        }, 460);
-      });
-    });
   }
 
   function nextSlide() {
-    const nextIndex = (currentIndex + 1) % realCount;
-    transitionToSlide(nextIndex, 'next');
+    showSlide(currentIndex + 1);
   }
 
   function prevSlide() {
-    const prevIndex = (currentIndex - 1 + realCount) % realCount;
-    transitionToSlide(prevIndex, 'prev');
-  }
-
-  function goToSlide(targetIndex) {
-    if (targetIndex === currentIndex || targetIndex < 0 || targetIndex >= realCount) return;
-    const direction = targetIndex > currentIndex ? 'next' : 'prev';
-    transitionToSlide(targetIndex, direction);
+    showSlide(currentIndex - 1);
   }
 
   function startAutoplay() {
@@ -517,7 +465,7 @@ function initHeroSlider() {
       e.stopPropagation();
       const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
       if (!isNaN(targetIndex)) {
-        goToSlide(targetIndex);
+        showSlide(targetIndex);
         startAutoplay();
       }
     });
@@ -527,7 +475,7 @@ function initHeroSlider() {
     textColDots.forEach((dot, i) => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
-        goToSlide(i);
+        showSlide(i);
         startAutoplay();
       });
     });
@@ -537,11 +485,9 @@ function initHeroSlider() {
   slider.addEventListener('mouseenter', stopAutoplay);
   slider.addEventListener('mouseleave', startAutoplay);
 
-  // Mobile Touch Swipe support with high-precision vertical scroll safety
+  // Mobile Touch Swipe: swipe left -> next, swipe right -> prev
   let touchStartX = 0;
   let touchStartY = 0;
-  let touchEndX = 0;
-  let touchEndY = 0;
 
   slider.addEventListener('touchstart', (e) => {
     stopAutoplay();
@@ -553,30 +499,21 @@ function initHeroSlider() {
 
   slider.addEventListener('touchend', (e) => {
     if (e.changedTouches && e.changedTouches.length > 0) {
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-      handleSwipe();
+      const diffX = touchStartX - e.changedTouches[0].screenX;
+      const diffY = touchStartY - e.changedTouches[0].screenY;
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      setTimeout(startAutoplay, 2500);
     }
   }, { passive: true });
 
-  function handleSwipe() {
-    const diffX = touchStartX - touchEndX;
-    const diffY = touchStartY - touchEndY;
-    // Strict gesture validation: must be primarily horizontal (diffX > 40px and at least 1.4x vertical)
-    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
-      if (diffX > 0) {
-        nextSlide(); // Swipe left -> next
-      } else {
-        prevSlide(); // Swipe right -> prev
-      }
-      setTimeout(startAutoplay, 3000);
-    } else {
-      setTimeout(startAutoplay, 1500);
-    }
-  }
-
-  // Initialize initial indicators and start autoplay
-  updateIndicators(0);
+  // Initial render & start autoplay
+  showSlide(0);
   startAutoplay();
 
   // Pause autoplay when browser tab is inactive, resume when active
