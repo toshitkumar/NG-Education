@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.7">
+  <link rel="stylesheet" href="css/style.css?v=4.8">
 </head>
 <body>
 
@@ -70,15 +70,19 @@
       <div class="floating-sphere sphere-4"></div>
       <div class="floating-sphere sphere-5"></div>
 
-      <!-- Layered Fluid Wave Graphic (100% Solid Colors, hanging from top y=0 into white canvas) -->
-      <svg class="wave-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Back Deep Purple/Indigo Wave Layer -->
+      <!-- Layered Fluid Wave Graphic (3 Animated Organic Wave Layers) -->
+      <!-- Layer 1: Back Deep Purple/Indigo Wave -->
+      <svg class="wave-svg wave-layer-1" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,0 L1440,0 L1440,75 C1280,145 1100,50 920,110 C740,170 560,40 380,120 C220,170 100,60 0,110 Z" fill="#3B287E"/>
-        
-        <!-- Mid Royal Blue Wave Layer -->
+      </svg>
+      
+      <!-- Layer 2: Mid Royal Blue Wave -->
+      <svg class="wave-svg wave-layer-2" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,0 L1440,0 L1440,125 C1300,65 1150,155 960,85 C780,145 620,75 440,155 C260,105 120,165 0,135 Z" fill="#1D4ED8"/>
-        
-        <!-- Front Sky Blue Wave Layer -->
+      </svg>
+      
+      <!-- Layer 3: Front Sky Blue Wave -->
+      <svg class="wave-svg wave-layer-3" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,0 L1440,0 L1440,55 C1260,115 1080,35 880,95 C680,135 500,55 320,105 C160,45 0,85 0,55 Z" fill="#0284C7"/>
       </svg>
     </div>
@@ -5174,6 +5178,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=4.7"></script>
+  <script src="js/main.js?v=4.8"></script>
 </body>
 </html>
