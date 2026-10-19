@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.9">
+  <link rel="stylesheet" href="css/style.css?v=4.0">
 </head>
 <body>
 
@@ -390,13 +390,25 @@
                   Stepper motor pulse rotation & driver calibration
                 </li>
               </ul>
+
+              <!-- Interactive Syllabus Banner -->
+              <div class="card-syllabus-banner" onclick="openModal('modalExploreMotors')" data-open-modal="modalExploreMotors" style="background-color: rgba(0, 151, 156, 0.08); border: 1px dashed var(--color-arduino); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem;">⚙️</span>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-arduino);">12 Modules Syllabus & Motor Projects</span>
+                </div>
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary-blue); text-decoration: underline;">View Full Syllabus →</span>
+              </div>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">6 Modules • 8+ Motion Labs</span>
+                <span class="sub-duration">12 Modules • 15–20 Hours</span>
                 <span class="main-price">₹1,199</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="motors">Enroll</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-arduino" onclick="openModal('modalExploreMotors')" data-open-modal="modalExploreMotors" style="padding: 9px 18px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Explore</button>
+                <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="motors" style="padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -2227,6 +2239,406 @@
     </div>
   </div>
 
+  <!-- Modal: Arduino Motor Control Detailed Syllabus Explorer (12 Modules) -->
+  <div class="modal-overlay" id="modalExploreMotors">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Single Course • 12 Practical Modules</span>
+        <h3>Arduino Motor Control</h3>
+        <p>Master DC motor drivers, PWM speed regulation, precision servo positioning, and stepper motor motion calibration for robotics and automation.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Course Specifications Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Course Specifications & Overview
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Skill Level</span>
+              <span class="syllabus-spec-val">Intermediate</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Total Modules</span>
+              <span class="syllabus-spec-val">12 Modules</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Recommended Duration</span>
+              <span class="syllabus-spec-val">15–20 hours</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Learning Format</span>
+              <span class="syllabus-spec-val">Hands-on Motor & Actuator Projects</span>
+            </div>
+            <div class="syllabus-spec-item" style="grid-column: 1 / -1;">
+              <span class="syllabus-spec-label">Prerequisites</span>
+              <span class="syllabus-spec-val">Arduino programming, digital I/O and basic electronics knowledge are recommended.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware & Software Requirements Card -->
+        <div class="syllabus-overview-card" style="border-left-color: var(--primary-blue);">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Hardware & Software Requirements
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Controller</span>
+              <span class="syllabus-spec-val">Arduino Uno R3, USB cable</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">DC Motor Control</span>
+              <span class="syllabus-spec-val">DC geared motors, L298N or L293D driver</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Servo Control</span>
+              <span class="syllabus-spec-val">SG90 micro-servo or compatible positional servo</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Stepper Control</span>
+              <span class="syllabus-spec-val">Compatible stepper motor and driver module</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Sensory Inputs</span>
+              <span class="syllabus-spec-val">Potentiometer, push buttons, optional sensors</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Safety & Assembly</span>
+              <span class="syllabus-spec-val">External power supply, breadboard, jumper wires & connectors</span>
+            </div>
+            <div class="syllabus-spec-item" style="grid-column: 1 / -1;">
+              <span class="syllabus-spec-label">Software</span>
+              <span class="syllabus-spec-val">Arduino IDE, Servo library and appropriate stepper-control library</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Completion Outcomes Box -->
+        <div class="syllabus-outcomes-card">
+          <h5>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Course Completion Outcomes
+          </h5>
+          <ul class="syllabus-outcomes-list">
+            <li>Explain DC, servo and stepper motor operating principles.</li>
+            <li>Control DC motor direction and speed using suitable drivers and PWM.</li>
+            <li>Position servo motors using programmed angles.</li>
+            <li>Calculate step counts and control stepper motor rotation.</li>
+            <li>Integrate sensors with motor-control logic.</li>
+            <li>Design and troubleshoot motorized robotics and automation prototypes.</li>
+          </ul>
+        </div>
+
+        <!-- Important Technical Note -->
+        <div style="background-color: rgba(217, 119, 6, 0.08); border: 1px dashed rgba(217, 119, 6, 0.4); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; color: #92400E; display: flex; align-items: flex-start; gap: 10px;">
+          <span style="font-size: 1.1rem; flex-shrink: 0;">⚠️</span>
+          <span><strong>Important Technical Note:</strong> L298N and L293D drivers have different current and thermal limits, so the selected motor must be compatible with the driver. A stepper motor must use a suitable driver and power supply. Never power motors directly from Arduino GPIO pins.</span>
+        </div>
+
+        <!-- 12 Modules Breakdown -->
+        <div class="syllabus-section-heading">
+          <span>Curriculum Breakdown (Modules 01 – 12)</span>
+          <span class="module-topic-badge">72 Learning Topics • 12 Hands-on Practicals</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Motors & Actuators</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is an actuator and how it works</li>
+              <li>DC, servo and stepper motor differences</li>
+              <li>Motor specifications: voltage, current, torque and RPM</li>
+              <li>Continuous versus controlled movement</li>
+              <li>Selecting motors for robotics projects</li>
+              <li>Understanding motor datasheets</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Identify and compare different motor types</span>
+            </div>
+          </div>
+
+          <!-- Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Motor Fundamentals & Electrical Safety</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Motor voltage and current requirements</li>
+              <li>Starting current and stall current</li>
+              <li>Why Arduino pins cannot directly drive most motors</li>
+              <li>External motor power supplies</li>
+              <li>Common ground between Arduino and motor driver</li>
+              <li>Power isolation, wiring and heat management</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Prepare a safe motor power and wiring plan</span>
+            </div>
+          </div>
+
+          <!-- Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">DC Motor Interfacing with Arduino</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>DC motor terminals and polarity</li>
+              <li>Motor driver fundamentals</li>
+              <li>L298N and L293D pin configuration</li>
+              <li>Connecting a motor to driver outputs</li>
+              <li>Enable pins and direction inputs</li>
+              <li>Forward, reverse, stop and braking concepts</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Control DC motor direction using Arduino Uno</span>
+            </div>
+          </div>
+
+          <!-- Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">PWM-Based Motor Speed Control</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Pulse Width Modulation fundamentals</li>
+              <li>Duty cycle and average output voltage</li>
+              <li>analogWrite() and PWM-capable pins</li>
+              <li>Speed control using potentiometer input</li>
+              <li>Minimum effective motor speed</li>
+              <li>Motor speed variation under different loads</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a variable-speed DC motor controller</span>
+            </div>
+          </div>
+
+          <!-- Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">Dual DC Motor Control & Coordination</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Controlling two motors independently</li>
+              <li>Forward and reverse movement</li>
+              <li>Coordinating left and right motors</li>
+              <li>Turning and pivoting logic</li>
+              <li>Combining sensor inputs with motor commands</li>
+              <li>Reusable functions for motion control</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a two-wheel robot movement controller</span>
+            </div>
+          </div>
+
+          <!-- Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Servo Motor Fundamentals</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>How servo motors work</li>
+              <li>Servo position versus continuous rotation</li>
+              <li>Servo wiring: power, ground and signal</li>
+              <li>Using the Arduino Servo library</li>
+              <li>Controlling angles from 0° to 180° where supported</li>
+              <li>Mechanical limits and safe positioning</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a servo-controlled sweeping mechanism</span>
+            </div>
+          </div>
+
+          <!-- Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Advanced Servo Position Control</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Mapping input values to servo angles</li>
+              <li>Potentiometer-based position control</li>
+              <li>Multi-position movement sequences</li>
+              <li>Coordinating multiple servo motors</li>
+              <li>Movement timing and smooth transitions</li>
+              <li>Avoiding mechanical binding and overload</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a joystick-free servo positioning system using a potentiometer</span>
+            </div>
+          </div>
+
+          <!-- Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Stepper Motors & Rotation Control</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Stepper motor operating principles</li>
+              <li>Unipolar and bipolar stepper motors</li>
+              <li>Steps per revolution and step angle</li>
+              <li>Stepper motor wiring and coil identification</li>
+              <li>Stepper libraries and basic movement commands</li>
+              <li>Direction and rotation control</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Rotate a stepper motor by a defined number of steps</span>
+            </div>
+          </div>
+
+          <!-- Module 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">Stepper Drivers & Motion Calibration</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Using compatible stepper drivers</li>
+              <li>STEP and DIR signal concepts</li>
+              <li>Microstepping and resolution</li>
+              <li>Setting driver current limits appropriately</li>
+              <li>Calculating steps for a target rotation</li>
+              <li>Speed, acceleration and missed-step troubleshooting</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Calibrate stepper rotation to a target angle</span>
+            </div>
+          </div>
+
+          <!-- Module 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Motor Timing & Motion Sequences</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Controlling movement duration</li>
+              <li>Using millis() for non-blocking timing</li>
+              <li>Sequential motor and servo operations</li>
+              <li>Basic acceleration and deceleration profiles</li>
+              <li>Coordinating multiple actuators</li>
+              <li>Emergency stop and limit-switch concepts</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a timed motorized gate or lift sequence</span>
+            </div>
+          </div>
+
+          <!-- Module 11 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">11</span>
+                <h4 class="module-title">Sensor-Based Motor Automation</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Using ultrasonic and IR sensor inputs</li>
+              <li>Starting and stopping motors based on conditions</li>
+              <li>Threshold-based movement control</li>
+              <li>Combining sensors with motor drivers</li>
+              <li>Fault detection and safe stopping</li>
+              <li>Debugging motor-control programs</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create an automatic obstacle-responsive motor system</span>
+            </div>
+          </div>
+
+          <!-- Module 12 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">12</span>
+                <h4 class="module-title">Final Motor Control Project</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Select a suitable motor and driver</li>
+              <li>Prepare wiring diagrams and power calculations</li>
+              <li>Write modular motion-control code</li>
+              <li>Test speed, direction, position and rotation</li>
+              <li>Troubleshoot wiring and mechanical problems</li>
+              <li>Document and demonstrate the final prototype</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a motorized lift, robotic arm mechanism or dual-motor robot</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Single Course Track • 12 Modules • Certificate Included</span>
+          <span class="main-price">₹1,199</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" data-open-modal="modalEnroll" data-course="motors">Enroll in This Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -2291,6 +2703,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=3.9"></script>
+  <script src="js/main.js?v=4.0"></script>
 </body>
 </html>
