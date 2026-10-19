@@ -10,7 +10,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.5">
+  <link rel="stylesheet" href="css/style.css?v=3.6">
 </head>
 <body>
 
@@ -255,10 +255,13 @@
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 12+ Codes</span>
+                <span class="sub-duration">16 Modules • 20–30 Hours</span>
                 <span class="main-price">₹999</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-outline" style="padding: 9px 16px; font-size: 0.88rem;" data-open-modal="modalExploreProgramming">Explore</button>
+                <button class="btn-pill btn-pill-primary" style="padding: 9px 18px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="programming">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -1046,6 +1049,410 @@
     </div>
   </div>
 
+  <!-- Modal: Arduino Programming Language Detailed Syllabus Explorer (16 Modules) -->
+  <div class="modal-overlay" id="modalExploreProgramming">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Single Course • 16 Comprehensive Modules</span>
+        <h3>Arduino Programming Language</h3>
+        <p>Complete curriculum breakdown, topic outlines, practical hands-on exercises and recommended course specifications.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Recommended Course Details Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Recommended Course Details
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Total Modules</span>
+              <span class="syllabus-spec-val">16 Modules</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Estimated Duration</span>
+              <span class="syllabus-spec-val">20–30 hours</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Programming Language</span>
+              <span class="syllabus-spec-val">Arduino C/C++</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Hardware</span>
+              <span class="syllabus-spec-val">Arduino Uno, USB cable, breadboard, LEDs, buttons and optional sensors</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Learning Format</span>
+              <span class="syllabus-spec-val">Video lessons, coding exercises and practical projects</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Final Assessment</span>
+              <span class="syllabus-spec-val">Working program, debugging task and project demonstration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16 Modules Breakdown -->
+        <div class="syllabus-section-heading">
+          <span>Curriculum Breakdown (Modules 01 – 16)</span>
+          <span class="module-topic-badge">64 Total Topics • 16 Practical Exercises</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Arduino Programming</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is Arduino programming?</li>
+              <li>Introduction to C/C++ for embedded systems</li>
+              <li>Arduino IDE installation and interface</li>
+              <li>Board selection, port configuration and sketch upload</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Upload your first Arduino program</span>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Arduino Program Structure & Syntax</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Understanding setup() and loop()</li>
+              <li>Statements, semicolons and code blocks</li>
+              <li>Comments, keywords and naming conventions</li>
+              <li>Compilation and uploading workflow</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Create a structured LED blinking program</span>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Variables, Data Types & Constants</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>int, long, float, char, bool and byte</li>
+              <li>Declaring and initializing variables</li>
+              <li>const and #define fundamentals</li>
+              <li>Scope, initialization and memory considerations</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Variable-based LED control</span>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Operators & Expressions</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Arithmetic and assignment operators</li>
+              <li>Comparison and logical operators</li>
+              <li>Increment and decrement</li>
+              <li>Operator precedence and bitwise basics</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Build a programmable condition calculator</span>
+            </div>
+          </div>
+
+          <!-- 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">Digital Input & Output Programming</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>pinMode() and pin configuration</li>
+              <li>digitalWrite() and digitalRead()</li>
+              <li>INPUT, OUTPUT and INPUT_PULLUP</li>
+              <li>Buttons, switches and LED control</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Push-button-controlled LED system</span>
+            </div>
+          </div>
+
+          <!-- 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Analog Input & PWM</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>analogRead() and ADC values</li>
+              <li>Understanding analog input ranges</li>
+              <li>PWM and analogWrite()</li>
+              <li>Mapping sensor values using map()</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Potentiometer-controlled LED brightness</span>
+            </div>
+          </div>
+
+          <!-- 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Conditional Statements</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>if and else statements</li>
+              <li>else-if ladder and nested conditions</li>
+              <li>switch-case statements</li>
+              <li>Combining multiple conditions</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Traffic light controller with decision logic</span>
+            </div>
+          </div>
+
+          <!-- 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Loops & Iteration</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>for, while and do-while loops</li>
+              <li>Nested loops and loop control</li>
+              <li>break and continue</li>
+              <li>Avoiding infinite loops</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Automatic LED patterns and sequences</span>
+            </div>
+          </div>
+
+          <!-- 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">Functions & Modular Programming</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Defining and calling custom functions</li>
+              <li>Parameters and return values</li>
+              <li>Variable scope</li>
+              <li>Reusable functions and code organization</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Function-based multi-mode LED controller</span>
+            </div>
+          </div>
+
+          <!-- 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Arrays, Strings & Data Handling</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Array declaration and indexing</li>
+              <li>Looping through arrays</li>
+              <li>Character arrays and String objects</li>
+              <li>Processing multiple readings</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Store and display multiple sensor readings</span>
+            </div>
+          </div>
+
+          <!-- 11 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">11</span>
+                <h4 class="module-title">Timing & Non-Blocking Programming</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Using delay() effectively</li>
+              <li>millis() for non-blocking timing</li>
+              <li>Unsigned long and elapsed-time calculations</li>
+              <li>Managing multiple timed events</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Multi-LED timer without blocking delay</span>
+            </div>
+          </div>
+
+          <!-- 12 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">12</span>
+                <h4 class="module-title">Serial Communication & Debugging</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Serial.begin(), print() and println()</li>
+              <li>Reading input with Serial.available()</li>
+              <li>Serial.read() and basic command parsing</li>
+              <li>Monitoring variables and troubleshooting errors</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Control an LED using Serial Monitor commands</span>
+            </div>
+          </div>
+
+          <!-- 13 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">13</span>
+                <h4 class="module-title">Sensor Data Processing</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Reading and interpreting sensor values</li>
+              <li>Threshold-based decisions</li>
+              <li>Converting raw readings into useful values</li>
+              <li>Basic averaging and noise reduction</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Sensor-triggered buzzer alarm</span>
+            </div>
+          </div>
+
+          <!-- 14 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">14</span>
+                <h4 class="module-title">Libraries & Component Integration</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What libraries are and how they work</li>
+              <li>Installing and including libraries</li>
+              <li>Using library objects and methods</li>
+              <li>Reading component documentation</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Interface an LCD or servo using a library</span>
+            </div>
+          </div>
+
+          <!-- 15 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">15</span>
+                <h4 class="module-title">Advanced Embedded Programming</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Interrupt fundamentals and supported pins</li>
+              <li>Event-driven programming</li>
+              <li>Memory and data type optimization</li>
+              <li>Code readability and troubleshooting</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Interrupt-based button event counter</span>
+            </div>
+          </div>
+
+          <!-- 16 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">16</span>
+                <h4 class="module-title">Final Coding Project & Assessment</h4>
+              </div>
+              <span class="module-topic-badge">4 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Planning program logic and flowcharts</li>
+              <li>Combining functions, conditions and sensor inputs</li>
+              <li>Testing, debugging and documenting code</li>
+              <li>Final practical demonstration</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">PRACTICAL EXERCISE</span>
+              <span>Develop a complete Arduino automation program</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Single Course Track • 16 Modules • Certificate Included</span>
+          <span class="main-price">₹999</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="programming">Enroll in This Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -1110,6 +1517,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=3.5"></script>
+  <script src="js/main.js?v=3.6"></script>
 </body>
 </html>
