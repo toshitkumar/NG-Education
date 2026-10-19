@@ -382,7 +382,7 @@ function initHeroSlider() {
   if (!slider) return;
 
   const track = slider.querySelector('.hero-slides-track');
-  const slides = slider.querySelectorAll('.hero-slide');
+  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
   const dots = slider.querySelectorAll('.slider-dot');
   const counter = slider.querySelector('#sliderCurrentNum');
   const prevBtn = slider.querySelector('.slider-arrow-prev');
@@ -392,90 +392,94 @@ function initHeroSlider() {
   if (!track || slides.length === 0) return;
 
   const realCount = slides.length; // 3 slides
-  
-  // Clone slide 0 to the end for 100% seamless, non-rewinding infinite loop
-  const clone = slides[0].cloneNode(true);
-  clone.classList.remove('active');
-  clone.setAttribute('data-slide', 'clone');
-  track.appendChild(clone);
-
   let currentIndex = 0;
   let autoplayTimer = null;
+  let isTransitioning = false;
   const slideInterval = 3800; // 3.8s
 
-  function updateSliderPosition(animate = true) {
-    if (!animate) {
-      track.style.transition = 'none';
+  // Initialize slides: slide 0 is active, all others are prepared on right
+  slides.forEach((slide, i) => {
+    slide.classList.remove('slide-out-left', 'slide-out-right', 'prepare-left', 'prepare-right');
+    if (i === 0) {
+      slide.classList.add('active');
     } else {
-      track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
+      slide.classList.remove('active');
+      slide.classList.add('prepare-right');
     }
-    track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
+  });
 
-    const displayIndex = currentIndex % realCount;
-
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === displayIndex);
-    });
-
+  function updateIndicators(targetIndex) {
     dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === displayIndex);
+      dot.classList.toggle('active', i === targetIndex);
     });
 
     if (textColDots && textColDots.length) {
       textColDots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === displayIndex);
+        dot.classList.toggle('active', i === targetIndex);
       });
     }
 
     if (counter) {
-      counter.textContent = String(displayIndex + 1).padStart(2, '0');
+      counter.textContent = String(targetIndex + 1).padStart(2, '0');
     }
   }
 
-  // Handle seamless infinite snapback when transitioning onto the clone
-  track.addEventListener('transitionend', () => {
-    if (currentIndex === realCount) {
-      track.style.transition = 'none';
-      currentIndex = 0;
-      track.style.transform = 'translate3d(0%, 0, 0)';
-    }
-  });
+  function transitionToSlide(targetIndex, direction = 'next') {
+    if (targetIndex === currentIndex || isTransitioning) return;
+    isTransitioning = true;
 
-  function goToSlide(index) {
-    if (index > realCount) {
-      currentIndex = 0;
+    const currentSlide = slides[currentIndex];
+    const targetSlide = slides[targetIndex];
+
+    // 1. Prepare target slide offscreen in incoming direction without transition
+    if (direction === 'next') {
+      targetSlide.classList.remove('slide-out-left', 'slide-out-right', 'active', 'prepare-left');
+      targetSlide.classList.add('prepare-right');
     } else {
-      currentIndex = index;
+      targetSlide.classList.remove('slide-out-left', 'slide-out-right', 'active', 'prepare-right');
+      targetSlide.classList.add('prepare-left');
     }
-    updateSliderPosition(true);
+
+    // 2. In next animation frame, animate target in and current out
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (direction === 'next') {
+          targetSlide.classList.remove('prepare-right');
+          targetSlide.classList.add('active');
+          currentSlide.classList.remove('active', 'prepare-left', 'prepare-right');
+          currentSlide.classList.add('slide-out-left');
+        } else {
+          targetSlide.classList.remove('prepare-left');
+          targetSlide.classList.add('active');
+          currentSlide.classList.remove('active', 'prepare-left', 'prepare-right');
+          currentSlide.classList.add('slide-out-right');
+        }
+
+        currentIndex = targetIndex;
+        updateIndicators(currentIndex);
+
+        // Reset transition lock after animation completes (450ms)
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 460);
+      });
+    });
   }
 
   function nextSlide() {
-    if (currentIndex >= realCount) {
-      track.style.transition = 'none';
-      currentIndex = 0;
-      track.style.transform = 'translate3d(0%, 0, 0)';
-      void track.offsetWidth;
-      currentIndex = 1;
-      updateSliderPosition(true);
-    } else {
-      currentIndex++;
-      updateSliderPosition(true);
-    }
+    const nextIndex = (currentIndex + 1) % realCount;
+    transitionToSlide(nextIndex, 'next');
   }
 
   function prevSlide() {
-    if (currentIndex === 0) {
-      track.style.transition = 'none';
-      currentIndex = realCount;
-      track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
-      void track.offsetWidth;
-      currentIndex = realCount - 1;
-      updateSliderPosition(true);
-    } else {
-      currentIndex--;
-      updateSliderPosition(true);
-    }
+    const prevIndex = (currentIndex - 1 + realCount) % realCount;
+    transitionToSlide(prevIndex, 'prev');
+  }
+
+  function goToSlide(targetIndex) {
+    if (targetIndex === currentIndex || targetIndex < 0 || targetIndex >= realCount) return;
+    const direction = targetIndex > currentIndex ? 'next' : 'prev';
+    transitionToSlide(targetIndex, direction);
   }
 
   function startAutoplay() {
@@ -571,8 +575,8 @@ function initHeroSlider() {
     }
   }
 
-  // Initialize initial position and start autoplay
-  updateSliderPosition(false);
+  // Initialize initial indicators and start autoplay
+  updateIndicators(0);
   startAutoplay();
 
   // Pause autoplay when browser tab is inactive, resume when active
