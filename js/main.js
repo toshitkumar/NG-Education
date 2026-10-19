@@ -333,16 +333,41 @@ function initMobileNav() {
   const navMenu = document.querySelector('.nav-menu');
 
   if (toggleBtn && navMenu) {
-    toggleBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      toggleBtn.innerHTML = navMenu.classList.contains('open') ? '✕' : '☰';
+    const closeDrawer = () => {
+      navMenu.classList.remove('open');
+      toggleBtn.innerHTML = '☰';
+      document.body.style.overflow = '';
+    };
+
+    const toggleDrawer = () => {
+      const isOpen = navMenu.classList.toggle('open');
+      toggleBtn.innerHTML = isOpen ? '✕' : '☰';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDrawer();
     });
 
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        toggleBtn.innerHTML = '☰';
+        closeDrawer();
       });
+    });
+
+    // Close when tapping outside the menu
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+        closeDrawer();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+        closeDrawer();
+      }
     });
   }
 }
