@@ -207,6 +207,10 @@ function closeAllModals() {
   document.body.style.overflow = '';
 }
 
+// Expose globally for inline onclick handlers
+window.openModal = openModal;
+window.closeAllModals = closeAllModals;
+
 /* =====================================================================
    3. CONTACT FORM & BOOKING
    ===================================================================== */
