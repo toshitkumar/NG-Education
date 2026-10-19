@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.2">
+  <link rel="stylesheet" href="css/style.css?v=4.3">
 </head>
 <body>
 
@@ -525,13 +525,25 @@
                   Smartphone mobile apps & emergency push alerts
                 </li>
               </ul>
+
+              <!-- Interactive Syllabus Banner -->
+              <div class="card-syllabus-banner" onclick="openModal('modalExploreIoT')" data-open-modal="modalExploreIoT" style="background-color: rgba(0, 151, 156, 0.08); border: 1px dashed var(--color-arduino); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem;">🌐</span>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-arduino);">12 Modules Syllabus &amp; 4 IoT Cloud Projects</span>
+                </div>
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary-blue); text-decoration: underline;">View Full Syllabus →</span>
+              </div>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 8 Cloud Projects</span>
+                <span class="sub-duration">12 Modules • 20–30 Hours</span>
                 <span class="main-price">₹1,499</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="iot">Enroll</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-arduino" onclick="openModal('modalExploreIoT')" data-open-modal="modalExploreIoT" style="padding: 9px 18px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Explore</button>
+                <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="iot" style="padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -3603,6 +3615,475 @@
     </div>
   </div>
 
+  <!-- Modal: Arduino IoT & Wi-Fi Detailed Syllabus Explorer (12 Modules) -->
+  <div class="modal-overlay" id="modalExploreIoT">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Single Course • 12 Modules • 4 IoT Cloud Projects</span>
+        <h3>Arduino IoT &amp; Wi-Fi</h3>
+        <p>Connect Arduino-based systems to the internet using Wi-Fi-enabled microcontrollers. Learn wireless communication, cloud dashboards, MQTT messaging, HTTP APIs, remote device control, and real-time sensor monitoring through practical IoT projects.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Course Specifications Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Course Specifications &amp; Overview
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Skill Level</span>
+              <span class="syllabus-spec-val">Intermediate–Advanced</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Total Modules</span>
+              <span class="syllabus-spec-val">12 Modules</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Learning Format</span>
+              <span class="syllabus-spec-val">Project-Based Learning</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Recommended Duration</span>
+              <span class="syllabus-spec-val">20–30 hours</span>
+            </div>
+            <div class="syllabus-spec-item" style="grid-column: 1 / -1;">
+              <span class="syllabus-spec-label">Prerequisites</span>
+              <span class="syllabus-spec-val">Arduino programming, basic electronics and sensor interfacing are recommended.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Featured IoT Projects Showcase -->
+        <div class="syllabus-overview-card" style="border-left-color: #00979C;">
+          <div class="syllabus-overview-title" style="color: #00979C;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Featured IoT Projects
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 14px;">
+            <!-- Project 1 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">1. Cloud Environmental Monitoring</span>
+                <span style="background-color: rgba(0, 151, 156, 0.12); color: var(--color-arduino); font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Cloud</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Measure temperature and humidity, transmit readings over Wi-Fi, and display live data on a cloud dashboard.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>Sensor data collection</li>
+                <li>Live charts &amp; status indicators</li>
+                <li>Remote cloud monitoring</li>
+              </ul>
+            </div>
+
+            <!-- Project 2 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">2. Smartphone Smart Device</span>
+                <span style="background-color: rgba(29, 78, 216, 0.1); color: var(--primary-blue); font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Mobile App</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Switch a low-voltage device remotely through an IoT app or web dashboard.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>MQTT or HTTP communication</li>
+                <li>Remote commands &amp; device status</li>
+                <li>Connection recovery</li>
+              </ul>
+            </div>
+
+            <!-- Project 3 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">3. IoT Smart Irrigation System</span>
+                <span style="background-color: rgba(16, 185, 129, 0.12); color: #047857; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Telemetry</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Monitor soil moisture remotely and automate a suitable low-voltage irrigation pump.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>Soil-moisture telemetry</li>
+                <li>Threshold-based watering</li>
+                <li>Remote status &amp; alerts</li>
+              </ul>
+            </div>
+
+            <!-- Project 4 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">4. IoT Safety Alert System</span>
+                <span style="background-color: rgba(220, 38, 38, 0.1); color: #DC2626; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Alerts</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Monitor sensor thresholds and send notifications when configured conditions are detected.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>Sensor-triggered events</li>
+                <li>Cloud push notifications</li>
+                <li>Event logging &amp; alert management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware & Software Requirements Card -->
+        <div class="syllabus-overview-card" style="border-left-color: var(--primary-blue);">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Hardware &amp; Software Requirements
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Controllers</span>
+              <span class="syllabus-spec-val">ESP8266 development board, ESP32 development board</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Optional Gateway</span>
+              <span class="syllabus-spec-val">Arduino Uno with compatible Wi-Fi module</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Sensors</span>
+              <span class="syllabus-spec-val">DHT11/DHT22, LDR, ultrasonic or soil-moisture sensor</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Outputs</span>
+              <span class="syllabus-spec-val">LEDs, buzzer, compatible low-voltage relay or driver</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Networking</span>
+              <span class="syllabus-spec-val">Wi-Fi access and internet connection</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Protocols</span>
+              <span class="syllabus-spec-val">HTTP/REST, JSON and MQTT</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Platforms</span>
+              <span class="syllabus-spec-val">Arduino IDE and a compatible IoT dashboard or broker</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Programming</span>
+              <span class="syllabus-spec-val">Arduino C/C++, networking and sensor libraries</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Completion Outcomes Box -->
+        <div class="syllabus-outcomes-card">
+          <h5>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Course Completion Outcomes
+          </h5>
+          <ul class="syllabus-outcomes-list">
+            <li>Configure ESP8266 and ESP32 boards for Wi-Fi connectivity.</li>
+            <li>Transmit sensor data to compatible cloud services.</li>
+            <li>Use HTTP APIs and MQTT to exchange telemetry and commands.</li>
+            <li>Build live dashboards for remote sensor monitoring.</li>
+            <li>Implement smartphone-based control and event notifications.</li>
+            <li>Apply basic authentication, connection recovery and IoT security practices.</li>
+          </ul>
+        </div>
+
+        <!-- Technical Note -->
+        <div style="background-color: rgba(217, 119, 6, 0.08); border: 1px dashed rgba(217, 119, 6, 0.4); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; color: #92400E; display: flex; align-items: flex-start; gap: 10px;">
+          <span style="font-size: 1.1rem; flex-shrink: 0;">⚠️</span>
+          <span><strong>Technical Note:</strong> The standard Arduino Uno R3 does not have built-in Wi-Fi. Wireless connectivity requires an external module, while ESP8266 and ESP32 development boards provide integrated Wi-Fi. Smartphone control, cloud dashboards and push notifications require a compatible platform or service, internet access where applicable, and appropriate credentials.</span>
+        </div>
+
+        <!-- 12 Modules Breakdown -->
+        <div class="syllabus-section-heading">
+          <span>Curriculum Breakdown (Modules 01 – 12)</span>
+          <span class="module-topic-badge">72 Learning Topics • 12 Hands-on Practicals</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to IoT &amp; Connected Devices</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is the Internet of Things (IoT)?</li>
+              <li>IoT architecture: devices, networks, cloud and applications</li>
+              <li>Sensors, controllers and connected actuators</li>
+              <li>Local automation versus cloud-based automation</li>
+              <li>IoT use cases in homes, agriculture and industry</li>
+              <li>Introduction to IoT security and privacy</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Design an IoT system architecture for a smart monitoring application</span>
+            </div>
+          </div>
+
+          <!-- Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Wi-Fi Microcontrollers: ESP8266 &amp; ESP32</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>ESP8266 and ESP32 architecture overview</li>
+              <li>Comparing Arduino Uno, ESP8266 and ESP32</li>
+              <li>GPIO, power requirements and board pinouts</li>
+              <li>Installing board support in Arduino IDE</li>
+              <li>Connecting to a Wi-Fi network</li>
+              <li>Reading IP addresses and connection status</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Connect an ESP8266 or ESP32 board to Wi-Fi</span>
+            </div>
+          </div>
+
+          <!-- Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Arduino Uno with Wi-Fi Modules</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Connecting Arduino Uno to ESP8266 modules</li>
+              <li>UART serial communication and AT commands</li>
+              <li>Baud rates and serial data exchange</li>
+              <li>Voltage compatibility and logic-level considerations</li>
+              <li>Sending sensor readings through a Wi-Fi module</li>
+              <li>Troubleshooting connection and communication errors</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Transmit Arduino Uno sensor readings through a Wi-Fi module</span>
+            </div>
+          </div>
+
+          <!-- Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Wi-Fi Networking &amp; Device Communication</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>SSID, passwords, IP addresses and gateways</li>
+              <li>Connecting to a wireless network programmatically</li>
+              <li>DHCP and basic network configuration</li>
+              <li>Wi-Fi connection monitoring and reconnection</li>
+              <li>Sending data between devices and local servers</li>
+              <li>Handling network failures</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a Wi-Fi-connected environmental monitoring device</span>
+            </div>
+          </div>
+
+          <!-- Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">HTTP, REST APIs &amp; Web Requests</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Client-server communication fundamentals</li>
+              <li>HTTP GET and POST requests</li>
+              <li>REST API endpoints and JSON data</li>
+              <li>Sending sensor readings to a web service</li>
+              <li>Receiving remote commands through an API</li>
+              <li>HTTP response codes and error handling</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Send sensor readings to an API and retrieve device status</span>
+            </div>
+          </div>
+
+          <!-- Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Cloud Platforms &amp; IoT Dashboards</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to IoT cloud services</li>
+              <li>Creating a device or project on a supported platform</li>
+              <li>Sending data to cloud channels or variables</li>
+              <li>Visualizing live sensor readings</li>
+              <li>Creating charts, gauges and status indicators</li>
+              <li>Remote device monitoring and dashboard troubleshooting</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a live cloud dashboard for temperature or sensor readings</span>
+            </div>
+          </div>
+
+          <!-- Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">MQTT Protocol &amp; Messaging</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Publish-subscribe communication model</li>
+              <li>MQTT brokers, topics and clients</li>
+              <li>Publishing sensor data and subscribing to commands</li>
+              <li>QoS levels and retained messages</li>
+              <li>Using MQTT libraries with ESP8266 or ESP32</li>
+              <li>Reconnection and message-handling logic</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Publish sensor readings to MQTT and receive a remote command</span>
+            </div>
+          </div>
+
+          <!-- Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Real-Time Telemetry &amp; Data Logging</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Periodic sensor data transmission</li>
+              <li>Timestamps and telemetry payloads</li>
+              <li>JSON formatting and parsing</li>
+              <li>Cloud-side data visualization</li>
+              <li>Sampling intervals and network bandwidth</li>
+              <li>Handling missing readings and reconnecting</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a real-time IoT sensor telemetry dashboard</span>
+            </div>
+          </div>
+
+          <!-- Module 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">Smartphone-Based Device Control</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Connecting a mobile interface to an IoT platform</li>
+              <li>Building controls for LEDs and compatible loads</li>
+              <li>Reading device status on a smartphone</li>
+              <li>Remote commands through HTTP or MQTT</li>
+              <li>Manual versus automatic control modes</li>
+              <li>Safe handling of disconnected devices</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Control a low-voltage LED or device from a smartphone</span>
+            </div>
+          </div>
+
+          <!-- Module 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Alerts, Notifications &amp; Event Automation</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Defining alert thresholds for sensor readings</li>
+              <li>Detecting abnormal or emergency conditions</li>
+              <li>Triggering notifications through supported services</li>
+              <li>Push notification and messaging integrations</li>
+              <li>Alert cooldowns and duplicate-alert prevention</li>
+              <li>Testing notification delivery and failure cases</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a sensor-triggered notification system</span>
+            </div>
+          </div>
+
+          <!-- Module 11 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">11</span>
+                <h4 class="module-title">IoT Security &amp; Reliability</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Protecting Wi-Fi credentials and API keys</li>
+              <li>Authentication and access permissions</li>
+              <li>TLS/HTTPS and secure MQTT concepts</li>
+              <li>Avoiding hard-coded public credentials</li>
+              <li>Connection recovery and watchdog fundamentals</li>
+              <li>Safe remote control and firmware update considerations</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Secure an IoT prototype using appropriate authentication and connection recovery</span>
+            </div>
+          </div>
+
+          <!-- Module 12 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">12</span>
+                <h4 class="module-title">Final IoT Project &amp; Deployment</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Selecting a real-world IoT application</li>
+              <li>Choosing the controller and cloud platform</li>
+              <li>Preparing circuit diagrams and data flow</li>
+              <li>Integrating sensors, networking and dashboard</li>
+              <li>Testing connectivity, alerts and remote commands</li>
+              <li>Documenting and demonstrating the final solution</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a complete smart monitoring or remote-control IoT system</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Single Course Track • 12 Modules • 4 IoT Cloud Projects • Certificate Included</span>
+          <span class="main-price">₹1,499</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="iot">Enroll in This Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -3667,6 +4148,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=4.2"></script>
+  <script src="js/main.js?v=4.3"></script>
 </body>
 </html>
