@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarouselDots();
   initHeroSlider();
   initTrainerFilters();
+  initCountUp();
 });
 
 /* =====================================================================
@@ -502,3 +503,71 @@ function initTrainerFilters() {
     });
   });
 }
+
+/* =====================================================================
+   8. ANIMATED NUMBER COUNTERS (COUNT-UP EFFECT)
+   ===================================================================== */
+function initCountUp() {
+  const counters = document.querySelectorAll('.count-up');
+  if (!counters.length) return;
+
+  const animateCounter = (el) => {
+    if (el.dataset.animated === 'true') return;
+    el.dataset.animated = 'true';
+
+    const target = parseFloat(el.getAttribute('data-target')) || 0;
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+    const useComma = el.getAttribute('data-comma') === 'true';
+    const duration = parseInt(el.getAttribute('data-duration'), 10) || 1600;
+
+    let startTimestamp = null;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      // Smooth cubic ease out
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const currentVal = Math.floor(ease * target);
+
+      let formatted = currentVal.toString();
+      if (useComma) {
+        formatted = currentVal.toLocaleString('en-IN');
+      }
+
+      el.textContent = `${prefix}${formatted}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        let finalFormatted = target.toString();
+        if (useComma) {
+          finalFormatted = target.toLocaleString('en-IN');
+        }
+        el.textContent = `${prefix}${finalFormatted}${suffix}`;
+        el.classList.add('counted');
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    counters.forEach(counter => observer.observe(counter));
+  } else {
+    counters.forEach(counter => animateCounter(counter));
+  }
+}
+
