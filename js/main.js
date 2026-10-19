@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initContactForm();
   initMobileNav();
-  initCarouselDots();
   initHeroSlider();
   initTrainerFilters();
   initCountUp();
@@ -348,18 +347,7 @@ function initMobileNav() {
   }
 }
 
-/* =====================================================================
-   6. CAROUSEL DOTS INTERACTION
-   ===================================================================== */
-function initCarouselDots() {
-  const dots = document.querySelectorAll('.carousel-dots .dot');
-  dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      dots.forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-    });
-  });
-}
+/* (Dots are synced automatically inside initHeroSlider) */
 
 /* =====================================================================
    7. HERO IMAGE SLIDER (Interactive with Auto-Play & Swipe)
@@ -368,26 +356,27 @@ function initHeroSlider() {
   const slider = document.querySelector('.hero-slider-card');
   if (!slider) return;
 
+  const track = slider.querySelector('.hero-slides-track');
   const slides = slider.querySelectorAll('.hero-slide');
   const dots = slider.querySelectorAll('.slider-dot');
   const counter = slider.querySelector('#sliderCurrentNum');
   const prevBtn = slider.querySelector('.slider-arrow-prev');
   const nextBtn = slider.querySelector('.slider-arrow-next');
+  const textColDots = document.querySelectorAll('.carousel-dots .dot');
 
-  if (slides.length === 0) return;
+  if (!track || slides.length === 0) return;
 
   let currentIndex = 0;
   let autoplayTimer = null;
   const slideInterval = 3800; // 3.8 seconds
 
-  function showSlide(index) {
-    if (index < 0) {
-      currentIndex = slides.length - 1;
-    } else if (index >= slides.length) {
-      currentIndex = 0;
+  function updateSliderPosition(animate = true) {
+    if (!animate) {
+      track.style.transition = 'none';
     } else {
-      currentIndex = index;
+      track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
     }
+    track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
 
     slides.forEach((slide, i) => {
       slide.classList.toggle('active', i === currentIndex);
@@ -397,15 +386,32 @@ function initHeroSlider() {
       dot.classList.toggle('active', i === currentIndex);
     });
 
+    if (textColDots && textColDots.length) {
+      textColDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
     if (counter) {
       counter.textContent = String(currentIndex + 1).padStart(2, '0');
     }
   }
 
+  function goToSlide(index) {
+    if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+    updateSliderPosition(true);
+  }
+
   function startAutoplay() {
     stopAutoplay();
     autoplayTimer = setInterval(() => {
-      showSlide(currentIndex + 1);
+      goToSlide(currentIndex + 1);
     }, slideInterval);
   }
 
@@ -417,30 +423,43 @@ function initHeroSlider() {
   }
 
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      showSlide(currentIndex + 1);
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex + 1);
       startAutoplay();
     });
   }
 
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      showSlide(currentIndex - 1);
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex - 1);
       startAutoplay();
     });
   }
 
   dots.forEach(dot => {
-    dot.addEventListener('click', () => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
       const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
       if (!isNaN(targetIndex)) {
-        showSlide(targetIndex);
+        goToSlide(targetIndex);
         startAutoplay();
       }
     });
   });
 
-  // Pause on hover
+  if (textColDots && textColDots.length) {
+    textColDots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(i);
+        startAutoplay();
+      });
+    });
+  }
+
+  // Pause on desktop hover
   slider.addEventListener('mouseenter', stopAutoplay);
   slider.addEventListener('mouseleave', startAutoplay);
 
@@ -466,9 +485,9 @@ function initHeroSlider() {
     const diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 35) {
       if (diff > 0) {
-        showSlide(currentIndex + 1); // Swipe left -> next
+        goToSlide(currentIndex + 1); // Swipe left -> next
       } else {
-        showSlide(currentIndex - 1); // Swipe right -> prev
+        goToSlide(currentIndex - 1); // Swipe right -> prev
       }
       setTimeout(startAutoplay, 2500);
     } else {
@@ -476,8 +495,8 @@ function initHeroSlider() {
     }
   }
 
-  // Initialize first slide and start auto-play immediately
-  showSlide(0);
+  // Initialize initial position and start autoplay
+  updateSliderPosition(false);
   startAutoplay();
 
   // Pause autoplay when browser tab is inactive, resume when active
