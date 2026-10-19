@@ -378,7 +378,7 @@ function initHeroSlider() {
 
   let currentIndex = 0;
   let autoplayTimer = null;
-  const slideInterval = 5000; // 5 seconds
+  const slideInterval = 3800; // 3.8 seconds
 
   function showSlide(index) {
     if (index < 0) {
@@ -464,36 +464,30 @@ function initHeroSlider() {
 
   function handleSwipe() {
     const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 40) {
+    if (Math.abs(diff) > 35) {
       if (diff > 0) {
         showSlide(currentIndex + 1); // Swipe left -> next
       } else {
         showSlide(currentIndex - 1); // Swipe right -> prev
       }
-      setTimeout(startAutoplay, 3000);
+      setTimeout(startAutoplay, 2500);
     } else {
-      setTimeout(startAutoplay, 1500);
+      setTimeout(startAutoplay, 1200);
     }
   }
 
-  // Initialize first slide immediately
+  // Initialize first slide and start auto-play immediately
   showSlide(0);
+  startAutoplay();
 
-  // Only run autoplay when the hero slider is visible on the user's screen
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          startAutoplay();
-        } else {
-          stopAutoplay();
-        }
-      });
-    }, { threshold: 0.25 });
-    observer.observe(slider);
-  } else {
-    startAutoplay();
-  }
+  // Pause autoplay when browser tab is inactive, resume when active
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  });
 }
 
 /* =====================================================================
