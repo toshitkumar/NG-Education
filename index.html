@@ -12,13 +12,21 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
-  <!-- Google Fonts Preconnect for Ultra-Fast Font Rendering -->
+  <!-- Preload Critical Banner Slide 1 Image (Mobile & Desktop) for Instant 0ms Paint -->
+  <link rel="preload" as="image" href="assets/images/slide1_robotics_mob.webp?v=6.0" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/slide1_robotics.webp?v=6.0" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
+
+  <!-- Google Fonts Preconnect and Non-Blocking Async Load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+  </noscript>
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=5.3">
+  <link rel="stylesheet" href="css/style.css?v=6.0">
 </head>
 <body>
 
@@ -95,8 +103,10 @@
               <!-- SLIDE 1: Hands-On Robotics & Arduino -->
               <div class="hero-slide active" data-slide="0">
                 <picture>
-                  <source srcset="assets/images/slide1_robotics.webp" type="image/webp">
-                  <img src="assets/images/slide1_robotics.jpg" alt="Hands-On Robotics &amp; Arduino" class="slide-img" width="1024" height="571" fetchpriority="high" loading="eager">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.webp?v=6.0" type="image/webp">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.jpg?v=6.0" type="image/jpeg">
+                  <source srcset="assets/images/slide1_robotics.webp?v=6.0" type="image/webp">
+                  <img src="assets/images/slide1_robotics.jpg?v=6.0" alt="Hands-On Robotics &amp; Arduino" class="slide-img" width="1024" height="571" fetchpriority="high" loading="eager" decoding="sync">
                 </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
@@ -113,8 +123,10 @@
               <!-- SLIDE 2: Artificial Intelligence & Computer Vision -->
               <div class="hero-slide" data-slide="1">
                 <picture>
-                  <source srcset="assets/images/slide2_ai.webp" type="image/webp">
-                  <img src="assets/images/slide2_ai.jpg" alt="Artificial Intelligence &amp; Vision Workstation" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.webp?v=6.0" type="image/webp">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.jpg?v=6.0" type="image/jpeg">
+                  <source srcset="assets/images/slide2_ai.webp?v=6.0" type="image/webp">
+                  <img src="assets/images/slide2_ai.jpg?v=6.0" alt="Artificial Intelligence &amp; Vision Workstation" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
                 </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
@@ -131,8 +143,10 @@
               <!-- SLIDE 3: STEM School Lab & Open to All -->
               <div class="hero-slide" data-slide="2">
                 <picture>
-                  <source srcset="assets/images/slide3_stem_lab.webp" type="image/webp">
-                  <img src="assets/images/slide3_stem_lab.jpg" alt="Grade 5-10 &amp; College STEM Lab" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.webp?v=6.0" type="image/webp">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.jpg?v=6.0" type="image/jpeg">
+                  <source srcset="assets/images/slide3_stem_lab.webp?v=6.0" type="image/webp">
+                  <img src="assets/images/slide3_stem_lab.jpg?v=6.0" alt="Grade 5-10 &amp; College STEM Lab" class="slide-img" width="1024" height="571" loading="lazy" decoding="async">
                 </picture>
                 <div class="slide-overlay">
                   <div class="slide-badge">
@@ -5762,6 +5776,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=5.3"></script>
+  <script src="js/main.js?v=6.0"></script>
 </body>
 </html>

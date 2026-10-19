@@ -400,9 +400,16 @@ h1, h2, h3, h4, h5, h6 {
   will-change: opacity;
 }
 
+/* Ensure slide 1 is 100% visible immediately at 0ms without waiting for transitions */
+.hero-slide:first-child,
 .hero-slide.active {
   opacity: 1;
   visibility: visible;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  z-index: 2;
 }
 
 .slide-img {
