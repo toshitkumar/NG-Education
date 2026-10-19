@@ -330,7 +330,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 240px;
+  height: 220px;
   overflow: hidden;
   line-height: 0;
   pointer-events: none;
@@ -338,68 +338,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wave-svg {
-  position: absolute;
-  top: 0;
-  left: -8%;
-  width: 116%;
-  height: 240px;
+  width: 100%;
+  height: 220px;
   display: block;
   pointer-events: none;
-  will-change: transform;
-}
-
-/* Layer 1: Back Deep Purple/Indigo Wave - Deep, slow rolling swell */
-.wave-layer-1 {
-  z-index: 1;
-  animation: waveMotionBack 14s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
-}
-
-/* Layer 2: Mid Royal Blue Wave - Counter-motion fluid roll */
-.wave-layer-2 {
-  z-index: 2;
-  animation: waveMotionMid 10s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate-reverse;
-}
-
-/* Layer 3: Front Sky Blue Wave - Dynamic surface ripple */
-.wave-layer-3 {
-  z-index: 3;
-  animation: waveMotionFront 7.5s cubic-bezier(0.42, 0, 0.58, 1) infinite alternate;
-}
-
-@keyframes waveMotionBack {
-  0% {
-    transform: translate3d(-35px, 0, 0) scaleY(1);
-  }
-  50% {
-    transform: translate3d(20px, 8px, 0) scaleY(1.08) skewX(-1.5deg);
-  }
-  100% {
-    transform: translate3d(45px, -6px, 0) scaleY(0.94) skewX(1deg);
-  }
-}
-
-@keyframes waveMotionMid {
-  0% {
-    transform: translate3d(40px, -4px, 0) scaleY(0.95) skewX(1.8deg);
-  }
-  50% {
-    transform: translate3d(-15px, 10px, 0) scaleY(1.09) skewX(-1.2deg);
-  }
-  100% {
-    transform: translate3d(-50px, 3px, 0) scaleY(1.01) skewX(2deg);
-  }
-}
-
-@keyframes waveMotionFront {
-  0% {
-    transform: translate3d(-45px, 5px, 0) scaleY(1.06) skewX(-1.2deg);
-  }
-  50% {
-    transform: translate3d(15px, -8px, 0) scaleY(0.93) skewX(1.6deg);
-  }
-  100% {
-    transform: translate3d(50px, 7px, 0) scaleY(1.11) skewX(-1.8deg);
-  }
 }
 
 /* Floating Solid Spheres */
@@ -408,8 +350,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
   box-shadow: 0 10px 24px rgba(12, 11, 39, 0.25);
   pointer-events: none;
-  z-index: 4;
-  will-change: transform;
+  z-index: 2;
 }
 
 .sphere-1 {
@@ -418,7 +359,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-sky);
   top: 80px;
   left: 280px;
-  animation: sphereFloat1 6.5s ease-in-out infinite alternate;
 }
 
 .sphere-2 {
@@ -427,7 +367,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-blue);
   top: 120px;
   left: 210px;
-  animation: sphereFloat2 5.2s ease-in-out infinite alternate 0.4s;
 }
 
 .sphere-3 {
@@ -436,7 +375,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #2563EB;
   top: 155px;
   left: 60px;
-  animation: sphereFloat1 7.2s ease-in-out infinite alternate 0.9s;
 }
 
 .sphere-4 {
@@ -445,7 +383,6 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-purple);
   top: 60px;
   left: 450px;
-  animation: sphereFloat2 8.5s ease-in-out infinite alternate 1.4s;
 }
 
 .sphere-5 {
@@ -454,34 +391,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-sky);
   top: 95px;
   right: 120px;
-  animation: sphereFloat1 5.8s ease-in-out infinite alternate 0.7s;
 }
 
-@keyframes sphereFloat1 {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(8px, -14px, 0);
-  }
-  100% {
-    transform: translate3d(-6px, -20px, 0);
-  }
-}
-
-@keyframes sphereFloat2 {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(-10px, -15px, 0);
-  }
-  100% {
-    transform: translate3d(8px, -8px, 0);
-  }
-}
-
-/* Organic Contour Lines as in Reference with subtle wave motion */
+/* Organic Contour Lines as in Reference */
 .contour-lines {
   position: absolute;
   top: 60px;
@@ -490,31 +402,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 240px;
   pointer-events: none;
   opacity: 0.55;
-  z-index: 4;
-  animation: contourWaveFloat 8.5s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes contourWaveFloat {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translate3d(10px, -8px, 0) scale(1.04);
-    opacity: 0.7;
-  }
-  100% {
-    transform: translate3d(-8px, 5px, 0) scale(0.97);
-    opacity: 0.45;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wave-layer-1, .wave-layer-2, .wave-layer-3,
-  .floating-sphere, .contour-lines {
-    animation: none !important;
-  }
+  z-index: 2;
 }
 
 .hero-main-layout {
@@ -2208,6 +2096,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+  .hero-wave-canvas {
+    height: 120px;
+  }
+  .wave-svg {
+    height: 120px;
+  }
+  .floating-sphere,
+  .contour-lines {
+    display: none !important;
+  }
+  .hero-wrapper {
+    padding-top: 10px;
+    padding-bottom: 45px;
+  }
+
   .hero-slides-viewport {
     height: 260px;
   }
@@ -3000,6 +2903,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+  .hero-wave-canvas {
+    height: 90px;
+  }
+  .wave-svg {
+    height: 90px;
+  }
+  .hero-wrapper {
+    padding-top: 6px;
+    padding-bottom: 35px;
+  }
+
   /* Ultra-compact header for narrow phones */
   .brand-text {
     font-size: 1.15rem;
