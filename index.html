@@ -13,7 +13,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.1">
+  <link rel="stylesheet" href="css/style.css?v=4.2">
 </head>
 <body>
 
@@ -480,13 +480,25 @@
                   Automatic night streetlights & intrusion sirens
                 </li>
               </ul>
+
+              <!-- Interactive Syllabus Banner -->
+              <div class="card-syllabus-banner" onclick="openModal('modalExploreAutomation')" data-open-modal="modalExploreAutomation" style="background-color: rgba(0, 151, 156, 0.08); border: 1px dashed var(--color-arduino); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 1.15rem;">🏡</span>
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--color-arduino);">12 Modules Syllabus &amp; 4 Featured Projects</span>
+                </div>
+                <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary-blue); text-decoration: underline;">View Full Syllabus →</span>
+              </div>
             </div>
             <div class="card-foot">
               <div class="price-text-wrap">
-                <span class="sub-duration">8 Modules • 6 Systems</span>
+                <span class="sub-duration">12 Modules • 15–20 Hours</span>
                 <span class="main-price">₹1,499</span>
               </div>
-              <button class="btn-pill btn-pill-outline" style="padding: 9px 22px; font-size: 0.88rem;" data-open-modal="modalEnroll" data-course="automation">Enroll</button>
+              <div class="card-action-btns">
+                <button class="btn-pill btn-pill-arduino" onclick="openModal('modalExploreAutomation')" data-open-modal="modalExploreAutomation" style="padding: 9px 18px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Explore</button>
+                <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="automation" style="padding: 9px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">Enroll</button>
+              </div>
             </div>
           </div>
 
@@ -3122,6 +3134,475 @@
     </div>
   </div>
 
+  <!-- Modal: Home Automation & Smart Agriculture Detailed Syllabus Explorer (12 Modules) -->
+  <div class="modal-overlay" id="modalExploreAutomation">
+    <div class="modal-card modal-card-syllabus">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+
+      <div class="syllabus-modal-head">
+        <span class="course-grade-badge" style="background-color: rgba(0, 151, 156, 0.1); color: var(--color-arduino); border-color: rgba(0, 151, 156, 0.25);">Single Course • 12 Modules • 4 Featured Projects</span>
+        <h3>Home Automation &amp; Smart Agriculture</h3>
+        <p>Build intelligent automation systems using Arduino Uno. Learn to control appliances through relay modules, automate plant irrigation using soil-moisture sensors, and develop automatic streetlights and intrusion alert systems.</p>
+      </div>
+
+      <div class="syllabus-modal-body">
+        <!-- Course Specifications Card -->
+        <div class="syllabus-overview-card">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Course Specifications &amp; Overview
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Skill Level</span>
+              <span class="syllabus-spec-val">Intermediate</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Total Modules</span>
+              <span class="syllabus-spec-val">12 Modules</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Learning Format</span>
+              <span class="syllabus-spec-val">Project-Based Learning</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Recommended Duration</span>
+              <span class="syllabus-spec-val">15–20 hours</span>
+            </div>
+            <div class="syllabus-spec-item" style="grid-column: 1 / -1;">
+              <span class="syllabus-spec-label">Prerequisites</span>
+              <span class="syllabus-spec-val">Arduino programming, basic electronics and sensor interfacing are recommended.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Featured Projects Showcase -->
+        <div class="syllabus-overview-card" style="border-left-color: #00979C;">
+          <div class="syllabus-overview-title" style="color: #00979C;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Featured Automation Projects
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 14px;">
+            <!-- Project 1 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">1. Smart Home Automation</span>
+                <span style="background-color: rgba(0, 151, 156, 0.12); color: var(--color-arduino); font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Relay</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Control lights and compatible low-voltage devices using relays, sensors and automated rules.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>Relay switching</li>
+                <li>Motion-based lighting</li>
+                <li>Automatic and manual control</li>
+              </ul>
+            </div>
+
+            <!-- Project 2 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">2. Smart Agriculture &amp; Irrigation</span>
+                <span style="background-color: rgba(16, 185, 129, 0.12); color: #047857; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Agriculture</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Monitor soil moisture and activate a water pump when the soil becomes sufficiently dry.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>Moisture sensor calibration</li>
+                <li>Automatic pump switching</li>
+                <li>Runtime limits &amp; dry-run protection</li>
+              </ul>
+            </div>
+
+            <!-- Project 3 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">3. Automatic Streetlight System</span>
+                <span style="background-color: rgba(217, 119, 6, 0.12); color: #B45309; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">LDR</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Detect low ambient light and switch LED streetlights on automatically.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>LDR-based detection</li>
+                <li>Threshold calibration</li>
+                <li>Automatic day-night switching</li>
+              </ul>
+            </div>
+
+            <!-- Project 4 -->
+            <div style="background-color: #F8FAFC; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 16px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark);">4. Intrusion Detection Alarm</span>
+                <span style="background-color: rgba(220, 38, 38, 0.1); color: #DC2626; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-pill);">Security</span>
+              </div>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Detect movement and activate a buzzer and visual warning indicators.</p>
+              <ul style="font-size: 0.82rem; color: var(--text-body); list-style: disc; margin-left: 18px; margin-bottom: 8px; line-height: 1.45;">
+                <li>PIR sensor integration</li>
+                <li>Alarm timing and control</li>
+                <li>Arming and disarming logic</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware & Software Requirements Card -->
+        <div class="syllabus-overview-card" style="border-left-color: var(--primary-blue);">
+          <div class="syllabus-overview-title">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Hardware &amp; Software Requirements
+          </div>
+          <div class="syllabus-spec-grid">
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Controller</span>
+              <span class="syllabus-spec-val">Arduino Uno R3</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Switching</span>
+              <span class="syllabus-spec-val">Relay modules with suitable ratings</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Sensors</span>
+              <span class="syllabus-spec-val">Soil-moisture sensor, LDR, PIR sensor, optional door switch</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Actuators</span>
+              <span class="syllabus-spec-val">Low-voltage DC pump, LEDs and buzzer</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Monitoring</span>
+              <span class="syllabus-spec-val">Optional LCD 16×2, resistors and status LEDs</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Assembly</span>
+              <span class="syllabus-spec-val">Breadboard, jumper wires and suitable connectors</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Power</span>
+              <span class="syllabus-spec-val">Appropriate regulated supply for Arduino, relays and loads</span>
+            </div>
+            <div class="syllabus-spec-item">
+              <span class="syllabus-spec-label">Software</span>
+              <span class="syllabus-spec-val">Arduino IDE and sensor/control libraries as needed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course Completion Outcomes Box -->
+        <div class="syllabus-outcomes-card">
+          <h5>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Course Completion Outcomes
+          </h5>
+          <ul class="syllabus-outcomes-list">
+            <li>Interface relay modules and control compatible electrical loads.</li>
+            <li>Automate lighting using ambient-light sensors.</li>
+            <li>Build a basic intrusion detection and alarm system.</li>
+            <li>Calibrate soil-moisture sensors for irrigation decisions.</li>
+            <li>Control a water pump using automatic thresholds and timeouts.</li>
+            <li>Combine multiple sensors and outputs into an integrated automation prototype.</li>
+          </ul>
+        </div>
+
+        <!-- Safety Note -->
+        <div style="background-color: rgba(220, 38, 38, 0.08); border: 1px dashed rgba(220, 38, 38, 0.4); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 24px; font-size: 0.85rem; color: #991B1B; display: flex; align-items: flex-start; gap: 10px;">
+          <span style="font-size: 1.1rem; flex-shrink: 0;">⚠️</span>
+          <span><strong>Safety Note:</strong> For learning activities, use low-voltage DC loads. Mains AC appliance switching must only be designed, enclosed and tested by a qualified person using correctly rated, isolated equipment. Never connect mains wiring directly to an Arduino or exposed breadboard.</span>
+        </div>
+
+        <!-- 12 Modules Breakdown -->
+        <div class="syllabus-section-heading">
+          <span>Curriculum Breakdown (Modules 01 – 12)</span>
+          <span class="module-topic-badge">72 Learning Topics • 12 Hands-on Practicals</span>
+        </div>
+
+        <div class="syllabus-modules-grid">
+          <!-- Module 01 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">01</span>
+                <h4 class="module-title">Introduction to Home Automation &amp; Smart Agriculture</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>What is automation and how it works</li>
+              <li>Applications of smart homes and precision agriculture</li>
+              <li>Arduino Uno as an automation controller</li>
+              <li>Sensors, actuators and control systems</li>
+              <li>Understanding automated input-output workflows</li>
+              <li>Planning an automation project</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Design a basic home or agriculture automation system</span>
+            </div>
+          </div>
+
+          <!-- Module 02 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">02</span>
+                <h4 class="module-title">Relay Modules &amp; Appliance Switching</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Relay working principle and internal contacts</li>
+              <li>NO, NC and COM terminals</li>
+              <li>Relay module input and output connections</li>
+              <li>Controlling low-voltage DC loads</li>
+              <li>Using transistor-driven or opto-isolated relay modules</li>
+              <li>Relay ratings, electrical isolation and safe wiring</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Control a low-voltage DC lamp using an Arduino relay module</span>
+            </div>
+          </div>
+
+          <!-- Module 03 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">03</span>
+                <h4 class="module-title">Sensor-Based Home Automation</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Reading PIR motion sensor outputs</li>
+              <li>Using LDR sensors for ambient light detection</li>
+              <li>Combining multiple sensor conditions</li>
+              <li>Automatic appliance switching logic</li>
+              <li>Configuring thresholds and timing delays</li>
+              <li>Preventing false triggers and repeated switching</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build an automatic room-light controller</span>
+            </div>
+          </div>
+
+          <!-- Module 04 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">04</span>
+                <h4 class="module-title">Smart Lighting &amp; Automatic Streetlights</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>LDR voltage divider and analog readings</li>
+              <li>Daylight and darkness threshold detection</li>
+              <li>Automatic LED streetlight control</li>
+              <li>Controlling multiple LED outputs</li>
+              <li>Energy-saving schedules and hysteresis</li>
+              <li>Testing performance in different lighting conditions</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build an automatic streetlight system</span>
+            </div>
+          </div>
+
+          <!-- Module 05 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">05</span>
+                <h4 class="module-title">Intrusion Detection &amp; Security Alerts</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>PIR-based intrusion detection</li>
+              <li>Door and window switch sensors</li>
+              <li>Buzzer and LED alert integration</li>
+              <li>Arming and disarming control logic</li>
+              <li>Alarm timing and event handling</li>
+              <li>False-alarm reduction and system testing</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Develop a home security alarm with intrusion alerts</span>
+            </div>
+          </div>
+
+          <!-- Module 06 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">06</span>
+                <h4 class="module-title">Smart Agriculture Fundamentals</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Introduction to smart farming</li>
+              <li>Soil-moisture sensing principles</li>
+              <li>Capacitive versus resistive moisture sensors</li>
+              <li>Sensor placement and soil variability</li>
+              <li>Analog readings and threshold selection</li>
+              <li>Planning a sensor-controlled irrigation system</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Measure soil moisture and display readings</span>
+            </div>
+          </div>
+
+          <!-- Module 07 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">07</span>
+                <h4 class="module-title">Soil-Moisture Sensor Calibration</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Connecting the sensor to Arduino Uno</li>
+              <li>Reading raw analog values</li>
+              <li>Calibrating dry and moist soil readings</li>
+              <li>Selecting irrigation thresholds</li>
+              <li>Filtering noisy sensor measurements</li>
+              <li>Preventing rapid pump switching</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a calibrated soil-moisture monitoring system</span>
+            </div>
+          </div>
+
+          <!-- Module 08 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">08</span>
+                <h4 class="module-title">Automatic Irrigation Pump Control</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>DC water pump and driver fundamentals</li>
+              <li>Relay or suitable driver-based pump switching</li>
+              <li>Automatic watering based on moisture thresholds</li>
+              <li>Pump runtime and timeout protection</li>
+              <li>Water reservoir and dry-run considerations</li>
+              <li>Testing irrigation performance</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build an automatic soil-moisture irrigation system</span>
+            </div>
+          </div>
+
+          <!-- Module 09 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">09</span>
+                <h4 class="module-title">Advanced Irrigation Logic</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Separate dry and wet soil thresholds</li>
+              <li>Hysteresis and stable switching</li>
+              <li>Timed watering cycles</li>
+              <li>Manual override and automatic modes</li>
+              <li>Multiple plant-zone control fundamentals</li>
+              <li>Fault handling for disconnected sensors</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Develop a smart irrigation controller with manual override</span>
+            </div>
+          </div>
+
+          <!-- Module 10 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">10</span>
+                <h4 class="module-title">Display, Monitoring &amp; System Status</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Displaying sensor values on an LCD</li>
+              <li>Showing pump and relay status</li>
+              <li>LED indicators for operating modes</li>
+              <li>Serial Monitor-based debugging</li>
+              <li>Recording readings and events</li>
+              <li>Building a simple status dashboard</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Create a smart agriculture monitoring panel</span>
+            </div>
+          </div>
+
+          <!-- Module 11 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">11</span>
+                <h4 class="module-title">Integrated Automation System</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Combining lighting, security and irrigation logic</li>
+              <li>Organizing code into reusable functions</li>
+              <li>Managing multiple sensors and outputs</li>
+              <li>Non-blocking timing using millis()</li>
+              <li>Power budgeting and safe wiring checks</li>
+              <li>Testing each subsystem independently</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Build a multi-function smart home and garden prototype</span>
+            </div>
+          </div>
+
+          <!-- Module 12 -->
+          <div class="module-card">
+            <div class="module-card-top">
+              <div class="module-card-left">
+                <span class="module-index">12</span>
+                <h4 class="module-title">Final Project &amp; Practical Assessment</h4>
+              </div>
+              <span class="module-topic-badge">6 learning topics</span>
+            </div>
+            <ul class="module-topics-list">
+              <li>Selecting a real-world automation problem</li>
+              <li>Preparing circuit diagrams and component lists</li>
+              <li>Programming and integrating hardware</li>
+              <li>Testing reliability and safety</li>
+              <li>Debugging and documenting the solution</li>
+              <li>Presenting the completed prototype</li>
+            </ul>
+            <div class="practical-exercise-box">
+              <span class="practical-tag">HANDS-ON PRACTICAL</span>
+              <span>Demonstrate an automated home, security or irrigation solution</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="syllabus-modal-foot">
+        <div class="price-text-wrap">
+          <span class="sub-duration">Single Course Track • 12 Modules • 4 Featured Projects • Certificate Included</span>
+          <span class="main-price">₹1,499</span>
+        </div>
+        <div class="card-action-btns">
+          <button class="btn-pill btn-pill-outline modal-close-btn" style="position: static; width: auto; height: auto; border-radius: var(--radius-pill); padding: 9px 20px; font-size: 0.88rem;">Close</button>
+          <button class="btn-pill btn-pill-primary" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="automation">Enroll in This Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: General Course Enroll -->
   <div class="modal-overlay" id="modalEnroll">
     <div class="modal-card">
@@ -3186,6 +3667,6 @@
   <div id="toastNotice" class="toast-notice"></div>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=4.1"></script>
+  <script src="js/main.js?v=4.2"></script>
 </body>
 </html>
