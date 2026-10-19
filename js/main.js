@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initCarouselDots();
   initHeroSlider();
+  initTrainerFilters();
 });
 
 /* =====================================================================
@@ -93,6 +94,19 @@ function initModals() {
         if (select) {
           for (let i = 0; i < select.options.length; i++) {
             if (select.options[i].value === courseVal) {
+              select.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      }
+
+      const trainerVal = trigger.getAttribute('data-trainer');
+      if (trainerVal && modalId === 'modalBookTrainer') {
+        const select = document.querySelector('#modalBookTrainer select[name="trainer"]');
+        if (select) {
+          for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value.toLowerCase() === trainerVal.toLowerCase()) {
               select.selectedIndex = i;
               break;
             }
@@ -461,4 +475,30 @@ function initHeroSlider() {
   // Initialize first slide and start auto-play
   showSlide(0);
   startAutoplay();
+}
+
+/* =====================================================================
+   7. TRAINER FILTERING
+   ===================================================================== */
+function initTrainerFilters() {
+  const filterBtns = document.querySelectorAll('.trainer-filter-btn');
+  const cards = document.querySelectorAll('.trainer-card');
+  if (!filterBtns.length || !cards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-filter');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category') || '';
+        if (cat === 'all' || cardCat.includes(cat)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
 }

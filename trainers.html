@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert Trainers & Mentors | NG EDUCATION</title>
+  <meta name="description" content="Meet our certified robotics mentors, embedded systems engineers, and Python trainers at NG EDUCATION. Hands-on practical guidance for Class 5-10 students and schools.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=4.7">
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. TOP HEADER (DEEP INDIGO MATCHING BRAND)
+       ===================================================================== -->
+  <header class="site-header">
+    <div class="container navbar">
+      <!-- Brand Logo -->
+      <a href="index.html#home" class="brand-logo">
+        <div class="brand-icon-orb">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span class="brand-text">NG <span>EDUCATION</span></span>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html#home" class="nav-link">Home</a></li>
+          <li><a href="index.html#courses" class="nav-link">Courses</a></li>
+          <li><a href="index.html#hire-teacher" class="nav-link">Hire Teacher</a></li>
+          <li><a href="index.html#stem-labs" class="nav-link">STEM Labs</a></li>
+          <li><a href="trainers.html" class="nav-link active">Trainers</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Actions (Trainers Highlighted, Login & Signup) -->
+      <div class="nav-actions">
+        <a href="trainers.html" class="btn-nav-trainers active">Trainers</a>
+        <button class="btn-nav-login" data-open-modal="modalLogin">Login</button>
+        <button class="btn-nav-signup" data-open-modal="modalSignup">Sign Up</button>
+        <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       2. TRAINERS HERO SECTION WITH STATS
+       ===================================================================== -->
+  <section class="trainers-hero-wrapper">
+    <div class="container">
+      <div class="trainers-hero-content">
+        <div class="trainers-hero-tag">
+          <span>🎓</span> Certified Mentors &amp; Faculty
+        </div>
+        <h1 class="trainers-hero-title">
+          Learn from India's Premier <span>Robotics &amp; STEM</span> Trainers
+        </h1>
+        <p class="trainers-hero-desc">
+          Our educators aren't just theoreticians—they are robotics builders, embedded firmware developers, and experienced school mentors who make tech accessible, intuitive, and genuinely exciting for students.
+        </p>
+        <div class="trainers-hero-actions">
+          <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" style="padding: 12px 28px; font-size: 0.95rem; font-weight: 700; cursor: pointer;">Book a Trainer for Your School</button>
+          <a href="#trainers-list" class="btn-pill btn-pill-outline" style="padding: 12px 24px; font-size: 0.95rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">Explore Profiles ↓</a>
+        </div>
+
+        <!-- Stats Counter Strip -->
+        <div class="trainers-stats-grid">
+          <div class="trainers-stat-card">
+            <div class="trainers-stat-num">10+</div>
+            <div class="trainers-stat-label">Certified Master Trainers</div>
+          </div>
+          <div class="trainers-stat-card">
+            <div class="trainers-stat-num">5,000+</div>
+            <div class="trainers-stat-label">Students Mentored</div>
+          </div>
+          <div class="trainers-stat-card">
+            <div class="trainers-stat-num">50+</div>
+            <div class="trainers-stat-label">School ATL Workshops</div>
+          </div>
+          <div class="trainers-stat-card">
+            <div class="trainers-stat-num">100%</div>
+            <div class="trainers-stat-label">Hands-On Practical Focus</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       3. TRAINERS DIRECTORY SECTION
+       ===================================================================== -->
+  <section class="trainers-main-section" id="trainers-list">
+    <div class="container">
+
+      <div class="section-head" style="text-align: center; margin-bottom: 24px;">
+        <span class="section-tag">Faculty Directory</span>
+        <h2 class="section-title">Meet Our Lead Instructors</h2>
+        <p class="section-desc">
+          Filter by technical domain or project track to find the right mentor for your student or institution.
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="trainers-filter-nav">
+        <button class="trainer-filter-btn active" data-filter="all">All Trainers</button>
+        <button class="trainer-filter-btn" data-filter="robotics">Robotics &amp; Bots</button>
+        <button class="trainer-filter-btn" data-filter="arduino">Arduino &amp; Electronics</button>
+        <button class="trainer-filter-btn" data-filter="python">Python &amp; Cloud IoT</button>
+        <button class="trainer-filter-btn" data-filter="labs">School ATL Labs</button>
+      </div>
+
+      <!-- Trainers Cards Grid -->
+      <div class="trainers-grid">
+
+        <!-- Trainer 1: Toshit Kumar -->
+        <div class="trainer-card" data-category="arduino robotics labs">
+          <div>
+            <div class="trainer-top-meta">
+              <img src="assets/images/founder_toshit_avatar.jpg" alt="Toshit Kumar" class="trainer-avatar-img">
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">Arduino &amp; Firmware Lead</span>
+                <h3 class="trainer-name">Toshit Kumar</h3>
+                <div class="trainer-role">Founder &amp; Lead Embedded Systems Trainer</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 6+ Years Experience</span> • <span>⭐ 4.9/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Founder of NG EDUCATION. Pioneer in embedded C/C++, ATmega328P architecture, sensor signal processing, and low-level hardware debugging. Has trained over 2,500 students in robotics circuit prototyping.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">250+</span>
+                <span class="trainer-stat-mini-lbl">Projects Guided</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">2,500+</span>
+                <span class="trainer-stat-mini-lbl">Students Mentored</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">Arduino Uno</span>
+                <span class="trainer-skill-tag">Embedded C/C++</span>
+                <span class="trainer-skill-tag">Sensors &amp; Signals</span>
+                <span class="trainer-skill-tag">Circuit Diagnostics</span>
+                <span class="trainer-skill-tag">Firmware Design</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Toshit Kumar" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Workshop</button>
+            <a href="https://wa.me/918077718423?text=Hi%20Toshit,%20I%20would%20like%20to%20connect%20for%20Robotics%20Training." target="_blank" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Trainer 2: Arpit -->
+        <div class="trainer-card" data-category="robotics">
+          <div>
+            <div class="trainer-top-meta">
+              <div class="trainer-avatar-orb">🤖</div>
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">Autonomous Bots Lead</span>
+                <h3 class="trainer-name">Arpit</h3>
+                <div class="trainer-role">Co-Founder &amp; Robotics Engineering Specialist</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 5+ Years Experience</span> • <span>⭐ 4.9/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Hardware architect specializing in autonomous two-wheel and four-wheel mobile robots, robotic arms, obstacle avoiders, and precision PID line-following algorithms. Dedicated to hands-on mechanical builds.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">180+</span>
+                <span class="trainer-stat-mini-lbl">Bot Builds</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">1,800+</span>
+                <span class="trainer-stat-mini-lbl">Students Mentored</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">2WD / 4WD Chassis</span>
+                <span class="trainer-skill-tag">L298N Motor Drivers</span>
+                <span class="trainer-skill-tag">PID Algorithms</span>
+                <span class="trainer-skill-tag">Robotic Arm Servos</span>
+                <span class="trainer-skill-tag">Ultrasonic &amp; IR</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Arpit" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Workshop</button>
+            <a href="https://wa.me/918077718423?text=Hi%20Arpit,%20I%20want%20to%20inquire%20about%20Robotics%20Bots%20Training." target="_blank" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Trainer 3: Maneesh Rastogi -->
+        <div class="trainer-card" data-category="labs arduino">
+          <div>
+            <div class="trainer-top-meta">
+              <div class="trainer-avatar-orb">⚙️</div>
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">ATL Lab Specialist</span>
+                <h3 class="trainer-name">Maneesh Rastogi</h3>
+                <div class="trainer-role">Managing Director &amp; Technical Curriculum Specialist</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 8+ Years Experience</span> • <span>⭐ 5.0/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Directs institutional STEM and Atal Tinkering Lab (ATL) setups across premier CBSE and ICSE schools. Expert in electronic safety protocols, NITI Aayog ATL guidelines, school curriculum mapping, and teacher training.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">50+</span>
+                <span class="trainer-stat-mini-lbl">ATL Labs Setup</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">350+</span>
+                <span class="trainer-stat-mini-lbl">Teachers Trained</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">ATL Compliance</span>
+                <span class="trainer-skill-tag">Lab Safety &amp; Grounding</span>
+                <span class="trainer-skill-tag">Ohm's Law Curricula</span>
+                <span class="trainer-skill-tag">Teacher Training</span>
+                <span class="trainer-skill-tag">School Audits</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Maneesh Rastogi" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Lab Audit</button>
+            <a href="tel:8077718423" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">Call Direct</a>
+          </div>
+        </div>
+
+        <!-- Trainer 4: Harsh -->
+        <div class="trainer-card" data-category="python">
+          <div>
+            <div class="trainer-top-meta">
+              <div class="trainer-avatar-orb">🐍</div>
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">Python &amp; Cloud IoT</span>
+                <h3 class="trainer-name">Harsh</h3>
+                <div class="trainer-role">Associated Manager &amp; IoT / Python Automation Trainer</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 4+ Years Experience</span> • <span>⭐ 4.8/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Spearheads the 18-Module Python Programming Masterclass and ESP32 cloud interfacing. Specializes in SQLite database integration, REST APIs, web automation with BeautifulSoup, and real-time MQTT cloud dashboards.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">120+</span>
+                <span class="trainer-stat-mini-lbl">IoT Deployments</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">1,200+</span>
+                <span class="trainer-stat-mini-lbl">Students Mentored</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">Python Masterclass</span>
+                <span class="trainer-skill-tag">SQLite Databases</span>
+                <span class="trainer-skill-tag">REST APIs &amp; JSON</span>
+                <span class="trainer-skill-tag">ESP32 &amp; ESP8266</span>
+                <span class="trainer-skill-tag">MQTT Protocols</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Harsh" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Workshop</button>
+            <a href="https://wa.me/918077718423?text=Hi%20Harsh,%20I%20want%20to%20learn%20Python%20and%20IoT." target="_blank" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Trainer 5: Pooja Sharma -->
+        <div class="trainer-card" data-category="python robotics">
+          <div>
+            <div class="trainer-top-meta">
+              <div class="trainer-avatar-orb">🧠</div>
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">AI &amp; Computer Vision</span>
+                <h3 class="trainer-name">Pooja Sharma</h3>
+                <div class="trainer-role">Senior AI &amp; Computer Vision Instructor</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 4+ Years Experience</span> • <span>⭐ 4.9/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Brings computer vision to life with real-time OpenCV webcam tracking, face and color recognition bots, and foundational machine learning algorithms for school and college learners.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">95+</span>
+                <span class="trainer-stat-mini-lbl">Vision Models</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">900+</span>
+                <span class="trainer-stat-mini-lbl">Students Mentored</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">OpenCV Camera Vision</span>
+                <span class="trainer-skill-tag">Python Automation</span>
+                <span class="trainer-skill-tag">Color Tracking</span>
+                <span class="trainer-skill-tag">Gesture Control</span>
+                <span class="trainer-skill-tag">AI Logic Models</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Pooja Sharma" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Session</button>
+            <a href="https://wa.me/918077718423?text=Hi%20Pooja,%20I%20am%20interested%20in%20AI%20and%20Computer%20Vision%20sessions." target="_blank" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Trainer 6: Vikram Singh -->
+        <div class="trainer-card" data-category="arduino labs">
+          <div>
+            <div class="trainer-top-meta">
+              <div class="trainer-avatar-orb">💡</div>
+              <div class="trainer-header-info">
+                <span class="trainer-category-badge">Junior STEM Mentor</span>
+                <h3 class="trainer-name">Vikram Singh</h3>
+                <div class="trainer-role">Junior STEM &amp; Class 5–8 Foundations Mentor</div>
+                <div class="trainer-exp-badge">
+                  <span>⏱️ 3+ Years Experience</span> • <span>⭐ 4.8/5 Rating</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="trainer-bio">
+              Specialist in making technology fun, intuitive, and safe for young minds (Classes 5-8). Focuses on breadboard circuit prototyping without soldering, Tinkercad simulations, and Scratch block logic.
+            </p>
+
+            <div class="trainer-stats-row">
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">150+</span>
+                <span class="trainer-stat-mini-lbl">School Camps</span>
+              </div>
+              <div class="trainer-stat-mini">
+                <span class="trainer-stat-mini-val">1,400+</span>
+                <span class="trainer-stat-mini-lbl">Junior Students</span>
+              </div>
+            </div>
+
+            <div class="trainer-skills-wrap">
+              <div class="trainer-skills-title">Core Competencies:</div>
+              <div class="trainer-skill-tags">
+                <span class="trainer-skill-tag">Breadboard Loops</span>
+                <span class="trainer-skill-tag">Tinkercad Circuits</span>
+                <span class="trainer-skill-tag">Scratch Programming</span>
+                <span class="trainer-skill-tag">LED Electronics</span>
+                <span class="trainer-skill-tag">STEM Games</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="trainer-card-foot">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Vikram Singh" style="flex: 1; padding: 10px 14px; font-size: 0.86rem; font-weight: 700; cursor: pointer;">Book Session</button>
+            <a href="https://wa.me/918077718423?text=Hi%20Vikram,%20I%20am%20inquiring%20about%20Junior%20STEM%20sessions." target="_blank" class="btn-pill btn-pill-outline" style="padding: 10px 14px; font-size: 0.86rem; font-weight: 700; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =====================================================================
+           4. SCHOOL HIGHLIGHT BANNER: HIRE A TRAINER FOR YOUR SCHOOL
+           ===================================================================== -->
+      <div class="trainers-hire-banner">
+        <div>
+          <span class="trainer-category-badge" style="background-color: rgba(0, 151, 156, 0.2); color: var(--color-cyan);">Institutional Service</span>
+          <h2 class="trainers-hire-title">Hire a Certified Robotics Trainer for <span>Your School</span></h2>
+          <p class="trainers-hire-desc">
+            Transform your school's STEM lab into a vibrant innovation hub. We deploy experienced robotics engineers who conduct full-day interactive workshops, guide student builds, and prepare batches for science exhibitions and robotics leagues.
+          </p>
+          <ul class="trainers-hire-checklist">
+            <li>✓ Full-Day Hands-on Mentoring</li>
+            <li>✓ All Hardware Kits &amp; Tools Brought by Us</li>
+            <li>✓ Certified Training Certificate for Students</li>
+            <li>✓ Teacher &amp; Faculty Enablement Session</li>
+          </ul>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <button class="btn-pill btn-pill-arduino" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" style="padding: 12px 24px; font-size: 0.92rem; font-weight: 700; cursor: pointer;">Book School Trainer</button>
+            <a href="tel:8077718423" class="btn-pill btn-pill-outline" style="padding: 12px 22px; font-size: 0.92rem; font-weight: 700; text-decoration: none;">📞 Call: 8077718423</a>
+          </div>
+        </div>
+
+        <div class="trainers-hire-price-box">
+          <span class="trainers-price-badge">Transparent Pricing</span>
+          <div class="trainers-price-amount">₹4,999</div>
+          <div class="trainers-price-unit">Per Full-Day Workshop (All-Inclusive)</div>
+          <p style="font-size: 0.82rem; color: #CBD5E1; margin-bottom: 16px;">
+            Suitable for Class 5 to 10 batches. Covers up to 50 students in hands-on group sessions.
+          </p>
+          <a href="https://wa.me/918077718423?text=Hi%20NG%20Education,%20we%20want%20to%20hire%20a%20Robotics%20Trainer%20for%20our%20School%20at%20₹4,999/day." target="_blank" class="btn-pill btn-pill-primary" style="width: 100%; display: block; text-decoration: none; padding: 10px 16px; font-size: 0.88rem; font-weight: 700;">Instant WhatsApp Booking</a>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           5. JOIN OUR FACULTY / BECOME A TRAINER
+           ===================================================================== -->
+      <div class="trainers-join-card">
+        <h3>Passionate About Robotics, Electronics or Python?</h3>
+        <p>
+          We are expanding our network of expert instructors across India. If you love building hardware, writing clean code, and mentoring the next generation of engineers, apply to join our faculty today.
+        </p>
+        <button class="btn-pill btn-pill-arduino" onclick="openModal('modalApplyTrainer')" data-open-modal="modalApplyTrainer" style="padding: 12px 28px; font-size: 0.92rem; font-weight: 700; cursor: pointer;">Apply as an NG Trainer</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6. SITE FOOTER
+       ===================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-text">NG <span>EDUCATION</span></span>
+          <p>
+            Empowering the next generation of creators, coders, and robotics engineers with experiential, project-first learning.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Single Courses</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#courses">Programming: Arduino Language</a></li>
+            <li><a href="index.html#courses">Electronics: Basics &amp; Circuits</a></li>
+            <li><a href="index.html#courses">Sensors: Interfacing &amp; Signals</a></li>
+            <li><a href="index.html#courses">Motors: Control &amp; Actuation</a></li>
+            <li><a href="index.html#courses">Robotics: Autonomous Bots &amp; Arm</a></li>
+            <li><a href="index.html#courses">Automation: Home &amp; Agriculture</a></li>
+            <li><a href="index.html#courses">IoT: Arduino IoT &amp; Wi-Fi</a></li>
+            <li><a href="index.html#courses">Python: Programming Masterclass</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>School Services</h4>
+          <ul class="footer-links">
+            <li><a href="trainers.html">Meet Our Expert Trainers</a></li>
+            <li><a href="index.html#hire-teacher">Hire Robotics Teacher (₹4,999/day)</a></li>
+            <li><a href="index.html#stem-labs">STEM &amp; Robotics Lab Setup</a></li>
+            <li><a href="index.html#stem-labs">ATL Compliance &amp; Kits</a></li>
+            <li><a href="index.html#contact">Competition Mentorship</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Leadership &amp; Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:8077718423">📞 8077718423</a></li>
+            <li><a href="mailto:Kumartoshit82@outlook.com">✉️ Kumartoshit82@outlook.com</a></li>
+            <li class="footer-team-list">
+              <div class="footer-team-item">
+                <div class="footer-founder-row">
+                  <img src="assets/images/founder_toshit_avatar.jpg" alt="Founder - Toshit Kumar" class="footer-founder-avatar">
+                  <span>🔹 <span class="footer-team-role">Founder:</span> Toshit Kumar</span>
+                </div>
+              </div>
+              <div class="footer-team-item">🔹 <span class="footer-team-role">Co-Founder:</span> Arpit</div>
+              <div class="footer-team-item">🔹 <span class="footer-team-role">Managing Director:</span> Maneesh Rastogi</div>
+              <div class="footer-team-item">🔹 <span class="footer-team-role">Associated Manager:</span> Harsh</div>
+            </li>
+            <li><a href="#trainers-list">Back to Top ↑</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NG EDUCATION. All Rights Reserved.</span>
+        <span>🔹 Founder: Toshit Kumar | 🔹 Co-Founder: Arpit | 🔹 Managing Director: Maneesh Rastogi | 🔹 Associated Manager: Harsh</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       7. MODALS
+       ===================================================================== -->
+  
+  <!-- Modal: Login -->
+  <div class="modal-overlay" id="modalLogin">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Welcome Back</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Login to access your NG Education student dashboard &amp; materials.</p>
+
+      <form class="modal-form" data-form-type="Login">
+        <div class="input-group">
+          <label class="input-label">Student ID or WhatsApp Number</label>
+          <input type="text" class="text-input" placeholder="e.g. 8077718423" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Password</label>
+          <input type="password" class="text-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-pill btn-pill-primary" style="width: 100%; margin-top: 8px;">Login to Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Sign Up -->
+  <div class="modal-overlay" id="modalSignup">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Create Your Account</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Join thousands of students building STEM and Robotics skills.</p>
+
+      <form class="modal-form" data-form-type="Student Signup">
+        <div class="input-group">
+          <label class="input-label">Full Name</label>
+          <input type="text" class="text-input" placeholder="e.g. Aarav Sharma" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">WhatsApp Number</label>
+          <input type="tel" class="text-input" placeholder="e.g. 8077718423" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Class / Grade Level</label>
+          <select class="select-input">
+            <option>Class 5–7 (Beginner STEM)</option>
+            <option selected>Class 8–10 (Robotics &amp; Python)</option>
+            <option>Class 11–12 / Open Learner</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-pill btn-pill-primary" style="width: 100%; margin-top: 8px;">Create Free Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Book Trainer -->
+  <div class="modal-overlay" id="modalBookTrainer">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Book an Expert Trainer</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Reserve a workshop or 1-on-1 session with our certified faculty.</p>
+
+      <form class="modal-form" data-form-type="Trainer Booking">
+        <div class="input-group">
+          <label class="input-label">Preferred Trainer</label>
+          <select class="select-input" name="trainer">
+            <option value="any">Any Available Expert Trainer</option>
+            <option value="toshit kumar">Toshit Kumar (Arduino &amp; Firmware Lead)</option>
+            <option value="arpit">Arpit (Autonomous Bots &amp; Robotics)</option>
+            <option value="maneesh rastogi">Maneesh Rastogi (STEM Labs &amp; ATL Specialist)</option>
+            <option value="harsh">Harsh (Python Masterclass &amp; Cloud IoT)</option>
+            <option value="pooja sharma">Pooja Sharma (AI &amp; Computer Vision)</option>
+            <option value="vikram singh">Vikram Singh (Junior Class 5-8 Foundations)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Your Name / School Name</label>
+          <input type="text" class="text-input" placeholder="e.g. Delhi Public School / Rajesh Kumar" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">WhatsApp Number</label>
+          <input type="tel" class="text-input" placeholder="e.g. 8077718423" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Training Type</label>
+          <select class="select-input">
+            <option>School Full-Day Workshop (₹4,999/day)</option>
+            <option>1-on-1 Student Mentoring Session</option>
+            <option>ATL Lab Setup &amp; Audit</option>
+            <option>Robotics Competition Coaching</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Preferred Date / Details</label>
+          <input type="text" class="text-input" placeholder="e.g. Next week, Class 7-9 batch of 40 students">
+        </div>
+        <button type="submit" class="btn-pill btn-pill-primary" style="width: 100%; margin-top: 8px;">Confirm Booking Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Apply as Trainer -->
+  <div class="modal-overlay" id="modalApplyTrainer">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <h3 style="font-size: 1.45rem; margin-bottom: 6px;">Join the NG Faculty</h3>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px;">Teach Robotics, Embedded Systems, or Python to enthusiastic students.</p>
+
+      <form class="modal-form" data-form-type="Trainer Application">
+        <div class="input-group">
+          <label class="input-label">Full Name</label>
+          <input type="text" class="text-input" placeholder="e.g. Priya Verma" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">WhatsApp Number</label>
+          <input type="tel" class="text-input" placeholder="e.g. 8077718423" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Primary Technical Domain</label>
+          <select class="select-input">
+            <option>Arduino &amp; Embedded Systems</option>
+            <option>Robotics Mechanics &amp; Autonomous Bots</option>
+            <option>Python Programming &amp; AI</option>
+            <option>IoT, ESP32 &amp; Cloud</option>
+            <option>Junior STEM (Classes 5-8)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">City / State</label>
+          <input type="text" class="text-input" placeholder="e.g. Bareilly / Lucknow / Delhi NCR" required>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Brief Background / Experience</label>
+          <textarea class="text-input" rows="3" placeholder="Briefly describe your hardware or coding experience..."></textarea>
+        </div>
+        <button type="submit" class="btn-pill btn-pill-primary" style="width: 100%; margin-top: 8px;">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Thank You Auto-Popup (Shows for 2 seconds) -->
+  <div class="modal-overlay" id="modalThankYou">
+    <div class="modal-card modal-card-thankyou">
+      <div class="thankyou-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h3 class="thankyou-title">Thank You!</h3>
+      <p class="thankyou-desc">Your request has been recorded. Our Expert will connect with you within 24 Hours.</p>
+      <div class="thankyou-meta">
+        <span class="thankyou-pill">✓ Saved to NG EDUCATION System</span>
+      </div>
+      <div class="thankyou-progress-bar">
+        <div class="thankyou-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notice Container -->
+  <div id="toastNotice" class="toast-notice"></div>
+
+  <!-- Main JavaScript File -->
+  <script src="js/main.js?v=4.7"></script>
+</body>
+</html>
