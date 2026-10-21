@@ -76,7 +76,7 @@ body {
 }
 
 /* Mobile Touch & Native App Tactile Feel */
-button, a, .btn-pill, .tab-btn, .trainer-filter-btn, .showcase-pill, .showcase-arrow, .mobile-toggle {
+button, a, .btn-pill, .tab-btn, .trainer-filter-btn, .mobile-toggle {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
@@ -389,166 +389,105 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* =====================================================================
-   HERO SHOWCASE (Redesigned: Zero-Glitch, Non-Blinking, Pure Solid Colors)
+   HERO BENTO SHOWCASE (100% Solid Color, Zero-Slider, Zero-Glitch)
    ===================================================================== */
-.hero-showcase-frame {
-  position: relative;
-  width: 100%;
-  max-width: 520px;
-  background-color: var(--header-bg);
-  border-radius: var(--radius-lg);
-  border: 3px solid #FFFFFF;
-  box-shadow: 0 16px 40px rgba(12, 11, 39, 0.22);
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* Showcase Top Navigation Tabs */
-.showcase-nav-pills {
+.hero-bento-grid {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  padding: 10px 12px;
-  background-color: #0C0B27;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 540px;
 }
 
-.showcase-nav-pills::-webkit-scrollbar {
-  display: none;
+.bento-card {
+  position: relative;
+  background-color: var(--header-bg);
+  border: 3px solid #FFFFFF;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 36px rgba(12, 11, 39, 0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.showcase-pill {
-  flex: 1 1 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 10px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #CBD5E1;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  outline: none;
+.bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(12, 11, 39, 0.28);
 }
 
-.showcase-pill .pill-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #64748B;
-  flex-shrink: 0;
-  transition: background-color 0.2s ease;
-}
-
-.showcase-pill.active {
-  background-color: var(--color-arduino);
-  border-color: var(--color-arduino);
-  color: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(0, 151, 156, 0.35);
-}
-
-.showcase-pill.active .pill-dot {
-  background-color: #FFFFFF;
-}
-
-/* Showcase Display Viewport */
-.showcase-display {
+.bento-media {
   position: relative;
   width: 100%;
-  height: 310px;
+  height: 240px;
   background-color: #0C0B27;
   overflow: hidden;
 }
 
-/* Layered Crossfade: The old slide stays visible UNDERNEATH
-   while the new slide fades in on top. NEVER ANY EMPTY FRAME! */
-.showcase-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 1;
-  pointer-events: none;
-  transition: opacity 0.35s ease-in-out;
+.bento-media-sm {
+  height: 150px;
 }
 
-.showcase-item.active {
-  opacity: 1;
-  z-index: 3;
-  pointer-events: auto;
-}
-
-.showcase-item.previous {
-  opacity: 1;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.showcase-item picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.showcase-img {
+.bento-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
-/* Bottom Information Overlay */
-.showcase-meta {
+.bento-overlay {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 14px 16px;
+  background-color: rgba(12, 11, 39, 0.45);
   pointer-events: none;
-  z-index: 4;
 }
 
-.showcase-badge {
+.bento-overlay-compact {
+  padding: 10px 12px;
+  background-color: rgba(12, 11, 39, 0.6);
+}
+
+.bento-badge {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: rgba(12, 11, 39, 0.94);
+  background-color: #0C0B27;
   border: 1.5px solid var(--color-arduino);
   color: #FFFFFF;
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 0.78rem;
-  padding: 5px 12px;
+  padding: 4px 12px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.showcase-caption {
+.bento-badge-sm {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  background-color: #0C0B27;
+  border: 1px solid var(--color-arduino);
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-bottom: auto;
+}
+
+.bento-info {
   background-color: rgba(12, 11, 39, 0.94);
   border-left: 4px solid var(--color-arduino);
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
   color: #FFFFFF;
-  box-sizing: border-box;
 }
 
-.showcase-caption-title {
+.bento-title {
   font-size: 1.05rem;
   font-family: var(--font-heading);
   font-weight: 800;
@@ -556,61 +495,34 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2px;
 }
 
-.showcase-caption-desc {
-  font-size: 0.78rem;
+.bento-desc {
+  font-size: 0.76rem;
   color: #CBD5E1;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
-/* Quick Nav Controls (Arrows & Counter) positioned top-right */
-.showcase-controls {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background-color: rgba(12, 11, 39, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 4px 8px;
-  border-radius: var(--radius-pill);
-  z-index: 6;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-}
-
-.showcase-arrow {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.showcase-arrow:hover {
-  background-color: var(--color-arduino);
-  border-color: var(--color-arduino);
-}
-
-.showcase-arrow svg {
-  width: 14px;
-  height: 14px;
-}
-
-.showcase-counter {
+.bento-title-sm {
+  font-size: 0.88rem;
   font-family: var(--font-heading);
-  font-size: 0.75rem;
   font-weight: 800;
   color: #FFFFFF;
-  padding: 0 4px;
-  letter-spacing: 0.05em;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.bento-desc-sm {
+  font-size: 0.7rem;
+  color: #CBD5E1;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.bento-sub-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
 }
 
 /* Trust Badges in Text Column (Zero Reflow) */
@@ -2127,7 +2039,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 8px;
   }
 
-  .hero-showcase-frame {
+  .hero-bento-grid {
     max-width: 540px;
     margin: 0 auto;
   }
@@ -2180,46 +2092,19 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
   }
 
-  .hero-showcase-frame {
+  .hero-bento-grid {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     border-width: 2px;
   }
 
-  .showcase-display {
-    height: 260px;
+  .bento-media {
+    height: 200px;
   }
 
-  .showcase-nav-pills {
-    padding: 8px 10px;
-    gap: 4px;
-  }
-
-  .showcase-pill {
-    padding: 6px 8px;
-    font-size: 0.74rem;
-  }
-
-  .showcase-meta {
-    padding: 12px 14px;
-  }
-
-  .showcase-badge {
-    font-size: 0.74rem;
-    padding: 4px 10px;
-  }
-
-  .showcase-caption {
-    padding: 8px 12px;
-  }
-
-  .showcase-caption-title {
-    font-size: 0.98rem;
-  }
-
-  .showcase-caption-desc {
-    font-size: 0.74rem;
+  .bento-media-sm {
+    height: 130px;
   }
 
   .hero-title-main {
@@ -3165,57 +3050,26 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2px 4px;
   }
 
-  /* Mobile Hero Showcase Optimizations (< 480px) */
-  .showcase-display {
-    height: 240px;
+  /* Mobile Hero Bento Optimizations (< 480px) */
+  .bento-sub-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
-  .showcase-nav-pills {
-    padding: 6px 8px;
-    gap: 4px;
+  .bento-media {
+    height: 180px;
   }
 
-  .showcase-pill {
-    padding: 5px 6px;
-    font-size: 0.68rem;
-    gap: 4px;
+  .bento-media-sm {
+    height: 120px;
   }
 
-  .showcase-meta {
-    padding: 8px 10px;
+  .bento-title {
+    font-size: 0.95rem;
   }
 
-  .showcase-badge {
-    font-size: 0.68rem;
-    padding: 3px 8px;
-  }
-
-  .showcase-caption {
-    padding: 6px 10px;
-  }
-
-  .showcase-caption-title {
-    font-size: 0.9rem;
-  }
-
-  .showcase-caption-desc {
-    font-size: 0.7rem;
-  }
-
-  .showcase-controls {
-    top: 8px;
-    right: 8px;
-    padding: 3px 6px;
-  }
-
-  .showcase-arrow {
-    width: 24px;
-    height: 24px;
-  }
-
-  .showcase-arrow svg {
-    width: 12px;
-    height: 12px;
+  .bento-desc {
+    font-size: 0.72rem;
   }
 
   .course-tabs {

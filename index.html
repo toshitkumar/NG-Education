@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=7.5">
+  <link rel="stylesheet" href="css/style.css?v=8.0">
 </head>
 <body>
 
@@ -90,122 +90,25 @@
 
     <div class="container hero-main-layout">
         
-        <!-- Left Column: Interactive STEM Showcase (Zero-Glitch, Non-Blinking, Pure Solid Colors) -->
-        <div class="hero-visual-col">
-          <div class="hero-showcase-frame">
-            
-            <!-- Showcase Domain Switcher Pills (Top Interactive Bar) -->
-            <div class="showcase-nav-pills" role="tablist" aria-label="STEM Showcase Tracks">
-              <button type="button" class="showcase-pill active" data-showcase="0" role="tab" aria-selected="true">
-                <span class="pill-dot"></span>
-                <span>🤖 Robotics</span>
-              </button>
-              <button type="button" class="showcase-pill" data-showcase="1" role="tab" aria-selected="false">
-                <span class="pill-dot"></span>
-                <span>🧠 AI &amp; Vision</span>
-              </button>
-              <button type="button" class="showcase-pill" data-showcase="2" role="tab" aria-selected="false">
-                <span class="pill-dot"></span>
-                <span>🏫 STEM Labs</span>
-              </button>
-            </div>
-
-            <!-- Showcase Screen / Image Container -->
-            <div class="showcase-display">
-              
-              <!-- ITEM 1: Hands-On Robotics & Arduino -->
-              <div class="showcase-item active" data-index="0">
-                <picture>
-                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.webp?v=7.5" type="image/webp">
-                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.jpg?v=7.5" type="image/jpeg">
-                  <source srcset="assets/images/slide1_robotics.webp?v=7.5" type="image/webp">
-                  <img src="assets/images/slide1_robotics.jpg?v=7.5" alt="Hands-On Robotics &amp; Arduino" class="showcase-img" width="1024" height="571" fetchpriority="high" loading="eager" decoding="sync">
-                </picture>
-                <div class="showcase-meta">
-                  <span class="showcase-badge">🤖 Hands-On Robotics</span>
-                  <div class="showcase-caption">
-                    <h3 class="showcase-caption-title">Arduino &amp; Smart Bots</h3>
-                    <p class="showcase-caption-desc">Sensors, circuit wiring &amp; autonomous bots</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ITEM 2: Artificial Intelligence & Computer Vision -->
-              <div class="showcase-item" data-index="1">
-                <picture>
-                  <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.webp?v=7.5" type="image/webp">
-                  <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.jpg?v=7.5" type="image/jpeg">
-                  <source srcset="assets/images/slide2_ai.webp?v=7.5" type="image/webp">
-                  <img src="assets/images/slide2_ai.jpg?v=7.5" alt="Artificial Intelligence &amp; Vision Workstation" class="showcase-img" width="1024" height="571" loading="eager" decoding="sync">
-                </picture>
-                <div class="showcase-meta">
-                  <span class="showcase-badge">🧠 Artificial Intelligence</span>
-                  <div class="showcase-caption">
-                    <h3 class="showcase-caption-title">AI &amp; Computer Vision</h3>
-                    <p class="showcase-caption-desc">Predictive algorithms &amp; computer vision systems</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- ITEM 3: STEM School Lab & Open to All -->
-              <div class="showcase-item" data-index="2">
-                <picture>
-                  <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.webp?v=7.5" type="image/webp">
-                  <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.jpg?v=7.5" type="image/jpeg">
-                  <source srcset="assets/images/slide3_stem_lab.webp?v=7.5" type="image/webp">
-                  <img src="assets/images/slide3_stem_lab.jpg?v=7.5" alt="Grade 5-10 &amp; College STEM Lab" class="showcase-img" width="1024" height="571" loading="eager" decoding="sync">
-                </picture>
-                <div class="showcase-meta">
-                  <span class="showcase-badge">🏫 Grade 5–10 &amp; Open to All</span>
-                  <div class="showcase-caption">
-                    <h3 class="showcase-caption-title">Hands-On STEM Labs</h3>
-                    <p class="showcase-caption-desc">School curriculum &amp; college upskilling</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Top-Right Controls (Prev/Next & Counter) -->
-              <div class="showcase-controls">
-                <button type="button" class="showcase-arrow showcase-arrow-prev" aria-label="Previous Track">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <div class="showcase-counter">
-                  <span id="showcaseCurrentNum">01</span> / <span>03</span>
-                </div>
-                <button type="button" class="showcase-arrow showcase-arrow-next" aria-label="Next Track">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right Column: Text Matching Reference Layout -->
+                <!-- Left Column: Primary Pitch, CTAs & Credibility -->
         <div class="hero-text-col">
-          <span class="hero-brand-badge">NG EDUCATION</span>
+          <span class="hero-brand-badge">⚡ NEXT-GEN STEM &amp; ROBOTICS PLATFORM</span>
           <h1 class="hero-title-main">
             Build The Future with<br>
-            <span class="arduino-teal-text">Hands-On STEM, Robotics & AI</span>
+            <span class="arduino-teal-text">Hands-On STEM, Robotics &amp; AI</span>
           </h1>
-          <div class="hero-subtitle-tag">NEXT-GEN STEM & ROBOTICS PLATFORM</div>
           
           <p class="hero-desc-para">
-            Empowering students with practical, project-first learning in Robotics, Arduino, AI & Machine Learning, Computer Science, Database Systems, and Creative Video Editing. Built for future innovators.
+            Empowering students from Grade 5–10 to college with practical, project-first learning in Arduino Robotics, Computer Vision, Artificial Intelligence, and Embedded Systems. Built for future innovators.
           </p>
 
           <!-- Pill Buttons as in Reference (Join Us & Sign Up) -->
           <div class="hero-buttons-row">
             <a href="#courses" class="btn-pill btn-pill-primary">
-              <span>JOIN US</span>
+              <span>EXPLORE COURSES</span>
             </a>
             <button class="btn-pill btn-pill-arduino" data-open-modal="modalSignup">
-              <span>SIGN UP</span>
+              <span>SIGN UP FREE</span>
             </button>
           </div>
 
@@ -213,16 +116,81 @@
           <div class="hero-trust-badges">
             <div class="trust-badge-item">
               <span class="trust-icon">✓</span>
-              <span>100% Practical Labs</span>
+              <span>100% Practical Kits</span>
             </div>
             <div class="trust-badge-item">
               <span class="trust-icon">✓</span>
-              <span>Grade 5–10 &amp; Open</span>
+              <span>Grade 5–10 &amp; College</span>
             </div>
             <div class="trust-badge-item">
               <span class="trust-icon">✓</span>
-              <span>Hardware Included</span>
+              <span>Verified Certification</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Right Column: 3-Domain Bento Hub (All Visible, Zero Slider, 100% Solid Color) -->
+        <div class="hero-visual-col">
+          <div class="hero-bento-grid">
+            
+            <!-- Bento Card 1: Featured Flagship (Robotics & Arduino) -->
+            <div class="bento-card bento-card-featured">
+              <div class="bento-media">
+                <picture>
+                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.webp?v=8.0" type="image/webp">
+                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.jpg?v=8.0" type="image/jpeg">
+                  <source srcset="assets/images/slide1_robotics.webp?v=8.0" type="image/webp">
+                  <img src="assets/images/slide1_robotics.jpg?v=8.0" alt="Hands-On Robotics &amp; Arduino Lab" class="bento-img" width="1024" height="571" fetchpriority="high" loading="eager" decoding="sync">
+                </picture>
+                <div class="bento-overlay">
+                  <span class="bento-badge">🤖 Track 01 • Robotics &amp; Arduino</span>
+                  <div class="bento-info">
+                    <h3 class="bento-title">Arduino Uno &amp; Smart Bots</h3>
+                    <p class="bento-desc">Sensors, circuit wiring, obstacle avoidance &amp; motor controllers</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bento Sub-Cards Row (Cards 2 & 3 Side by Side) -->
+            <div class="bento-sub-row">
+              
+              <!-- Bento Card 2: AI & Computer Vision -->
+              <div class="bento-card bento-card-sub">
+                <div class="bento-media bento-media-sm">
+                  <picture>
+                    <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.webp?v=8.0" type="image/webp">
+                    <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.jpg?v=8.0" type="image/jpeg">
+                    <source srcset="assets/images/slide2_ai.webp?v=8.0" type="image/webp">
+                    <img src="assets/images/slide2_ai.jpg?v=8.0" alt="Artificial Intelligence &amp; Vision Workstation" class="bento-img" width="1024" height="571" loading="eager" decoding="sync">
+                  </picture>
+                  <div class="bento-overlay bento-overlay-compact">
+                    <span class="bento-badge-sm">🧠 Track 02 • AI &amp; Vision</span>
+                    <h4 class="bento-title-sm">AI &amp; Computer Vision</h4>
+                    <p class="bento-desc-sm">Predictive ML models &amp; OpenCV algorithms</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bento Card 3: School STEM Labs -->
+              <div class="bento-card bento-card-sub">
+                <div class="bento-media bento-media-sm">
+                  <picture>
+                    <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.webp?v=8.0" type="image/webp">
+                    <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.jpg?v=8.0" type="image/jpeg">
+                    <source srcset="assets/images/slide3_stem_lab.webp?v=8.0" type="image/webp">
+                    <img src="assets/images/slide3_stem_lab.jpg?v=8.0" alt="Grade 5-10 &amp; College STEM Lab" class="bento-img" width="1024" height="571" loading="eager" decoding="sync">
+                  </picture>
+                  <div class="bento-overlay bento-overlay-compact">
+                    <span class="bento-badge-sm">🏫 Track 03 • School Labs</span>
+                    <h4 class="bento-title-sm">Grade 5–10 STEM Labs</h4>
+                    <p class="bento-desc-sm">Curriculum kits, ATL setup &amp; teacher bootcamps</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
     </div>
@@ -5790,6 +5758,6 @@
   </a>
 
   <!-- Main JavaScript File -->
-  <script src="js/main.js?v=7.5"></script>
+  <script src="js/main.js?v=8.0"></script>
 </body>
 </html>
