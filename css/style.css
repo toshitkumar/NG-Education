@@ -245,6 +245,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 18px;
 }
 
 .brand-icon-orb {
@@ -270,6 +272,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   color: #0F172A;
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .brand-text span {
@@ -282,7 +285,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 28px;
+  gap: 20px;
 }
 
 .nav-link {
@@ -320,6 +323,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  margin-left: 18px;
 }
 
 .btn-nav-trainers {
@@ -344,20 +349,26 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-nav-login {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #0F172A;
   background-color: transparent;
   border: 1.5px solid #CBD5E1;
-  padding: 8px 18px;
+  height: 42px;
+  padding: 0 20px;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .btn-nav-login:hover {
   border-color: #0F172A;
   background-color: #F8FAFC;
+  transform: translateY(-1px);
 }
 
 .btn-nav-signup {
@@ -2631,7 +2642,33 @@ h1, h2, h3, h4, h5, h6 {
   .btn-nav-signup,
   .btn-nav-login,
   .btn-nav-trainers,
-  .nav-actions .btn-ref-amber {
+  .nav-actions 
+.btn-header-cta {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: #F59E0B;
+  height: 42px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-header-cta:hover {
+  background-color: #D97706;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn-ref-amber {
     display: none !important;
   }
 
@@ -3107,6 +3144,32 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #F8FAFC;
 }
 
+
+.btn-header-cta {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: #F59E0B;
+  height: 42px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-header-cta:hover {
+  background-color: #D97706;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+}
+
 .btn-ref-amber {
   display: inline-flex;
   align-items: center;
@@ -3298,8 +3361,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ref-mini-arrow {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: #FEF3C7;
   color: #D97706;
@@ -3307,12 +3370,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
 }
 
 .ref-mini-arrow svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   stroke-width: 2.5;
 }
 
@@ -3320,6 +3384,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #F59E0B;
   color: #FFFFFF;
   transform: translate(2px, -2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
 }
 
 .ref-mini-sparkle {
@@ -3593,21 +3658,22 @@ h1, h2, h3, h4, h5, h6 {
 .ref-arrow-button {
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 50%;
   background-color: #FEF3C7;
   color: #D97706;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   border: none;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.15);
 }
 
 .ref-arrow-button svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   stroke-width: 2.5;
 }
 
@@ -3615,6 +3681,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #F59E0B;
   color: #FFFFFF;
   transform: translate(2px, -2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
 }
 
 /* --- 4. SECTION 3: BENTO GRID WITH STUDENT --- */
@@ -3973,23 +4040,74 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --- 8. RESPONSIVE BREAKPOINTS (TABLETS & MOBILES) --- */
-@media (max-width: 1024px) {
-  .hero-ref-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
+/* For medium/large screens (1024px down to 769px), KEEP 2-COLUMN LAYOUT:
+   TEXT STRICTLY ON LEFT, IMAGE STRICTLY ON RIGHT */
+@media (max-width: 1200px) {
+  .nav-menu {
+    gap: 16px;
   }
 
-  .hero-ref-right {
-    order: -1;
+  .nav-link {
+    font-size: 0.88rem;
+  }
+
+  .hero-ref-container {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
   }
 
   .hero-chalkboard-card {
-    height: 460px;
-    max-width: 420px;
+    height: 480px;
+    max-width: 410px;
   }
 
   .hero-student-cutout-img {
-    max-height: 470px;
+    max-height: 490px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 12px;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  /* Two columns maintained: TEXT ON LEFT, IMAGE ON RIGHT */
+  .hero-ref-container {
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .hero-ref-left {
+    order: 1; /* TEXT ON LEFT */
+  }
+
+  .hero-ref-right {
+    order: 2; /* IMAGE ON RIGHT */
+  }
+
+  .hero-ref-heading {
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+  }
+
+  .hero-chalkboard-card {
+    height: 430px;
+    max-width: 370px;
+  }
+
+  .hero-student-cutout-img {
+    max-height: 440px;
+  }
+
+  .hero-ref-mini-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .ref-bento-layout {
@@ -4041,6 +4159,20 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero-ref-section {
     padding: 30px 0 50px 0;
+  }
+
+  .hero-ref-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-ref-left {
+    order: 1; /* TEXT IS ALWAYS FIRST / TOP */
+  }
+
+  .hero-ref-right {
+    order: 2; /* IMAGE IS ALWAYS SECOND / BELOW TEXT */
+    margin-top: 8px;
   }
 
   .section-split-header {
