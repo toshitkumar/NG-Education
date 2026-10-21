@@ -10,7 +10,7 @@
   <meta http-equiv="Expires" content="0">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230E6258'><circle cx='12' cy='12' r='10'></circle></svg>">
   
   <!-- Google Fonts Preconnect and High-Performance Load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,11 +55,10 @@
         </ul>
       </nav>
 
-      <!-- Right Actions (Trainers Highlighted, Login & Signup) -->
+      <!-- Right Actions (Trainers Highlighted & Book Workshop) -->
       <div class="nav-actions">
         <a href="trainers.html" class="btn-nav-trainers active">Trainers</a>
-        <button class="btn-nav-login" data-open-modal="modalLogin">Login</button>
-        <button class="btn-nav-signup" data-open-modal="modalSignup">Sign Up</button>
+        <button class="btn-ref-amber" onclick="openModal('modalBookTrainer')" style="padding: 8px 20px; font-size: 0.88rem;">Book Workshop</button>
         <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
       </div>
     </div>
@@ -81,7 +80,7 @@
           Our educators aren't just theoreticians—they are robotics builders, embedded firmware developers, and experienced school mentors who make tech accessible, intuitive, and genuinely exciting for students.
         </p>
         <div class="trainers-hero-actions">
-          <button class="btn-pill btn-pill-arduino" onclick="openModal(\'modalBookTrainer\')" data-open-modal="modalBookTrainer">Book a Trainer for Your School</button>
+          <button class="btn-ref-amber" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer">Book a Trainer for Your School</button>
           <a href="#trainers-list" class="btn-pill btn-pill-outline-white">Explore Profiles ↓</a>
         </div>
 
@@ -180,7 +179,7 @@
           </div>
 
           <div class="trainer-card-foot">
-            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal(\'modalBookTrainer\')" data-open-modal="modalBookTrainer" data-trainer="Toshit Kumar">Book Workshop</button>
+            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Toshit Kumar">Book Workshop</button>
             <a href="https://wa.me/918077718423?text=Hi%20Toshit,%20I%20would%20like%20to%20connect%20for%20Robotics%20Training." target="_blank" class="btn-pill btn-pill-outline btn-trainer-wa">WhatsApp</a>
           </div>
         </div>
@@ -228,7 +227,7 @@
           </div>
 
           <div class="trainer-card-foot">
-            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal(\'modalBookTrainer\')" data-open-modal="modalBookTrainer" data-trainer="Arpit">Book Workshop</button>
+            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Arpit">Book Workshop</button>
             <a href="https://wa.me/918077718423?text=Hi%20Arpit,%20I%20want%20to%20inquire%20about%20Robotics%20Bots%20Training." target="_blank" class="btn-pill btn-pill-outline btn-trainer-wa">WhatsApp</a>
           </div>
         </div>
@@ -324,7 +323,7 @@
           </div>
 
           <div class="trainer-card-foot">
-            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal(\'modalBookTrainer\')" data-open-modal="modalBookTrainer" data-trainer="Harsh">Book Workshop</button>
+            <button class="btn-pill btn-pill-arduino btn-trainer-book" onclick="openModal('modalBookTrainer')" data-open-modal="modalBookTrainer" data-trainer="Harsh">Book Workshop</button>
             <a href="https://wa.me/918077718423?text=Hi%20Harsh,%20I%20want%20to%20learn%20Python%20and%20IoT." target="_blank" class="btn-pill btn-pill-outline btn-trainer-wa">WhatsApp</a>
           </div>
         </div>
@@ -432,7 +431,7 @@
            ===================================================================== -->
       <div class="trainers-hire-banner">
         <div>
-          <span class="trainer-category-badge" style="background-color: rgba(0, 151, 156, 0.2); color: var(--color-cyan);">Institutional Service</span>
+          <span class="trainer-category-badge" style="background-color: rgba(0, 151, 156, 0.2); color: #F59E0B;">Institutional Service</span>
           <h2 class="trainers-hire-title">Hire a Certified Robotics Trainer for <span>Your School</span></h2>
           <p class="trainers-hire-desc">
             Transform your school's STEM lab into a vibrant innovation hub. We deploy experienced robotics engineers who conduct full-day interactive workshops, guide student builds, and prepare batches for science exhibitions and robotics leagues.
@@ -468,7 +467,7 @@
         <p>
           We are expanding our network of expert instructors across India. If you love building hardware, writing clean code, and mentoring the next generation of engineers, apply to join our faculty today.
         </p>
-        <button class="btn-pill btn-pill-arduino" onclick="openModal(\'modalApplyTrainer\')" data-open-modal="modalApplyTrainer">Apply as an NG Trainer</button>
+        <button class="btn-pill btn-pill-arduino" onclick="openModal('modalApplyTrainer')" data-open-modal="modalApplyTrainer">Apply as an NG Trainer</button>
       </div>
 
     </div>
