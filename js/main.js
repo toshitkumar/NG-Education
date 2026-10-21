@@ -371,8 +371,6 @@ function initMobileNav() {
   }
 }
 
-/* Showcase tracks synced inside initHeroShowcase */
-
 /* =====================================================================
    7. TRAINER FILTERING
    ===================================================================== */
