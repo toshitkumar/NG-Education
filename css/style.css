@@ -285,22 +285,37 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 20px;
+  gap: clamp(10px, 1.4vw, 20px);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-menu .mobile-nav-action-item {
+  display: none !important;
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 0.95vw, 0.94rem);
   font-weight: 600;
   color: #475569;
   text-decoration: none;
   transition: var(--transition);
   position: relative;
-  padding: 6px 0;
+  padding: 8px 4px;
+  white-space: nowrap; /* Never allow 'Why Us' or 'School Services' to wrap into 2 lines */
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
 }
 
 .nav-link:hover {
-  color: #0F172A;
+  color: #0E6258;
 }
 
 .nav-link.active {
@@ -312,8 +327,8 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 4px;
+  right: 4px;
   height: 2.5px;
   background-color: #0E6258;
   border-radius: 2px;
@@ -2604,8 +2619,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* --- MOBILE DEVICES (<= 768px) --- */
-@media (max-width: 768px) {
+/* --- TABLET & MOBILE NAVIGATION (<= 991px) --- */
+@media (max-width: 991px) {
   .container {
     padding: 0 16px;
   }
@@ -2684,8 +2699,9 @@ h1, h2, h3, h4, h5, h6 {
     max-height: calc(100vh - 64px);
     background-color: #FFFFFF;
     flex-direction: column;
-    padding: 20px 20px 48px;
-    gap: 10px;
+    align-items: stretch; /* Ensure all nav links stretch to full 100% width */
+    padding: 16px 20px 40px;
+    gap: 8px;
     border-bottom: none;
     transform: translateY(-115%);
     opacity: 0;
@@ -2705,24 +2721,66 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: auto;
   }
 
+  .nav-menu li {
+    width: 100%;
+    list-style: none;
+    display: block;
+  }
+
   .nav-menu .nav-link {
     display: flex;
     align-items: center;
-    padding: 12px 16px;
-    font-size: 1.05rem;
+    justify-content: space-between; /* Text on left, chevron on right */
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 0.98rem;
     font-weight: 600;
     border-radius: var(--radius-sm);
     color: #0F172A;
     background-color: #F8FAFC;
-    border: 1px solid #E2E8F0;
+    border: 1.5px solid #E2E8F0;
+    text-decoration: none;
+    transition: var(--transition);
+    white-space: nowrap;
+    box-sizing: border-box;
   }
 
+  /* Chevron indicator on right for clean mobile alignment */
+  .nav-menu .nav-link::after {
+    content: '›';
+    font-size: 1.35rem;
+    line-height: 1;
+    color: #94A3B8;
+    font-weight: 400;
+    position: static;
+    background: none;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    transition: var(--transition);
+  }
+
+  .nav-menu .nav-link:hover,
   .nav-menu .nav-link:active,
   .nav-menu .nav-link.active {
     background-color: #E6F7F5;
     border-color: #0E6258;
     color: #0E6258;
     font-weight: 700;
+  }
+
+  .nav-menu .nav-link.active::after {
+    color: #0E6258;
+    font-weight: 700;
+  }
+
+  .nav-menu .mobile-nav-action-item {
+    display: block !important;
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 16px;
+    border-top: 1px solid #E2E8F0;
   }
 
   .mobile-nav-action-item .btn-pill-outline-white {
@@ -4049,13 +4107,39 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1080px) {
   .nav-menu {
-    gap: 12px;
+    gap: 10px;
   }
 
   .nav-link {
+    font-size: 0.84rem;
+    white-space: nowrap;
+    padding: 6px 2px;
+  }
+
+  .site-header .btn-nav-login {
+    padding: 0 14px;
     font-size: 0.85rem;
+    height: 38px;
+  }
+
+  .site-header .btn-header-cta {
+    padding: 0 16px;
+    font-size: 0.85rem;
+    height: 38px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 0.82rem;
+    white-space: nowrap;
+    padding: 6px 2px;
   }
 
   /* Two columns maintained: TEXT ON LEFT, IMAGE ON RIGHT */
