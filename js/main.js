@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initTrainerFilters();
   initCountUp();
+  initLiveCoursesSync();
 });
 
 /* =====================================================================
@@ -187,6 +188,56 @@ function initModals() {
         message: detailsArr.join(' | '),
         timestamp: new Date().toLocaleString('en-IN')
       };
+
+      // Sync with Master Admin Orders & User Directories
+      try {
+        const isEnrollment = formTypeLower.includes('enroll') || formTypeLower.includes('course') || formTypeLower.includes('workshop');
+        const isUserReg = formTypeLower.includes('signup') || formTypeLower.includes('register') || formTypeLower.includes('account');
+
+        if (isEnrollment) {
+          const newOrder = {
+            id: 'ORD-' + Math.floor(1000 + Math.random() * 9000),
+            studentName: nameVal || 'Enrolled Student',
+            parentName: nameVal || 'Parent',
+            phone: contactVal || '—',
+            email: contactVal.includes('@') ? contactVal : '',
+            courseName: formType || 'STEM Flagship Track',
+            amount: 1999,
+            paymentMode: 'UPI / Online',
+            transactionId: 'TXN-' + Math.floor(100000 + Math.random() * 900000),
+            timestamp: new Date().toLocaleString('en-IN'),
+            approved: false // Requires Admin Approval
+          };
+          const savedOrders = JSON.parse(localStorage.getItem('ng_education_orders') || '[]');
+          savedOrders.unshift(newOrder);
+          localStorage.setItem('ng_education_orders', JSON.stringify(savedOrders));
+        }
+
+        if (isUserReg) {
+          const ua = navigator.userAgent;
+          const isMob = /Android|iPhone|iPad/i.test(ua);
+          const os = /Windows/i.test(ua) ? 'Windows' : /Macintosh|Mac OS/i.test(ua) ? 'Mac OS' : /Android/i.test(ua) ? 'Android' : /iPhone|iPad/i.test(ua) ? 'iOS' : 'Desktop';
+          const browser = /Chrome/i.test(ua) ? 'Chrome' : /Safari/i.test(ua) ? 'Safari' : /Firefox/i.test(ua) ? 'Firefox' : 'Browser';
+
+          const newUser = {
+            id: 'USR-' + Math.floor(100 + Math.random() * 900),
+            name: nameVal || 'New Learner',
+            email: contactVal.includes('@') ? contactVal : '',
+            phone: !contactVal.includes('@') ? contactVal : '',
+            source: 'Direct Website',
+            location: 'India',
+            deviceType: isMob ? 'Mobile' : 'Desktop',
+            os: os,
+            browser: browser,
+            timestamp: new Date().toLocaleString('en-IN')
+          };
+          const savedUsers = JSON.parse(localStorage.getItem('ng_education_users') || '[]');
+          savedUsers.unshift(newUser);
+          localStorage.setItem('ng_education_users', JSON.stringify(savedUsers));
+        }
+      } catch (adminErr) {
+        console.warn('Admin local recording notice:', adminErr);
+      }
 
       await logLeadToGoogleSheet(modalPayload);
 
@@ -464,3 +515,114 @@ function initCountUp() {
   }
 }
 
+/* =====================================================================
+   9. DYNAMIC ADMIN COURSE SYNC (Pricing, Discounts & Visibility)
+   ===================================================================== */
+function initLiveCoursesSync() {
+  const container = document.querySelector('#single-courses .courses-grid');
+  if (!container) return;
+
+  const savedCoursesJson = localStorage.getItem('ng_education_courses');
+  if (!savedCoursesJson) return;
+
+  try {
+    const courses = JSON.parse(savedCoursesJson);
+    if (!Array.isArray(courses)) return;
+
+    const existingCards = Array.from(container.querySelectorAll('.course-card:not(.card-admin-dynamic)'));
+    const matchedTitles = new Set();
+
+    // 1. Update existing cards
+    existingCards.forEach(card => {
+      const titleEl = card.querySelector('h3');
+      if (!titleEl) return;
+      const titleText = titleEl.textContent.trim().toLowerCase();
+
+      const matchedCourse = courses.find(c => c.title.trim().toLowerCase() === titleText);
+      if (matchedCourse) {
+        matchedTitles.add(matchedCourse.title.trim().toLowerCase());
+
+        // Visibility
+        if (matchedCourse.active === false) {
+          card.style.display = 'none';
+        } else {
+          card.style.display = 'flex';
+        }
+
+        // Price wrap update
+        const priceWrap = card.querySelector('.price-text-wrap');
+        if (priceWrap) {
+          const origFormatted = matchedCourse.originalPrice ? '₹' + Number(matchedCourse.originalPrice).toLocaleString('en-IN') : '';
+          const discFormatted = '₹' + Number(matchedCourse.discountPrice).toLocaleString('en-IN');
+          
+          priceWrap.innerHTML = `
+            <span class="sub-duration">${matchedCourse.duration || '12-16 Modules'}</span>
+            <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-top:2px;">
+              <span class="main-price">${discFormatted}</span>
+              ${matchedCourse.originalPrice && matchedCourse.originalPrice > matchedCourse.discountPrice ? `<span style="text-decoration:line-through; font-size:0.85rem; color:#94A3B8; font-weight:600;">${origFormatted}</span>` : ''}
+              ${matchedCourse.discountBadge ? `<span style="background:#FEF3C7; color:#D97706; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px;">${matchedCourse.discountBadge}</span>` : ''}
+            </div>
+          `;
+        }
+      }
+    });
+
+    // 2. Remove previously injected dynamic cards
+    container.querySelectorAll('.card-admin-dynamic').forEach(el => el.remove());
+
+    // 3. Append newly added courses created by admin
+    courses.forEach(c => {
+      if (c.active !== false && !matchedTitles.has(c.title.trim().toLowerCase())) {
+        const dynamicCard = document.createElement('div');
+        dynamicCard.className = 'course-card card-admin-dynamic';
+        dynamicCard.innerHTML = `
+          <div>
+            <div class="card-top-flex">
+              <div class="course-icon-orb">${c.icon || '🚀'}</div>
+              <span class="course-grade-badge">${c.category || 'Special Track'}</span>
+            </div>
+            <h3>${c.title}</h3>
+            <p>${c.description || 'Hands-on experiential learning module designed by industry experts.'}</p>
+            <ul class="course-points">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                ${c.grade || 'Grades 5-12'} curriculum tailored by STEM mentors
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Complete hardware kit guidance & 1-on-1 doubt clearing
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Government-recognized NG Education completion certificate
+              </li>
+            </ul>
+          </div>
+          <div class="card-foot">
+            <div class="price-text-wrap">
+              <span class="sub-duration">${c.duration || 'Flexible Modules'}</span>
+              <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-top:2px;">
+                <span class="main-price">₹${Number(c.discountPrice).toLocaleString('en-IN')}</span>
+                ${c.originalPrice && c.originalPrice > c.discountPrice ? `<span style="text-decoration:line-through; font-size:0.85rem; color:#94A3B8; font-weight:600;">₹${Number(c.originalPrice).toLocaleString('en-IN')}</span>` : ''}
+                ${c.discountBadge ? `<span style="background:#FEF3C7; color:#D97706; font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px;">${c.discountBadge}</span>` : ''}
+              </div>
+            </div>
+            <div class="card-action-btns">
+              <button class="btn-pill btn-pill-primary btn-card-enroll" onclick="openModal('modalEnroll')" data-open-modal="modalEnroll" data-course="${encodeURIComponent(c.title)}">Enroll</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(dynamicCard);
+      }
+    });
+  } catch (err) {
+    console.warn('Dynamic course sync notice:', err);
+  }
+}
+
+// Re-sync on storage change (if admin edits in another tab)
+window.addEventListener('storage', (e) => {
+  if (e.key === 'ng_education_courses') {
+    initLiveCoursesSync();
+  }
+});

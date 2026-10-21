@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NG EDUCATION | Master Admin Portal</title>
+  <meta name="description" content="Private Master Admin Dashboard for NG EDUCATION. Manage Courses, Pricing, Student Enrollments, and User Logins.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230E6258'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. AUTHENTICATION & LOGIN SCREEN (LOCK SCREEN)
+       ===================================================================== -->
+  <div class="admin-auth-wrapper" id="adminAuthWrap">
+    <div class="admin-login-card">
+      <div class="auth-header">
+        <a href="index.html" class="auth-brand-logo">
+          <div class="auth-logo-orb">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <span class="auth-brand-text">NG <span>EDUCATION</span></span>
+        </a>
+        <h1 class="auth-title">Admin Console</h1>
+        <p class="auth-subtitle">Enter your authorized credentials to manage courses, enrollments &amp; platform data.</p>
+      </div>
+
+      <!-- Alert Box -->
+      <div id="authAlertBox" class="auth-alert-box"></div>
+
+      <form id="adminLoginForm">
+        <div class="auth-form-group">
+          <label class="auth-label" for="adminUserInput">Admin ID or Username</label>
+          <div class="auth-input-wrap">
+            <input type="text" id="adminUserInput" class="auth-input" placeholder="e.g. toshitkumar82" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="auth-form-group">
+          <label class="auth-label" for="adminPassInput">Password</label>
+          <div class="auth-input-wrap">
+            <input type="password" id="adminPassInput" class="auth-input" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-auth-submit">
+          <span>Sign In to Dashboard</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <div class="auth-extra-links">
+        <span class="auth-forgot-link" onclick="openForgotPasswordModal()">Forgot Password?</span>
+        <a href="index.html" class="auth-home-link">← Return to Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. 2-STEP EMAIL VERIFICATION & FORGOT PASSWORD MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalForgotPass">
+    <div class="admin-modal-box" style="max-width: 480px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title">Reset Admin Password</h3>
+        <button class="btn-modal-close" onclick="closeForgotPasswordModal()">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <div id="forgotAlert" class="auth-alert-box"></div>
+
+        <!-- Step 1: Send OTP -->
+        <div id="stepSendOtp">
+          <p style="font-size: 0.92rem; color: #475569; margin-bottom: 18px;">
+            For security, a 6-digit verification code will be sent to the registered Master Admin email address: <strong>kumartoshit82@gmail.com</strong>.
+          </p>
+          <div class="auth-form-group">
+            <label class="auth-label">Confirm Master Admin Email</label>
+            <input type="email" id="recoveryEmailInput" class="auth-input" value="kumartoshit82@gmail.com" placeholder="kumartoshit82@gmail.com">
+          </div>
+          <button type="button" class="btn-primary-action" style="width: 100%; justify-content: center; height: 46px;" onclick="requestPasswordResetOtp()">
+            Send 2-Step Verification Code
+          </button>
+        </div>
+
+        <!-- Step 2: Verify OTP -->
+        <div id="stepVerifyOtp" style="display: none;">
+          <p style="font-size: 0.92rem; color: #475569; margin-bottom: 18px;">
+            We have sent a 6-digit code to <strong id="sentEmailNote">kumartoshit82@gmail.com</strong>. Please enter it below:
+          </p>
+          <div class="auth-form-group">
+            <label class="auth-label">Enter 6-Digit OTP</label>
+            <input type="text" id="otpInput" class="auth-input" placeholder="e.g. 849201" maxlength="6" style="letter-spacing: 4px; font-weight: 800; font-size: 1.2rem; text-align: center;">
+          </div>
+          <button type="button" class="btn-primary-action" style="width: 100%; justify-content: center; height: 46px;" onclick="verifyResetOtp()">
+            Verify Code
+          </button>
+        </div>
+
+        <!-- Step 3: Set New Password -->
+        <div id="stepSetNewPass" style="display: none;">
+          <p style="font-size: 0.92rem; color: #10B981; font-weight: 700; margin-bottom: 16px;">
+            ✓ Identity verified successfully! Choose your new password.
+          </p>
+          <div class="auth-form-group">
+            <label class="auth-label">New Password</label>
+            <input type="password" id="newPasswordInput" class="auth-input" placeholder="Minimum 6 characters">
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Confirm New Password</label>
+            <input type="password" id="confirmPasswordInput" class="auth-input" placeholder="Re-enter password">
+          </div>
+          <button type="button" class="btn-primary-action" style="width: 100%; justify-content: center; height: 46px;" onclick="saveNewPassword()">
+            Save New Password &amp; Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3. MAIN ADMIN APP LAYOUT (SIDEBAR + CONTENT PANES)
+       ===================================================================== -->
+  <div class="admin-app-layout" id="adminAppLayout" style="display: none;">
+
+    <!-- Left Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="auth-brand-logo" style="margin-bottom: 0;">
+          <div class="auth-logo-orb" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <span class="auth-brand-text" style="font-size: 1.15rem;">NG <span>ADMIN</span></span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-tab-btn active" id="tabBtn_dashboard" onclick="switchAdminTab('dashboard')">
+          <span>📊</span>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-tab-btn" id="tabBtn_courses" onclick="switchAdminTab('courses')">
+          <span>📚</span>
+          <span>Courses Manager</span>
+        </button>
+
+        <button class="nav-tab-btn" id="tabBtn_orders" onclick="switchAdminTab('orders')">
+          <span>💳</span>
+          <span>Enrollments &amp; Approvals</span>
+          <span class="nav-tab-badge" id="sidebarOrderBadge" style="display: none;">0</span>
+        </button>
+
+        <button class="nav-tab-btn" id="tabBtn_users" onclick="switchAdminTab('users')">
+          <span>👥</span>
+          <span>User Logins</span>
+        </button>
+
+        <button class="nav-tab-btn" id="tabBtn_security" onclick="switchAdminTab('security')">
+          <span>🔒</span>
+          <span>Security &amp; 2-Step</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <div class="admin-avatar">TK</div>
+          <div class="admin-names">
+            <div class="admin-name-title" id="adminDisplayUsername">toshitkumar82</div>
+            <div class="admin-role-badge">Master Admin</div>
+          </div>
+        </div>
+        <button class="btn-sidebar-logout" onclick="handleLogout()" title="Sign Out">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+      
+      <!-- Top Navigation -->
+      <header class="admin-top-nav">
+        <div class="top-nav-left">
+          <button class="btn-mobile-sidebar-toggle" id="btnSidebarToggle">☰</button>
+          <h2 class="top-page-title" id="topNavTitle">Platform Overview</h2>
+        </div>
+        <div class="top-nav-right">
+          <span style="font-size: 0.85rem; color: #10B981; font-weight: 700; background: #D1FAE5; padding: 4px 10px; border-radius: 999px;">
+            ● Protected Session
+          </span>
+          <a href="index.html" target="_blank" class="btn-live-site">
+            <span>View Live Site</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Panes Container -->
+      <div class="admin-view-container">
+
+        <!-- ==========================================
+             PANE 1: DASHBOARD
+             ========================================== -->
+        <div class="admin-tab-pane active" id="pane_dashboard">
+          
+          <!-- Metric Cards -->
+          <div class="stats-cards-grid">
+            <div class="stat-metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Pending Approvals</span>
+                <div class="metric-icon-wrap metric-amber">⏳</div>
+              </div>
+              <div class="metric-number" id="metricPendingOrders">0</div>
+              <div class="metric-footer">Awaiting payment verification</div>
+            </div>
+
+            <div class="stat-metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Verified Revenue</span>
+                <div class="metric-icon-wrap metric-green">₹</div>
+              </div>
+              <div class="metric-number" id="metricTotalRevenue">₹0</div>
+              <div class="metric-footer">Total approved course sales</div>
+            </div>
+
+            <div class="stat-metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Registered Users</span>
+                <div class="metric-icon-wrap metric-teal">👥</div>
+              </div>
+              <div class="metric-number" id="metricTotalUsers">0</div>
+              <div class="metric-footer">Google &amp; Direct Logins</div>
+            </div>
+
+            <div class="stat-metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Active Live Courses</span>
+                <div class="metric-icon-wrap metric-purple">📚</div>
+              </div>
+              <div class="metric-number" id="metricActiveCourses">0</div>
+              <div class="metric-footer">Published on Home Page</div>
+            </div>
+          </div>
+
+          <!-- Quick Orders Table -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3>Recent Student Enrollments &amp; Approvals</h3>
+                <p>Toggle switch to ON to immediately approve course access upon payment verification.</p>
+              </div>
+              <button class="btn-primary-action" onclick="switchAdminTab('orders')">View All Enrollments →</button>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Approval Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashRecentOrdersBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             PANE 2: COURSES MANAGER
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_courses">
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3>Live Courses &amp; Pricing Catalog</h3>
+                <p>Add new courses, update prices, discounts, and toggle courses ON/OFF directly on the Home Page.</p>
+              </div>
+              <div class="panel-actions">
+                <button class="btn-primary-action" onclick="openAddCourseModal()">+ Add New Course</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Course Title</th>
+                    <th>Category</th>
+                    <th>Pricing &amp; Discount</th>
+                    <th>Status</th>
+                    <th>Home Page Live Switch</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="coursesTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             PANE 3: ENROLLMENTS & APPROVALS
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_orders">
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3>Course Enrollments &amp; Payment Verification</h3>
+                <p>Verify payment proof/UTR and toggle ON to grant student course access.</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Student &amp; Parent</th>
+                    <th>Contact Info</th>
+                    <th>Course Enrolled</th>
+                    <th>Amount &amp; Mode</th>
+                    <th>Transaction Ref</th>
+                    <th>Approval Status</th>
+                    <th>Approve Switch</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             PANE 4: USER LOGINS DIRECTORY
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_users">
+          <div class="panel-card">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3>Registered User Logins Directory</h3>
+                <p>Synced live with your Google Sheet (Google Users &amp; Direct Signups) with location &amp; device details.</p>
+              </div>
+              <a href="https://docs.google.com/spreadsheets/d/1xr0EmkTysGumahYe-9bsFYZ5dHt9Hrwc7kHUkn9JGhY/edit" target="_blank" class="btn-secondary-action">
+                <span>Open in Google Sheets ↗</span>
+              </a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Full Name</th>
+                    <th>Email Address</th>
+                    <th>Phone</th>
+                    <th>Source</th>
+                    <th>Location &amp; IP</th>
+                    <th>Device &amp; OS</th>
+                    <th>Joined At</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             PANE 5: SECURITY & 2-STEP SETTINGS
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_security">
+          <div class="panel-card" style="max-width: 680px;">
+            <div class="panel-header">
+              <div class="panel-title-wrap">
+                <h3>Admin Security &amp; 2-Step Verification</h3>
+                <p>Manage your Master Admin credentials and password recovery.</p>
+              </div>
+            </div>
+            <div class="admin-modal-body">
+              <div class="auth-form-group">
+                <label class="auth-label">Master Admin ID / Username</label>
+                <input type="text" class="auth-input" value="toshitkumar82" readonly style="background: #F1F5F9; color: #475569;">
+              </div>
+
+              <div class="auth-form-group">
+                <label class="auth-label">2-Step Verification Recovery Email</label>
+                <input type="email" class="auth-input" value="kumartoshit82@gmail.com" readonly style="background: #F1F5F9; color: #475569;">
+                <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">
+                  All password reset codes and security verification OTPs are strictly dispatched to this address.
+                </p>
+              </div>
+
+              <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--admin-border);">
+                <button type="button" class="btn-primary-action" onclick="openForgotPasswordModal()">
+                  Trigger 2-Step Email Password Reset Code →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- =====================================================================
+       4. ADD / EDIT COURSE MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalCourse">
+    <div class="admin-modal-box">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="courseModalTitle">Add New Course</h3>
+        <button class="btn-modal-close" onclick="closeCourseModal()">&times;</button>
+      </div>
+      <form id="courseForm" onsubmit="handleCourseFormSubmit(event)">
+        <input type="hidden" id="courseEditId">
+        <div class="admin-modal-body">
+          <div class="modal-form-grid">
+            <div class="modal-form-full auth-form-group">
+              <label class="auth-label">Course Title *</label>
+              <input type="text" id="courseInputTitle" class="auth-input" placeholder="e.g. Autonomous Smart Car & Robotics" required>
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Category *</label>
+              <input type="text" id="courseInputCategory" class="auth-input" placeholder="e.g. Robotics, AI, Coding" required>
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Icon (Emoji) *</label>
+              <input type="text" id="courseInputIcon" class="auth-input" placeholder="e.g. 🤖, 💻, ⚡" required>
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Target Students / Grade</label>
+              <input type="text" id="courseInputGrade" class="auth-input" placeholder="e.g. Grade 5–10">
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Duration &amp; Modules</label>
+              <input type="text" id="courseInputDuration" class="auth-input" placeholder="e.g. 16 Modules • 25 Hours">
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Original Price (₹)</label>
+              <input type="number" id="courseInputOrigPrice" class="auth-input" placeholder="e.g. 3999" min="0">
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Discounted Selling Price (₹) *</label>
+              <input type="number" id="courseInputDiscPrice" class="auth-input" placeholder="e.g. 1999" required min="0">
+            </div>
+
+            <div class="auth-form-group">
+              <label class="auth-label">Discount Badge Text</label>
+              <input type="text" id="courseInputBadge" class="auth-input" placeholder="e.g. 50% OFF, Bestseller">
+            </div>
+
+            <div class="modal-form-full auth-form-group">
+              <label class="auth-label">Course Description</label>
+              <textarea id="courseInputDesc" class="auth-input" style="height: 80px; padding-top: 10px; resize: vertical;" placeholder="Brief summary of what students will build and learn..."></textarea>
+            </div>
+
+            <div class="modal-form-full" style="display: flex; align-items: center; gap: 10px;">
+              <input type="checkbox" id="courseInputActive" checked style="width: 18px; height: 18px; accent-color: var(--admin-teal);">
+              <label for="courseInputActive" style="font-size: 0.92rem; font-weight: 700; color: var(--admin-slate); cursor: pointer;">
+                Publish Live on Home Page immediately
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-secondary-action" onclick="closeCourseModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Logic Script -->
+  <script src="js/admin.js"></script>
+</body>
+</html>
