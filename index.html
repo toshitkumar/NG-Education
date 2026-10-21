@@ -12,9 +12,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231D4ED8'><circle cx='12' cy='12' r='10'></circle></svg>">
   
-  <!-- Preload Critical Banner Slide 1 Image (Mobile & Desktop) for Instant 0ms Paint -->
-  <link rel="preload" as="image" href="assets/images/slide1_robotics_mob.webp?v=9.0" type="image/webp" media="(max-width: 600px)" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/images/slide1_robotics.webp?v=9.0" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
+  <!-- Preload Critical Hero Cutout Asset for Instant 0ms Paint -->
+  <link rel="preload" as="image" href="assets/images/hero_student_cutout.webp" type="image/webp" fetchpriority="high">
 
   <!-- Google Fonts Preconnect and High-Performance Load -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,9 +46,11 @@
       <nav>
         <ul class="nav-menu">
           <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#why-hands-on" class="nav-link">Why Us</a></li>
+          <li><a href="#why-choose" class="nav-link">Benefits</a></li>
           <li><a href="#courses" class="nav-link">Courses</a></li>
-          <li><a href="#hire-teacher" class="nav-link">Hire Teacher</a></li>
-          <li><a href="#stem-labs" class="nav-link">STEM Labs</a></li>
+          <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+          <li><a href="#hire-teacher" class="nav-link">School Services</a></li>
           <li><a href="trainers.html" class="nav-link">Trainers</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
           <li class="mobile-nav-action-item">
@@ -62,157 +63,492 @@
       <!-- Right Actions (Trainers, Login & Signup) -->
       <div class="nav-actions">
         <a href="trainers.html" class="btn-nav-trainers">Trainers</a>
-        <button class="btn-nav-login" data-open-modal="modalLogin">Login</button>
-        <button class="btn-nav-signup" data-open-modal="modalSignup">Sign Up</button>
+        <button class="btn-ref-amber" onclick="openModal('modalEnroll')" style="padding: 8px 20px; font-size: 0.88rem;">Book Workshop</button>
         <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
       </div>
     </div>
   </header>
 
   <!-- =====================================================================
-       2. HERO WITH LAYERED ORGANIC FLUID WAVES & 3D FLOATING SPHERES
+       2. HERO SECTION (MATCHING REFERENCE DESIGN & STUDENT WITH ARDUINO ROBOT)
        ===================================================================== -->
-  <section class="hero-wrapper" id="home">
-    
-    <!-- Multi-Layer Fluid Wave Transition SVG (Hanging from top into white canvas) -->
-    <div class="hero-wave-canvas" aria-hidden="true">
-      <!-- Layered Fluid Wave Graphic (100% Solid Colors, hanging from top y=0 into white canvas) -->
-      <svg class="wave-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Back Deep Purple/Indigo Wave Layer -->
-        <path d="M0,0 L1440,0 L1440,75 C1280,145 1100,50 920,110 C740,170 560,40 380,120 C220,170 100,60 0,110 Z" fill="#3B287E"/>
-        
-        <!-- Mid Royal Blue Wave Layer -->
-        <path d="M0,0 L1440,0 L1440,125 C1300,65 1150,155 960,85 C780,145 620,75 440,155 C260,105 120,165 0,135 Z" fill="#1D4ED8"/>
-        
-        <!-- Front Sky Blue Wave Layer -->
-        <path d="M0,0 L1440,0 L1440,55 C1260,115 1080,35 880,95 C680,135 500,55 320,105 C160,45 0,85 0,55 Z" fill="#0284C7"/>
-      </svg>
-    </div>
+  <section class="hero-ref-section" id="home">
+    <div class="container hero-ref-container">
+      
+      <!-- Left Column: Title with brush underline, subtitle, amber button, loop doodle & 2 mini cards -->
+      <div class="hero-ref-left">
+        <h1 class="hero-ref-heading">
+          Keep STEM Learning<br>
+          <span class="hero-highlight-track">
+            on Track
+            <svg class="doodle-brush-underline" viewBox="0 0 210 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M4 14 C45 4, 100 16, 155 7 C180 3, 198 10, 206 8" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+            </svg>
+          </span>
+        </h1>
 
-    <div class="container hero-main-layout">
-        
-                <!-- Left Column: Primary Pitch, CTAs & Credibility -->
-        <div class="hero-text-col">
-          <span class="hero-brand-badge">⚡ NEXT-GEN STEM &amp; ROBOTICS PLATFORM</span>
-          <h1 class="hero-title-main">
-            Build The Future with<br>
-            <span class="arduino-teal-text">Hands-On STEM, Robotics &amp; AI</span>
-          </h1>
+        <p class="hero-ref-subtitle">
+          When schools and students have reliable access to certified STEM trainers and hands-on hardware kits, young minds build real electronics, code microcontrollers, and innovate without limits.
+        </p>
+
+        <div class="hero-ref-cta-group">
+          <button class="btn-ref-amber" onclick="openModal('modalEnroll')">Get Started</button>
           
-          <p class="hero-desc-para">
-            Empowering students from Grade 5–10 to college with practical, project-first learning in Arduino Robotics, Computer Vision, Artificial Intelligence, and Embedded Systems. Built for future innovators.
-          </p>
-
-          <!-- Pill Buttons as in Reference (Join Us & Sign Up) -->
-          <div class="hero-buttons-row">
-            <a href="#courses" class="btn-pill btn-pill-primary">
-              <span>EXPLORE COURSES</span>
-            </a>
-            <button class="btn-pill btn-pill-arduino" data-open-modal="modalSignup">
-              <span>SIGN UP FREE</span>
-            </button>
-          </div>
-
-          <!-- Feature Trust Badges (Static, Zero-Layout-Shift, Pure Solid Color) -->
-          <div class="hero-trust-badges">
-            <div class="trust-badge-item">
-              <span class="trust-icon">✓</span>
-              <span>100% Practical Kits</span>
-            </div>
-            <div class="trust-badge-item">
-              <span class="trust-icon">✓</span>
-              <span>Grade 5–10 &amp; College</span>
-            </div>
-            <div class="trust-badge-item">
-              <span class="trust-icon">✓</span>
-              <span>Verified Certification</span>
-            </div>
+          <!-- Hand-drawn loop doodle pointing towards mini cards -->
+          <div class="hero-loop-doodle" aria-hidden="true">
+            <svg viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 25 C25 5, 55 5, 42 28 C34 42, 18 36, 28 20 C38 6, 60 18, 68 28 M56 22 L70 29 L64 39" stroke="#0E6258" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
         </div>
 
-        <!-- Right Column: 3-Domain Bento Hub (All Visible, Zero Slider, 100% Solid Color) -->
-        <div class="hero-visual-col">
-          <div class="hero-bento-grid">
-            
-            <!-- Bento Card 1: Featured Flagship (Robotics & Arduino) -->
-            <div class="bento-card bento-card-featured">
-              <div class="bento-media">
-                <picture>
-                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.webp?v=9.0" type="image/webp">
-                  <source media="(max-width: 600px)" srcset="assets/images/slide1_robotics_mob.jpg?v=9.0" type="image/jpeg">
-                  <source srcset="assets/images/slide1_robotics.webp?v=9.0" type="image/webp">
-                  <img src="assets/images/slide1_robotics.jpg?v=9.0" alt="Hands-On Robotics &amp; Arduino Lab" class="bento-img" width="1024" height="571" fetchpriority="high" loading="eager" decoding="sync">
-                </picture>
-                <div class="bento-overlay">
-                  <span class="bento-badge">🤖 Track 01 • Robotics &amp; Arduino</span>
-                  <div class="bento-info">
-                    <h3 class="bento-title">Arduino Uno &amp; Smart Bots</h3>
-                    <p class="bento-desc">Sensors, circuit wiring, obstacle avoidance &amp; motor controllers</p>
-                  </div>
-                </div>
+        <!-- Two Mini Cards Side-by-Side (Matching Reference Layout) -->
+        <div class="hero-ref-mini-cards">
+          
+          <!-- Mini Card 1: Certified Trainers Worldwide (Toshit Kumar) -->
+          <a href="trainers.html" class="ref-mini-card">
+            <div class="ref-mini-avatar">
+              <img src="assets/images/founder_toshit_avatar.webp" alt="Toshit Kumar - Master Trainer" width="50" height="50" loading="eager">
+            </div>
+            <div class="ref-mini-info">
+              <span class="ref-mini-tag">Best: <strong>Certified Trainers Worldwide</strong></span>
+              <div class="ref-mini-stat">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Mentors Across 50+ ATL Labs</span>
               </div>
             </div>
-
-            <!-- Bento Sub-Cards Row (Cards 2 & 3 Side by Side) -->
-            <div class="bento-sub-row">
-              
-              <!-- Bento Card 2: AI & Computer Vision -->
-              <div class="bento-card bento-card-sub">
-                <div class="bento-media bento-media-sm">
-                  <picture>
-                    <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.webp?v=9.0" type="image/webp">
-                    <source media="(max-width: 600px)" srcset="assets/images/slide2_ai_mob.jpg?v=9.0" type="image/jpeg">
-                    <source srcset="assets/images/slide2_ai.webp?v=9.0" type="image/webp">
-                    <img src="assets/images/slide2_ai.jpg?v=9.0" alt="Artificial Intelligence &amp; Vision Workstation" class="bento-img" width="1024" height="571" loading="eager" decoding="sync">
-                  </picture>
-                  <div class="bento-overlay bento-overlay-compact">
-                    <span class="bento-badge-sm">🧠 Track 02 • AI &amp; Vision</span>
-                    <h4 class="bento-title-sm">AI &amp; Computer Vision</h4>
-                    <p class="bento-desc-sm">Predictive ML models &amp; OpenCV algorithms</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Bento Card 3: School STEM Labs -->
-              <div class="bento-card bento-card-sub">
-                <div class="bento-media bento-media-sm">
-                  <picture>
-                    <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.webp?v=9.0" type="image/webp">
-                    <source media="(max-width: 600px)" srcset="assets/images/slide3_stem_lab_mob.jpg?v=9.0" type="image/jpeg">
-                    <source srcset="assets/images/slide3_stem_lab.webp?v=9.0" type="image/webp">
-                    <img src="assets/images/slide3_stem_lab.jpg?v=9.0" alt="Grade 5-10 &amp; College STEM Lab" class="bento-img" width="1024" height="571" loading="eager" decoding="sync">
-                  </picture>
-                  <div class="bento-overlay bento-overlay-compact">
-                    <span class="bento-badge-sm">🏫 Track 03 • School Labs</span>
-                    <h4 class="bento-title-sm">Grade 5–10 STEM Labs</h4>
-                    <p class="bento-desc-sm">Curriculum kits, ATL setup &amp; teacher bootcamps</p>
-                  </div>
-                </div>
-              </div>
-
+            <div class="ref-mini-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
             </div>
+          </a>
 
+          <!-- Mini Card 2: Transforming Schools & Maker Labs -->
+          <div class="ref-mini-card" onclick="openModal('modalStemLab')">
+            <div class="ref-mini-thumb">
+              <img src="assets/images/slide3_stem_lab.webp" alt="School STEM Lab" width="54" height="48" loading="eager">
+            </div>
+            <div class="ref-mini-info">
+              <span class="ref-mini-tag">Transforming schools &amp; ATL maker labs</span>
+            </div>
+            <div class="ref-mini-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </div>
+            <!-- Star sparkle on bottom-right of mini card 2 -->
+            <div class="ref-mini-sparkle" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="#0E6258"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
+            </div>
           </div>
+
         </div>
+      </div>
+
+      <!-- Right Hero Column: Dark Teal Chalkboard Card + Student Cutout holding Arduino Robot -->
+      <div class="hero-ref-right">
+        <div class="hero-chalkboard-card">
+          
+          <!-- Subtle Chalk Circuit & Robotics Vector Doodles in Background -->
+          <svg class="chalkboard-bg-doodles" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 80 H120 V140 H80 V200 H160" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 4"/>
+            <circle cx="40" cy="80" r="4" fill="rgba(255,255,255,0.3)"/>
+            <circle cx="160" cy="200" r="4" fill="rgba(255,255,255,0.3)"/>
+            <path d="M60 260 H90 L100 245 L110 275 L120 245 L130 275 L140 260 H170" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <rect x="340" y="70" width="80" height="90" rx="8" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="330" y1="90" x2="340" y2="90" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="330" y1="110" x2="340" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="330" y1="130" x2="340" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="420" y1="90" x2="430" y2="90" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="420" y1="110" x2="430" y2="110" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <line x1="420" y1="130" x2="430" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+            <text x="352" y="120" fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="12" font-weight="bold">ATmega</text>
+            <circle cx="390" cy="480" r="30" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="6 6"/>
+            <text x="50" y="520" fill="rgba(255,255,255,0.2)" font-family="monospace" font-size="14">V = I × R</text>
+          </svg>
+
+          <!-- Golden Radiating Burst Rays (\ | /) on top-left of student -->
+          <div class="doodle-burst-rays hero-rays" aria-hidden="true">
+            <span class="ray ray-1"></span>
+            <span class="ray ray-2"></span>
+            <span class="ray ray-3"></span>
+          </div>
+
+          <!-- Student Cutout Holding Arduino Smart Robotics Car (Explicit User Request) -->
+          <picture class="hero-student-picture">
+            <source srcset="assets/images/hero_student_cutout.webp" type="image/webp">
+            <img src="assets/images/hero_student_cutout.png" 
+                 alt="Smiling Indian school student holding Arduino smart robotics car and electronics" 
+                 class="hero-student-cutout-img" 
+                 width="480" height="520" fetchpriority="high" loading="eager">
+          </picture>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- =====================================================================
-       3. COURSE LIST SECTION (SINGLE & COMBO COURSES TOGGLE)
+       3. SECTION 2: A SMARTER WAY TO LEARN & BUILD ROBOTICS (3-CARD GRID)
        ===================================================================== -->
-  <section class="courses-section" id="courses">
+  <section class="section-ref-padding" id="why-hands-on">
     <div class="container">
       
-      <div class="section-head">
-        <span class="section-tag">Learning Pathways</span>
-        <h2 class="section-title">Explore Next-Gen Programs</h2>
-        <p class="section-desc">
-          High-impact practical courses designed for school students (Class 5–10) and open learners of all ages. Choose single subjects or combo packages.
-        </p>
+      <!-- Split Header Matching Reference Image -->
+      <div class="section-split-header">
+        <div class="split-header-left">
+          <h2 class="ref-heading-md">
+            A Smarter <span class="highlight-underline">Way to Learn<svg class="doodle-brush-underline-sm" viewBox="0 0 160 14" fill="none"><path d="M3 10 C35 2, 75 12, 115 5 C135 2, 148 8, 155 6" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/></svg></span><br>
+            &amp; Build Real Robotics
+          </h2>
+        </div>
+
+        <div class="split-header-center" aria-hidden="true">
+          <svg class="doodle-loop-arrow-lg" viewBox="0 0 80 50" fill="none">
+            <path d="M10 25 C25 5, 55 5, 42 28 C34 42, 18 36, 28 20 C38 6, 60 18, 68 28 M56 22 L70 29 L64 39" stroke="#0E6258" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="split-header-right">
+          <p class="ref-sub-text">
+            When schools and students replace passive theoretical lectures with hands-on hardware prototyping, learners grasp engineering principles faster, retain 4× more knowledge, and stay inspired.
+          </p>
+        </div>
       </div>
 
-      <!-- Course Switcher (Single vs Combo) -->
-      <div class="course-tabs-wrapper">
+      <!-- 3-Card Grid Matching Reference Image -->
+      <div class="ref-three-cards-grid">
+        
+        <!-- Card 1: Hands-on Hardware vs Theory -->
+        <div class="ref-pillar-card">
+          <h3 class="ref-card-title">
+            Hands-on hardware solves <span class="text-amber">theoretical learning</span> gaps
+          </h3>
+          <p class="ref-card-body">
+            When students wire physical breadboards and flash Arduino C/C++ firmware, abstract concepts in physics and electronics become instantly tangible and exciting.
+          </p>
+          <div class="ref-card-bottom-row">
+            <div class="ref-card-icon-art" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#0E6258" stroke-width="2.5">
+                <path d="M20 5 C28 5, 35 12, 35 20 C35 28, 28 35, 20 35 C12 35, 8 28, 8 20 C8 14, 13 10, 19 10 C24 10, 27 14, 27 19 C27 23, 24 26, 20 26 C17 26, 15 24, 15 21 C15 18, 18 16, 20 16"/>
+              </svg>
+            </div>
+            <a href="#courses" class="ref-arrow-button" aria-label="Explore Hands-on Courses">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: A Better Way to Connect Schools & Trainers -->
+        <div class="ref-pillar-card ref-pillar-featured">
+          <div class="ref-card-top-row">
+            <div class="ref-chip-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="#0E6258" stroke-width="2.2">
+                <circle cx="16" cy="16" r="12"/>
+                <ellipse cx="16" cy="16" rx="6" ry="12"/>
+                <line x1="4" y1="16" x2="28" y2="16"/>
+              </svg>
+            </div>
+            <a href="trainers.html" class="ref-arrow-button" aria-label="Find Certified Trainers">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+          <h3 class="ref-card-title">
+            A better way to <span class="text-teal">connect</span> schools &amp; certified trainers
+          </h3>
+          <p class="ref-card-body">
+            Schools and institutions get verified, background-checked robotics faculty on-demand for ATL lab sessions, maker bootcamps, and competition mentoring.
+          </p>
+        </div>
+
+        <!-- Card 3: Student Learning Stays On Track -->
+        <div class="ref-pillar-card">
+          <h3 class="ref-card-title">
+            Student learning stays <span class="text-amber">on track</span> to build real innovation
+          </h3>
+          <p class="ref-card-body">
+            Structured 12 to 18 module pathways guide every student from first circuit connections to autonomous obstacle-avoiding cars and national Olympiad triumphs.
+          </p>
+          <div class="ref-card-bottom-row">
+            <div class="ref-card-icon-art" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" stroke="#0E6258" stroke-width="2.5">
+                <circle cx="20" cy="20" r="14"/>
+                <circle cx="20" cy="20" r="8"/>
+                <circle cx="20" cy="20" r="3" fill="#0E6258"/>
+              </svg>
+            </div>
+            <a href="#courses" class="ref-arrow-button" aria-label="View Milestones">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       4. SECTION 3: WHY CHOOSE OUR STEM PROGRAMS? (BENTO GRID WITH STUDENT)
+       ===================================================================== -->
+  <section class="section-ref-padding" id="why-choose">
+    <div class="container">
+      
+      <!-- Header with Sparkle and Doodles -->
+      <div class="section-split-header">
+        <div class="split-header-left">
+          <h2 class="ref-heading-md">
+            Why Choose Our <span class="highlight-underline">Programs?<svg class="doodle-brush-underline-sm" viewBox="0 0 160 14" fill="none"><path d="M3 10 C35 2, 75 12, 115 5 C135 2, 148 8, 155 6" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/></svg></span>
+            <span class="ref-gold-star">✦</span>
+          </h2>
+        </div>
+
+        <div class="split-header-right">
+          <p class="ref-sub-text">
+            Schools and parents save time and money while unlocking proven project-based learning. Every student builds real working prototypes with lifetime kits and certified mentorship.
+          </p>
+          <!-- Loop doodle swooping down to bento -->
+          <div class="ref-side-loop-doodle" aria-hidden="true">
+            <svg viewBox="0 0 60 40" fill="none">
+              <path d="M10 10 C30 5, 50 15, 40 30 C30 42, 15 30, 25 20 C35 10, 50 25, 55 35" stroke="#0E6258" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Grid Matching Reference Image Section 3 -->
+      <div class="ref-bento-layout">
+        
+        <!-- Left Column: Student with Glasses holding Breadboard Circuit & Servo -->
+        <div class="ref-bento-student-col">
+          <div class="ref-bento-teal-card">
+            <!-- Chalk Circuit Vector Doodles -->
+            <svg class="chalkboard-bg-doodles" viewBox="0 0 450 550" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M30 60 H100 V120 H180" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 4"/>
+              <rect x="280" y="50" width="70" height="70" rx="8" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+              <text x="290" y="90" fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="11">PWM</text>
+              <circle cx="100" cy="400" r="35" stroke="rgba(255,255,255,0.16)" stroke-width="2" stroke-dasharray="5 5"/>
+              <path d="M50 480 H120 L130 465 L140 495 L150 480 H200" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+            </svg>
+
+            <!-- Schoolgirl Cutout Holding Breadboard with LEDs & Servo Actuator -->
+            <picture class="ref-bento-student-picture">
+              <source srcset="assets/images/feature_student_cutout.webp" type="image/webp">
+              <img src="assets/images/feature_student_cutout.png" 
+                   alt="Inspiring Indian schoolgirl with glasses proudly holding electronics prototyping breadboard and servo" 
+                   class="ref-bento-student-img" 
+                   width="420" height="460" loading="lazy">
+            </picture>
+          </div>
+        </div>
+
+        <!-- Right Column: Bento Stat Cards (Amber) + Dark Teal Accent Cards -->
+        <div class="ref-bento-stats-col">
+          
+          <!-- Row 1: Amber Stat Card 1 + Radiating Rays -->
+          <div class="ref-bento-row-top">
+            <div class="ref-bento-amber-card">
+              <div class="ref-stat-number">10+</div>
+              <div class="ref-stat-label">Certified STEM &amp; Robotics Trainers</div>
+            </div>
+            <!-- Radiating burst rays -->
+            <div class="doodle-burst-rays ref-bento-rays" aria-hidden="true">
+              <span class="ray ray-1"></span>
+              <span class="ray ray-2"></span>
+              <span class="ray ray-3"></span>
+            </div>
+          </div>
+
+          <!-- Row 2: Amber Stat Card 2 + Dark Teal Accent Card 1 -->
+          <div class="ref-bento-row-mid">
+            <div class="ref-bento-amber-card">
+              <div class="ref-stat-number">300+</div>
+              <div class="ref-stat-label">Hands-On Robotics Projects Built</div>
+            </div>
+            <div class="ref-bento-teal-accent-card" aria-hidden="true">
+              <svg viewBox="0 0 100 80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2">
+                <rect x="20" y="20" width="60" height="40" rx="6"/>
+                <line x1="35" y1="20" x2="35" y2="10"/>
+                <line x1="50" y1="20" x2="50" y2="10"/>
+                <line x1="65" y1="20" x2="65" y2="10"/>
+                <line x1="35" y1="60" x2="35" y2="70"/>
+                <line x1="50" y1="60" x2="50" y2="70"/>
+                <line x1="65" y1="60" x2="65" y2="70"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Row 3: Amber Stat Card 3 + Dark Teal Accent Card 2 -->
+          <div class="ref-bento-row-bot">
+            <div class="ref-bento-amber-card">
+              <div class="ref-stat-number">50+</div>
+              <div class="ref-stat-label">Schools &amp; ATL Labs Transformed</div>
+            </div>
+            <div class="ref-bento-teal-accent-card" aria-hidden="true">
+              <svg viewBox="0 0 100 80" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2">
+                <rect x="15" y="15" width="70" height="45" rx="4"/>
+                <line x1="15" y1="45" x2="85" y2="45"/>
+                <circle cx="50" cy="52" r="3" fill="rgba(255,255,255,0.3)"/>
+                <line x1="35" y1="60" x2="65" y2="60"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       5. SECTION 4: WHAT OUR LOVELY SCHOOLS & PARENTS SAY (TESTIMONIALS)
+       ===================================================================== -->
+  <section class="section-ref-padding ref-bg-light" id="testimonials">
+    <div class="container">
+      
+      <!-- Testimonial Header with Green Wavy Brush -->
+      <div class="section-split-header">
+        <div class="split-header-left">
+          <h2 class="ref-heading-md">
+            What Our <span class="highlight-underline">Lovely Schools<svg class="doodle-brush-underline-sm" viewBox="0 0 160 14" fill="none"><path d="M3 10 C35 2, 75 12, 115 5 C135 2, 148 8, 155 6" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/></svg></span><br>
+            &amp; Parents Say
+          </h2>
+        </div>
+
+        <div class="split-header-right">
+          <p class="ref-sub-text">
+            Read verified reviews from school principals, ATL lab coordinators, and parents whose students discovered the joy of hands-on electronics with NG EDUCATION.
+          </p>
+          <!-- Green wavy brush flourish -->
+          <div class="ref-wavy-brush" aria-hidden="true">
+            <svg viewBox="0 0 85 22" fill="none">
+              <path d="M5 8 Q 22 2, 42 8 T 80 8" stroke="#0E6258" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M10 16 Q 27 10, 47 16 T 85 16" stroke="#0E6258" stroke-width="4.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Testimonial Cards -->
+      <div class="ref-testimonials-grid">
+        
+        <!-- Card 1: Principal DPS -->
+        <div class="ref-testimonial-card">
+          <div class="ref-testi-author">
+            <div class="ref-testi-avatar-orb">👨‍💼</div>
+            <div class="ref-testi-info">
+              <h4 class="ref-author-name">Dr. Rajesh Sharma</h4>
+              <span class="ref-author-role">Principal, Delhi Public School</span>
+            </div>
+          </div>
+          <div class="ref-testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="ref-testi-quote">
+            "NG EDUCATION replaced rote slides with <strong>100% practical hardware kits</strong>. Their certified trainers are punctual, disciplined, and ignite immense excitement in our Grade 6 to 9 students."
+          </p>
+        </div>
+
+        <!-- Card 2: ATL Lab In-Charge -->
+        <div class="ref-testimonial-card">
+          <div class="ref-testi-author">
+            <div class="ref-testi-avatar-orb">👩‍🏫</div>
+            <div class="ref-testi-info">
+              <h4 class="ref-author-name">Meenakshi Verma</h4>
+              <span class="ref-author-role">ATL Lab In-Charge, Ryan International</span>
+            </div>
+          </div>
+          <div class="ref-testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="ref-testi-quote">
+            "Hiring a certified STEM trainer through NG EDUCATION was completely friction-free. Our students built <strong>obstacle-avoiding robot cars</strong> in 3 days and clinched 1st prize at the state exhibition!"
+          </p>
+        </div>
+
+        <!-- Card 3: Parent -->
+        <div class="ref-testimonial-card">
+          <div class="ref-testi-author">
+            <div class="ref-testi-avatar-orb">👨‍👧</div>
+            <div class="ref-testi-info">
+              <h4 class="ref-author-name">Sunil Kapoor</h4>
+              <span class="ref-author-role">Parent of Grade 7 Student</span>
+            </div>
+          </div>
+          <div class="ref-testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="ref-testi-quote">
+            "My son was constantly glued to mobile games. After the <strong>Arduino Junior Explorer course</strong>, he now builds real LED alarms and obstacle sensors on weekends. Exceptional learning experience!"
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       6. SECTION 5: HANDS-ON PROGRAMS FOR FUTURE ENGINEERS (SPOTLIGHTS + TABS)
+       ===================================================================== -->
+  <section class="section-ref-padding" id="courses">
+    <div class="container">
+      
+      <!-- Split Header -->
+      <div class="section-split-header">
+        <div class="split-header-left">
+          <h2 class="ref-heading-md">
+            Hands-On Programs For<br>
+            <span class="highlight-underline">Future Engineers<svg class="doodle-brush-underline-sm" viewBox="0 0 160 14" fill="none"><path d="M3 10 C35 2, 75 12, 115 5 C135 2, 148 8, 155 6" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/></svg></span>
+            <span class="ref-gold-star">✦</span>
+          </h2>
+        </div>
+
+        <div class="split-header-right">
+          <p class="ref-sub-text">
+            High-impact practical courses designed for school students (Class 5–10) and open learners of all ages. Explore flagship tracks or toggle single and combo packages below.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 Featured Spotlight Cards Matching Reference Section 5 -->
+      <div class="ref-spotlight-grid">
+        
+        <!-- Spotlight 1: Arduino Uno & Smart Bots -->
+        <div class="ref-spotlight-card" onclick="openModal('modalExploreRobotics')">
+          <div class="ref-spotlight-img-wrap">
+            <img src="assets/images/slide1_robotics.webp" alt="Arduino Uno & Smart Bots" class="ref-spotlight-img" width="600" height="340" loading="lazy">
+          </div>
+          <div class="ref-spotlight-footer">
+            <h4 class="ref-spotlight-title">Arduino Uno &amp; Smart Bots</h4>
+            <div class="ref-mini-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotlight 2: AI & Computer Vision -->
+        <div class="ref-spotlight-card" onclick="openModal('modalExploreProgramming')">
+          <div class="ref-spotlight-img-wrap">
+            <img src="assets/images/slide2_ai.webp" alt="AI & Computer Vision Workstation" class="ref-spotlight-img" width="600" height="340" loading="lazy">
+          </div>
+          <div class="ref-spotlight-footer">
+            <h4 class="ref-spotlight-title">AI &amp; Computer Vision Pro</h4>
+            <div class="ref-mini-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotlight 3: School STEM Labs -->
+        <div class="ref-spotlight-card" onclick="openModal('modalStemLab')">
+          <div class="ref-spotlight-img-wrap">
+            <img src="assets/images/slide3_stem_lab.webp" alt="Grade 5-10 School STEM & ATL Labs" class="ref-spotlight-img" width="600" height="340" loading="lazy">
+          </div>
+          <div class="ref-spotlight-footer">
+            <h4 class="ref-spotlight-title">Grade 5–10 STEM &amp; ATL Labs</h4>
+            <div class="ref-mini-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+<div class="course-tabs-wrapper">
         <div class="course-tabs">
           <button class="tab-btn active" data-target="single-courses">
             <span>🎯 Single Courses</span>
@@ -760,6 +1096,56 @@
   </section>
 
   <!-- =====================================================================
+       7. SECTION 6: GET IN TOUCH / JOIN COMMUNITY BANNER (STUDENT WITH GADGET)
+       ===================================================================== -->
+  <section class="section-ref-padding" id="join-community">
+    <div class="container">
+      
+      <div class="ref-community-banner">
+        <!-- Left: Student with Backpack & Microcontroller Gadget waving -->
+        <div class="ref-community-student-wrap">
+          <picture>
+            <source srcset="assets/images/cta_student_cutout.webp" type="image/webp">
+            <img src="assets/images/cta_student_cutout.png" 
+                 alt="Friendly Indian school student holding microcontroller STEM gadget and waving" 
+                 class="ref-community-student-img" 
+                 width="280" height="320" loading="lazy">
+          </picture>
+        </div>
+
+        <!-- Center Content -->
+        <div class="ref-community-content">
+          <span class="ref-community-tag">Get in Touch</span>
+          <h2 class="ref-community-title">
+            Join our community<br>
+            of school partners
+          </h2>
+          <p class="ref-community-desc">
+            Looking to deploy an ATL robotics maker lab or book certified master trainers? NG EDUCATION is now empowering premier schools and students nationwide.
+          </p>
+          <button class="btn-ref-amber" onclick="openModal('modalEnroll')">Contact Our Team</button>
+        </div>
+
+        <!-- Top-Right Action Arrow Button -->
+        <a href="#contact" class="ref-community-arrow-btn" aria-label="Go to Contact Form">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+
+        <!-- Bottom-Right Golden Asterisk Doodle -->
+        <div class="ref-community-star-doodle" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none">
+            <line x1="30" y1="5" x2="30" y2="55" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+            <line x1="5" y1="30" x2="55" y2="30" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+            <line x1="12" y1="12" x2="48" y2="48" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+            <line x1="12" y1="48" x2="48" y2="12" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- =====================================================================
        4. SCHOOLS SECTION 1: HIRE A ROBOTICS TEACHER
        ===================================================================== -->
   <section class="schools-hire-section" id="hire-teacher">
@@ -1012,8 +1398,7 @@
 
     </div>
   </section>
-
-  <!-- =====================================================================
+<!-- =====================================================================
        8. FOOTER
        ===================================================================== -->
   <footer class="site-footer">
