@@ -3314,8 +3314,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-loop-doodle {
-  width: 70px;
-  height: 45px;
+  width: 78px;
+  height: 52px;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
   display: flex;
   align-items: center;
   opacity: 0.85;
@@ -3541,8 +3544,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .doodle-loop-arrow-lg {
-  width: 70px;
-  height: 45px;
+  width: 78px;
+  height: 52px;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
 }
 
 .split-header-right {
