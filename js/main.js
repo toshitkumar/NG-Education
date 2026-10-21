@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initContactForm();
   initMobileNav();
-  initHeroSlider();
+  initHeroShowcase();
   initTrainerFilters();
   initCountUp();
 });
@@ -372,69 +372,76 @@ function initMobileNav() {
   }
 }
 
-/* (Dots are synced automatically inside initHeroSlider) */
+/* Showcase tracks synced inside initHeroShowcase */
 
 /* =====================================================================
-   7. HERO IMAGE SLIDER (Interactive with Auto-Play & Swipe)
+   7. HERO SHOWCASE (Zero-Glitch, Non-Blinking, Pure Solid Color Architecture)
    ===================================================================== */
-function initHeroSlider() {
-  const slider = document.querySelector('.hero-slider-card');
-  if (!slider) return;
+function initHeroShowcase() {
+  const showcase = document.querySelector('.hero-showcase-frame');
+  if (!showcase) return;
 
-  const slides = slider.querySelectorAll('.hero-slide');
-  const dots = slider.querySelectorAll('.slider-dot');
-  const counter = slider.querySelector('#sliderCurrentNum');
-  const prevBtn = slider.querySelector('.slider-arrow-prev');
-  const nextBtn = slider.querySelector('.slider-arrow-next');
-  const textColDots = document.querySelectorAll('.carousel-dots .dot');
+  const items = showcase.querySelectorAll('.showcase-item');
+  const pills = showcase.querySelectorAll('.showcase-pill');
+  const counter = showcase.querySelector('#showcaseCurrentNum');
+  const prevBtn = showcase.querySelector('.showcase-arrow-prev');
+  const nextBtn = showcase.querySelector('.showcase-arrow-next');
 
-  if (slides.length === 0) return;
+  if (items.length === 0) return;
 
   let currentIndex = 0;
   let autoplayTimer = null;
-  const slideInterval = 4000; // 4.0s
+  let isTransitioning = false;
+  const slideInterval = 4500; // 4.5s
 
-  function showSlide(index) {
-    if (index < 0) {
-      currentIndex = slides.length - 1;
-    } else if (index >= slides.length) {
-      currentIndex = 0;
-    } else {
-      currentIndex = index;
-    }
+  function switchToShowcase(targetIndex) {
+    if (targetIndex === currentIndex || isTransitioning) return;
+    isTransitioning = true;
 
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === currentIndex);
+    const previousItem = items[currentIndex];
+    const nextItem = items[targetIndex];
+
+    // Mark previous item so it stays visible underneath during fade
+    items.forEach(item => item.classList.remove('previous'));
+    previousItem.classList.add('previous');
+    previousItem.classList.remove('active');
+
+    // Activate next item to fade in on top
+    nextItem.classList.add('active');
+
+    // Update Pills and Counter
+    pills.forEach((pill, i) => {
+      const isActive = i === targetIndex;
+      pill.classList.toggle('active', isActive);
+      pill.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
-    });
-
-    if (textColDots && textColDots.length) {
-      textColDots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-    }
 
     if (counter) {
-      counter.textContent = String(currentIndex + 1).padStart(2, '0');
+      counter.textContent = String(targetIndex + 1).padStart(2, '0');
     }
+
+    currentIndex = targetIndex;
+
+    // Clean up previous marker after transition completes
+    setTimeout(() => {
+      previousItem.classList.remove('previous');
+      isTransitioning = false;
+    }, 400);
   }
 
-  function nextSlide() {
-    showSlide(currentIndex + 1);
+  function nextTrack() {
+    const nextIdx = (currentIndex + 1) % items.length;
+    switchToShowcase(nextIdx);
   }
 
-  function prevSlide() {
-    showSlide(currentIndex - 1);
+  function prevTrack() {
+    const prevIdx = (currentIndex - 1 + items.length) % items.length;
+    switchToShowcase(prevIdx);
   }
 
   function startAutoplay() {
     stopAutoplay();
-    autoplayTimer = setInterval(() => {
-      nextSlide();
-    }, slideInterval);
+    autoplayTimer = setInterval(nextTrack, slideInterval);
   }
 
   function stopAutoplay() {
@@ -444,52 +451,43 @@ function initHeroSlider() {
     }
   }
 
+  // Pill tab clicks
+  pills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const targetIdx = parseInt(pill.getAttribute('data-showcase'), 10);
+      if (!isNaN(targetIdx)) {
+        switchToShowcase(targetIdx);
+        startAutoplay();
+      }
+    });
+  });
+
+  // Next / Prev clicks
   if (nextBtn) {
     nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      nextSlide();
+      nextTrack();
       startAutoplay();
     });
   }
 
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      prevSlide();
+      prevTrack();
       startAutoplay();
     });
   }
 
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
-      if (!isNaN(targetIndex)) {
-        showSlide(targetIndex);
-        startAutoplay();
-      }
-    });
-  });
-
-  if (textColDots && textColDots.length) {
-    textColDots.forEach((dot, i) => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        showSlide(i);
-        startAutoplay();
-      });
-    });
-  }
-
-  // Pause on desktop hover
-  slider.addEventListener('mouseenter', stopAutoplay);
-  slider.addEventListener('mouseleave', startAutoplay);
-
-  // Mobile Touch Swipe: swipe left -> next, swipe right -> prev
+  // Touch Swipe support
   let touchStartX = 0;
   let touchStartY = 0;
 
-  slider.addEventListener('touchstart', (e) => {
+  showcase.addEventListener('touchstart', (e) => {
     stopAutoplay();
     if (e.changedTouches && e.changedTouches.length > 0) {
       touchStartX = e.changedTouches[0].screenX;
@@ -497,26 +495,26 @@ function initHeroSlider() {
     }
   }, { passive: true });
 
-  slider.addEventListener('touchend', (e) => {
+  showcase.addEventListener('touchend', (e) => {
     if (e.changedTouches && e.changedTouches.length > 0) {
       const diffX = touchStartX - e.changedTouches[0].screenX;
       const diffY = touchStartY - e.changedTouches[0].screenY;
       if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.3) {
         if (diffX > 0) {
-          nextSlide();
+          nextTrack();
         } else {
-          prevSlide();
+          prevTrack();
         }
       }
       setTimeout(startAutoplay, 2500);
     }
   }, { passive: true });
 
-  // Initial render & start autoplay
-  showSlide(0);
+  showcase.addEventListener('mouseenter', stopAutoplay);
+  showcase.addEventListener('mouseleave', startAutoplay);
+
   startAutoplay();
 
-  // Pause autoplay when browser tab is inactive, resume when active
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       stopAutoplay();
