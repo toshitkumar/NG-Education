@@ -4382,3 +4382,44 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
 }
+
+
+/* Admin Login Button in Header */
+.btn-nav-admin {
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0E6258;
+  background-color: #E6F4F1;
+  border: 1.5px solid #0E6258;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-nav-admin:hover {
+  background-color: #0E6258;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1200px) {
+  .btn-nav-admin {
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .site-header .btn-nav-admin {
+    display: none !important;
+  }
+}
