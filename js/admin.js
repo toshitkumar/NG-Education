@@ -131,6 +131,153 @@ function generateCourseCurriculum(courseId, title) {
     ];
   }
 
+  if (courseId === 'course_10' || title.toLowerCase().includes('drone')) {
+    return [
+      {
+        id: 'mod_10_1',
+        moduleNumber: 1,
+        title: 'Quadcopter Aerodynamics, Frame Geometry & Component Sizing',
+        hours: '5 Hours',
+        description: 'Understand multirotor physics, center of gravity, thrust-to-weight ratios, and assembling rigid carbon fiber frames.',
+        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+1',
+        parts: [
+          {
+            id: 'part_10_1_1',
+            partNumber: 1,
+            title: 'UAV Principles, Lift vs Weight & Propeller Dynamics',
+            duration: '22 min',
+            overview: 'In-depth study of Bernoulli principles on drone propellers, CW vs CCW counter-rotation torque cancellation, and sizing airframes.',
+            video: {
+              title: 'Lecture 1.1: Quadcopter Aerodynamics & Thrust Calculations',
+              url: 'https://drive.google.com/file/d/1_demo_drone_aero/view',
+              size: '64.2 MB',
+              type: 'drive'
+            },
+            pdf: {
+              title: 'Drone_Airframe_Geometry_and_Thrust_Chart.pdf',
+              url: 'https://drive.google.com/file/d/1_demo_drone_frame_pdf/view',
+              size: '2.1 MB'
+            },
+            notes: {
+              title: 'Thrust-to-Weight Rule of Thumb',
+              content: '### Drone Aerodynamics Formula:\nTotal Thrust Required >= 2 * Total All-Up Weight (AUW) of the drone.\nFor an 800g drone, the 4 motors combined must produce at least 1600g of thrust (400g per motor) for stable hovering at 50% throttle.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_notes_1/view'
+            },
+            assignment: {
+              title: 'Lab Challenge 1: Calculate AUW and Thrust Budget for 450mm Drone',
+              description: 'List components (frame, 4 motors, 4 ESCs, battery, flight controller, receiver), calculate total weight in grams, and determine required motor KV rating.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_assign_1/view'
+            }
+          },
+          {
+            id: 'part_10_1_2',
+            partNumber: 2,
+            title: 'Chassis Assembly & Vibration Dampening Mounts',
+            duration: '25 min',
+            overview: 'Assemble carbon fiber arms, landing skids, install motor locknuts with threadlocker, and isolate flight controller from high-frequency motor harmonics.',
+            video: {
+              title: 'Lecture 1.2: Assembling 450mm Quadcopter Frame & Anti-Vibration Base',
+              url: 'https://drive.google.com/file/d/1_demo_drone_assembly/view',
+              size: '78.5 MB',
+              type: 'drive'
+            },
+            pdf: {
+              title: 'Quadcopter_Assembly_Blueprints_and_Screw_Torque.pdf',
+              url: 'https://drive.google.com/file/d/1_demo_drone_blueprints/view',
+              size: '3.4 MB'
+            },
+            notes: {
+              title: 'Vibration Isolation Guidelines',
+              content: 'High-frequency motor vibrations introduce accelerometer gyro noise. Always mount the flight controller on silicone anti-vibration standoffs or 3M foam pads.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_notes_vib/view'
+            },
+            assignment: {
+              title: 'Lab Challenge 2: Complete Mechanical Frame Build & Alignment Check',
+              description: 'Assemble frame diagonally, verify motor mount level with spirit level, and photograph chassis from top and side views.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_assign_frame/view'
+            }
+          }
+        ]
+      },
+      {
+        id: 'mod_10_2',
+        moduleNumber: 2,
+        title: 'Brushless DC Motors, 30A ESCs & LiPo Power Architecture',
+        hours: '6 Hours',
+        description: 'Wire 3-phase brushless motors, calibrate Electronic Speed Controllers (ESCs), distribute LiPo power safely, and configure BEC voltage regulators.',
+        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+2',
+        parts: [
+          {
+            id: 'part_10_2_1',
+            partNumber: 1,
+            title: 'BLDC Motors, ESC Calibration & Motor Rotation Matching',
+            duration: '26 min',
+            overview: '3-phase electronic commutation, swapping motor wires to reverse spin, and throttle calibration sequence for synchronized motor response.',
+            video: {
+              title: 'Lecture 2.1: ESC Throttle Range Calibration & Solder Joints',
+              url: 'https://drive.google.com/file/d/1_demo_drone_esc/view',
+              size: '52.0 MB',
+              type: 'drive'
+            },
+            pdf: {
+              title: 'BLDC_Commutation_and_ESC_Wiring_Diagram.pdf',
+              url: 'https://drive.google.com/file/d/1_demo_drone_esc_pdf/view',
+              size: '1.9 MB'
+            },
+            notes: {
+              title: 'Motor Rotation Rules for Quadcopter (X-Frame)',
+              content: '### Direction of Rotation:\n- Front-Left (Motor 1): Clockwise (CW)\n- Front-Right (Motor 2): Counter-Clockwise (CCW)\n- Rear-Right (Motor 3): Clockwise (CW)\n- Rear-Left (Motor 4): Counter-Clockwise (CCW)',
+              url: 'https://drive.google.com/file/d/1_demo_drone_notes_comm/view'
+            },
+            assignment: {
+              title: 'Lab Challenge 3: Synchronized ESC Throttle Range Calibration',
+              description: 'Calibrate all 4 ESCs simultaneously through flight controller passthrough mode so all 4 motors spin up at exact same throttle percentage.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_assign_esc/view'
+            }
+          }
+        ]
+      },
+      {
+        id: 'mod_10_3',
+        moduleNumber: 3,
+        title: 'Flight Controller, PID Gyro Tuning & Pre-Flight Testing',
+        hours: '6 Hours',
+        description: 'Configure flight controller firmware, calibrate 6-axis gyroscope, bind 2.4GHz 6-CH radio transmitter, tune PID loops, and conduct safe test flights.',
+        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+3',
+        parts: [
+          {
+            id: 'part_10_3_1',
+            partNumber: 1,
+            title: 'Radio Transmitter Binding, Fail-Safe & PID Stabilization',
+            duration: '28 min',
+            overview: 'Bind 6-channel radio receiver, configure throttle fail-safe cut-off, adjust PID proportional gains, and tethered hover testing.',
+            video: {
+              title: 'Lecture 3.1: Radio Receiver Binding, PID Tuning & Maiden Flight',
+              url: 'https://drive.google.com/file/d/1_demo_drone_flight/view',
+              size: '85.4 MB',
+              type: 'drive'
+            },
+            pdf: {
+              title: 'Pre_Flight_Checklist_and_Safety_Protocols.pdf',
+              url: 'https://drive.google.com/file/d/1_demo_drone_safety_pdf/view',
+              size: '1.5 MB'
+            },
+            notes: {
+              title: 'Mandatory Pre-Flight Safety Checklist',
+              content: '1. Never power on drone with propellers attached indoors during calibration.\n2. Set Radio Fail-Safe to "Motor Disarm" on signal loss.\n3. Check battery voltage (>3.7V per cell, never fly below 3.5V per cell).\n4. Check GPS lock (minimum 8 satellites before arming).',
+              url: 'https://drive.google.com/file/d/1_demo_drone_notes_safety/view'
+            },
+            assignment: {
+              title: 'Capstone Flight Assignment: 30-Second Stable Autonomous Hover',
+              description: 'Conduct flight test in open ground or netted enclosure. Execute takeoff, maintain level hover for 30 seconds at 1.5m altitude, and perform gentle landing.',
+              url: 'https://drive.google.com/file/d/1_demo_drone_assign_flight/view'
+            }
+          }
+        ]
+      }
+    ];
+  }
+
   if (courseId === 'course_5' || title.toLowerCase().includes('robotics')) {
     return [
       {
@@ -420,6 +567,20 @@ const DEFAULT_COURSES = [
     discountBadge: '50% OFF',
     active: true,
     modules: 18
+  },
+  {
+    id: 'course_10',
+    title: 'Drone Making & Aerial Robotics',
+    category: 'Drone Tech',
+    icon: '🛸',
+    grade: 'Grade 6–12',
+    duration: '14 Modules • 25–35 Hours',
+    description: 'Design, build, solder, wire, and calibrate your own autonomous quadcopter drone. Master flight dynamics, BLDC motors, ESCs, gyroscopes, radio telemetry, and safe piloting.',
+    originalPrice: 4999,
+    discountPrice: 2499,
+    discountBadge: '50% OFF',
+    active: true,
+    modules: 14
   }
 ];
 
@@ -546,8 +707,19 @@ class AdminState {
       localStorage.setItem(ADMIN_CONFIG.coursesKey, JSON.stringify(this.courses));
     } else {
       this.courses = JSON.parse(savedCourses);
-      // Ensure every course has curriculum
       let updated = false;
+
+      // Merge newly added default courses (e.g. Drone Making) if not present
+      DEFAULT_COURSES.forEach(defCourse => {
+        if (!this.courses.some(c => c.id === defCourse.id || c.title.toLowerCase().includes('drone'))) {
+          this.courses.push({
+            ...defCourse,
+            curriculum: generateCourseCurriculum(defCourse.id, defCourse.title)
+          });
+          updated = true;
+        }
+      });
+
       this.courses.forEach(c => {
         if (!c.curriculum || !Array.isArray(c.curriculum) || c.curriculum.length === 0) {
           c.curriculum = generateCourseCurriculum(c.id, c.title);

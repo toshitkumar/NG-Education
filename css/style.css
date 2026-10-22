@@ -4423,3 +4423,184 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
 }
+
+/* =====================================================================
+   KAUSHAL BODH LAB SECTION (NEP 2020 / SKILL INDIA)
+   ===================================================================== */
+.kaushal-bodh-section {
+  padding: 96px 0;
+  background-color: #08473F;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.kaushal-bodh-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #F59E0B;
+}
+
+.kaushal-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1.5px solid #F59E0B;
+  border-radius: 999px;
+  color: #F59E0B;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.kaushal-head {
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 56px;
+}
+
+.kaushal-head h2 {
+  font-size: clamp(2.2rem, 3.8vw, 2.9rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.kaushal-head h2 span {
+  color: #F59E0B;
+}
+
+.kaushal-head p {
+  font-size: 1.05rem;
+  color: #E2E8F0;
+  line-height: 1.6;
+}
+
+.kaushal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.kaushal-box {
+  background-color: #0E6258;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px 24px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kaushal-box:hover {
+  transform: translateY(-6px);
+  border-color: #F59E0B;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+}
+
+.kaushal-icon-orb {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background-color: #F59E0B;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+}
+
+.kaushal-box h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.kaushal-box p {
+  font-size: 0.9rem;
+  color: #CBD5E1;
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+.kaushal-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 14px;
+}
+
+.kaushal-features-list li {
+  font-size: 0.82rem;
+  color: #E2E8F0;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kaushal-features-list li span {
+  color: #F59E0B;
+  font-weight: 700;
+}
+
+.kaushal-banner-strip {
+  background-color: #0F172A;
+  border: 1.5px solid rgba(245, 158, 11, 0.4);
+  border-radius: 20px;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.kaushal-strip-left h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.kaushal-strip-left p {
+  font-size: 0.94rem;
+  color: #94A3B8;
+  max-width: 620px;
+}
+
+.kaushal-strip-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1200px) {
+  .kaushal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .kaushal-grid {
+    grid-template-columns: 1fr;
+  }
+  .kaushal-banner-strip {
+    padding: 24px 20px;
+  }
+}
