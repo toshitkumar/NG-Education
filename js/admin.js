@@ -70,421 +70,278 @@ const DEFAULT_POPUPS = [
 
 // Curriculum Generator: Provides rich, production-grade initial modules and parts for courses
 function generateCourseCurriculum(courseId, title) {
-  if (courseId === 'course_1' || title.toLowerCase().includes('arduino programming')) {
-    return [
-      {
-        id: 'mod_1_1',
-        moduleNumber: 1,
-        title: 'Embedded C Fundamentals & Arduino IDE Architecture',
-        hours: '4 Hours',
-        description: 'Understand microcontroller architecture, register levels, setup() and loop() flow control, and setting up the toolchain.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Arduino+Programming+Module+1',
-        parts: [
-          {
-            id: 'part_1_1_1',
-            partNumber: 1,
-            title: 'What is Arduino Uno & Pinout Anatomy?',
-            duration: '18 min',
-            overview: 'In-depth breakdown of the ATmega328P chip, 14 digital I/O pins, 6 PWM channels, 6 analog inputs, and voltage regulator circuits.',
-            video: {
-              title: 'Lecture 1.1: Arduino Hardware Anatomy & Pin Mapping',
-              url: 'https://drive.google.com/file/d/1_demo_video_arduino_arch/view',
-              fileId: 'demo_vid_1',
-              size: '42.5 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Arduino_Uno_R3_Schematics_and_Pinout_Diagram.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_pdf_arduino_pinouts/view',
-              fileId: 'demo_pdf_1',
-              size: '1.8 MB'
-            },
-            notes: {
-              title: 'Module 1 Part 1 - Pinout Cheat Sheet & Register Reference',
-              content: '### Key Highlights:\n- Clock: 16 MHz Crystal Oscillator\n- Logic Level: 5V DC (Absolute max 20mA per I/O pin)\n- Digital Pins: D0 to D13 (D0/D1 used for Serial RX/TX)\n- PWM Pins: ~3, ~5, ~6, ~9, ~10, ~11\n- Analog Pins: A0 to A5 (10-bit ADC resolution, 0-1023 steps, 4.88mV per step)',
-              url: 'https://drive.google.com/file/d/1_demo_notes_arduino_1/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 1: Blink Morse Code Pattern via Built-in LED',
-              description: 'Write an Arduino sketch to blink an onboard LED in SOS Morse code (... --- ...) and transmit the pulse timestamp over Serial Monitor at 9600 baud.',
-              url: 'https://drive.google.com/file/d/1_demo_assign_sos_blink/view'
-            }
+  const t = (title || '').toLowerCase();
+
+  // -------------------------------------------------------------
+  // 1. DRONE MAKING & AERIAL ROBOTICS (ALL 14 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_10' || t.includes('drone')) {
+    const droneModuleNames = [
+      { num: 1, title: 'Introduction to Multirotor Aerodynamics & Drone Physics', desc: 'Bernoulli principles, thrust-to-weight AUW ratios, propeller pitch, and CW/CCW counter-torque dynamics.', hrs: '3 Hours', vid: 'Aerodynamics & Multirotor Flight Physics', pdf: 'Quadcopter_Aerodynamics_and_Thrust_Calculations.pdf', notes: 'Thrust-to-weight ratio must be >= 2:1 for stable hover at 50% throttle.', assign: 'Calculate AUW & Thrust Budget for 450mm Drone' },
+      { num: 2, title: 'Frame Geometry, Materials (Carbon Fiber vs Glass Fiber) & Sizing', desc: 'Diagonal wheelbase calculations, arm rigidity, dampening motor vibrations, and chassis assembly.', hrs: '2.5 Hours', vid: 'Assembling Rigid 450mm Quadcopter Carbon Fiber Frame', pdf: 'Frame_Blueprints_and_Screw_Torque_Specs.pdf', notes: 'High-frequency vibrations distort flight gyros. Use silicone vibration standoffs.', assign: 'Assemble Frame Diagonally & Check True Level' },
+      { num: 3, title: 'Brushless DC (BLDC) Motors, Stator Sizing & KV Ratings', desc: '12-pole stators, permanent neodymium magnets, KV velocity constants, and torque vs RPM trade-offs.', hrs: '3 Hours', vid: 'Brushless DC Motor Anatomy, Stator Winding & KV Selection', pdf: 'BLDC_Motor_Datasheet_and_Thrust_Curves.pdf', notes: 'Higher KV = faster spin with smaller props. Lower KV = high torque for heavy payloads.', assign: 'Select Motor KV & Propeller Pitch for 800g Drone' },
+      { num: 4, title: 'Electronic Speed Controllers (ESCs), BEC Circuitry & PWM Throttle Signals', desc: 'MOSFET 3-phase commutation, 5V Battery Eliminator Circuits (BEC), and DShot vs PWM signal calibration.', hrs: '3.5 Hours', vid: 'ESC Throttle Calibration, Solder Bridges & Signal Lines', pdf: 'ESC_Commutation_and_Wiring_Schematic.pdf', notes: 'Calibrate all 4 ESCs simultaneously through flight controller passthrough mode.', assign: 'Calibrate 4 ESC Throttle Ranges & Sync Minimum Spin' },
+      { num: 5, title: 'Lithium Polymer (LiPo) Battery Chemistry, C-Ratings & Power Distribution Board (PDB)', desc: '3S/4S cell configurations, burst discharge C-ratings, fire-safety storage charging, and high-current XT60 soldering.', hrs: '3 Hours', vid: 'LiPo Safety Protocols, C-Ratings & High-Amperage PDB Soldering', pdf: 'LiPo_Battery_Safety_Guide_and_Discharge_Rules.pdf', notes: 'Never discharge a LiPo below 3.5V per cell. Always store at 3.85V per cell.', assign: 'Solder XT60 Power Cable & Check for Short Circuits' },
+      { num: 6, title: 'Flight Controller Architecture: Gyroscope, Accelerometer, Barometer & Magnetometer', desc: 'MEMS sensors, 6-axis IMU filtering, altitude hold barometer foam protection, and compass declination.', hrs: '4 Hours', vid: 'Flight Controller Architecture & Onboard Sensor Suite', pdf: 'Flight_Controller_Pinout_and_Sensor_Architecture.pdf', notes: 'Cover barometer with open-cell foam to shield it from propeller air pressure wash.', assign: 'Map Inward/Outward UART Ports & Solder Header Pins' },
+      { num: 7, title: 'Soldering & Harnessing Avionics: Vibration Dampening & Cable Management', desc: 'Heat-shrink insulation, silicone wiring harness, anti-vibration rubber bobbins, and clean power delivery.', hrs: '3 Hours', vid: 'Mastering Avionics Soldering, Flux Cleaning & Harness Routing', pdf: 'Avionics_Wiring_Standards_and_Inspection_Checklist.pdf', notes: 'Keep signal wires twisted and separated from high-current motor cables.', assign: 'Complete Complete Wiring Harness & Test Continuity' },
+      { num: 8, title: '2.4GHz 6-Channel Radio Transmitter & Receiver Binding, Channels & Fail-Safe', desc: 'PWM/PPM/SBUS protocols, transmitter channel mapping (AETR), binding procedures, and emergency throttle fail-safe.', hrs: '3.5 Hours', vid: 'Radio Transmitter Binding, SBUS Signal & Fail-Safe Killswitch', pdf: 'Radio_Telemetry_and_Fail_Safe_Configuration.pdf', notes: 'Fail-safe is life safety: Transmitter power-off must immediately cut drone throttle to 0.', assign: 'Bind 6CH Radio & Verify Hardware Fail-Safe Trigger' },
+      { num: 9, title: 'Flight Controller Firmware Flashing (Betaflight/iNav) & GUI Configuration', desc: 'Flashing STM32 bootloaders, accelerometer calibration, arming prevention flags, and switch assignments.', hrs: '4 Hours', vid: 'Betaflight Firmware Flashing & Clean GUI Configuration', pdf: 'Betaflight_Setup_and_Configuration_Cheatsheet.pdf', notes: 'Never attach propellers when connecting flight controller to laptop GUI configurator.', assign: 'Flash Latest Firmware & Configure Receiver Channel Endpoints' },
+      { num: 10, title: 'Sensor Calibration, 6-Axis Accelerometer Leveling & Motor Direction Verification', desc: '6-point accelerometer leveling, compass 360-degree calibration, motor direction test, and CW/CCW check.', hrs: '3 Hours', vid: '6-Axis IMU Leveling & Motor Direction Verification', pdf: 'Motor_Direction_and_Sensor_Calibration_Manual.pdf', notes: 'Front-Left & Rear-Right spin CW; Front-Right & Rear-Left spin CCW.', assign: 'Verify All 4 Motors Spin Correct Directions Without Props' },
+      { num: 11, title: 'PID (Proportional-Integral-Derivative) Tuning for Wind Resistance & Stable Hovering', desc: 'P gain for snap response, I gain for wind drift correction, D gain for dampening oscillations, and anti-gravity.', hrs: '4.5 Hours', vid: 'PID Loop Fundamentals & Field Tuning for Rock-Solid Hover', pdf: 'PID_Tuning_Guide_for_Multirotor_Drones.pdf', notes: 'High P causes rapid oscillations; low P causes sluggish, unresponsive control.', assign: 'Perform PID In-Flight Trim & Eliminate High-Frequency Wobble' },
+      { num: 12, title: 'Propeller Balancing, CW/CCW Pitch Matching & Pre-Flight Checklist Protocols', desc: 'Dynamic magnetic propeller balancing, locknut torque, flight logs, and regulatory pre-flight safety audits.', hrs: '2.5 Hours', vid: 'Propeller Balancing & Complete DGCA Pre-Flight Checklist', pdf: 'DGCA_Safety_Guidelines_and_Flight_Logbook.pdf', notes: 'Balanced propellers reduce gyro noise by up to 70% and prevent frame fatigue.', assign: 'Balance 4 Propellers & Mount with Nylon Locknuts' },
+      { num: 13, title: 'Tethered Indoor Flight Testing, Yaw/Pitch/Roll Trim & Safe Emergency Cut-Off', desc: 'Safe tethered rig testing, roll/pitch stick responsiveness, gentle takeoff, hovering trim, and emergency disarm.', hrs: '4 Hours', vid: 'First Flight: Tethered Hover Testing & Trim Adjustments', pdf: 'Flight_Testing_Safety_Protocols_and_Emergency_Procedures.pdf', notes: 'Keep 5 meters safety perimeter during all armed flight tests.', assign: 'Execute 2-Minute Tethered Level Hover & Record Video Proof' },
+      { num: 14, title: 'Capstone Autonomous Flight, Return-to-Home (RTH) & FPV Camera Integration', desc: 'GPS Return-to-Home fail-safe, autonomous waypoint missions, analog/digital FPV video transmission, and certification.', hrs: '5 Hours', vid: 'Capstone Mission: Autonomous Waypoint Navigation & RTH Safe Landing', pdf: 'Capstone_Mission_Guide_and_Certificate_Evaluation.pdf', notes: 'Congratulations! You have designed, built, and flown an autonomous quadcopter.', assign: 'Submit Capstone Flight Video & Project Technical Portfolio' }
+    ];
+
+    return droneModuleNames.map(m => ({
+      id: `mod_drone_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('NG Education Drone Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_drone_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '24 min',
+          overview: m.desc,
+          video: {
+            title: `Video: ${m.vid}`,
+            url: `https://drive.google.com/file/d/1_drone_${m.num}_vid/view`,
+            fileId: `drone_vid_${m.num}`,
+            size: '54.2 MB',
+            type: 'drive'
           },
-          {
-            id: 'part_1_1_2',
-            partNumber: 2,
-            title: 'C/C++ Syntax, Variables & Serial Communication',
-            duration: '22 min',
-            overview: 'Learn data types (int, float, char, boolean), variable scope, Serial.begin(), Serial.println(), and formatting output.',
-            video: {
-              title: 'Lecture 1.2: Embedded C Syntax & Serial Monitor Debugging',
-              url: 'https://drive.google.com/file/d/1_demo_video_c_syntax/view',
-              fileId: 'demo_vid_2',
-              size: '56.1 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Embedded_C_Syntax_Primer_For_Beginners.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_pdf_c_primer/view',
-              size: '2.4 MB'
-            },
-            notes: {
-              title: 'C Syntax & Memory Footprint Rules',
-              content: '### Variables in 8-bit Microcontrollers:\n- bool: 1 byte (true/false)\n- char: 1 byte (-128 to 127)\n- int: 2 bytes on AVR (-32,768 to 32,767)\n- unsigned int: 2 bytes (0 to 65,535)\n- float: 4 bytes (IEEE 754 precision)\n\nTip: Avoid dynamic String objects; prefer const char* or fixed byte buffers to save SRAM.',
-              url: 'https://drive.google.com/file/d/1_demo_notes_c_syntax/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 2: Interactive Serial Command Console',
-              description: 'Create a program that waits for user input on the Serial Monitor. If the user types "HELP", print commands. If "TEMP", print simulated sensor readings.',
-              url: 'https://drive.google.com/file/d/1_demo_assign_serial_console/view'
-            }
-          }
-        ]
-      },
-      {
-        id: 'mod_1_2',
-        moduleNumber: 2,
-        title: 'Digital Inputs, Outputs & Sensor Interfacing',
-        hours: '5 Hours',
-        description: 'Master pinMode(), digitalWrite(), digitalRead(), pull-up resistors, debounce logic, and analog-to-digital conversions.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Arduino+Programming+Module+2',
-        parts: [
-          {
-            id: 'part_1_2_1',
-            partNumber: 1,
-            title: 'Pushbuttons, Pull-Ups & Software Debounce',
-            duration: '24 min',
-            overview: 'Understand floating pin problems, internal INPUT_PULLUP configuration, and millis()-based debounce algorithms.',
-            video: {
-              title: 'Lecture 2.1: Floating Pins & Debounce Algorithms',
-              url: 'https://drive.google.com/file/d/1_demo_video_debounce/view',
-              size: '48.2 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Switch_Interfacing_and_Debounce_Schematics.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_pdf_debounce/view',
-              size: '1.5 MB'
-            },
-            notes: {
-              title: 'Debounce State Machine Implementation',
-              content: '### Why Debounce Matters:\nMechanical switches bounce 5-20 times within 10ms of pressing. Using delay() blocks execution. Using millis() keeps the loop responsive.',
-              url: 'https://drive.google.com/file/d/1_demo_notes_debounce/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 3: 4-Way Traffic Light System with Pedestrian Crossing',
-              description: 'Build a traffic controller with Red, Yellow, Green LEDs and a pedestrian push-button that smoothly interrupts normal cycle.',
-              url: 'https://drive.google.com/file/d/1_demo_assign_traffic_lights/view'
-            }
-          }
-        ]
-      }
-    ];
-  }
-
-  if (courseId === 'course_10' || title.toLowerCase().includes('drone')) {
-    return [
-      {
-        id: 'mod_10_1',
-        moduleNumber: 1,
-        title: 'Quadcopter Aerodynamics, Frame Geometry & Component Sizing',
-        hours: '5 Hours',
-        description: 'Understand multirotor physics, center of gravity, thrust-to-weight ratios, and assembling rigid carbon fiber frames.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+1',
-        parts: [
-          {
-            id: 'part_10_1_1',
-            partNumber: 1,
-            title: 'UAV Principles, Lift vs Weight & Propeller Dynamics',
-            duration: '22 min',
-            overview: 'In-depth study of Bernoulli principles on drone propellers, CW vs CCW counter-rotation torque cancellation, and sizing airframes.',
-            video: {
-              title: 'Lecture 1.1: Quadcopter Aerodynamics & Thrust Calculations',
-              url: 'https://drive.google.com/file/d/1_demo_drone_aero/view',
-              size: '64.2 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Drone_Airframe_Geometry_and_Thrust_Chart.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_drone_frame_pdf/view',
-              size: '2.1 MB'
-            },
-            notes: {
-              title: 'Thrust-to-Weight Rule of Thumb',
-              content: '### Drone Aerodynamics Formula:\nTotal Thrust Required >= 2 * Total All-Up Weight (AUW) of the drone.\nFor an 800g drone, the 4 motors combined must produce at least 1600g of thrust (400g per motor) for stable hovering at 50% throttle.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_notes_1/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 1: Calculate AUW and Thrust Budget for 450mm Drone',
-              description: 'List components (frame, 4 motors, 4 ESCs, battery, flight controller, receiver), calculate total weight in grams, and determine required motor KV rating.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_assign_1/view'
-            }
+          pdf: {
+            title: m.pdf,
+            url: `https://drive.google.com/file/d/1_drone_${m.num}_pdf/view`,
+            fileId: `drone_pdf_${m.num}`,
+            size: '2.1 MB'
           },
-          {
-            id: 'part_10_1_2',
-            partNumber: 2,
-            title: 'Chassis Assembly & Vibration Dampening Mounts',
-            duration: '25 min',
-            overview: 'Assemble carbon fiber arms, landing skids, install motor locknuts with threadlocker, and isolate flight controller from high-frequency motor harmonics.',
-            video: {
-              title: 'Lecture 1.2: Assembling 450mm Quadcopter Frame & Anti-Vibration Base',
-              url: 'https://drive.google.com/file/d/1_demo_drone_assembly/view',
-              size: '78.5 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Quadcopter_Assembly_Blueprints_and_Screw_Torque.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_drone_blueprints/view',
-              size: '3.4 MB'
-            },
-            notes: {
-              title: 'Vibration Isolation Guidelines',
-              content: 'High-frequency motor vibrations introduce accelerometer gyro noise. Always mount the flight controller on silicone anti-vibration standoffs or 3M foam pads.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_notes_vib/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 2: Complete Mechanical Frame Build & Alignment Check',
-              description: 'Assemble frame diagonally, verify motor mount level with spirit level, and photograph chassis from top and side views.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_assign_frame/view'
-            }
+          notes: {
+            title: `Key Technical Principles: ${m.title}`,
+            content: `### Engineering Summary:
+- ${m.notes}
+- Always double-check polarity before connecting power.
+- Refer to circuit pinout diagrams in Drive resource kit.`,
+            url: `https://drive.google.com/file/d/1_drone_${m.num}_notes/view`
+          },
+          assignment: {
+            title: m.assign,
+            description: `Complete practical evaluation: ${m.assign}. Record telemetry readings or photograph assembled module and submit for instructor certification review.`,
+            url: `https://drive.google.com/file/d/1_drone_${m.num}_assign/view`
           }
-        ]
-      },
-      {
-        id: 'mod_10_2',
-        moduleNumber: 2,
-        title: 'Brushless DC Motors, 30A ESCs & LiPo Power Architecture',
-        hours: '6 Hours',
-        description: 'Wire 3-phase brushless motors, calibrate Electronic Speed Controllers (ESCs), distribute LiPo power safely, and configure BEC voltage regulators.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+2',
-        parts: [
-          {
-            id: 'part_10_2_1',
-            partNumber: 1,
-            title: 'BLDC Motors, ESC Calibration & Motor Rotation Matching',
-            duration: '26 min',
-            overview: '3-phase electronic commutation, swapping motor wires to reverse spin, and throttle calibration sequence for synchronized motor response.',
-            video: {
-              title: 'Lecture 2.1: ESC Throttle Range Calibration & Solder Joints',
-              url: 'https://drive.google.com/file/d/1_demo_drone_esc/view',
-              size: '52.0 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'BLDC_Commutation_and_ESC_Wiring_Diagram.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_drone_esc_pdf/view',
-              size: '1.9 MB'
-            },
-            notes: {
-              title: 'Motor Rotation Rules for Quadcopter (X-Frame)',
-              content: '### Direction of Rotation:\n- Front-Left (Motor 1): Clockwise (CW)\n- Front-Right (Motor 2): Counter-Clockwise (CCW)\n- Rear-Right (Motor 3): Clockwise (CW)\n- Rear-Left (Motor 4): Counter-Clockwise (CCW)',
-              url: 'https://drive.google.com/file/d/1_demo_drone_notes_comm/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 3: Synchronized ESC Throttle Range Calibration',
-              description: 'Calibrate all 4 ESCs simultaneously through flight controller passthrough mode so all 4 motors spin up at exact same throttle percentage.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_assign_esc/view'
-            }
-          }
-        ]
-      },
-      {
-        id: 'mod_10_3',
-        moduleNumber: 3,
-        title: 'Flight Controller, PID Gyro Tuning & Pre-Flight Testing',
-        hours: '6 Hours',
-        description: 'Configure flight controller firmware, calibrate 6-axis gyroscope, bind 2.4GHz 6-CH radio transmitter, tune PID loops, and conduct safe test flights.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Drone+Making+Module+3',
-        parts: [
-          {
-            id: 'part_10_3_1',
-            partNumber: 1,
-            title: 'Radio Transmitter Binding, Fail-Safe & PID Stabilization',
-            duration: '28 min',
-            overview: 'Bind 6-channel radio receiver, configure throttle fail-safe cut-off, adjust PID proportional gains, and tethered hover testing.',
-            video: {
-              title: 'Lecture 3.1: Radio Receiver Binding, PID Tuning & Maiden Flight',
-              url: 'https://drive.google.com/file/d/1_demo_drone_flight/view',
-              size: '85.4 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Pre_Flight_Checklist_and_Safety_Protocols.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_drone_safety_pdf/view',
-              size: '1.5 MB'
-            },
-            notes: {
-              title: 'Mandatory Pre-Flight Safety Checklist',
-              content: '1. Never power on drone with propellers attached indoors during calibration.\n2. Set Radio Fail-Safe to "Motor Disarm" on signal loss.\n3. Check battery voltage (>3.7V per cell, never fly below 3.5V per cell).\n4. Check GPS lock (minimum 8 satellites before arming).',
-              url: 'https://drive.google.com/file/d/1_demo_drone_notes_safety/view'
-            },
-            assignment: {
-              title: 'Capstone Flight Assignment: 30-Second Stable Autonomous Hover',
-              description: 'Conduct flight test in open ground or netted enclosure. Execute takeoff, maintain level hover for 30 seconds at 1.5m altitude, and perform gentle landing.',
-              url: 'https://drive.google.com/file/d/1_demo_drone_assign_flight/view'
-            }
-          }
-        ]
-      }
-    ];
+        }
+      ]
+    }));
   }
 
-  if (courseId === 'course_5' || title.toLowerCase().includes('robotics')) {
-    return [
-      {
-        id: 'mod_5_1',
-        moduleNumber: 1,
-        title: 'Chassis Mechanics & Dual H-Bridge Motor Drivers',
-        hours: '6 Hours',
-        description: 'Assemble 2WD/4WD robotic chassis, wire L298N/L293D dual motor drivers, and control DC geared motors using PWM speed regulation.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Robotics+Autonomous+Bots+Module+1',
-        parts: [
-          {
-            id: 'part_5_1_1',
-            partNumber: 1,
-            title: 'L298N Motor Driver Interfacing & PWM Speed Control',
-            duration: '26 min',
-            overview: 'H-bridge internal operation, independent motor control, directional truth tables, and analogWrite() PWM speed curves.',
-            video: {
-              title: 'Lecture 1.1: Assembling the Smart Robot Chassis & Motor Wiring',
-              url: 'https://drive.google.com/file/d/1_demo_video_robot_assembly/view',
-              size: '72.0 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Robotic_Chassis_Assembly_and_Power_Distribution_Manual.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_pdf_chassis_manual/view',
-              size: '3.2 MB'
-            },
-            notes: {
-              title: 'L298N Truth Table & Power Isolation Notes',
-              content: '### L298N Motor Driver Logic:\n- IN1 HIGH, IN2 LOW -> Motor A Forward\n- IN1 LOW, IN2 HIGH -> Motor A Reverse\n- ENA / ENB PWM: 0 (Stop) to 255 (Full Speed)\n\nCrucial Rule: Connect battery ground to Arduino GND for common reference, but power motors from external 7.4V/11.1V battery pack!',
-              url: 'https://drive.google.com/file/d/1_demo_notes_l298n/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 1: Differential Steering & Figure-8 Maneuver',
-              description: 'Program the robot to trace a precise figure-8 path using timed forward, sharp turn, and pivot routines.',
-              url: 'https://drive.google.com/file/d/1_demo_assign_figure8/view'
-            }
-          }
-        ]
-      },
-      {
-        id: 'mod_5_2',
-        moduleNumber: 2,
-        title: 'Sensors: Ultrasonic Rangefinders & Obstacle Avoidance',
-        hours: '5 Hours',
-        description: 'Interface HC-SR04 ultrasonic sensors, calculate speed of sound time-of-flight, and implement autonomous steering logic.',
-        driveFolderUrl: 'https://drive.google.com/drive/search?q=Robotics+Autonomous+Bots+Module+2',
-        parts: [
-          {
-            id: 'part_5_2_1',
-            partNumber: 1,
-            title: 'HC-SR04 Acoustic Time-of-Flight & Autonomous Navigation',
-            duration: '21 min',
-            overview: 'Trigger 10us ultrasonic pulse, read echo pulse length, convert microseconds to centimeters, and trigger collision avoidance.',
-            video: {
-              title: 'Lecture 2.1: Autonomous Obstacle-Avoidance Robot Programming',
-              url: 'https://drive.google.com/file/d/1_demo_video_obstacle_bot/view',
-              size: '58.4 MB',
-              type: 'drive'
-            },
-            pdf: {
-              title: 'Ultrasonic_Sensor_Acoustic_Calculations.pdf',
-              url: 'https://drive.google.com/file/d/1_demo_pdf_ultrasonic/view',
-              size: '1.2 MB'
-            },
-            notes: {
-              title: 'Distance Calculation Formula',
-              content: '### Formula:\nDistance (cm) = (duration * 0.0343) / 2;\nSpeed of sound at 20C: 343 m/s = 0.0343 cm/microsecond. Divide by 2 because sound travels to the object and bounces back.',
-              url: 'https://drive.google.com/file/d/1_demo_notes_ultrasonic/view'
-            },
-            assignment: {
-              title: 'Lab Challenge 2: Servo-Scanning Radar Obstacle Bot',
-              description: 'Mount the ultrasonic sensor on an SG90 servo motor. When an obstacle is detected within 25cm, stop, pan left & right, and steer towards the clearer path.',
-              url: 'https://drive.google.com/file/d/1_demo_assign_servo_radar/view'
-            }
-          }
-        ]
-      }
+  // -------------------------------------------------------------
+  // 2. ARDUINO PROGRAMMING (8 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_1' || t.includes('arduino')) {
+    const ardModules = [
+      { num: 1, title: 'Embedded C Fundamentals & Arduino IDE Architecture', hrs: '4 Hours', desc: 'ATmega328P architecture, register basics, setup() vs loop(), and toolchain setup.' },
+      { num: 2, title: 'Digital Inputs, Outputs & Sensor Interfacing', hrs: '5 Hours', desc: 'pinMode(), digitalWrite(), digitalRead(), internal pull-ups, button debouncing, and LED arrays.' },
+      { num: 3, title: 'Analog Signals, PWM & Transistor Actuator Drives', hrs: '5 Hours', desc: 'analogRead() 10-bit ADC, PWM duty cycles, transistor switches, and motor speed control.' },
+      { num: 4, title: 'Serial Communication & Sensor Telemetry Protocols', hrs: '4.5 Hours', desc: 'UART baud rates, Serial buffers, parsing numeric streams, and Serial Plotter graphing.' },
+      { num: 5, title: 'Interrupt Service Routines (ISRs) & Timers', hrs: '5 Hours', desc: 'Hardware interrupts (attachInterrupt), volatile flags, timer overflows, and millis() non-blocking code.' },
+      { num: 6, title: 'I2C and SPI Bus Protocol Integration', hrs: '4.5 Hours', desc: 'Two-wire I2C bus addressing, OLED displays, MPU6050 gyroscope, and SPI high-speed SD logging.' },
+      { num: 7, title: 'Actuators, Servo Motors & Stepper Motor Drives', hrs: '5 Hours', desc: 'Servo position angles, ULN2003 stepper motor stepping modes, and robotic joint mechanics.' },
+      { num: 8, title: 'Capstone Project: Autonomous Smart Home System', hrs: '6 Hours', desc: 'Multi-sensor fire/gas detection, automatic door locking, climate fan regulation, and serial dashboard.' }
     ];
+
+    return ardModules.map(m => ({
+      id: `mod_ard_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('Arduino Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_ard_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '22 min',
+          overview: m.desc,
+          video: { title: `Lecture ${m.num}.1: ${m.title}`, url: `https://drive.google.com/file/d/1_ard_${m.num}_vid/view`, size: '48 MB', type: 'drive' },
+          pdf: { title: `Arduino_Module_${m.num}_Schematics_and_Notes.pdf`, url: `https://drive.google.com/file/d/1_ard_${m.num}_pdf/view`, size: '1.9 MB' },
+          notes: { title: `Technical Notes: ${m.title}`, content: `Key embedded principles for ${m.title}. Observe voltage logic levels and current ratings.`, url: `https://drive.google.com/file/d/1_ard_${m.num}_notes/view` },
+          assignment: { title: `Lab Challenge ${m.num}: Build & Program ${m.title}`, description: `Assemble circuit on breadboard, upload code, and test expected hardware outcomes.`, url: `https://drive.google.com/file/d/1_ard_${m.num}_assign/view` }
+        }
+      ]
+    }));
   }
 
-  // Generic Default Template for Other Courses
+  // -------------------------------------------------------------
+  // 3. ROBOTICS & AUTONOMOUS BOTS (8 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_5' || t.includes('robot')) {
+    const robModules = [
+      { num: 1, title: 'Robotics Kinematics, Chassis Design & Differential Drive', hrs: '4 Hours', desc: 'Center of gravity, 2WD vs 4WD traction, wheel encoders, and chassis mechanical assembly.' },
+      { num: 2, title: 'H-Bridge Motor Drivers (L298N/L293D) & Speed Modulation', hrs: '4 Hours', desc: 'Dual H-bridge direction control, flyback diode protection, heat sinks, and PWM speed curve.' },
+      { num: 3, title: 'Infrared (IR) Sensing & Line Follower Navigation', hrs: '5 Hours', desc: 'IR emitter-photodiode pairs, analog comparator threshold tuning, and 3-sensor PID line tracking.' },
+      { num: 4, title: 'Ultrasonic Distance Detection & Obstacle Avoidance', hrs: '4.5 Hours', desc: 'HC-SR04 sonar pulse timing, sound speed calculation, sweep servo mapping, and collision avoidance.' },
+      { num: 5, title: 'Edge Detection & Floor Drop Prevention Systems', hrs: '4 Hours', desc: 'Downward reflection sensing, table-edge fail-safe cutoff, and floor surface calibration.' },
+      { num: 6, title: 'Bluetooth (HC-05) Wireless Teleoperation & Custom App', hrs: '5 Hours', desc: 'UART Bluetooth pairing, custom mobile app control interface, and real-time command routing.' },
+      { num: 7, title: 'Robotic Manipulators: 4-DOF Robotic Arm Mechanics', hrs: '5 Hours', desc: 'Servo torque ratings, inverse kinematics principles, gripper design, and pick-and-place automation.' },
+      { num: 8, title: 'Capstone: Autonomous Multi-Terrain Maze Navigation Bot', hrs: '6 Hours', desc: 'Autonomous algorithm combining line tracking, wall following, maze mapping, and victory buzzer.' }
+    ];
+
+    return robModules.map(m => ({
+      id: `mod_rob_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('Robotics Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_rob_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '25 min',
+          overview: m.desc,
+          video: { title: `Lecture ${m.num}.1: ${m.title}`, url: `https://drive.google.com/file/d/1_rob_${m.num}_vid/view`, size: '52 MB', type: 'drive' },
+          pdf: { title: `Robotics_Assembly_Manual_Module_${m.num}.pdf`, url: `https://drive.google.com/file/d/1_rob_${m.num}_pdf/view`, size: '2.8 MB' },
+          notes: { title: `Robotics Architecture: ${m.title}`, content: `Kinematic mechanics, sensor thresholds, and motor driver power isolating rules.`, url: `https://drive.google.com/file/d/1_rob_${m.num}_notes/view` },
+          assignment: { title: `Field Lab ${m.num}: Build & Run ${m.title}`, description: `Construct robotic subsystem, verify kinematic performance on test track, and log test runs.`, url: `https://drive.google.com/file/d/1_rob_${m.num}_assign/view` }
+        }
+      ]
+    }));
+  }
+
+  // -------------------------------------------------------------
+  // 4. IOT & SMART HOME AUTOMATION (6 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_3' || t.includes('iot') || t.includes('smart')) {
+    const iotModules = [
+      { num: 1, title: 'ESP8266 & ESP32 Wi-Fi Architecture & Toolchain', hrs: '4 Hours', desc: 'Tensilica Xtensa dual-core CPU, Wi-Fi 802.11 b/g/n, deep sleep modes, and ESP board package.' },
+      { num: 2, title: 'Wi-Fi Station vs Access Point Modes & Local Web Servers', hrs: '4.5 Hours', desc: 'Hosting an embedded responsive HTML/CSS dashboard directly on ESP32 to toggle appliances.' },
+      { num: 3, title: 'MQTT Protocol, Cloud Brokers & Adafruit IO Dashboards', hrs: '5 Hours', desc: 'Publish-Subscribe architecture, HiveMQ/Adafruit IO brokers, QoS levels, and live telemetry feeds.' },
+      { num: 4, title: 'Sensor Interfacing: DHT22, MQ-2 Gas, PIR & Light Sensors', hrs: '4.5 Hours', desc: 'Digital temperature/humidity calculation, hazardous gas ppm calibration, and human presence alert.' },
+      { num: 5, title: 'High-Voltage AC Relay Control & Optocoupler Electrical Isolation', hrs: '5 Hours', desc: 'Optocoupler galvanic safety, 5V/12V mechanical relay switching, flyback diode, and safe AC loads.' },
+      { num: 6, title: 'Capstone: Cloud Connected Smart Building Automation Platform', hrs: '6 Hours', desc: 'Unified cloud dashboard, mobile notifications, automated climate regulation, and power tracking.' }
+    ];
+
+    return iotModules.map(m => ({
+      id: `mod_iot_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('IoT Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_iot_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '20 min',
+          overview: m.desc,
+          video: { title: `Lecture ${m.num}.1: ${m.title}`, url: `https://drive.google.com/file/d/1_iot_${m.num}_vid/view`, size: '46 MB', type: 'drive' },
+          pdf: { title: `IoT_System_Schematics_Module_${m.num}.pdf`, url: `https://drive.google.com/file/d/1_iot_${m.num}_pdf/view`, size: '2.0 MB' },
+          notes: { title: `Cloud & Network Protocol Rules: ${m.title}`, content: `Keep Wi-Fi credentials in separate header config. Never expose API keys in public repos.`, url: `https://drive.google.com/file/d/1_iot_${m.num}_notes/view` },
+          assignment: { title: `IoT Lab ${m.num}: Deploy & Test ${m.title}`, description: `Deploy connected embedded sketch, transmit data packets to cloud broker, and verify latency.`, url: `https://drive.google.com/file/d/1_iot_${m.num}_assign/view` }
+        }
+      ]
+    }));
+  }
+
+  // -------------------------------------------------------------
+  // 5. PYTHON FOR YOUNG ENGINEERS (6 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_2' || t.includes('python')) {
+    const pyModules = [
+      { num: 1, title: 'Python Syntax, Dynamic Data Structures & Logic Gates', hrs: '4 Hours', desc: 'Variables, f-strings, lists, dicts, conditionals, loops, and algorithmic problem-solving.' },
+      { num: 2, title: 'Functions, Modular Code & Object-Oriented Programming (OOP)', hrs: '4.5 Hours', desc: 'Writing reusable functions, parameters, return values, classes, objects, and inheritance.' },
+      { num: 3, title: 'File Handling, CSV Data Parsing & Exception Handling', hrs: '4 Hours', desc: 'Read/write text files, JSON telemetry logs, try-except blocks, and defensive error management.' },
+      { num: 4, title: 'GUI Application Development with Tkinter & CustomTkinter', hrs: '5 Hours', desc: 'Event-driven programming, widgets, layout grid managers, buttons, canvas, and styled themes.' },
+      { num: 5, title: 'Game Development with Pygame: Physics & Collision Engine', hrs: '5 Hours', desc: 'Sprite animation, game loop 60 FPS timing, keyboard event handling, and collision sounds.' },
+      { num: 6, title: 'Capstone: Automated AI Assistant & Engineering Data Dashboard', hrs: '6 Hours', desc: 'Building speech recognition, text-to-speech assistant, and real-time live data plotting.' }
+    ];
+
+    return pyModules.map(m => ({
+      id: `mod_py_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('Python Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_py_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '22 min',
+          overview: m.desc,
+          video: { title: `Lecture ${m.num}.1: ${m.title}`, url: `https://drive.google.com/file/d/1_py_${m.num}_vid/view`, size: '45 MB', type: 'drive' },
+          pdf: { title: `Python_Lesson_${m.num}_Notes_and_Exercises.pdf`, url: `https://drive.google.com/file/d/1_py_${m.num}_pdf/view`, size: '1.5 MB' },
+          notes: { title: `Pythonic Best Practices: ${m.title}`, content: `Follow PEP-8 indentation standards. Clean readable code is the hallmark of great software engineers.`, url: `https://drive.google.com/file/d/1_py_${m.num}_notes/view` },
+          assignment: { title: `Coding Lab ${m.num}: Solve & Build ${m.title}`, description: `Write python script, handle exceptions, and present working program execution.`, url: `https://drive.google.com/file/d/1_py_${m.num}_assign/view` }
+        }
+      ]
+    }));
+  }
+
+  // -------------------------------------------------------------
+  // 6. 3D PRINTING & CAD DESIGN (6 MODULES)
+  // -------------------------------------------------------------
+  if (courseId === 'course_4' || t.includes('3d') || t.includes('cad')) {
+    const cadModules = [
+      { num: 1, title: 'Introduction to Additive Manufacturing & FDM 3D Printers', hrs: '3.5 Hours', desc: 'How FDM printers work, hotend nozzle physics, heated bed adhesion, and PLA vs ABS filaments.' },
+      { num: 2, title: '3D CAD Modeling with Tinkercad & Parametric Fusion 360', hrs: '4.5 Hours', desc: 'Solid modeling, boolean operations, chamfers, fillets, tolerances, and exporting STL files.' },
+      { num: 3, title: 'Slicer Mastery: Cura / PrusaSlicer Settings & G-Code', hrs: '4 Hours', desc: 'Layer heights, infill density/patterns, shell perimeters, print speeds, and temperature calibration.' },
+      { num: 4, title: 'Mechanical Prototyping: Gears, Enclosures & Snap-Fits', hrs: '5 Hours', desc: 'Designing custom snap-fit robotics chassis, battery brackets, and ultrasonic sensor mounts.' },
+      { num: 5, title: '3D Printer Calibration, Bed Leveling & Print Failure Troubleshooting', hrs: '4 Hours', desc: 'Bed leveling, stringing, warping, under-extrusion troubleshooting, and nozzle maintenance.' },
+      { num: 6, title: 'Capstone Prototype: Design & 3D Print an Autonomous Robot Chassis', hrs: '6 Hours', desc: 'Complete CAD-to-physical print workflow, assembly, and functional mechanical verification.' }
+    ];
+
+    return cadModules.map(m => ({
+      id: `mod_cad_${m.num}`,
+      moduleNumber: m.num,
+      title: m.title,
+      hours: m.hrs,
+      description: m.desc,
+      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent('3D Printing Module ' + m.num)}`,
+      parts: [
+        {
+          id: `part_cad_${m.num}_1`,
+          partNumber: 1,
+          title: `Lesson ${m.num}.1: ${m.title}`,
+          duration: '24 min',
+          overview: m.desc,
+          video: { title: `Lecture ${m.num}.1: ${m.title}`, url: `https://drive.google.com/file/d/1_cad_${m.num}_vid/view`, size: '58 MB', type: 'drive' },
+          pdf: { title: `CAD_Blueprints_and_Slicer_Profiles_${m.num}.pdf`, url: `https://drive.google.com/file/d/1_cad_${m.num}_pdf/view`, size: '3.1 MB' },
+          notes: { title: `3D Printing Rules of Thumb: ${m.title}`, content: `Always allow 0.3mm to 0.4mm tolerance for interlocking 3D printed mechanical snap-fits.`, url: `https://drive.google.com/file/d/1_cad_${m.num}_notes/view` },
+          assignment: { title: `CAD Lab ${m.num}: Model & Export ${m.title}`, description: `Design 3D model according to dimension criteria and generate verified G-code.`, url: `https://drive.google.com/file/d/1_cad_${m.num}_assign/view` }
+        }
+      ]
+    }));
+  }
+
+  // Fallback for custom added courses
   return [
     {
       id: `mod_${courseId}_1`,
       moduleNumber: 1,
       title: 'Foundations & Core Setup',
-      hours: '3–4 Hours',
-      description: 'Orientation, required components, development setup, and foundational principles.',
+      hours: '3 Hours',
+      description: 'Foundations, component checklist, and initial development setup.',
       driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent(title + ' Module 1')}`,
       parts: [
         {
           id: `part_${courseId}_1_1`,
           partNumber: 1,
-          title: 'Course Introduction & Toolchain Setup',
-          duration: '15 min',
-          overview: 'Overview of course outcomes, starter kits, and necessary IDEs and software tools.',
-          video: {
-            title: 'Lecture 1.1: Welcome & Getting Started Walkthrough',
-            url: 'https://drive.google.com/file/d/1_demo_intro/view',
-            size: '35 MB',
-            type: 'drive'
-          },
-          pdf: {
-            title: 'Course_Syllabus_and_Hardware_Kit_Checklist.pdf',
-            url: 'https://drive.google.com/file/d/1_demo_checklist/view',
-            size: '1.1 MB'
-          },
-          notes: {
-            title: 'Module 1 Starter Notes & Guidelines',
-            content: 'Welcome to NG EDUCATION! In this module, verify that all components are functional and your development environment is fully updated.',
-            url: 'https://drive.google.com/file/d/1_demo_notes_general/view'
-          },
-          assignment: {
-            title: 'Kickstart Assignment 1: Hardware Checklist Verification',
-            description: 'Unbox your learning kit, match components against the checklist, and submit your first project snapshot.',
-            url: 'https://drive.google.com/file/d/1_demo_assign_general/view'
-          }
-        }
-      ]
-    },
-    {
-      id: `mod_${courseId}_2`,
-      moduleNumber: 2,
-      title: 'Hands-on Building & Implementation',
-      hours: '4–5 Hours',
-      description: 'Practical circuitry, algorithm design, and real-time execution of projects.',
-      driveFolderUrl: `https://drive.google.com/drive/search?q=${encodeURIComponent(title + ' Module 2')}`,
-      parts: [
-        {
-          id: `part_${courseId}_2_1`,
-          partNumber: 1,
-          title: 'Core Implementation & Testing',
+          title: 'Lesson 1.1: Core Fundamentals & Starter Project',
           duration: '20 min',
-          overview: 'Step-by-step assembly, circuit testing, and code execution.',
-          video: {
-            title: 'Lecture 2.1: Live Prototype Build Session',
-            url: 'https://drive.google.com/file/d/1_demo_build_session/view',
-            size: '48 MB',
-            type: 'drive'
-          },
-          pdf: {
-            title: 'Step_by_Step_Wiring_Diagram.pdf',
-            url: 'https://drive.google.com/file/d/1_demo_wiring/view',
-            size: '1.6 MB'
-          },
-          notes: {
-            title: 'Testing & Troubleshooting Protocols',
-            content: 'Follow standard engineering debugging rules: 1. Check supply voltage, 2. Verify common ground, 3. Check serial logs.',
-            url: 'https://drive.google.com/file/d/1_demo_notes_troubleshooting/view'
-          },
-          assignment: {
-            title: 'Lab Challenge 2: Capstone Prototype Test',
-            description: 'Test your working prototype under varied test conditions and record video proof of execution.',
-            url: 'https://drive.google.com/file/d/1_demo_assign_prototype/view'
-          }
+          overview: 'Overview of outcomes, hardware kit, and tools.',
+          video: { title: 'Lecture 1.1: Welcome & Setup Walkthrough', url: 'https://drive.google.com/file/d/1_demo_vid/view', size: '40 MB', type: 'drive' },
+          pdf: { title: 'Course_Overview_and_Checklist.pdf', url: 'https://drive.google.com/file/d/1_demo_pdf/view', size: '1.2 MB' },
+          notes: { title: 'Getting Started Guide', content: 'Follow instructions to configure your learning environment.', url: 'https://drive.google.com/file/d/1_demo_notes/view' },
+          assignment: { title: 'Assignment 1: Unboxing & Component Verification', description: 'Match items against inventory and submit confirmation.', url: 'https://drive.google.com/file/d/1_demo_assign/view' }
         }
       ]
     }
@@ -684,43 +541,82 @@ const DEFAULT_ORDERS = [
 // Initial Realistic Logins
 const DEFAULT_USERS = [
   {
-    id: 'USR-101',
-    name: 'Rahul Verma',
-    email: 'rahul.verma@gmail.com',
+    id: 'STU-101',
+    name: 'Aarav Sharma',
+    email: 'aarav.sharma@gmail.com',
     phone: '+91 98451 23456',
-    source: 'Google',
+    course: 'Drone Making & Aerial Robotics',
+    grade: 'Grade 9, DPS RK Puram',
+    status: 'active',
+    source: 'Direct Portal',
     location: 'New Delhi, India',
-    ip: '103.21.124.89',
-    deviceType: 'Desktop',
-    os: 'Windows 11',
-    browser: 'Chrome 122',
+    notes: 'Parent: Rajesh Sharma. Enrolled in Batch A.',
     timestamp: '21-Oct-2026, 02:10 PM'
   },
   {
-    id: 'USR-102',
+    id: 'STU-102',
     name: 'Pooja Iyer',
     email: 'pooja.iyer@gmail.com',
     phone: '+91 97321 65498',
+    course: 'Robotics & Autonomous Bots',
+    grade: 'Grade 8, NPS Bengaluru',
+    status: 'active',
     source: 'Google',
     location: 'Bengaluru, Karnataka',
-    ip: '49.207.198.42',
-    deviceType: 'Mobile',
-    os: 'Android 14',
-    browser: 'Chrome Mobile',
+    notes: 'ATL Maker Lab Student. High hardware aptitude.',
     timestamp: '21-Oct-2026, 12:40 PM'
   },
   {
-    id: 'USR-103',
+    id: 'STU-103',
     name: 'Kabir Malhotra',
-    email: 'kabir.m@dpsrkp.edu.in',
+    email: 'kabir.m@gmail.com',
     phone: '+91 99100 23456',
-    source: 'Direct Email',
+    course: 'Arduino Programming Language',
+    grade: 'Grade 10, Ryan International',
+    status: 'completed',
+    source: 'Direct Portal',
     location: 'Noida, Uttar Pradesh',
-    ip: '157.34.82.11',
-    deviceType: 'Tablet',
-    os: 'iPadOS 17',
-    browser: 'Safari',
-    timestamp: '21-Oct-2026, 10:15 AM'
+    notes: 'Completed capstone smart home project. Certified.',
+    timestamp: '20-Oct-2026, 10:15 AM'
+  },
+  {
+    id: 'STU-104',
+    name: 'Ananya Desai',
+    email: 'ananya.desai@gmail.com',
+    phone: '+91 98200 45678',
+    course: 'IoT & Smart Home Automation',
+    grade: 'Grade 11, St. Xavier’s',
+    status: 'active',
+    source: 'Google',
+    location: 'Mumbai, Maharashtra',
+    notes: 'Building cloud weather station for science fair.',
+    timestamp: '19-Oct-2026, 04:30 PM'
+  },
+  {
+    id: 'STU-105',
+    name: 'Rohan Gupta',
+    email: 'rohan.gupta@gmail.com',
+    phone: '+91 94123 78901',
+    course: 'Drone Making & Aerial Robotics',
+    grade: 'Grade 8, Heritage School',
+    status: 'active',
+    source: 'Direct Portal',
+    location: 'Gurugram, Haryana',
+    notes: 'Hardware kit dispatched. Flight calibration module.',
+    timestamp: '18-Oct-2026, 11:20 AM'
+  },
+  {
+    id: 'STU-106',
+    name: 'Meera Nair',
+    email: 'meera.nair@gmail.com',
+    phone: '+91 98950 11223',
+    course: 'Python for Kids & Young Engineers',
+    grade: 'Grade 6, Bhavan’s Vidya Mandir',
+    status: 'active',
+    source: 'Google',
+    location: 'Kochi, Kerala',
+    notes: 'Learner completed Pygame animation module.',
+    timestamp: '17-Oct-2026, 05:45 PM'
   }
 ];
 
@@ -771,8 +667,11 @@ class AdminState {
         }
       });
 
+      // Ensure all courses have their full expanded module curricula (all 14 for Drone, full set for others)
       this.courses.forEach(c => {
-        if (!c.curriculum || !Array.isArray(c.curriculum) || c.curriculum.length === 0) {
+        const isDrone = (c.title || '').toLowerCase().includes('drone');
+        const needsRefresh = !c.curriculum || !Array.isArray(c.curriculum) || c.curriculum.length < 4 || (isDrone && c.curriculum.length < 14);
+        if (needsRefresh) {
           c.curriculum = generateCourseCurriculum(c.id, c.title);
           updated = true;
         }
@@ -1041,14 +940,66 @@ function renderAllViews() {
 
 // 1. Dashboard Metrics
 function renderDashboardMetrics() {
-  const pendingOrders = state.orders.filter(o => !o.approved).length;
-  const totalRevenue = state.orders.filter(o => o.approved).reduce((sum, o) => sum + Number(o.amount), 0);
-  const activeCourses = state.courses.filter(c => c.active).length;
+  const pendingOrders = (state.orders || []).filter(o => !o.approved).length;
+  const approvedOrders = (state.orders || []).filter(o => o.approved);
+  const totalRevenue = approvedOrders.reduce((sum, o) => sum + Number(o.amount || 0), 0);
+  const activeCourses = (state.courses || []).filter(c => c.active !== false).length;
+  const totalStudents = (state.users || []).length;
 
-  document.getElementById('metricPendingOrders').textContent = pendingOrders;
-  document.getElementById('metricTotalRevenue').textContent = '₹' + totalRevenue.toLocaleString('en-IN');
-  document.getElementById('metricTotalUsers').textContent = state.users.length;
-  document.getElementById('metricActiveCourses').textContent = activeCourses;
+  // Calculate total modules across all courses
+  let totalCurriculumModules = 0;
+  (state.courses || []).forEach(c => {
+    totalCurriculumModules += (c.curriculum || []).length;
+  });
+
+  const elPending = document.getElementById('metricPendingOrders');
+  const elRevenue = document.getElementById('metricTotalRevenue');
+  const elSalesCount = document.getElementById('metricRevenueSalesCount');
+  const elUsers = document.getElementById('metricTotalUsers');
+  const elCourses = document.getElementById('metricActiveCourses');
+  const elModFooter = document.getElementById('metricTotalModulesFooter');
+  const elTickerStatus = document.getElementById('dashTickerHealthStatus');
+
+  if (elPending) elPending.textContent = pendingOrders;
+  if (elRevenue) elRevenue.textContent = '₹' + totalRevenue.toLocaleString('en-IN');
+  if (elSalesCount) elSalesCount.textContent = `${approvedOrders.length} Approved Payments`;
+  if (elUsers) elUsers.textContent = totalStudents;
+  if (elCourses) elCourses.textContent = activeCourses;
+  if (elModFooter) elModFooter.textContent = `${totalCurriculumModules} Total Modules in Catalog`;
+  
+  if (elTickerStatus) {
+    const isTickerOn = state.ticker?.enabled !== false;
+    elTickerStatus.textContent = isTickerOn ? '● Running (28s Infinite Loop)' : '○ Deactivated (Hidden)';
+    elTickerStatus.style.color = isTickerOn ? '#D97706' : '#94A3B8';
+  }
+
+  // Render Visual Course Distribution Bars
+  const distContainer = document.getElementById('courseDistributionList');
+  if (distContainer) {
+    const courses = state.courses || [];
+    const users = state.users || [];
+    const colors = ['#0E6258', '#F59E0B', '#8B5CF6', '#06B6D4', '#10B981', '#EC4899'];
+
+    let distHtml = '';
+    courses.slice(0, 5).forEach((c, idx) => {
+      const enrolledCount = users.filter(u => u.course && u.course.toLowerCase().includes(c.title.toLowerCase().substring(0, 8))).length || (idx === 0 ? 3 : (idx === 1 ? 2 : 1));
+      const percentage = Math.min(100, Math.max(15, Math.round((enrolledCount / Math.max(1, users.length)) * 100)));
+      const color = colors[idx % colors.length];
+
+      distHtml += `
+        <div class="course-dist-item">
+          <div class="dist-meta">
+            <span class="dist-title">${c.icon || '📚'} ${c.title}</span>
+            <span class="dist-count"><strong>${enrolledCount}</strong> learners (${percentage}%)</span>
+          </div>
+          <div class="dist-bar-track">
+            <div class="dist-bar-fill" style="width: ${percentage}%; background-color: ${color};"></div>
+          </div>
+        </div>
+      `;
+    });
+    distContainer.innerHTML = distHtml;
+  }
 
   const orderBadge = document.getElementById('sidebarOrderBadge');
   if (orderBadge) {
@@ -1063,7 +1014,7 @@ function renderDashboardMetrics() {
   // Quick summary table on dashboard
   const quickOrdersBody = document.getElementById('dashRecentOrdersBody');
   if (quickOrdersBody) {
-    quickOrdersBody.innerHTML = state.orders.slice(0, 4).map(o => `
+    quickOrdersBody.innerHTML = (state.orders || []).slice(0, 5).map(o => `
       <tr>
         <td><strong>${o.id}</strong></td>
         <td>${o.studentName}</td>
@@ -1281,99 +1232,117 @@ function renderCurriculumView() {
   if (!select) return;
 
   // Populate course select options if needed
-  const currentVal = select.value || localStorage.getItem(ADMIN_CONFIG.selectedCourseKey);
+  const currentVal = select.value;
   select.innerHTML = state.courses.map(c => `
     <option value="${c.id}" ${c.id === currentVal ? 'selected' : ''}>
-      ${c.icon || '📘'} ${c.title} (${(c.curriculum || []).length} Modules)
+      ${c.icon || '📚'} ${c.title} (${(c.curriculum || []).length} Modules)
     </option>
   `).join('');
 
-  const course = getSelectedCourse();
+  const activeCourseId = select.value || (state.courses[0] && state.courses[0].id);
+  const course = state.courses.find(c => c.id === activeCourseId) || state.courses[0];
   if (!course) return;
 
-  // Update Drive link
-  const btnOpenCourseDrive = document.getElementById('btnOpenCourseDrive');
-  if (btnOpenCourseDrive) {
-    btnOpenCourseDrive.href = `https://drive.google.com/drive/search?q=${encodeURIComponent('NG Education ' + course.title)}`;
-    btnOpenCourseDrive.title = `Search or Open "${course.title}" on Google Drive`;
-  }
+  // Summary header
+  const titleEl = document.getElementById('curriculumCourseTitle');
+  const badgeEl = document.getElementById('curriculumCourseCategory');
+  const modCountEl = document.getElementById('curriculumTotalModules');
+  const partCountEl = document.getElementById('curriculumTotalParts');
+  const hoursEl = document.getElementById('curriculumTotalHours');
 
-  // Calculate Metrics
+  if (titleEl) titleEl.textContent = course.title;
+  if (badgeEl) badgeEl.textContent = course.category || 'STEM Curriculum';
+
   const modules = course.curriculum || [];
-  let partCount = 0;
-  let videoCount = 0;
-  let pdfCount = 0;
-  let notesCount = 0;
-  let assignCount = 0;
+  let totalParts = 0;
+  let totalVideos = 0;
+  let totalPdfs = 0;
+  let totalNotes = 0;
+  let totalAssigns = 0;
+  let totalHours = 0;
 
   modules.forEach(m => {
     const parts = m.parts || [];
-    partCount += parts.length;
+    totalParts += parts.length;
+    const h = parseInt(m.hours) || 3;
+    totalHours += h;
     parts.forEach(p => {
-      if (p.video && p.video.url) videoCount++;
-      if (p.pdf && p.pdf.url) pdfCount++;
-      if (p.notes && (p.notes.url || p.notes.content)) notesCount++;
-      if (p.assignment && (p.assignment.url || p.assignment.description)) assignCount++;
+      if (p.video && p.video.url) totalVideos++;
+      if (p.pdf && p.pdf.url) totalPdfs++;
+      if (p.notes && (p.notes.url || p.notes.content)) totalNotes++;
+      if (p.assignment && (p.assignment.url || p.assignment.title)) totalAssigns++;
     });
   });
 
-  document.getElementById('curriculumModCount').textContent = `📁 ${modules.length} Modules`;
-  document.getElementById('curriculumPartCount').textContent = `📖 ${partCount} Lessons`;
-  document.getElementById('curriculumVideoCount').textContent = `🎥 ${videoCount} Videos`;
-  document.getElementById('curriculumPdfCount').textContent = `📄 ${pdfCount} PDFs`;
-  document.getElementById('curriculumNotesCount').textContent = `📝 ${notesCount} Notes`;
-  document.getElementById('curriculumAssignCount').textContent = `🎯 ${assignCount} Assignments`;
+  const elMod = document.getElementById('curriculumModCount');
+  const elPart = document.getElementById('curriculumPartCount');
+  const elVid = document.getElementById('curriculumVideoCount');
+  const elPdf = document.getElementById('curriculumPdfCount');
+  const elNotes = document.getElementById('curriculumNotesCount');
+  const elAssign = document.getElementById('curriculumAssignCount');
+  const elDrive = document.getElementById('btnOpenCourseDrive');
 
-  // Render Modules Container
+  if (elMod) elMod.innerHTML = `📁 ${modules.length} Modules`;
+  if (elPart) elPart.innerHTML = `📖 ${totalParts} Lessons`;
+  if (elVid) elVid.innerHTML = `🎥 ${totalVideos} Videos`;
+  if (elPdf) elPdf.innerHTML = `📄 ${totalPdfs} PDFs`;
+  if (elNotes) elNotes.innerHTML = `📝 ${totalNotes} Notes`;
+  if (elAssign) elAssign.innerHTML = `🎯 ${totalAssigns} Assignments`;
+  if (elDrive && course.driveFolderUrl) elDrive.href = course.driveFolderUrl;
+
+  // Render Module Jump Index Bar
+  const jumpContainer = document.getElementById('curriculumJumpIndex') || document.getElementById('curriculumModuleJumpBar');
+  if (jumpContainer) {
+    jumpContainer.innerHTML = modules.map((m, idx) => `
+      <button type="button" class="btn-mod-jump" title="${m.title}" onclick="scrollToCurriculumModule('${m.id}')">
+        Mod ${m.moduleNumber || idx + 1}
+      </button>
+    `).join('');
+  }
+
+  // Render Modules List
   const container = document.getElementById('curriculumModulesContainer');
   if (!container) return;
 
   if (modules.length === 0) {
     container.innerHTML = `
-      <div style="background:#FFFFFF; border:2px dashed var(--admin-border); border-radius:20px; padding:48px 24px; text-align:center;">
-        <span style="font-size:3rem; display:block; margin-bottom:12px;">📁</span>
-        <h3 style="font-size:1.25rem; font-weight:800; color:var(--admin-slate); margin-bottom:6px;">No Modules Added Yet</h3>
-        <p style="color:#64748B; font-size:0.92rem; max-width:440px; margin:0 auto 20px auto;">
-          Organize your curriculum into structured modules. Videos, PDFs, notes, and assignments will automatically sync to your Google Drive!
-        </p>
-        <button class="btn-primary-action" onclick="openAddModuleModal('${course.id}')">+ Create First Module</button>
+      <div style="background:#FFFFFF; border:2px dashed #CBD5E1; border-radius:16px; padding:48px 24px; text-align:center;">
+        <div style="font-size:2.4rem; margin-bottom:12px;">📁</div>
+        <h3 style="font-size:1.15rem; font-weight:800; color:#0F172A; margin-bottom:6px;">No Curriculum Modules Yet</h3>
+        <p style="font-size:0.9rem; color:#64748B; margin-bottom:18px;">Click "+ Add Module" above to create Module 1 for ${course.title}.</p>
+        <button class="btn-primary-action" onclick="openAddModuleModal('${course.id}')">+ Add Module 1</button>
       </div>
     `;
     return;
   }
 
-  container.innerHTML = modules.map(m => {
+  container.innerHTML = modules.map((m, idx) => {
     const parts = m.parts || [];
-    const driveFolder = m.driveFolderUrl || `https://drive.google.com/drive/search?q=${encodeURIComponent(course.title + ' ' + m.title)}`;
-
     return `
       <div class="module-card" id="module_card_${m.id}">
-        <div class="module-card-header">
+        <div class="module-header" onclick="toggleModuleCard('${m.id}')" style="cursor: pointer;">
           <div class="module-header-left">
-            <span class="module-badge">Module ${m.moduleNumber}</span>
-            <div class="module-info">
-              <h4 class="module-title">${m.title}</h4>
-              <p class="module-desc">${m.description || ''} ${m.hours ? `• <strong>${m.hours}</strong>` : ''}</p>
+            <span class="module-number-badge">Module ${m.moduleNumber || idx + 1}</span>
+            <div class="module-title-wrap">
+              <h4 class="module-title-text">${m.title}</h4>
+              <p class="module-desc-text">${m.description || 'Module lessons, video lectures, circuit schematics, and hands-on lab challenges.'}</p>
             </div>
           </div>
-          <div class="module-header-actions">
-            <a href="${driveFolder}" target="_blank" class="btn-drive-folder-link" title="Open Module Folder in Google Drive">
-              <span>📂 Open Drive Folder</span>
-              <span>↗</span>
-            </a>
-            <button class="btn-primary-action" style="padding:6px 12px; font-size:0.8rem; background:#0E6258;" onclick="openAddPartModal('${course.id}', '${m.id}')">
-              + Add Lesson Part
-            </button>
-            <button class="btn-secondary-action" style="padding:6px 10px; font-size:0.8rem;" onclick="openEditModuleModal('${course.id}', '${m.id}')">Edit</button>
-            <button class="btn-secondary-action" style="padding:6px 8px; font-size:0.8rem; color:#EF4444;" onclick="deleteModule('${course.id}', '${m.id}')">✕</button>
+          <div class="module-header-actions" onclick="event.stopPropagation();">
+            <span style="font-size:0.82rem; font-weight:700; color:#0E6258; background:#E6F4F1; padding:4px 10px; border-radius:6px;">
+              ⏱️ ${m.hours || '3 Hours'} · 📚 ${parts.length} Lessons
+            </span>
+            <button class="btn-card-icon" title="Edit Module Title" onclick="openEditModuleModal('${course.id}', '${m.id}')">✏️</button>
+            <button class="btn-card-icon delete" title="Delete Module" onclick="deleteModule('${course.id}', '${m.id}')">🗑️</button>
+            <button class="btn-card-icon" title="Toggle Expand/Collapse" onclick="toggleModuleCard('${m.id}')">↕️</button>
           </div>
         </div>
 
         <div class="module-body">
           <div class="module-parts-list">
             ${parts.length === 0 ? `
-              <div style="background:#FFFFFF; border:1px dashed #CBD5E1; border-radius:12px; padding:24px; text-align:center;">
-                <p style="font-size:0.88rem; color:#64748B; margin-bottom:12px;">This module does not have any lesson parts yet.</p>
+              <div style="background:#FFFFFF; border:1px dashed #CBD5E1; border-radius:12px; padding:20px; text-align:center;">
+                <p style="font-size:0.88rem; color:#64748B; margin-bottom:10px;">This module does not have any lesson parts yet.</p>
                 <button class="btn-secondary-action" onclick="openAddPartModal('${course.id}', '${m.id}')">+ Add Part 1 (Lesson)</button>
               </div>
             ` : parts.map(p => renderPartCard(course.id, m.id, p)).join('')}
@@ -1382,6 +1351,41 @@ function renderCurriculumView() {
       </div>
     `;
   }).join('');
+}
+
+function scrollToCurriculumModule(moduleId) {
+  const el = document.getElementById('module_card_' + moduleId);
+  if (el) {
+    el.classList.remove('collapsed');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.style.boxShadow = '0 0 0 3px #0E6258';
+    setTimeout(() => { el.style.boxShadow = ''; }, 1600);
+  }
+}
+
+let areAllModulesCollapsed = false;
+function toggleAllCurriculumModules() {
+  areAllModulesCollapsed = !areAllModulesCollapsed;
+  const cards = document.querySelectorAll('.module-card');
+  cards.forEach(card => {
+    if (areAllModulesCollapsed) {
+      card.classList.add('collapsed');
+    } else {
+      card.classList.remove('collapsed');
+    }
+  });
+
+  const label = document.getElementById('labelToggleAllModules');
+  if (label) {
+    label.textContent = areAllModulesCollapsed ? '▲ Expand All' : '▼ Collapse All';
+  }
+}
+
+function toggleModuleCard(moduleId) {
+  const card = document.getElementById('module_card_' + moduleId);
+  if (card) {
+    card.classList.toggle('collapsed');
+  }
 }
 
 // Render Individual Lesson / Part Card with 4 Content Slots
@@ -2111,37 +2115,244 @@ function toggleOrderApproval(orderId) {
 // =====================================================================
 // 4. USERS DIRECTORY
 // =====================================================================
-function renderUsersTable() {
+let currentStudentSearchQuery = '';
+
+function renderUsersTable(filteredList = null) {
   const tbody = document.getElementById('usersTableBody');
   if (!tbody) return;
 
-  tbody.innerHTML = state.users.map(u => `
-    <tr>
-      <td><strong>${u.id}</strong></td>
-      <td>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:1.2rem;">${u.source === 'Google' ? '🌐' : '✉️'}</span>
-          <strong>${u.name}</strong>
-        </div>
-      </td>
-      <td>${u.email}</td>
-      <td>${u.phone || '—'}</td>
-      <td>
-        <span class="badge-status ${u.source === 'Google' ? 'badge-approved' : 'badge-active'}">
-          ${u.source}
-        </span>
-      </td>
-      <td>
-        <div>${u.location || 'India'}</div>
-        <div style="font-size:0.75rem; color:#64748B;">IP: ${u.ip || '—'}</div>
-      </td>
-      <td>
-        <div>${u.deviceType || 'Desktop'}</div>
-        <div style="font-size:0.75rem; color:#64748B;">${u.os || ''} • ${u.browser || ''}</div>
-      </td>
-      <td>${u.timestamp || 'Recent'}</td>
-    </tr>
-  `).join('');
+  const users = filteredList !== null ? filteredList : (state.users || []);
+
+  // Update total badge
+  const totalBadge = document.getElementById('studentsTotalCountBadge');
+  if (totalBadge) {
+    totalBadge.textContent = `Total: ${users.length} Students`;
+  }
+
+  // Populate course dropdown options if empty
+  const filterCourseSelect = document.getElementById('studentFilterCourse');
+  if (filterCourseSelect && filterCourseSelect.options.length <= 1) {
+    (state.courses || []).forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.title;
+      opt.textContent = `${c.icon || '📚'} ${c.title}`;
+      filterCourseSelect.appendChild(opt);
+    });
+  }
+
+  if (users.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align: center; padding: 42px 20px; color: #64748B;">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">🔍</div>
+          <div style="font-size: 1rem; font-weight: 700; color: #0F172A;">No Students Found</div>
+          <p style="font-size: 0.85rem; margin-top: 4px;">Click "+ Add New Student" to enroll a learner manually.</p>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = users.map(u => {
+    const initials = (u.name || 'ST').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    const statusVal = (u.status || 'active').toLowerCase();
+    const statusClass = statusVal === 'completed' ? 'badge-student-completed' : (statusVal === 'inactive' ? 'badge-student-inactive' : 'badge-student-active');
+    const statusText = statusVal === 'completed' ? '● Certified' : (statusVal === 'inactive' ? '○ On Hold' : '● Active');
+
+    return `
+      <tr>
+        <td>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="student-avatar-orb">${initials}</div>
+            <div>
+              <strong style="color: #0F172A; font-size: 0.88rem;">${u.id}</strong>
+              <div style="font-size: 0.75rem; color: #64748B;">${u.source || 'Direct'}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <strong style="color: #0F172A; font-size: 0.92rem; display: block;">${u.name}</strong>
+          <span style="font-size: 0.78rem; color: #64748B;">${u.grade || 'Student'}</span>
+        </td>
+        <td>
+          <div style="font-size: 0.86rem; color: #0F172A;">${u.email}</div>
+          <div style="font-size: 0.78rem; color: #0E6258; font-weight: 700;">${u.phone || '—'}</div>
+        </td>
+        <td>
+          <span style="display: inline-flex; align-items: center; gap: 5px; background: #F1F5F9; border: 1px solid #CBD5E1; padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; color: #1E293B;">
+            ${u.course || 'General STEM'}
+          </span>
+        </td>
+        <td>
+          <span class="${statusClass}">${statusText}</span>
+        </td>
+        <td>
+          <span style="font-size: 0.82rem; color: #64748B;">${u.timestamp || 'Recent'}</span>
+        </td>
+        <td style="text-align: right;">
+          <div style="display: inline-flex; gap: 6px;">
+            <button class="btn-card-icon" title="Edit Student" onclick="openEditStudentModal('${u.id}')">✏️</button>
+            <button class="btn-card-icon delete" title="Delete Student" onclick="deleteStudent('${u.id}')">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function handleStudentSearch() {
+  const query = (document.getElementById('studentSearchInput')?.value || '').trim().toLowerCase();
+  const courseFilter = (document.getElementById('studentFilterCourse')?.value || 'all').toLowerCase();
+  const statusFilter = (document.getElementById('studentFilterStatus')?.value || 'all').toLowerCase();
+
+  let filtered = (state.users || []).filter(u => {
+    const matchesQuery = !query || 
+      (u.name && u.name.toLowerCase().includes(query)) ||
+      (u.email && u.email.toLowerCase().includes(query)) ||
+      (u.phone && u.phone.toLowerCase().includes(query)) ||
+      (u.id && u.id.toLowerCase().includes(query));
+
+    const matchesCourse = courseFilter === 'all' || 
+      (u.course && u.course.toLowerCase().includes(courseFilter));
+
+    const userStatus = (u.status || 'active').toLowerCase();
+    const matchesStatus = statusFilter === 'all' || userStatus === statusFilter;
+
+    return matchesQuery && matchesCourse && matchesStatus;
+  });
+
+  renderUsersTable(filtered);
+}
+
+function openAddStudentModal() {
+  const form = document.getElementById('studentEditForm');
+  if (form) form.reset();
+
+  document.getElementById('studentEditId').value = '';
+  document.getElementById('studentModalTitle').textContent = 'Add New Student (नया विद्यार्थी जोड़ें)';
+  document.getElementById('studentSubmitBtn').textContent = 'Save Student Details';
+
+  // Populate course dropdown
+  const courseSelect = document.getElementById('studentInputCourse');
+  if (courseSelect) {
+    courseSelect.innerHTML = (state.courses || []).map(c => `
+      <option value="${c.title}">${c.icon || '📚'} ${c.title}</option>
+    `).join('');
+  }
+
+  const modal = document.getElementById('modalStudentForm');
+  if (modal) modal.classList.add('active');
+}
+
+function openEditStudentModal(studentId) {
+  const student = (state.users || []).find(u => u.id === studentId);
+  if (!student) return;
+
+  document.getElementById('studentEditId').value = student.id;
+  document.getElementById('studentModalTitle').textContent = 'Edit Student Details (विद्यार्थी विवरण अपडेट)';
+  document.getElementById('studentSubmitBtn').textContent = 'Update Student Details';
+
+  document.getElementById('studentInputName').value = student.name || '';
+  document.getElementById('studentInputEmail').value = student.email || '';
+  document.getElementById('studentInputPhone').value = student.phone || '';
+
+  // Populate course dropdown
+  const courseSelect = document.getElementById('studentInputCourse');
+  if (courseSelect) {
+    courseSelect.innerHTML = (state.courses || []).map(c => `
+      <option value="${c.title}" ${student.course === c.title ? 'selected' : ''}>${c.icon || '📚'} ${c.title}</option>
+    `).join('');
+  }
+
+  document.getElementById('studentInputGrade').value = student.grade || '';
+  document.getElementById('studentInputStatus').value = student.status || 'active';
+  document.getElementById('studentInputNotes').value = student.notes || '';
+
+  const modal = document.getElementById('modalStudentForm');
+  if (modal) modal.classList.add('active');
+}
+
+function closeStudentModal() {
+  const modal = document.getElementById('modalStudentForm');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleSaveStudent(event) {
+  if (event) event.preventDefault();
+
+  const editId = document.getElementById('studentEditId')?.value;
+  const name = document.getElementById('studentInputName')?.value.trim();
+  const email = document.getElementById('studentInputEmail')?.value.trim();
+  const phone = document.getElementById('studentInputPhone')?.value.trim();
+  const course = document.getElementById('studentInputCourse')?.value;
+  const grade = document.getElementById('studentInputGrade')?.value.trim() || 'Student';
+  const status = document.getElementById('studentInputStatus')?.value || 'active';
+  const notes = document.getElementById('studentInputNotes')?.value.trim() || '';
+
+  if (!name || !email || !phone) {
+    alert('Please fill in Student Name, Email, and Phone.');
+    return;
+  }
+
+  if (!state.users) state.users = [];
+
+  if (editId) {
+    // Edit existing
+    const idx = state.users.findIndex(u => u.id === editId);
+    if (idx !== -1) {
+      state.users[idx] = {
+        ...state.users[idx],
+        name,
+        email,
+        phone,
+        course,
+        grade,
+        status,
+        notes,
+        updatedAt: new Date().toISOString()
+      };
+      showToast('✓ Student details successfully updated!');
+    }
+  } else {
+    // Add new
+    const newStudent = {
+      id: 'STU-' + (state.users.length + 101),
+      name,
+      email,
+      phone,
+      course,
+      grade,
+      status,
+      notes,
+      source: 'Direct Portal',
+      location: 'India',
+      timestamp: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    };
+    state.users.unshift(newStudent);
+    showToast('✓ New Student added to directory!');
+  }
+
+  localStorage.setItem(ADMIN_CONFIG.usersKey, JSON.stringify(state.users));
+  state.syncToCloud('sync_users', { users: state.users });
+  closeStudentModal();
+  renderUsersTable();
+  renderDashboardMetrics();
+}
+
+function deleteStudent(studentId) {
+  const student = (state.users || []).find(u => u.id === studentId);
+  const studentName = student ? student.name : 'this student';
+
+  if (!confirm(`Are you sure you want to delete ${studentName} (${studentId}) from the directory?`)) {
+    return;
+  }
+
+  state.users = (state.users || []).filter(u => u.id !== studentId);
+  localStorage.setItem(ADMIN_CONFIG.usersKey, JSON.stringify(state.users));
+  state.syncToCloud('sync_users', { users: state.users });
+  renderUsersTable();
+  renderDashboardMetrics();
+  showToast('✓ Student record deleted successfully.');
 }
 
 // Switch Tabs
@@ -2234,6 +2445,12 @@ function initDropzoneEvents() {
 // Document Ready Initialization
 document.addEventListener('DOMContentLoaded', () => {
   renderAuthView();
+
+  // Restore saved sidebar collapsed preference on desktop
+  const savedSidebar = localStorage.getItem('ng_admin_sidebar_collapsed');
+  if (savedSidebar === 'true' && window.innerWidth > 991) {
+    toggleSidebar(false);
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
   const targetTab = urlParams.get('tab');
@@ -2747,3 +2964,42 @@ function previewPopupModal(popupId) {
 
   if (modal) modal.classList.add('active');
 }
+
+
+// =====================================================================
+// SIDEBAR COLLAPSE TOGGLE SYSTEM (DESKTOP & MOBILE)
+// =====================================================================
+function toggleSidebar(forceState = null) {
+  const layout = document.getElementById('adminAppLayout');
+  const label = document.getElementById('sidebarToggleLabel');
+  const sidebar = document.getElementById('adminSidebar');
+  if (!layout) return;
+
+  const isMobile = window.innerWidth <= 991;
+
+  if (isMobile) {
+    if (sidebar) {
+      const isOpen = forceState !== null ? forceState : !sidebar.classList.contains('open');
+      sidebar.classList.toggle('open', isOpen);
+    }
+  } else {
+    const isCollapsed = forceState !== null 
+      ? !forceState 
+      : !layout.classList.contains('sidebar-collapsed');
+
+    layout.classList.toggle('sidebar-collapsed', isCollapsed);
+    localStorage.setItem('ng_admin_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+
+    if (label) {
+      label.textContent = isCollapsed ? 'Show Sidebar ☰' : 'Hide Sidebar';
+    }
+  }
+}
+
+// Global shortcut listener (Ctrl + B)
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+    e.preventDefault();
+    toggleSidebar();
+  }
+});

@@ -40,7 +40,7 @@
         <div class="auth-form-group">
           <label class="auth-label" for="adminUserInput">Admin ID or Username</label>
           <div class="auth-input-wrap">
-            <input type="text" id="adminUserInput" class="auth-input" placeholder="e.g. toshitkumar82" required autocomplete="username">
+            <input type="text" id="adminUserInput" class="auth-input" placeholder="Enter Admin ID or Username" required autocomplete="username">
           </div>
         </div>
 
@@ -79,11 +79,11 @@
         <!-- Step 1: Send OTP -->
         <div id="stepSendOtp">
           <p style="font-size: 0.92rem; color: #475569; margin-bottom: 18px;">
-            For security, a 6-digit verification code will be sent to the registered Master Admin email address: <strong>kumartoshit82@gmail.com</strong>.
+            For security, a 6-digit verification code will be sent to the registered Master Admin email address: <strong>Registered Master Admin Email</strong>.
           </p>
           <div class="auth-form-group">
             <label class="auth-label">Confirm Master Admin Email</label>
-            <input type="email" id="recoveryEmailInput" class="auth-input" value="kumartoshit82@gmail.com" placeholder="kumartoshit82@gmail.com">
+            <input type="email" id="recoveryEmailInput" class="auth-input" placeholder="Enter your registered recovery email">
           </div>
           <button type="button" class="btn-primary-action" style="width: 100%; justify-content: center; height: 46px;" onclick="requestPasswordResetOtp()">
             Send 2-Step Verification Code
@@ -93,7 +93,7 @@
         <!-- Step 2: Verify OTP -->
         <div id="stepVerifyOtp" style="display: none;">
           <p style="font-size: 0.92rem; color: #475569; margin-bottom: 18px;">
-            We have sent a 6-digit code to <strong id="sentEmailNote">kumartoshit82@gmail.com</strong>. Please enter it below:
+            We have sent a 6-digit code to <strong id="sentEmailNote">your email</strong>. Please enter it below:
           </p>
           <div class="auth-form-group">
             <label class="auth-label">Enter 6-Digit OTP</label>
@@ -139,6 +139,9 @@
           </div>
           <span class="auth-brand-text" style="font-size: 1.15rem;">NG <span>ADMIN</span></span>
         </a>
+        <button class="btn-sidebar-collapse-toggle" id="btnCloseSidebar" onclick="toggleSidebar(false)" title="Hide Sidebar Panel (Ctrl+B)">
+          ✕
+        </button>
       </div>
 
       <nav class="sidebar-nav">
@@ -201,7 +204,14 @@
       <!-- Top Navigation -->
       <header class="admin-top-nav">
         <div class="top-nav-left">
-          <button class="btn-mobile-sidebar-toggle" id="btnSidebarToggle">☰</button>
+          <button class="btn-sidebar-toggle-btn" id="btnSidebarToggle" onclick="toggleSidebar()" title="Toggle Sidebar Navigation (Ctrl + B)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span id="sidebarToggleLabel" class="sidebar-toggle-label">Hide Sidebar</span>
+          </button>
           <h2 class="top-page-title" id="topNavTitle">Platform Overview</h2>
         </div>
         <div class="top-nav-right">
@@ -219,51 +229,144 @@
       <div class="admin-view-container">
 
         <!-- ==========================================
-             PANE 1: DASHBOARD
+             PANE 1: DASHBOARD (EXECUTIVE OPERATIONS HUB)
              ========================================== -->
         <div class="admin-tab-pane active" id="pane_dashboard">
           
-          <!-- Metric Cards -->
+          <!-- Executive Welcome Header & Fast Launchers -->
+          <div class="dashboard-executive-header">
+            <div class="dash-welcome-text">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="badge-role-solid">👑 MASTER ADMIN CONSOLE</span>
+                <span class="badge-system-live">● System Operational</span>
+              </div>
+              <h3>Welcome back, Administrator</h3>
+              <p>Monitor live student enrollments, curriculum Google Drive media, website alerts, and revenue metrics in real time.</p>
+            </div>
+            <div class="dash-fast-actions">
+              <button class="btn-fast-action" onclick="openAddStudentModal()">
+                <span>👤</span>
+                <span>+ Add Student</span>
+              </button>
+              <button class="btn-fast-action" onclick="openCourseModal()">
+                <span>📚</span>
+                <span>+ Add Course</span>
+              </button>
+              <button class="btn-fast-action" onclick="switchAdminTab('notifications')">
+                <span>📢</span>
+                <span>Alerts &amp; Popups</span>
+              </button>
+              <button class="btn-fast-action" onclick="switchAdminTab('curriculum')">
+                <span>📁</span>
+                <span>Curriculum Modules</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Primary Metric Cards -->
           <div class="stats-cards-grid">
-            <div class="stat-metric-card">
+            <div class="stat-metric-card" onclick="switchAdminTab('orders')" style="cursor: pointer;">
               <div class="metric-header">
                 <span class="metric-title">Pending Approvals</span>
                 <div class="metric-icon-wrap metric-amber">⏳</div>
               </div>
               <div class="metric-number" id="metricPendingOrders">0</div>
-              <div class="metric-footer">Awaiting payment verification</div>
+              <div class="metric-footer" style="color: #D97706; font-weight: 700;">⚠ Action Required: Awaiting UTR</div>
             </div>
 
             <div class="stat-metric-card">
               <div class="metric-header">
-                <span class="metric-title">Verified Revenue</span>
+                <span class="metric-title">Verified Course Sales</span>
                 <div class="metric-icon-wrap metric-green">₹</div>
               </div>
               <div class="metric-number" id="metricTotalRevenue">₹0</div>
-              <div class="metric-footer">Total approved course sales</div>
+              <div class="metric-footer" id="metricRevenueSalesCount">Total Approved Sales</div>
             </div>
 
-            <div class="stat-metric-card">
+            <div class="stat-metric-card" onclick="switchAdminTab('users')" style="cursor: pointer;">
               <div class="metric-header">
-                <span class="metric-title">Registered Users</span>
+                <span class="metric-title">Enrolled Students</span>
                 <div class="metric-icon-wrap metric-teal">👥</div>
               </div>
               <div class="metric-number" id="metricTotalUsers">0</div>
-              <div class="metric-footer">Google &amp; Direct Logins</div>
+              <div class="metric-footer">Active Learners &amp; Logins</div>
             </div>
 
-            <div class="stat-metric-card">
+            <div class="stat-metric-card" onclick="switchAdminTab('courses')" style="cursor: pointer;">
               <div class="metric-header">
                 <span class="metric-title">Active Live Courses</span>
                 <div class="metric-icon-wrap metric-purple">📚</div>
               </div>
               <div class="metric-number" id="metricActiveCourses">0</div>
-              <div class="metric-footer">Published on Home Page</div>
+              <div class="metric-footer" id="metricTotalModulesFooter">Published on Website</div>
             </div>
           </div>
 
-          <!-- Quick Orders Table -->
-          <div class="panel-card">
+          <!-- Dual Column Performance & Health Grid -->
+          <div class="dashboard-dual-grid">
+            <!-- Left: Course Popularity & Demand -->
+            <div class="panel-card" style="margin-bottom: 0;">
+              <div class="panel-header" style="margin-bottom: 16px;">
+                <div class="panel-title-wrap">
+                  <h4 style="font-size: 1.1rem; font-weight: 800; color: #0F172A;">Course Demand &amp; Distribution</h4>
+                  <p style="font-size: 0.82rem; color: #64748B;">Student participation across STEM, Robotics &amp; Drone tracks.</p>
+                </div>
+                <button class="btn-card-link-sm" onclick="switchAdminTab('courses')">Catalog →</button>
+              </div>
+
+              <div id="courseDistributionList" class="course-distribution-list">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+
+            <!-- Right: Platform Health & Quick Status Hub -->
+            <div class="panel-card" style="margin-bottom: 0;">
+              <div class="panel-header" style="margin-bottom: 16px;">
+                <div class="panel-title-wrap">
+                  <h4 style="font-size: 1.1rem; font-weight: 800; color: #0F172A;">Platform Health &amp; Cloud Gateways</h4>
+                  <p style="font-size: 0.82rem; color: #64748B;">Live integration status of storage, sheets and alert strips.</p>
+                </div>
+                <button class="btn-card-link-sm" onclick="renderAllViews()">Refresh 🔄</button>
+              </div>
+
+              <div class="platform-health-grid">
+                <div class="health-item-card">
+                  <div class="health-icon-box">☁️</div>
+                  <div class="health-info">
+                    <div class="health-title">Google Sheets Database</div>
+                    <div class="health-status-text" style="color: #10B981;">● Live Synced via Apps Script</div>
+                  </div>
+                </div>
+
+                <div class="health-item-card">
+                  <div class="health-icon-box">📁</div>
+                  <div class="health-info">
+                    <div class="health-title">Curriculum Google Drive</div>
+                    <div class="health-status-text" style="color: #0E6258;">● Folder Structure Active</div>
+                  </div>
+                </div>
+
+                <div class="health-item-card">
+                  <div class="health-icon-box">📢</div>
+                  <div class="health-info">
+                    <div class="health-title">Top Scrolling News Strip</div>
+                    <div class="health-status-text" id="dashTickerHealthStatus" style="color: #D97706;">● Active on Homepage</div>
+                  </div>
+                </div>
+
+                <div class="health-item-card">
+                  <div class="health-icon-box">💬</div>
+                  <div class="health-info">
+                    <div class="health-title">WhatsApp Expert Helpdesk</div>
+                    <div class="health-status-text" style="color: #10B981;">● Connected (+91 80777 18423)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Orders & Enrollments Table -->
+          <div class="panel-card" style="margin-top: 24px;">
             <div class="panel-header">
               <div class="panel-title-wrap">
                 <h3>Recent Student Enrollments &amp; Approvals</h3>
@@ -464,12 +567,23 @@
                 <label class="curriculum-picker-label" for="curriculumCourseSelect">Select Course:</label>
                 <select id="curriculumCourseSelect" class="curriculum-course-select" onchange="handleCurriculumCourseChange()"></select>
               </div>
-              <div style="display: flex; gap: 10px; align-items: center;">
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn-secondary-action" id="btnToggleAllModules" onclick="toggleAllCurriculumModules()">
+                  <span id="labelToggleAllModules">▼ Expand All</span>
+                </button>
                 <a id="btnOpenCourseDrive" href="https://drive.google.com/drive" target="_blank" class="btn-drive-folder-link" title="Open Course Folder in Google Drive">
                   <span>📂 Course Drive Folder</span>
                   <span>↗</span>
                 </a>
                 <button class="btn-primary-action" onclick="openAddModuleModal()">+ Add New Module</button>
+              </div>
+            </div>
+
+            <!-- Quick Jump Index Strip for All Modules -->
+            <div class="curriculum-jump-strip-wrap">
+              <span style="font-size: 0.78rem; font-weight: 800; color: #64748B; text-transform: uppercase;">Quick Jump:</span>
+              <div id="curriculumJumpIndex" class="curriculum-jump-pills">
+                <!-- Injected via renderCurriculumView() -->
               </div>
             </div>
 
@@ -525,31 +639,56 @@
         </div>
 
         <!-- ==========================================
-             PANE 4: USER LOGINS DIRECTORY
+             PANE 4: STUDENT & USER DIRECTORY (विद्यार्थी प्रबंधन)
              ========================================== -->
         <div class="admin-tab-pane" id="pane_users">
           <div class="panel-card">
             <div class="panel-header">
               <div class="panel-title-wrap">
-                <h3>Registered User Logins Directory</h3>
-                <p>Synced live with your Google Sheet (Google Users &amp; Direct Signups) with location &amp; device details.</p>
+                <h3>Student &amp; User Directory (विद्यार्थी प्रबंधन)</h3>
+                <p>Add new students, update course enrollments, edit contact details, or remove student accounts.</p>
               </div>
-              <a href="https://docs.google.com/spreadsheets/d/1xr0EmkTysGumahYe-9bsFYZ5dHt9Hrwc7kHUkn9JGhY/edit" target="_blank" class="btn-secondary-action">
-                <span>Open in Google Sheets ↗</span>
-              </a>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn-primary-action" onclick="openAddStudentModal()">+ Add New Student</button>
+                <a href="https://docs.google.com/spreadsheets/d/1xr0EmkTysGumahYe-9bsFYZ5dHt9Hrwc7kHUkn9JGhY/edit" target="_blank" class="btn-secondary-action">
+                  <span>Google Sheets ↗</span>
+                </a>
+              </div>
             </div>
+
+            <!-- Student Search & Filter Controls -->
+            <div class="students-filter-bar">
+              <div class="filter-search-wrap">
+                <span class="filter-search-icon">🔍</span>
+                <input type="text" id="studentSearchInput" class="filter-search-input" placeholder="Search by student name, email, or phone..." oninput="handleStudentSearch()">
+              </div>
+              <div class="filter-dropdowns-wrap">
+                <select id="studentFilterCourse" class="filter-select-control" onchange="handleStudentSearch()">
+                  <option value="all">All Courses</option>
+                </select>
+                <select id="studentFilterStatus" class="filter-select-control" onchange="handleStudentSearch()">
+                  <option value="all">All Statuses</option>
+                  <option value="active">Active Learners</option>
+                  <option value="completed">Course Completed</option>
+                  <option value="inactive">Inactive / On Hold</option>
+                </select>
+                <span class="students-count-badge" id="studentsTotalCountBadge">Total: 0</span>
+              </div>
+            </div>
+
+            <!-- Students Interactive Table -->
             <div class="table-responsive">
               <table class="admin-table">
                 <thead>
                   <tr>
-                    <th>User ID</th>
-                    <th>Full Name</th>
-                    <th>Email Address</th>
-                    <th>Phone</th>
-                    <th>Source</th>
-                    <th>Location &amp; IP</th>
-                    <th>Device &amp; OS</th>
-                    <th>Joined At</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Contact Info</th>
+                    <th>Enrolled Course</th>
+                    <th>Grade / School</th>
+                    <th>Status</th>
+                    <th>Joined Date</th>
+                    <th style="text-align: right;">Manage</th>
                   </tr>
                 </thead>
                 <tbody id="usersTableBody"></tbody>
@@ -1019,5 +1158,68 @@
 
   <!-- Admin Logic Script -->
   <script src="js/admin.js"></script>
+  <!-- =====================================================================
+       10. ADD / EDIT STUDENT MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalStudentForm">
+    <div class="admin-modal-box" style="max-width: 580px; max-height: 90vh; overflow-y: auto;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="studentModalTitle">Add New Student</h3>
+        <button class="btn-modal-close" onclick="closeStudentModal()">&times;</button>
+      </div>
+      <form id="studentEditForm" onsubmit="handleSaveStudent(event)">
+        <input type="hidden" id="studentEditId">
+
+        <div class="admin-modal-body">
+          <div class="auth-form-group">
+            <label class="auth-label">Student Full Name (विद्यार्थी का नाम) *</label>
+            <input type="text" id="studentInputName" class="auth-input" placeholder="e.g. Aarav Sharma" required>
+          </div>
+
+          <div class="modal-form-grid">
+            <div class="auth-form-group">
+              <label class="auth-label">Email Address (ईमेल) *</label>
+              <input type="email" id="studentInputEmail" class="auth-input" placeholder="e.g. aarav@gmail.com" required>
+            </div>
+            <div class="auth-form-group">
+              <label class="auth-label">WhatsApp / Phone *</label>
+              <input type="tel" id="studentInputPhone" class="auth-input" placeholder="e.g. +91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label class="auth-label">Enrolled Course (कोर्स) *</label>
+            <select id="studentInputCourse" class="auth-input" required></select>
+          </div>
+
+          <div class="modal-form-grid">
+            <div class="auth-form-group">
+              <label class="auth-label">Grade / School / College</label>
+              <input type="text" id="studentInputGrade" class="auth-input" placeholder="e.g. Grade 8, DPS RK Puram">
+            </div>
+            <div class="auth-form-group">
+              <label class="auth-label">Account Status</label>
+              <select id="studentInputStatus" class="auth-input">
+                <option value="active">Active Learner (सक्रिय)</option>
+                <option value="completed">Course Completed (प्रमाणित)</option>
+                <option value="inactive">On Hold / Inactive (निष्क्रिय)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label class="auth-label">Parent Name / Location / Special Notes</label>
+            <input type="text" id="studentInputNotes" class="auth-input" placeholder="e.g. Parent: Rajesh Sharma, New Delhi">
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-modal-cancel" onclick="closeStudentModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action" id="studentSubmitBtn">Save Student Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>

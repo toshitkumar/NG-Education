@@ -1701,3 +1701,411 @@ input:checked + .slider-round:before {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =====================================================================
+   8. ENHANCED SIDEBAR TOGGLE & COLLAPSE SYSTEM (DESKTOP & MOBILE)
+   ===================================================================== */
+.btn-sidebar-collapse-toggle {
+  background: #F1F5F9;
+  border: 1px solid var(--admin-border);
+  color: var(--admin-slate);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.btn-sidebar-collapse-toggle:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
+}
+
+.btn-sidebar-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--admin-border);
+  color: var(--admin-slate);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.btn-sidebar-toggle-btn:hover {
+  background: #F8FAFC;
+  border-color: var(--admin-teal);
+  color: var(--admin-teal);
+}
+
+.sidebar-collapsed .btn-sidebar-toggle-btn {
+  background: var(--admin-teal);
+  border-color: var(--admin-teal);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(14, 98, 88, 0.25);
+}
+
+/* Sidebar transition */
+.admin-sidebar {
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.28s ease !important;
+}
+
+.admin-main-content {
+  transition: margin-left 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s ease !important;
+}
+
+/* Collapsed state rules across all screens */
+.admin-app-layout.sidebar-collapsed .admin-sidebar {
+  transform: translateX(-100%) !important;
+  pointer-events: none !important;
+}
+
+.admin-app-layout.sidebar-collapsed .admin-main-content {
+  margin-left: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* =====================================================================
+   9. EXECUTIVE OPERATIONS DASHBOARD STYLES
+   ===================================================================== */
+.dashboard-executive-header {
+  background: #FFFFFF;
+  border: 1.5px solid var(--admin-border);
+  border-left: 5px solid var(--admin-teal);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: var(--admin-shadow);
+  flex-wrap: wrap;
+}
+
+.dash-welcome-text h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0;
+}
+
+.dash-welcome-text p {
+  font-size: 0.88rem;
+  color: #64748B;
+  margin: 0;
+  max-width: 600px;
+}
+
+.badge-role-solid {
+  background: #0E6258;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-system-live {
+  background: #D1FAE5;
+  color: #065F46;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.dash-fast-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-fast-action {
+  background: #F8FAFC;
+  border: 1.5px solid var(--admin-border);
+  color: #0F172A;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-fast-action:hover {
+  background: #FFFFFF;
+  border-color: var(--admin-teal);
+  color: var(--admin-teal);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.dashboard-dual-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.course-distribution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.course-dist-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dist-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.dist-bar-track {
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dist-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.platform-health-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.health-item-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+}
+
+.health-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.health-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.health-status-text {
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+/* =====================================================================
+   10. CURRICULUM MODULE JUMP STRIP & EXPAND STYLES
+   ===================================================================== */
+.curriculum-jump-strip-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed #CBD5E1;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.curriculum-jump-pills {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.btn-mod-jump {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.btn-mod-jump:hover {
+  background: var(--admin-teal);
+  color: #FFFFFF;
+  border-color: var(--admin-teal);
+}
+
+.module-card.collapsed .module-body {
+  display: none !important;
+}
+
+/* =====================================================================
+   11. STUDENT & USER MANAGEMENT SUITE STYLES
+   ===================================================================== */
+.students-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: #94A3B8;
+  pointer-events: none;
+}
+
+.filter-search-input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  color: #0F172A;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-search-input:focus {
+  border-color: var(--admin-teal);
+}
+
+.filter-dropdowns-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-select-control {
+  padding: 9px 14px;
+  background: #FFFFFF;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0F172A;
+  outline: none;
+  cursor: pointer;
+}
+
+.students-count-badge {
+  background: #E6F4F1;
+  color: #0E6258;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.student-avatar-orb {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0E6258;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.badge-student-active {
+  background: #D1FAE5;
+  color: #065F46;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.badge-student-completed {
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.badge-student-inactive {
+  background: #F1F5F9;
+  color: #64748B;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+@media (max-width: 991px) {
+  .dashboard-dual-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-executive-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
