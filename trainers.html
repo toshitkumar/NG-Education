@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=9.3">
+  <link rel="stylesheet" href="css/style.css?v=9.4">
   <!-- Inline Critical News Ticker Styles (Guarantees 1-Line News Scroll Across All Devices & Cache States) -->
   <style>
     .top-ticker-strip {
@@ -66,8 +66,17 @@
       animation: topTickerScroll 28s linear infinite !important;
       will-change: transform !important;
     }
-    .top-ticker-strip:hover .top-ticker-track {
-      animation-play-state: paused !important;
+    .top-ticker-track-wrap,
+    .top-ticker-track {
+      pointer-events: none !important;
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      touch-action: pan-y !important;
+    }
+    .top-ticker-strip:hover .top-ticker-track,
+    .top-ticker-strip:active .top-ticker-track,
+    .top-ticker-strip:focus .top-ticker-track {
+      animation-play-state: running !important;
     }
     .top-ticker-item {
       display: inline-flex !important;

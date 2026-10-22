@@ -4788,8 +4788,9 @@ h1, h2, h3, h4, h5, h6 {
   will-change: transform;
 }
 
-.top-ticker-strip:hover .top-ticker-track {
-  animation-play-state: paused;
+.top-ticker-strip:hover .top-ticker-track,
+.top-ticker-strip:active .top-ticker-track {
+  animation-play-state: running;
 }
 
 .top-ticker-item {
