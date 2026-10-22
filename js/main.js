@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTrainerFilters();
   initCountUp();
   initLiveCoursesSync();
+  initLiveTickerSync();
+  initLivePopupsManager();
 });
 
 /* =====================================================================
@@ -623,9 +625,336 @@ function initLiveCoursesSync() {
   }
 }
 
-// Re-sync on storage change (if admin edits in another tab)
+
+/* =====================================================================
+   11. LIVE ANNOUNCEMENT TICKER & MULTI-TARGET POPUPS MANAGER
+   ===================================================================== */
+
+const DEFAULT_SITE_TICKER = {
+  enabled: true,
+  badgeText: '📢 NOTICE',
+  text1: "🎓 Once you complete a course you'll get a certificate 100% free.",
+  highlightWord: "100% free",
+  text2: "📜 Official Verified STEM & Robotics Certificate Included at No Extra Cost.",
+  text3: "⚡ 100% Practical Training + Free Shareable Certificate upon Project Completion!",
+  bgColor: '#F59E0B',
+  textColor: '#0F172A',
+  speed: '28s'
+};
+
+const DEFAULT_SITE_POPUPS = [
+  {
+    id: 'popup_1',
+    title: '🚀 Drone Making & Aerial Robotics Masterclass',
+    audience: 'home',
+    image: 'assets/images/slide1_robotics.webp',
+    message: 'Join our hands-on quadcopter building batch. Complete DIY hardware kit included with DGCA safety and flight calibration training!',
+    hasSchedule: true,
+    scheduleLabel: 'New Batch Starts:',
+    scheduleDate: '2026-11-05',
+    scheduleTime: '11:00',
+    btnText: 'Explore Course (50% OFF) →',
+    btnLink: '#courses',
+    isActive: true
+  },
+  {
+    id: 'popup_2',
+    title: '🏆 Inter-School RoboFest 2026 Registration',
+    audience: 'students',
+    image: 'assets/images/slide3_stem_lab.webp',
+    message: 'Attention students! Submit your obstacle-avoidance robot or IoT project by Friday to qualify for national ATL STEM innovation awards.',
+    hasSchedule: true,
+    scheduleLabel: 'Submission Deadline:',
+    scheduleDate: '2026-11-15',
+    scheduleTime: '18:00',
+    btnText: 'Submit Project Video →',
+    btnLink: 'index.html#contact',
+    isActive: true
+  }
+];
+
+function initLiveTickerSync() {
+  const tickerStrip = document.querySelector('.top-ticker-strip');
+  if (!tickerStrip) return;
+
+  try {
+    let ticker = DEFAULT_SITE_TICKER;
+    const rawTicker = localStorage.getItem('ng_education_ticker_settings');
+    if (rawTicker) {
+      ticker = { ...DEFAULT_SITE_TICKER, ...JSON.parse(rawTicker) };
+    }
+
+    if (ticker.enabled === false) {
+      tickerStrip.style.display = 'none';
+      return;
+    } else {
+      tickerStrip.style.display = 'flex';
+    }
+
+    // Apply colors
+    if (ticker.bgColor) {
+      tickerStrip.style.backgroundColor = ticker.bgColor;
+      tickerStrip.style.borderBottomColor = ticker.bgColor;
+    }
+    if (ticker.textColor) {
+      tickerStrip.style.color = ticker.textColor;
+    }
+
+    // Badge
+    const badgeEl = tickerStrip.querySelector('.top-ticker-badge');
+    if (badgeEl && ticker.badgeText) {
+      if (ticker.bgColor) badgeEl.style.color = ticker.bgColor;
+      if (ticker.textColor) badgeEl.style.backgroundColor = ticker.textColor;
+      const parts = ticker.badgeText.split(' ');
+      const icon = parts[0] || '📢';
+      const text = parts.slice(1).join(' ') || 'NOTICE';
+      badgeEl.innerHTML = `<span style="font-size: 0.95rem;">${icon}</span><span>${text}</span>`;
+    }
+
+    // Format messages
+    const formatMsg = (msg) => {
+      if (!msg) return '';
+      if (ticker.highlightWord && msg.includes(ticker.highlightWord)) {
+        return msg.replace(
+          ticker.highlightWord,
+          `<strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">${ticker.highlightWord}</strong>`
+        );
+      }
+      return msg;
+    };
+
+    let items = [];
+    if (ticker.text1) items.push(formatMsg(ticker.text1));
+    if (ticker.text2) items.push(formatMsg(ticker.text2));
+    if (ticker.text3) items.push(formatMsg(ticker.text3));
+
+    if (items.length > 0) {
+      const track = tickerStrip.querySelector('.top-ticker-track');
+      if (track) {
+        const singleSetHtml = items
+          .map(item => `<span class="top-ticker-item" style="color: ${ticker.textColor || '#0F172A'};">${item}</span><span class="top-ticker-separator" style="color: ${ticker.textColor || '#0F172A'}; opacity: 0.6;">✦</span>`)
+          .join('');
+
+        track.innerHTML = singleSetHtml + singleSetHtml;
+        if (ticker.speed) {
+          track.style.animationDuration = ticker.speed;
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Ticker sync error:', err);
+  }
+}
+
+// Global active site popups state
+let activeHomePopups = [];
+let currentSitePopupIndex = 0;
+let activeStudentPopup = null;
+
+function initLivePopupsManager() {
+  try {
+    let popupsList = DEFAULT_SITE_POPUPS;
+    const rawPopups = localStorage.getItem('ng_education_popups_list');
+    if (rawPopups) {
+      try {
+        popupsList = JSON.parse(rawPopups);
+      } catch (e) {
+        popupsList = DEFAULT_SITE_POPUPS;
+      }
+    } else {
+      localStorage.setItem('ng_education_popups_list', JSON.stringify(DEFAULT_SITE_POPUPS));
+    }
+
+    // 1. Filter Home Page Popups
+    activeHomePopups = popupsList.filter(p => p.isActive && (p.audience === 'home' || p.audience === 'all'));
+
+    // Check if dismissed today
+    activeHomePopups = activeHomePopups.filter(p => {
+      const sessionDismissed = sessionStorage.getItem('dismissed_site_popup_' + p.id);
+      const dayDismissed = localStorage.getItem('dismissed_popup_day_' + p.id);
+      const todayStr = new Date().toDateString();
+      return !sessionDismissed && dayDismissed !== todayStr;
+    });
+
+    // 2. Filter Student Popups for student portal / login
+    const studentPopups = popupsList.filter(p => p.isActive && (p.audience === 'students' || p.audience === 'all'));
+    if (studentPopups.length > 0) {
+      activeStudentPopup = studentPopups[0];
+      setupStudentNoticeInLogin(activeStudentPopup);
+    }
+
+    // 3. Trigger Home Page Popup if available
+    if (activeHomePopups.length > 0) {
+      currentSitePopupIndex = 0;
+      setTimeout(() => {
+        // Only show if no other modal currently active
+        const hasOpenModal = document.querySelector('.modal-overlay.active');
+        if (!hasOpenModal) {
+          renderCurrentSitePopup();
+          const modal = document.getElementById('modalDynamicSitePopup');
+          if (modal) modal.classList.add('active');
+        }
+      }, 1400);
+    }
+  } catch (err) {
+    console.warn('Popups manager error:', err);
+  }
+}
+
+function renderCurrentSitePopup() {
+  if (!activeHomePopups || activeHomePopups.length === 0) return;
+  const popup = activeHomePopups[currentSitePopupIndex];
+  if (!popup) return;
+
+  const modal = document.getElementById('modalDynamicSitePopup');
+  if (!modal) return;
+
+  // Title & Message
+  const titleEl = document.getElementById('sitePopupTitle');
+  const msgEl = document.getElementById('sitePopupMessage');
+  if (titleEl) titleEl.textContent = popup.title;
+  if (msgEl) msgEl.textContent = popup.message;
+
+  // Image & Badges
+  const imgWrap = document.getElementById('sitePopupImageWrap');
+  const imgEl = document.getElementById('sitePopupImage');
+  const badgeNoImg = document.getElementById('sitePopupBadgeNoImg');
+  const audBadge = document.getElementById('sitePopupAudienceBadge');
+  const audLabel = document.getElementById('sitePopupAudienceLabel');
+
+  const audienceText = popup.audience === 'home' ? '🏠 Special Announcement' : (popup.audience === 'students' ? '🎓 Student Notice' : '🌐 Important Update');
+  if (audBadge) audBadge.textContent = audienceText;
+  if (audLabel) audLabel.textContent = audienceText;
+
+  if (popup.image && popup.image.trim().length > 3) {
+    if (imgEl) imgEl.src = popup.image.trim();
+    if (imgWrap) imgWrap.style.display = 'block';
+    if (badgeNoImg) badgeNoImg.style.display = 'none';
+  } else {
+    if (imgWrap) imgWrap.style.display = 'none';
+    if (badgeNoImg) badgeNoImg.style.display = 'inline-flex';
+  }
+
+  // Schedule (Date & Time)
+  const schedBox = document.getElementById('sitePopupScheduleBox');
+  const schedLabel = document.getElementById('sitePopupScheduleLabel');
+  const schedValue = document.getElementById('sitePopupScheduleValue');
+
+  if (popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime)) {
+    if (schedLabel) schedLabel.textContent = popup.scheduleLabel || 'SCHEDULE';
+    
+    let formattedDateTime = '';
+    if (popup.scheduleDate) {
+      try {
+        const d = new Date(popup.scheduleDate);
+        formattedDateTime = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+      } catch (e) {
+        formattedDateTime = popup.scheduleDate;
+      }
+    }
+    if (popup.scheduleTime) {
+      formattedDateTime += (formattedDateTime ? ' at ' : '') + popup.scheduleTime;
+    }
+
+    if (schedValue) schedValue.textContent = formattedDateTime;
+    if (schedBox) schedBox.style.display = 'flex';
+  } else {
+    if (schedBox) schedBox.style.display = 'none';
+  }
+
+  // Multi-Popup Prev/Next Navigation
+  const navWrap = document.getElementById('sitePopupNavWrap');
+  const counterEl = document.getElementById('sitePopupCounter');
+  if (activeHomePopups.length > 1) {
+    if (navWrap) navWrap.style.display = 'flex';
+    if (counterEl) counterEl.textContent = `Notice ${currentSitePopupIndex + 1} of ${activeHomePopups.length}`;
+  } else {
+    if (navWrap) navWrap.style.display = 'none';
+  }
+
+  // CTA Action Button
+  const btn = document.getElementById('sitePopupActionBtn');
+  const btnText = document.getElementById('sitePopupActionBtnText');
+  if (popup.btnText) {
+    if (btnText) btnText.textContent = popup.btnText;
+    if (btn) {
+      btn.href = popup.btnLink || '#courses';
+      btn.style.display = 'flex';
+    }
+  } else {
+    if (btn) btn.style.display = 'none';
+  }
+}
+
+function navigateSitePopup(delta) {
+  if (!activeHomePopups || activeHomePopups.length <= 1) return;
+  currentSitePopupIndex = (currentSitePopupIndex + delta + activeHomePopups.length) % activeHomePopups.length;
+  renderCurrentSitePopup();
+}
+
+function dismissSitePopup(foreverToday = false) {
+  const modal = document.getElementById('modalDynamicSitePopup');
+  if (modal) modal.classList.remove('active');
+
+  if (activeHomePopups && activeHomePopups[currentSitePopupIndex]) {
+    const currentId = activeHomePopups[currentSitePopupIndex].id;
+    sessionStorage.setItem('dismissed_site_popup_' + currentId, 'true');
+    if (foreverToday) {
+      localStorage.setItem('dismissed_popup_day_' + currentId, new Date().toDateString());
+    }
+  }
+}
+
+function setupStudentNoticeInLogin(popup) {
+  const card = document.getElementById('studentLoginNoticeCard');
+  if (!card || !popup) return;
+
+  const titleEl = document.getElementById('studentNoticeTitle');
+  const msgEl = document.getElementById('studentNoticeMsg');
+  const schedBadge = document.getElementById('studentNoticeScheduleBadge');
+
+  if (titleEl) titleEl.textContent = popup.title;
+  if (msgEl) {
+    msgEl.textContent = popup.message.length > 90 ? popup.message.substring(0, 87) + '...' : popup.message;
+  }
+  if (schedBadge) {
+    schedBadge.textContent = popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime) 
+      ? `⏰ ${popup.scheduleLabel || 'Date:'} ${popup.scheduleDate || ''}` 
+      : '⚡ Active';
+  }
+
+  card.style.display = 'block';
+}
+
+function openStudentPopupDetail() {
+  if (!activeStudentPopup) return;
+  closeAllModals();
+
+  // Populate dynamic modal with student popup data
+  const tempHome = activeHomePopups;
+  activeHomePopups = [activeStudentPopup];
+  currentSitePopupIndex = 0;
+  renderCurrentSitePopup();
+
+  const modal = document.getElementById('modalDynamicSitePopup');
+  if (modal) modal.classList.add('active');
+}
+
+// Expose globals for inline HTML event handlers
+window.navigateSitePopup = navigateSitePopup;
+window.dismissSitePopup = dismissSitePopup;
+window.openStudentPopupDetail = openStudentPopupDetail;
+
+// Re-sync on storage change (if admin modifies in another tab)
 window.addEventListener('storage', (e) => {
   if (e.key === 'ng_education_courses') {
     initLiveCoursesSync();
   }
+  if (e.key === 'ng_education_ticker_settings') {
+    initLiveTickerSync();
+  }
+  if (e.key === 'ng_education_popups_list') {
+    initLivePopupsManager();
+  }
 });
+

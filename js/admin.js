@@ -14,8 +14,59 @@ const ADMIN_CONFIG = {
   ordersKey: 'ng_education_orders',
   usersKey: 'ng_education_users',
   selectedCourseKey: 'ng_admin_selected_course',
+  tickerKey: 'ng_education_ticker_settings',
+  popupsKey: 'ng_education_popups_list',
   webAppUrl: 'https://script.google.com/macros/s/AKfycbzE4aQeBXIGj3P7IqP6vzPeZOC4XERF2_UWdhzk-JyXHSn2ykwKcaYkulTtffYwBpwaHQ/exec'
 };
+
+// Default Announcement Ticker Data
+const DEFAULT_TICKER = {
+  enabled: true,
+  badgeText: '📢 NOTICE',
+  text1: "🎓 Once you complete a course you'll get a certificate 100% free.",
+  highlightWord: "100% free",
+  text2: "📜 Official Verified STEM & Robotics Certificate Included at No Extra Cost.",
+  text3: "⚡ 100% Practical Training + Free Shareable Certificate upon Project Completion!",
+  bgColor: '#F59E0B',
+  textColor: '#0F172A',
+  speed: '28s',
+  updatedAt: new Date().toISOString()
+};
+
+// Default Popups Data
+const DEFAULT_POPUPS = [
+  {
+    id: 'popup_1',
+    title: '🚀 Drone Making & Aerial Robotics Masterclass',
+    audience: 'home',
+    image: 'assets/images/slide1_robotics.webp',
+    message: 'Join our hands-on quadcopter building batch. Complete DIY hardware kit included with DGCA safety and flight calibration training!',
+    hasSchedule: true,
+    scheduleLabel: 'New Batch Starts:',
+    scheduleDate: '2026-11-05',
+    scheduleTime: '11:00',
+    btnText: 'Explore Course (50% OFF) →',
+    btnLink: '#courses',
+    isActive: true,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'popup_2',
+    title: '🏆 Inter-School RoboFest 2026 Registration',
+    audience: 'students',
+    image: 'assets/images/slide3_stem_lab.webp',
+    message: 'Attention students! Submit your obstacle-avoidance robot or IoT project by Friday to qualify for national ATL STEM innovation awards.',
+    hasSchedule: true,
+    scheduleLabel: 'Submission Deadline:',
+    scheduleDate: '2026-11-15',
+    scheduleTime: '18:00',
+    btnText: 'Submit Project Video →',
+    btnLink: 'index.html#contact',
+    isActive: true,
+    createdAt: new Date().toISOString()
+  }
+];
+
 
 // Curriculum Generator: Provides rich, production-grade initial modules and parts for courses
 function generateCourseCurriculum(courseId, title) {
@@ -748,6 +799,31 @@ class AdminState {
     } else {
       this.users = JSON.parse(savedUsers);
     }
+    // Ticker Settings
+    let savedTicker = localStorage.getItem(ADMIN_CONFIG.tickerKey);
+    if (!savedTicker) {
+      this.ticker = { ...DEFAULT_TICKER };
+      localStorage.setItem(ADMIN_CONFIG.tickerKey, JSON.stringify(this.ticker));
+    } else {
+      try {
+        this.ticker = JSON.parse(savedTicker);
+      } catch (e) {
+        this.ticker = { ...DEFAULT_TICKER };
+      }
+    }
+
+    // Popups List
+    let savedPopups = localStorage.getItem(ADMIN_CONFIG.popupsKey);
+    if (!savedPopups) {
+      this.popups = [...DEFAULT_POPUPS];
+      localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(this.popups));
+    } else {
+      try {
+        this.popups = JSON.parse(savedPopups);
+      } catch (e) {
+        this.popups = [...DEFAULT_POPUPS];
+      }
+    }
   }
 
   saveCourses() {
@@ -959,6 +1035,8 @@ function renderAllViews() {
   renderCurriculumView();
   renderOrdersTable();
   renderUsersTable();
+  if (typeof renderTickerSettings === 'function') renderTickerSettings();
+  if (typeof renderPopupsTable === 'function') renderPopupsTable();
 }
 
 // 1. Dashboard Metrics
@@ -2081,6 +2159,7 @@ function switchAdminTab(tabName) {
     dashboard: 'Platform Overview',
     courses: 'Courses & Pricing Catalog',
     curriculum: 'Curriculum, Modules & Media',
+    notifications: 'Alerts & Popups Manager',
     orders: 'Student Enrollments & Approvals',
     users: 'Registered User Directory',
     security: 'Admin Security & 2-Step Settings'
@@ -2093,6 +2172,10 @@ function switchAdminTab(tabName) {
 
   if (tabName === 'curriculum') {
     renderCurriculumView();
+  }
+  if (tabName === 'notifications') {
+    renderTickerSettings();
+    renderPopupsTable();
   }
 
   // Mobile sidebar close on click
@@ -2170,3 +2253,497 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initDropzoneEvents();
 });
+
+// =====================================================================
+// NOTIFICATIONS & POPUPS MANAGEMENT LOGIC
+// =====================================================================
+
+let currentPopupFilter = 'all';
+
+function renderTickerSettings() {
+  const ticker = state.ticker || DEFAULT_TICKER;
+  
+  const enableSwitch = document.getElementById('tickerEnableSwitch');
+  const badgeInput = document.getElementById('tickerInputBadge');
+  const highlightInput = document.getElementById('tickerInputHighlight');
+  const msg1Input = document.getElementById('tickerInputMsg1');
+  const msg2Input = document.getElementById('tickerInputMsg2');
+  const msg3Input = document.getElementById('tickerInputMsg3');
+  const bgInput = document.getElementById('tickerInputBgColor');
+  const textInput = document.getElementById('tickerInputTextColor');
+  const speedSelect = document.getElementById('tickerInputSpeed');
+
+  if (enableSwitch) enableSwitch.checked = ticker.enabled !== false;
+  if (badgeInput) badgeInput.value = ticker.badgeText || '📢 NOTICE';
+  if (highlightInput) highlightInput.value = ticker.highlightWord || '100% free';
+  if (msg1Input) msg1Input.value = ticker.text1 || '';
+  if (msg2Input) msg2Input.value = ticker.text2 || '';
+  if (msg3Input) msg3Input.value = ticker.text3 || '';
+  if (bgInput) bgInput.value = ticker.bgColor || '#F59E0B';
+  if (textInput) textInput.value = ticker.textColor || '#0F172A';
+  if (speedSelect && ticker.speed) speedSelect.value = ticker.speed;
+
+  handleTickerPreviewUpdate();
+}
+
+function handleTickerPreviewUpdate() {
+  const isEnabled = document.getElementById('tickerEnableSwitch')?.checked;
+  const badge = document.getElementById('tickerInputBadge')?.value || '📢 NOTICE';
+  const highlight = document.getElementById('tickerInputHighlight')?.value || '100% free';
+  const msg1 = document.getElementById('tickerInputMsg1')?.value || '';
+  const msg2 = document.getElementById('tickerInputMsg2')?.value || '';
+  const msg3 = document.getElementById('tickerInputMsg3')?.value || '';
+  const bgColor = document.getElementById('tickerInputBgColor')?.value || '#F59E0B';
+  const textColor = document.getElementById('tickerInputTextColor')?.value || '#0F172A';
+  const speed = document.getElementById('tickerInputSpeed')?.value || '28s';
+
+  const previewStrip = document.getElementById('adminTickerPreviewStrip');
+  const previewBadge = document.getElementById('adminTickerPreviewBadge');
+  const previewBadgeText = document.getElementById('previewBadgeText');
+  const previewTrack = document.getElementById('adminTickerPreviewTrack');
+
+  if (previewStrip) {
+    previewStrip.style.backgroundColor = bgColor;
+    previewStrip.style.color = textColor;
+    previewStrip.style.opacity = isEnabled ? '1' : '0.4';
+  }
+
+  if (previewBadge) {
+    previewBadge.style.color = bgColor;
+  }
+  if (previewBadgeText) {
+    previewBadgeText.textContent = badge.replace('📢', '').trim();
+  }
+
+  if (previewTrack) {
+    const formatMsg = (msg) => {
+      if (highlight && msg.includes(highlight)) {
+        return msg.replace(highlight, `<strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">${highlight}</strong>`);
+      }
+      return msg;
+    };
+
+    let itemsHtml = `<span class="top-ticker-item" style="color: ${textColor}; padding: 0 18px; display: inline-flex; align-items: center; white-space: nowrap; font-weight: 700;">${formatMsg(msg1)}</span>`;
+    if (msg2) {
+      itemsHtml += `<span class="top-ticker-separator" style="color: ${textColor}; opacity: 0.6; padding: 0 10px;">✦</span><span class="top-ticker-item" style="color: ${textColor}; padding: 0 18px; display: inline-flex; align-items: center; white-space: nowrap; font-weight: 700;">${formatMsg(msg2)}</span>`;
+    }
+    if (msg3) {
+      itemsHtml += `<span class="top-ticker-separator" style="color: ${textColor}; opacity: 0.6; padding: 0 10px;">✦</span><span class="top-ticker-item" style="color: ${textColor}; padding: 0 18px; display: inline-flex; align-items: center; white-space: nowrap; font-weight: 700;">${formatMsg(msg3)}</span>`;
+    }
+
+    previewTrack.innerHTML = itemsHtml + `<span class="top-ticker-separator" style="color: ${textColor}; opacity: 0.6; padding: 0 10px;">✦</span>` + itemsHtml;
+    previewTrack.style.animationDuration = speed;
+  }
+}
+
+function applyTickerColorPreset(bgColor, textColor) {
+  const bgInput = document.getElementById('tickerInputBgColor');
+  const textInput = document.getElementById('tickerInputTextColor');
+  if (bgInput) bgInput.value = bgColor;
+  if (textInput) textInput.value = textColor;
+
+  document.querySelectorAll('.btn-color-preset').forEach(btn => btn.classList.remove('active'));
+  handleTickerPreviewUpdate();
+}
+
+function handleSaveTickerSettings(event) {
+  if (event) event.preventDefault();
+
+  const isEnabled = document.getElementById('tickerEnableSwitch')?.checked;
+  const badge = document.getElementById('tickerInputBadge')?.value.trim();
+  const highlight = document.getElementById('tickerInputHighlight')?.value.trim();
+  const msg1 = document.getElementById('tickerInputMsg1')?.value.trim();
+  const msg2 = document.getElementById('tickerInputMsg2')?.value.trim();
+  const msg3 = document.getElementById('tickerInputMsg3')?.value.trim();
+  const bgColor = document.getElementById('tickerInputBgColor')?.value || '#F59E0B';
+  const textColor = document.getElementById('tickerInputTextColor')?.value || '#0F172A';
+  const speed = document.getElementById('tickerInputSpeed')?.value || '28s';
+
+  const newTicker = {
+    enabled: isEnabled,
+    badgeText: badge,
+    highlightWord: highlight,
+    text1: msg1,
+    text2: msg2,
+    text3: msg3,
+    bgColor: bgColor,
+    textColor: textColor,
+    speed: speed,
+    updatedAt: new Date().toISOString()
+  };
+
+  state.ticker = newTicker;
+  localStorage.setItem(ADMIN_CONFIG.tickerKey, JSON.stringify(newTicker));
+  showToast('✓ Top Scrolling Ticker successfully updated and published to live website!');
+}
+
+function renderPopupsTable(filterAudience = currentPopupFilter) {
+  currentPopupFilter = filterAudience;
+  const container = document.getElementById('popupsListContainer');
+  if (!container) return;
+
+  const popups = state.popups || [];
+
+  // Update Counters
+  const countAll = popups.length;
+  const countHome = popups.filter(p => p.audience === 'home').length;
+  const countStudents = popups.filter(p => p.audience === 'students').length;
+
+  const elAll = document.getElementById('countPopupsAll');
+  const elHome = document.getElementById('countPopupsHome');
+  const elStudents = document.getElementById('countPopupsStudents');
+  const sidebarBadge = document.getElementById('sidebarPopupsBadge');
+
+  if (elAll) elAll.textContent = countAll;
+  if (elHome) elHome.textContent = countHome;
+  if (elStudents) elStudents.textContent = countStudents;
+  if (sidebarBadge) {
+    const activeCount = popups.filter(p => p.isActive).length;
+    sidebarBadge.textContent = activeCount;
+    sidebarBadge.style.display = activeCount > 0 ? 'inline-block' : 'none';
+  }
+
+  // Filter
+  const filtered = filterAudience === 'all' 
+    ? popups 
+    : popups.filter(p => p.audience === filterAudience || p.audience === 'all');
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; padding: 48px 24px; text-align: center; background: #FFFFFF; border: 2px dashed #E2E8F0; border-radius: 16px;">
+        <span style="font-size: 2.8rem; display: block; margin-bottom: 12px;">📭</span>
+        <h4 style="font-size: 1.15rem; color: #0F172A; margin-bottom: 6px;">No Popups Found for this Filter</h4>
+        <p style="font-size: 0.88rem; color: #64748B; margin-bottom: 18px;">Click "Create New Popup" to add an announcement or event modal.</p>
+        <button type="button" class="btn-primary-action" onclick="openCreatePopupModal()">+ Create New Popup</button>
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(popup => {
+    const audClass = popup.audience === 'home' ? 'badge-aud-home' : (popup.audience === 'students' ? 'badge-aud-students' : 'badge-aud-all');
+    const audLabel = popup.audience === 'home' ? '🏠 Home Page Only' : (popup.audience === 'students' ? '🎓 Students Only' : '🌐 All Visitors & Students');
+    const statusClass = popup.isActive ? 'pill-active' : 'pill-inactive';
+    const statusText = popup.isActive ? '● Live' : '○ Inactive';
+
+    let scheduleHtml = '';
+    if (popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime)) {
+      scheduleHtml = `
+        <div class="popup-card-schedule-chip">
+          <span>⏰</span>
+          <span>${popup.scheduleLabel || 'Scheduled:'} ${popup.scheduleDate || ''} ${popup.scheduleTime || ''}</span>
+        </div>
+      `;
+    } else {
+      scheduleHtml = `
+        <div class="popup-card-schedule-chip" style="color: #64748B;">
+          <span>🟢</span>
+          <span>Without Date/Time (Always Active)</span>
+        </div>
+      `;
+    }
+
+    const bannerHtml = popup.image 
+      ? `<img src="${popup.image}" alt="${popup.title}" class="popup-card-banner-img">`
+      : `<div class="popup-card-banner-placeholder"><span>📢</span></div>`;
+
+    html += `
+      <div class="popup-admin-card ${popup.isActive ? '' : 'inactive'}">
+        <div class="popup-card-banner-wrap">
+          ${bannerHtml}
+          <span class="popup-badge-audience ${audClass}">${audLabel}</span>
+          <span class="popup-status-pill ${statusClass}">${statusText}</span>
+        </div>
+        
+        <div class="popup-card-content">
+          <h4 class="popup-card-title">${popup.title}</h4>
+          <p class="popup-card-msg">${popup.message}</p>
+          ${scheduleHtml}
+        </div>
+
+        <div class="popup-card-footer">
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">
+            <input type="checkbox" ${popup.isActive ? 'checked' : ''} onchange="togglePopupStatus('${popup.id}')" style="accent-color: var(--admin-teal); width: 16px; height: 16px;">
+            <span>${popup.isActive ? 'Active' : 'Draft'}</span>
+          </label>
+
+          <div class="popup-footer-actions">
+            <button class="btn-card-icon" title="Preview Popup" onclick="previewPopupModal('${popup.id}')">👁️</button>
+            <button class="btn-card-icon" title="Edit Popup" onclick="openEditPopupModal('${popup.id}')">✏️</button>
+            <button class="btn-card-icon delete" title="Delete Popup" onclick="deletePopup('${popup.id}')">🗑️</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function filterPopupsTable(aud) {
+  document.querySelectorAll('.upload-type-btn').forEach(btn => btn.classList.remove('active'));
+  const targetBtn = document.getElementById('popupFilter_' + aud);
+  if (targetBtn) targetBtn.classList.add('active');
+  renderPopupsTable(aud);
+}
+
+function openCreatePopupModal() {
+  document.getElementById('popupEditForm').reset();
+  document.getElementById('popupEditId').value = '';
+  document.getElementById('popupModalTitle').textContent = 'Create Announcement Popup';
+  document.getElementById('popupSubmitBtnText').textContent = 'Save & Publish Popup';
+  
+  clearPopupImage();
+  togglePopupScheduleInputs(false);
+  handlePopupAudienceChange();
+
+  const modal = document.getElementById('modalAdminPopup');
+  if (modal) modal.classList.add('active');
+}
+
+function openEditPopupModal(popupId) {
+  const popup = (state.popups || []).find(p => p.id === popupId);
+  if (!popup) return;
+
+  document.getElementById('popupEditId').value = popup.id;
+  document.getElementById('popupModalTitle').textContent = 'Edit Announcement Popup';
+  document.getElementById('popupSubmitBtnText').textContent = 'Update & Save Popup';
+
+  document.getElementById('popupInputAudience').value = popup.audience || 'home';
+  document.getElementById('popupInputTitle').value = popup.title || '';
+  document.getElementById('popupInputImageUrl').value = popup.image || '';
+  document.getElementById('popupInputMessage').value = popup.message || '';
+
+  if (popup.image) {
+    handlePopupImagePreview(popup.image);
+  } else {
+    clearPopupImage();
+  }
+
+  const hasSched = popup.hasSchedule === true;
+  document.getElementById('popupInputHasSchedule').checked = hasSched;
+  togglePopupScheduleInputs(hasSched);
+
+  if (hasSched) {
+    document.getElementById('popupInputScheduleLabel').value = popup.scheduleLabel || 'Event Starts:';
+    document.getElementById('popupInputDate').value = popup.scheduleDate || '';
+    document.getElementById('popupInputTime').value = popup.scheduleTime || '';
+  }
+
+  document.getElementById('popupInputBtnText').value = popup.btnText || '';
+  document.getElementById('popupInputBtnLink').value = popup.btnLink || '';
+  document.getElementById('popupInputIsActive').checked = popup.isActive !== false;
+
+  handlePopupAudienceChange();
+
+  const modal = document.getElementById('modalAdminPopup');
+  if (modal) modal.classList.add('active');
+}
+
+function closePopupModal() {
+  const modal = document.getElementById('modalAdminPopup');
+  if (modal) modal.classList.remove('active');
+}
+
+function handlePopupAudienceChange() {
+  const sel = document.getElementById('popupInputAudience')?.value;
+  const hint = document.getElementById('popupAudienceHint');
+  if (!hint) return;
+
+  if (sel === 'home') {
+    hint.textContent = '✓ यह पॉप-अप सिर्फ वेबसाइट के होम पेज पर आने वाले सामान्य आगंतुकों को दिखेगा।';
+    hint.style.color = '#0E6258';
+  } else if (sel === 'students') {
+    hint.textContent = '🎓 यह पॉप-अप विशेष रूप से स्टूडेंट्स (लॉगिन एवं स्टूडेंट डैशबोर्ड) को दिखेगा।';
+    hint.style.color = '#D97706';
+  } else {
+    hint.textContent = '🌐 यह पॉप-अप होमपेज विजिटर्स और स्टूडेंट्स दोनों को दिखेगा।';
+    hint.style.color = '#6D28D9';
+  }
+}
+
+function togglePopupScheduleInputs(isChecked) {
+  const wrap = document.getElementById('popupScheduleFieldsWrap');
+  const badge = document.getElementById('popupScheduleStatusBadge');
+  if (wrap) wrap.style.display = isChecked ? 'block' : 'none';
+  if (badge) {
+    badge.textContent = isChecked ? 'Schedule Active' : 'Without Date/Time';
+    badge.style.background = isChecked ? '#D1FAE5' : '#E2E8F0';
+    badge.style.color = isChecked ? '#065F46' : '#64748B';
+  }
+}
+
+function handlePopupImagePreview(url) {
+  const previewBox = document.getElementById('popupImagePreviewBox');
+  const previewEl = document.getElementById('popupImagePreviewEl');
+  if (!previewBox || !previewEl) return;
+
+  if (url && url.trim().length > 3) {
+    previewEl.src = url.trim();
+    previewBox.style.display = 'block';
+  } else {
+    previewBox.style.display = 'none';
+  }
+}
+
+function clearPopupImage() {
+  const urlInput = document.getElementById('popupInputImageUrl');
+  const fileInput = document.getElementById('popupFileInput');
+  const previewBox = document.getElementById('popupImagePreviewBox');
+  if (urlInput) urlInput.value = '';
+  if (fileInput) fileInput.value = '';
+  if (previewBox) previewBox.style.display = 'none';
+}
+
+function handlePopupFileUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    document.getElementById('popupInputImageUrl').value = dataUrl;
+    handlePopupImagePreview(dataUrl);
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleSavePopup(event) {
+  if (event) event.preventDefault();
+
+  const editId = document.getElementById('popupEditId')?.value;
+  const audience = document.getElementById('popupInputAudience')?.value || 'home';
+  const title = document.getElementById('popupInputTitle')?.value.trim();
+  const image = document.getElementById('popupInputImageUrl')?.value.trim();
+  const message = document.getElementById('popupInputMessage')?.value.trim();
+
+  const hasSchedule = document.getElementById('popupInputHasSchedule')?.checked === true;
+  const scheduleLabel = document.getElementById('popupInputScheduleLabel')?.value.trim() || 'Scheduled:';
+  const scheduleDate = document.getElementById('popupInputDate')?.value || '';
+  const scheduleTime = document.getElementById('popupInputTime')?.value || '';
+
+  const btnText = document.getElementById('popupInputBtnText')?.value.trim() || '';
+  const btnLink = document.getElementById('popupInputBtnLink')?.value.trim() || '';
+  const isActive = document.getElementById('popupInputIsActive')?.checked === true;
+
+  if (!title || !message) {
+    alert('Please enter Title and Message.');
+    return;
+  }
+
+  if (!state.popups) state.popups = [];
+
+  if (editId) {
+    // Update existing
+    const idx = state.popups.findIndex(p => p.id === editId);
+    if (idx !== -1) {
+      state.popups[idx] = {
+        ...state.popups[idx],
+        audience,
+        title,
+        image,
+        message,
+        hasSchedule,
+        scheduleLabel,
+        scheduleDate,
+        scheduleTime,
+        btnText,
+        btnLink,
+        isActive,
+        updatedAt: new Date().toISOString()
+      };
+      showToast('✓ Popup successfully updated!');
+    }
+  } else {
+    // Create new
+    const newPopup = {
+      id: 'popup_' + Date.now(),
+      audience,
+      title,
+      image,
+      message,
+      hasSchedule,
+      scheduleLabel,
+      scheduleDate,
+      scheduleTime,
+      btnText,
+      btnLink,
+      isActive,
+      createdAt: new Date().toISOString()
+    };
+    state.popups.unshift(newPopup);
+    showToast('✓ New Popup created & published!');
+  }
+
+  localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+  closePopupModal();
+  renderPopupsTable();
+}
+
+function togglePopupStatus(popupId) {
+  const popup = (state.popups || []).find(p => p.id === popupId);
+  if (!popup) return;
+
+  popup.isActive = !popup.isActive;
+  localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+  renderPopupsTable();
+  showToast(popup.isActive ? '✓ Popup is now LIVE on website!' : '○ Popup has been deactivated.');
+}
+
+function deletePopup(popupId) {
+  if (!confirm('Are you sure you want to delete this popup?')) return;
+
+  state.popups = (state.popups || []).filter(p => p.id !== popupId);
+  localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+  renderPopupsTable();
+  showToast('✓ Popup deleted successfully.');
+}
+
+function previewPopupModal(popupId) {
+  const popup = (state.popups || []).find(p => p.id === popupId);
+  if (!popup) return;
+
+  // Uses the existing preview modal
+  const modal = document.getElementById('modalContentPreview');
+  const titleEl = document.getElementById('previewModalTitle');
+  const typeBadge = document.getElementById('previewTypeBadge');
+  const container = document.getElementById('previewMediaContainer');
+  const folderLoc = document.getElementById('previewFolderLocation');
+  const driveLink = document.getElementById('previewDriveLink');
+
+  if (titleEl) titleEl.textContent = 'Popup Preview: ' + popup.title;
+  if (typeBadge) {
+    typeBadge.className = 'curriculum-stat-pill pill-video';
+    typeBadge.textContent = 'Target: ' + (popup.audience === 'home' ? 'Home Page' : (popup.audience === 'students' ? 'Students Portal' : 'All'));
+  }
+
+  let schedHtml = '';
+  if (popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime)) {
+    schedHtml = `
+      <div style="background: #FEF3C7; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: #92400E; font-size: 0.88rem; font-weight: 700;">
+        <span>⏰</span>
+        <span>${popup.scheduleLabel || 'Date & Time:'} ${popup.scheduleDate || ''} ${popup.scheduleTime || ''}</span>
+      </div>
+    `;
+  }
+
+  const imgHtml = popup.image ? `<img src="${popup.image}" style="width: 100%; max-height: 220px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; border: 1.5px solid #CBD5E1;">` : '';
+
+  if (container) {
+    container.innerHTML = `
+      <div style="text-align: left; max-width: 480px; margin: 0 auto; padding: 10px;">
+        ${imgHtml}
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin-bottom: 8px;">${popup.title}</h3>
+        <p style="font-size: 0.92rem; color: #475569; line-height: 1.6; margin-bottom: 16px;">${popup.message}</p>
+        ${schedHtml}
+        ${popup.btnText ? `<a href="${popup.btnLink || '#'}" class="btn-primary-action" style="display: block; text-align: center; justify-content: center; text-decoration: none; font-weight: 800;">${popup.btnText}</a>` : ''}
+      </div>
+    `;
+  }
+
+  if (folderLoc) folderLoc.textContent = 'Status: ' + (popup.isActive ? 'Active & Live' : 'Draft (Inactive)');
+  if (driveLink) driveLink.style.display = 'none';
+
+  if (modal) modal.classList.add('active');
+}

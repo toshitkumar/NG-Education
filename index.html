@@ -1771,6 +1771,19 @@
       <h3 style="font-size: 1.5rem; margin-bottom: 6px;">Login to NG EDUCATION</h3>
       <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Access your student dashboard, courses, and project files.</p>
 
+            <!-- Student Active Notice Card (Populated dynamically from Admin Popups) -->
+      <div id="studentLoginNoticeCard" style="display: none; background: #FFFBEB; border: 1.5px solid #F59E0B; border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; text-align: left;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+          <span style="background: #F59E0B; color: #0F172A; font-size: 0.72rem; font-weight: 900; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.04em;">🎓 Student Alert</span>
+          <span id="studentNoticeScheduleBadge" style="font-size: 0.75rem; color: #92400E; font-weight: 700;"></span>
+        </div>
+        <h4 id="studentNoticeTitle" style="font-size: 0.95rem; font-weight: 800; color: #0F172A; margin: 0 0 4px 0; line-height: 1.3;"></h4>
+        <p id="studentNoticeMsg" style="font-size: 0.82rem; color: #475569; line-height: 1.45; margin: 0 0 8px 0;"></p>
+        <button type="button" id="studentNoticeDetailBtn" onclick="openStudentPopupDetail()" style="background: #0E6258; color: #FFFFFF; border: none; border-radius: 8px; padding: 6px 14px; font-size: 0.78rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+          View Full Notice &amp; Instructions →
+        </button>
+      </div>
+
       <form class="modal-form" data-form-type="Login">
         <div class="input-group">
           <label class="input-label">Email or Username</label>
@@ -6555,6 +6568,67 @@
       </div>
       <div class="thankyou-progress-bar">
         <div class="thankyou-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Dynamic Site Announcement Popup (Configurable via Admin Console) -->
+  <div class="modal-overlay" id="modalDynamicSitePopup" style="z-index: 1050;">
+    <div class="modal-card modal-card-site-popup" style="max-width: 520px; width: 100%; padding: 0; overflow: hidden; border-radius: 20px; border: 2px solid #0E6258; background: #FFFFFF; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35); position: relative; text-align: left;">
+      <!-- Close Button -->
+      <button class="modal-close-btn" onclick="dismissSitePopup()" aria-label="Close modal" style="position: absolute; top: 12px; right: 12px; z-index: 20; background: #0F172A; color: #FFFFFF; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; border: 2px solid #FFFFFF; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer;">✕</button>
+
+      <!-- Banner Image Wrap -->
+      <div id="sitePopupImageWrap" style="position: relative; width: 100%; max-height: 220px; overflow: hidden; background: #0F172A; display: none;">
+        <img id="sitePopupImage" src="" alt="Announcement Banner" style="width: 100%; height: 220px; object-fit: cover; display: block;">
+        <span id="sitePopupAudienceBadge" style="position: absolute; top: 14px; left: 14px; background: #0E6258; color: #FFFFFF; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+          📢 SPECIAL ANNOUNCEMENT
+        </span>
+      </div>
+
+      <!-- Content Area -->
+      <div style="padding: 22px 24px 22px 24px;">
+        <!-- Header without image fallback badge -->
+        <div id="sitePopupBadgeNoImg" style="display: inline-flex; align-items: center; gap: 6px; background: #E6F4F1; color: #0E6258; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">
+          <span>📢</span>
+          <span id="sitePopupAudienceLabel">SPECIAL ANNOUNCEMENT</span>
+        </div>
+
+        <h3 id="sitePopupTitle" style="font-size: 1.35rem; font-weight: 800; color: #0F172A; line-height: 1.3; margin: 0 0 10px 0;">
+          <!-- Injected via JS -->
+        </h3>
+
+        <p id="sitePopupMessage" style="font-size: 0.92rem; color: #475569; line-height: 1.6; margin: 0 0 16px 0;">
+          <!-- Injected via JS -->
+        </p>
+
+        <!-- Date & Time Schedule Box (if scheduled) -->
+        <div id="sitePopupScheduleBox" style="display: none; background: #FEF3C7; border: 1.5px solid #F59E0B; border-radius: 12px; padding: 10px 14px; margin-bottom: 18px; align-items: center; gap: 10px;">
+          <span style="font-size: 1.25rem;">⏰</span>
+          <div>
+            <div id="sitePopupScheduleLabel" style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #92400E; letter-spacing: 0.05em;">SCHEDULE</div>
+            <div id="sitePopupScheduleValue" style="font-size: 0.92rem; font-weight: 800; color: #78350F;"></div>
+          </div>
+        </div>
+
+        <!-- Multi-Popup Indicator (if more than 1 popup available) -->
+        <div id="sitePopupNavWrap" style="display: none; align-items: center; justify-content: space-between; margin-bottom: 16px; padding: 6px 12px; background: #F8FAFC; border-radius: 8px; border: 1px solid #E2E8F0;">
+          <span id="sitePopupCounter" style="font-size: 0.78rem; font-weight: 700; color: #64748B;">Notice 1 of 2</span>
+          <div style="display: flex; gap: 6px;">
+            <button type="button" onclick="navigateSitePopup(-1)" style="border: 1px solid #CBD5E1; background: #FFFFFF; border-radius: 4px; padding: 3px 10px; font-size: 0.78rem; cursor: pointer; font-weight: 700;">◀ Prev</button>
+            <button type="button" onclick="navigateSitePopup(1)" style="border: 1px solid #CBD5E1; background: #FFFFFF; border-radius: 4px; padding: 3px 10px; font-size: 0.78rem; cursor: pointer; font-weight: 700;">Next ▶</button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <a id="sitePopupActionBtn" href="#courses" class="btn-primary-action" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 20px; background: #0E6258; color: #FFFFFF; border-radius: 10px; font-size: 0.95rem; font-weight: 800; text-decoration: none; border: none; box-shadow: 0 4px 12px rgba(14, 98, 88, 0.3); text-align: center;">
+            <span id="sitePopupActionBtnText">Explore Course Now →</span>
+          </a>
+          <button type="button" onclick="dismissSitePopup(true)" style="background: transparent; border: none; color: #64748B; font-size: 0.8rem; font-weight: 700; cursor: pointer; padding: 6px; text-decoration: underline;">
+            Don't show this announcement again today
+          </button>
+        </div>
       </div>
     </div>
   </div>

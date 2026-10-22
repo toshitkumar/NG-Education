@@ -152,6 +152,12 @@
           <span>Courses Manager</span>
         </button>
 
+                <button class="nav-tab-btn" id="tabBtn_notifications" onclick="switchAdminTab('notifications')">
+          <span>📢</span>
+          <span>Alerts &amp; Popups</span>
+          <span class="nav-tab-badge" id="sidebarPopupsBadge" style="display: none;">0</span>
+        </button>
+
         <button class="nav-tab-btn" id="tabBtn_curriculum" onclick="switchAdminTab('curriculum')">
           <span>📁</span>
           <span>Curriculum &amp; Media</span>
@@ -279,6 +285,136 @@
                 </thead>
                 <tbody id="dashRecentOrdersBody"></tbody>
               </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             PANE: NOTIFICATIONS & POPUPS MANAGER
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_notifications">
+          
+          <!-- Section 1: Top Scrolling Announcement Bar (Ticker) -->
+          <div class="panel-card" style="margin-bottom: 28px;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Top Scrolling Announcement Bar (टॉप टिकर पट्टी)</h3>
+                <p class="panel-subtitle">Configure the live continuous news-style scrolling strip displayed at the absolute top of your website.</p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.88rem; cursor: pointer; color: var(--admin-slate);">
+                  <input type="checkbox" id="tickerEnableSwitch" checked onchange="handleTickerPreviewUpdate()" style="width: 18px; height: 18px; accent-color: var(--admin-teal);">
+                  <span>Show Ticker on Website</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Live Ticker Preview Box -->
+            <div style="margin-bottom: 24px;">
+              <div style="font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748B; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <span>Live Interactive Preview</span>
+                <span style="font-weight: 600; color: #10B981;">● Updates live as you type</span>
+              </div>
+              
+              <div id="adminTickerLivePreviewWrap" style="border: 2px dashed #CBD5E1; border-radius: 12px; overflow: hidden; background: #F8FAFC; padding: 6px;">
+                <div id="adminTickerPreviewStrip" class="top-ticker-strip" style="background-color: #F59E0B; color: #0F172A; width: 100%; height: 38px; overflow: hidden; display: flex; align-items: center; border-radius: 8px; position: relative; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
+                  <div id="adminTickerPreviewBadge" class="top-ticker-badge" style="background-color: #0F172A; color: #F59E0B; height: 100%; padding: 0 16px; display: inline-flex; align-items: center; gap: 6px; font-weight: 900; font-size: 0.78rem; text-transform: uppercase; flex-shrink: 0; box-shadow: 2px 0 8px rgba(0,0,0,0.2);">
+                    <span>📢</span>
+                    <span id="previewBadgeText">NOTICE</span>
+                  </div>
+                  <div class="top-ticker-track-wrap" style="flex: 1; overflow: hidden; display: flex; align-items: center;">
+                    <div id="adminTickerPreviewTrack" class="top-ticker-track" style="display: flex; align-items: center; white-space: nowrap;">
+                      <!-- Populated via JS -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ticker Form Controls -->
+            <form id="tickerSettingsForm" onsubmit="handleSaveTickerSettings(event)">
+              <div class="modal-form-grid" style="margin-bottom: 16px;">
+                <div class="auth-form-group">
+                  <label class="auth-label">Left Badge Text *</label>
+                  <input type="text" id="tickerInputBadge" class="auth-input" value="📢 NOTICE" placeholder="e.g. 📢 NOTICE or 🎓 CERTIFICATE" required oninput="handleTickerPreviewUpdate()">
+                </div>
+                <div class="auth-form-group">
+                  <label class="auth-label">Word to Highlight (Bold &amp; Underlined)</label>
+                  <input type="text" id="tickerInputHighlight" class="auth-input" value="100% free" placeholder="e.g. 100% free" oninput="handleTickerPreviewUpdate()">
+                </div>
+              </div>
+
+              <div class="auth-form-group" style="margin-bottom: 16px;">
+                <label class="auth-label">Primary Announcement Message *</label>
+                <input type="text" id="tickerInputMsg1" class="auth-input" value="🎓 Once you complete a course you'll get a certificate 100% free." placeholder="Main message scrolling across the screen" required oninput="handleTickerPreviewUpdate()">
+              </div>
+
+              <div class="modal-form-grid" style="margin-bottom: 16px;">
+                <div class="auth-form-group">
+                  <label class="auth-label">Secondary Message 1</label>
+                  <input type="text" id="tickerInputMsg2" class="auth-input" value="📜 Official Verified STEM &amp; Robotics Certificate Included at No Extra Cost." placeholder="Second bullet message" oninput="handleTickerPreviewUpdate()">
+                </div>
+                <div class="auth-form-group">
+                  <label class="auth-label">Secondary Message 2</label>
+                  <input type="text" id="tickerInputMsg3" class="auth-input" value="⚡ 100% Practical Training + Free Shareable Certificate upon Project Completion!" placeholder="Third bullet message" oninput="handleTickerPreviewUpdate()">
+                </div>
+              </div>
+
+              <div class="modal-form-grid" style="margin-bottom: 20px;">
+                <div class="auth-form-group">
+                  <label class="auth-label">Color Theme Preset</label>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+                    <button type="button" class="btn-color-preset" id="presetAmber" onclick="applyTickerColorPreset('#F59E0B', '#0F172A')" style="background: #F59E0B; color: #0F172A; border: 2px solid #D97706; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer;">Amber Gold (Default)</button>
+                    <button type="button" class="btn-color-preset" id="presetTeal" onclick="applyTickerColorPreset('#0E6258', '#FFFFFF')" style="background: #0E6258; color: #FFFFFF; border: 1.5px solid #08473F; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer;">Deep Teal</button>
+                    <button type="button" class="btn-color-preset" id="presetCrimson" onclick="applyTickerColorPreset('#DC2626', '#FFFFFF')" style="background: #DC2626; color: #FFFFFF; border: 1.5px solid #B91C1C; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer;">Crimson Alert</button>
+                    <button type="button" class="btn-color-preset" id="presetNavy" onclick="applyTickerColorPreset('#0F172A', '#F59E0B')" style="background: #0F172A; color: #F59E0B; border: 1.5px solid #334155; padding: 6px 14px; border-radius: 8px; font-weight: 800; font-size: 0.82rem; cursor: pointer;">Dark Slate</button>
+                  </div>
+                  <input type="hidden" id="tickerInputBgColor" value="#F59E0B">
+                  <input type="hidden" id="tickerInputTextColor" value="#0F172A">
+                </div>
+
+                <div class="auth-form-group">
+                  <label class="auth-label">Scrolling Speed</label>
+                  <select id="tickerInputSpeed" class="auth-input" onchange="handleTickerPreviewUpdate()">
+                    <option value="20s">⚡ Fast (20 seconds)</option>
+                    <option value="28s" selected>🎯 Balanced (28 seconds - Recommended)</option>
+                    <option value="38s">🐢 Relaxed (38 seconds)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn-primary-action" style="padding: 12px 26px; font-size: 0.95rem;">
+                  <span>Save &amp; Publish Ticker to Live Website</span>
+                  <span>✓</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Section 2: Website & Student Popups Manager -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Website &amp; Student Popups Manager (मल्टी-टारगेट पॉप-अप्स)</h3>
+                <p class="panel-subtitle">Create and manage multiple active popups with banners, text, dates &amp; times. Target Home Page visitors or Enrolled Students separately.</p>
+              </div>
+              <button type="button" class="btn-primary-action" onclick="openCreatePopupModal()">
+                <span>+ Create New Popup</span>
+              </button>
+            </div>
+
+            <!-- Popups Audience Filter Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+              <button type="button" class="upload-type-btn active" id="popupFilter_all" onclick="filterPopupsTable('all')">All Popups (<span id="countPopupsAll">0</span>)</button>
+              <button type="button" class="upload-type-btn" id="popupFilter_home" onclick="filterPopupsTable('home')">🏠 Home Page Only (<span id="countPopupsHome">0</span>)</button>
+              <button type="button" class="upload-type-btn" id="popupFilter_students" onclick="filterPopupsTable('students')">🎓 Students Only (<span id="countPopupsStudents">0</span>)</button>
+            </div>
+
+            <!-- Popups Container -->
+            <div id="popupsListContainer" class="popups-cards-grid">
+              <!-- Populated via renderPopupsTable() -->
             </div>
           </div>
 
@@ -760,6 +896,124 @@
           </a>
         </div>
       </div>
+    </div>
+  </div>
+
+    <!-- =====================================================================
+       9. CREATE / EDIT POPUP MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalAdminPopup">
+    <div class="admin-modal-box" style="max-width: 620px; max-height: 92vh; overflow-y: auto;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="popupModalTitle">Create Announcement Popup</h3>
+        <button class="btn-modal-close" onclick="closePopupModal()">&times;</button>
+      </div>
+      <form id="popupEditForm" onsubmit="handleSavePopup(event)">
+        <input type="hidden" id="popupEditId">
+
+        <div class="admin-modal-body">
+          
+          <!-- 1. Target Audience Selector -->
+          <div class="auth-form-group">
+            <label class="auth-label">Target Audience (कहाँ और किसको दिखाना है?) *</label>
+            <select id="popupInputAudience" class="auth-input" required onchange="handlePopupAudienceChange()">
+              <option value="home">🏠 Home Page Visitors (सार्वजनिक होमपेज विजिटर्स)</option>
+              <option value="students">🎓 Enrolled Students Only (लॉगिन किए हुए स्टूडेंट्स पोर्टल)</option>
+              <option value="all">🌐 All Visitors &amp; Students (पूरी वेबसाइट पर सभी को)</option>
+            </select>
+            <p id="popupAudienceHint" style="font-size: 0.78rem; color: #0E6258; margin-top: 4px; font-weight: 600;">
+              ✓ यह पॉप-अप सिर्फ वेबसाइट के होम पेज पर आने वाले आगंतुकों को दिखेगा।
+            </p>
+          </div>
+
+          <!-- 2. Popup Title -->
+          <div class="auth-form-group">
+            <label class="auth-label">Popup Title (शीर्षक) *</label>
+            <input type="text" id="popupInputTitle" class="auth-input" placeholder="e.g. 🛸 Drone Making Masterclass 50% Off" required>
+          </div>
+
+          <!-- 3. Image URL or File Upload -->
+          <div class="auth-form-group">
+            <label class="auth-label">Popup Banner Image (फोटो या बैनर जोड़ें)</label>
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+              <input type="text" id="popupInputImageUrl" class="auth-input" placeholder="Image URL (e.g. assets/images/slide1_robotics.webp or drive link)" oninput="handlePopupImagePreview(this.value)">
+              <button type="button" class="btn-secondary-action" onclick="document.getElementById('popupFileInput').click()" style="flex-shrink: 0; white-space: nowrap;">
+                <span>📁 Upload File</span>
+              </button>
+              <input type="file" id="popupFileInput" accept="image/*" style="display: none;" onchange="handlePopupFileUpload(event)">
+            </div>
+            
+            <!-- Image Preview Box -->
+            <div id="popupImagePreviewBox" style="display: none; position: relative; border-radius: 12px; overflow: hidden; border: 1.5px solid #CBD5E1; max-height: 160px; background: #0F172A; text-align: center;">
+              <img id="popupImagePreviewEl" src="" alt="Popup Preview" style="width: 100%; height: 160px; object-fit: cover;">
+              <button type="button" onclick="clearPopupImage()" style="position: absolute; top: 8px; right: 8px; background: rgba(15,23,42,0.85); color: white; border: none; border-radius: 999px; width: 28px; height: 28px; cursor: pointer; font-size: 14px; font-weight: bold;">✕</button>
+            </div>
+          </div>
+
+          <!-- 4. Popup Message -->
+          <div class="auth-form-group">
+            <label class="auth-label">Popup Message / Details (विवरण) *</label>
+            <textarea id="popupInputMessage" class="auth-input" style="height: 80px; padding-top: 8px; resize: vertical;" placeholder="Enter event details, offer highlights, instructions or announcement text..." required></textarea>
+          </div>
+
+          <!-- 5. Date & Time Scheduling Section (With or Without Date/Time) -->
+          <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 800; color: #0F172A; cursor: pointer;">
+                <input type="checkbox" id="popupInputHasSchedule" onchange="togglePopupScheduleInputs(this.checked)" style="accent-color: var(--admin-teal); width: 18px; height: 18px;">
+                <span>Include Event Date &amp; Time (तारीख और समय जोड़ें)</span>
+              </label>
+              <span id="popupScheduleStatusBadge" style="font-size: 0.75rem; font-weight: 800; background: #E2E8F0; color: #64748B; padding: 2px 8px; border-radius: 999px;">Optional</span>
+            </div>
+            
+            <div id="popupScheduleFieldsWrap" style="display: none; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #CBD5E1;">
+              <div class="auth-form-group" style="margin-bottom: 10px;">
+                <label class="auth-label">Schedule Heading / Label</label>
+                <input type="text" id="popupInputScheduleLabel" class="auth-input" value="Event Starts:" placeholder="e.g. Event Starts: or Batch Date: or Submission Deadline:">
+              </div>
+              <div class="modal-form-grid">
+                <div class="auth-form-group">
+                  <label class="auth-label">Date (तारीख)</label>
+                  <input type="date" id="popupInputDate" class="auth-input">
+                </div>
+                <div class="auth-form-group">
+                  <label class="auth-label">Time (समय)</label>
+                  <input type="time" id="popupInputTime" class="auth-input">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Action Button (CTA) -->
+          <div class="modal-form-grid" style="margin-bottom: 16px;">
+            <div class="auth-form-group">
+              <label class="auth-label">Button Text (CTA बटन टेक्स्ट)</label>
+              <input type="text" id="popupInputBtnText" class="auth-input" placeholder="e.g. Explore Course (50% OFF) →">
+            </div>
+            <div class="auth-form-group">
+              <label class="auth-label">Button Link / Action</label>
+              <input type="text" id="popupInputBtnLink" class="auth-input" placeholder="e.g. #courses or #kaushal-bodh">
+            </div>
+          </div>
+
+          <!-- 7. Active Status Checkbox -->
+          <div style="margin-top: 6px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; color: var(--admin-slate);">
+              <input type="checkbox" id="popupInputIsActive" checked style="accent-color: var(--admin-teal); width: 18px; height: 18px;">
+              <span>Activate this popup immediately (तुरंत एक्टिव और लाइव करें)</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-secondary-action" onclick="closePopupModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action">
+            <span id="popupSubmitBtnText">Save &amp; Publish Popup</span>
+            <span>✨</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

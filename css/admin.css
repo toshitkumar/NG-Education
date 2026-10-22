@@ -1504,3 +1504,200 @@ input:checked + .slider-round:before {
     flex-wrap: wrap;
   }
 }
+
+
+/* =====================================================================
+   ALERTS & POPUPS MANAGER STYLES (admin.css)
+   ===================================================================== */
+.popups-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 22px;
+}
+
+.popup-admin-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  box-shadow: var(--admin-shadow);
+}
+
+.popup-admin-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--admin-teal);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+}
+
+.popup-admin-card.inactive {
+  opacity: 0.72;
+  border-style: dashed;
+}
+
+.popup-card-banner-wrap {
+  width: 100%;
+  height: 160px;
+  background: #08473F;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-card-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.popup-card-banner-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #94A3B8;
+  font-size: 2.2rem;
+  background: #1E293B;
+}
+
+.popup-badge-audience {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.badge-aud-home {
+  background: #E6F7F5;
+  color: #0E6258;
+  border: 1px solid #99F6E4;
+}
+
+.badge-aud-students {
+  background: #FEF3C7;
+  color: #D97706;
+  border: 1px solid #FDE68A;
+}
+
+.badge-aud-all {
+  background: #EDE9FE;
+  color: #6D28D9;
+  border: 1px solid #DDD6FE;
+}
+
+.popup-status-pill {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.pill-active {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.pill-inactive {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.popup-card-content {
+  padding: 18px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--admin-slate);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.popup-card-msg {
+  font-size: 0.88rem;
+  color: var(--admin-text-muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.popup-card-schedule-chip {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--admin-slate);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.popup-card-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--admin-border);
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.popup-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background: #FFFFFF;
+  color: var(--admin-slate);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-card-icon:hover {
+  background: var(--admin-teal);
+  color: #FFFFFF;
+  border-color: var(--admin-teal);
+}
+
+.btn-card-icon.delete:hover {
+  background: #EF4444;
+  color: #FFFFFF;
+  border-color: #EF4444;
+}
+
+@media (max-width: 768px) {
+  .popups-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
