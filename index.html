@@ -21,7 +21,89 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=9.1">
+  <link rel="stylesheet" href="css/style.css?v=9.3">
+  <!-- Inline Critical News Ticker Styles (Guarantees 1-Line News Scroll Across All Devices & Cache States) -->
+  <style>
+    .top-ticker-strip {
+      background-color: #F59E0B !important;
+      color: #0F172A !important;
+      width: 100% !important;
+      height: 38px !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      border-bottom: 2px solid #D97706 !important;
+      position: relative !important;
+      z-index: 1001 !important;
+      user-select: none !important;
+    }
+    .top-ticker-badge {
+      background-color: #0F172A !important;
+      color: #F59E0B !important;
+      height: 100% !important;
+      padding: 0 16px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      font-weight: 900 !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase !important;
+      flex-shrink: 0 !important;
+      box-shadow: 3px 0 10px rgba(0,0,0,0.25) !important;
+      z-index: 3 !important;
+    }
+    .top-ticker-track-wrap {
+      flex: 1 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      position: relative !important;
+      height: 100% !important;
+    }
+    .top-ticker-track {
+      display: flex !important;
+      align-items: center !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      animation: topTickerScroll 28s linear infinite !important;
+      will-change: transform !important;
+    }
+    .top-ticker-strip:hover .top-ticker-track {
+      animation-play-state: paused !important;
+    }
+    .top-ticker-item {
+      display: inline-flex !important;
+      align-items: center !important;
+      white-space: nowrap !important;
+      font-size: 0.88rem !important;
+      font-weight: 700 !important;
+      color: #0F172A !important;
+      padding: 0 18px !important;
+      flex-shrink: 0 !important;
+      line-height: 38px !important;
+    }
+    .top-ticker-separator {
+      display: inline-block !important;
+      color: #78350F !important;
+      font-size: 0.75rem !important;
+      opacity: 0.65 !important;
+      padding: 0 12px !important;
+      flex-shrink: 0 !important;
+    }
+    @keyframes topTickerScroll {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    @media (max-width: 600px) {
+      .top-ticker-strip { height: 34px !important; }
+      .top-ticker-badge { padding: 0 10px !important; font-size: 0.7rem !important; gap: 4px !important; }
+      .top-ticker-item { font-size: 0.78rem !important; padding: 0 12px !important; line-height: 34px !important; }
+      .top-ticker-separator { padding: 0 8px !important; }
+      .top-ticker-track { animation-duration: 22s !important; }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -29,52 +111,34 @@
        1. TOP HEADER (DEEP INDIGO MATCHING REFERENCE IMAGE)
        ===================================================================== -->
   <header class="site-header">
-    <!-- Top Announcement Strip (Yellow Scrolling Bar) -->
-    <div class="top-ticker-strip" role="region" aria-label="Course Certificate Announcement">
-      <div class="top-ticker-track-wrap">
-        <div class="top-ticker-track">
+        <!-- Top Announcement Strip (Yellow Scrolling Bar - News Ticker Style) -->
+    <div class="top-ticker-strip" role="region" aria-label="Course Certificate Announcement" style="background-color: #F59E0B; color: #0F172A; width: 100%; height: 38px; overflow: hidden; display: flex; align-items: center; border-bottom: 2px solid #D97706; position: relative; z-index: 1001; user-select: none; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;">
+      <!-- News Badge -->
+      <div class="top-ticker-badge" style="background-color: #0F172A; color: #F59E0B; height: 100%; padding: 0 16px; display: inline-flex; align-items: center; gap: 6px; font-weight: 900; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; flex-shrink: 0; box-shadow: 3px 0 10px rgba(0,0,0,0.25); z-index: 3;">
+        <span style="font-size: 0.95rem;">📢</span>
+        <span>NOTICE</span>
+      </div>
+      <!-- Marquee Track Wrapper -->
+      <div class="top-ticker-track-wrap" style="flex: 1; overflow: hidden; display: flex; align-items: center; position: relative; height: 100%;">
+        <div class="top-ticker-track" style="display: flex; align-items: center; white-space: nowrap; flex-shrink: 0;">
           <!-- Set 1 -->
-          <div class="top-ticker-item">
-            <span class="ticker-icon">🎓</span>
-            <span>Once you complete a course you'll get a certificate <strong>100% free</strong>.</span>
-          </div>
+          <span class="top-ticker-item">🎓 Once you complete a course you'll get a certificate <strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">100% free</strong>.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">📜</span>
-            <span>Verified STEM &amp; Robotics Certificate Included at No Extra Cost.</span>
-          </div>
+          <span class="top-ticker-item">📜 Official Verified STEM &amp; Robotics Certificate Included at No Extra Cost.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">🎓</span>
-            <span>Once you complete a course you'll get a certificate <strong>100% free</strong>.</span>
-          </div>
+          <span class="top-ticker-item">🎓 Once you complete a course you'll get a certificate <strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">100% free</strong>.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">⚡</span>
-            <span>Hands-on Project Evaluation &amp; Instant Shareable Certificate!</span>
-          </div>
+          <span class="top-ticker-item">⚡ 100% Practical Training + Free Shareable Certificate upon Project Completion!</span>
           <span class="top-ticker-separator">✦</span>
 
-          <!-- Set 2 (Identical duplicate for seamless continuous infinite scroll) -->
-          <div class="top-ticker-item">
-            <span class="ticker-icon">🎓</span>
-            <span>Once you complete a course you'll get a certificate <strong>100% free</strong>.</span>
-          </div>
+          <!-- Set 2 (Identical duplicate for seamless continuous infinite loop) -->
+          <span class="top-ticker-item">🎓 Once you complete a course you'll get a certificate <strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">100% free</strong>.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">📜</span>
-            <span>Verified STEM &amp; Robotics Certificate Included at No Extra Cost.</span>
-          </div>
+          <span class="top-ticker-item">📜 Official Verified STEM &amp; Robotics Certificate Included at No Extra Cost.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">🎓</span>
-            <span>Once you complete a course you'll get a certificate <strong>100% free</strong>.</span>
-          </div>
+          <span class="top-ticker-item">🎓 Once you complete a course you'll get a certificate <strong style="font-weight: 900; text-decoration: underline; text-underline-offset: 3px; margin-left: 4px;">100% free</strong>.</span>
           <span class="top-ticker-separator">✦</span>
-          <div class="top-ticker-item">
-            <span class="ticker-icon">⚡</span>
-            <span>Hands-on Project Evaluation &amp; Instant Shareable Certificate!</span>
-          </div>
+          <span class="top-ticker-item">⚡ 100% Practical Training + Free Shareable Certificate upon Project Completion!</span>
           <span class="top-ticker-separator">✦</span>
         </div>
       </div>
