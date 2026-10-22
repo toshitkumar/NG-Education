@@ -24,22 +24,30 @@
   <link rel="stylesheet" href="css/style.css?v=9.4">
   <!-- Inline Critical News Ticker Styles (Guarantees 1-Line News Scroll Across All Devices & Cache States) -->
   <style>
+    :root {
+      --ticker-bg: #F59E0B;
+      --ticker-color: #0F172A;
+      --ticker-badge-bg: #0F172A;
+      --ticker-badge-color: #F59E0B;
+      --ticker-speed: 28s;
+    }
     .top-ticker-strip {
-      background-color: #F59E0B !important;
-      color: #0F172A !important;
+      background-color: var(--ticker-bg) !important;
+      color: var(--ticker-color) !important;
       width: 100% !important;
       height: 38px !important;
       overflow: hidden !important;
       display: flex !important;
       align-items: center !important;
-      border-bottom: 2px solid #D97706 !important;
+      border-bottom: 2px solid rgba(0,0,0,0.12) !important;
       position: relative !important;
       z-index: 1001 !important;
       user-select: none !important;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
     .top-ticker-badge {
-      background-color: #0F172A !important;
-      color: #F59E0B !important;
+      background-color: var(--ticker-badge-bg) !important;
+      color: var(--ticker-badge-color) !important;
       height: 100% !important;
       padding: 0 16px !important;
       display: inline-flex !important;
@@ -66,7 +74,7 @@
       align-items: center !important;
       white-space: nowrap !important;
       flex-shrink: 0 !important;
-      animation: topTickerScroll 28s linear infinite !important;
+      animation: topTickerScroll var(--ticker-speed) linear infinite !important;
       will-change: transform !important;
     }
     .top-ticker-track-wrap,
@@ -87,14 +95,14 @@
       white-space: nowrap !important;
       font-size: 0.88rem !important;
       font-weight: 700 !important;
-      color: #0F172A !important;
+      color: var(--ticker-color) !important;
       padding: 0 18px !important;
       flex-shrink: 0 !important;
       line-height: 38px !important;
     }
     .top-ticker-separator {
       display: inline-block !important;
-      color: #78350F !important;
+      color: var(--ticker-color) !important;
       font-size: 0.75rem !important;
       opacity: 0.65 !important;
       padding: 0 12px !important;
@@ -109,7 +117,6 @@
       .top-ticker-badge { padding: 0 10px !important; font-size: 0.7rem !important; gap: 4px !important; }
       .top-ticker-item { font-size: 0.78rem !important; padding: 0 12px !important; line-height: 34px !important; }
       .top-ticker-separator { padding: 0 8px !important; }
-      .top-ticker-track { animation-duration: 22s !important; }
     }
   </style>
 

@@ -681,7 +681,11 @@ function initLiveTickerSync() {
     let ticker = DEFAULT_SITE_TICKER;
     const rawTicker = localStorage.getItem('ng_education_ticker_settings');
     if (rawTicker) {
-      ticker = { ...DEFAULT_SITE_TICKER, ...JSON.parse(rawTicker) };
+      try {
+        ticker = { ...DEFAULT_SITE_TICKER, ...JSON.parse(rawTicker) };
+      } catch (e) {
+        ticker = DEFAULT_SITE_TICKER;
+      }
     }
 
     if (ticker.enabled === false) {
@@ -691,24 +695,29 @@ function initLiveTickerSync() {
       tickerStrip.style.display = 'flex';
     }
 
-    // Apply colors
-    if (ticker.bgColor) {
-      tickerStrip.style.backgroundColor = ticker.bgColor;
-      tickerStrip.style.borderBottomColor = ticker.bgColor;
-    }
-    if (ticker.textColor) {
-      tickerStrip.style.color = ticker.textColor;
-    }
+    // Apply colors via CSS Variables on root and direct inline styles
+    const bg = ticker.bgColor || '#F59E0B';
+    const text = ticker.textColor || '#0F172A';
+    const speed = ticker.speed || '28s';
+
+    document.documentElement.style.setProperty('--ticker-bg', bg);
+    document.documentElement.style.setProperty('--ticker-color', text);
+    document.documentElement.style.setProperty('--ticker-badge-bg', text);
+    document.documentElement.style.setProperty('--ticker-badge-color', bg);
+    document.documentElement.style.setProperty('--ticker-speed', speed);
+
+    tickerStrip.style.setProperty('background-color', bg, 'important');
+    tickerStrip.style.setProperty('color', text, 'important');
 
     // Badge
     const badgeEl = tickerStrip.querySelector('.top-ticker-badge');
     if (badgeEl && ticker.badgeText) {
-      if (ticker.bgColor) badgeEl.style.color = ticker.bgColor;
-      if (ticker.textColor) badgeEl.style.backgroundColor = ticker.textColor;
-      const parts = ticker.badgeText.split(' ');
+      badgeEl.style.setProperty('background-color', text, 'important');
+      badgeEl.style.setProperty('color', bg, 'important');
+      const parts = ticker.badgeText.trim().split(' ');
       const icon = parts[0] || '📢';
-      const text = parts.slice(1).join(' ') || 'NOTICE';
-      badgeEl.innerHTML = `<span style="font-size: 0.95rem;">${icon}</span><span>${text}</span>`;
+      const badgeWord = parts.slice(1).join(' ') || 'NOTICE';
+      badgeEl.innerHTML = `<span style="font-size: 0.95rem;">${icon}</span><span>${badgeWord}</span>`;
     }
 
     // Format messages
@@ -724,21 +733,26 @@ function initLiveTickerSync() {
     };
 
     let items = [];
-    if (ticker.text1) items.push(formatMsg(ticker.text1));
-    if (ticker.text2) items.push(formatMsg(ticker.text2));
-    if (ticker.text3) items.push(formatMsg(ticker.text3));
+    if (ticker.text1 && ticker.text1.trim()) items.push(formatMsg(ticker.text1.trim()));
+    if (ticker.text2 && ticker.text2.trim()) items.push(formatMsg(ticker.text2.trim()));
+    if (ticker.text3 && ticker.text3.trim()) items.push(formatMsg(ticker.text3.trim()));
 
     if (items.length > 0) {
       const track = tickerStrip.querySelector('.top-ticker-track');
       if (track) {
-        const singleSetHtml = items
-          .map(item => `<span class="top-ticker-item" style="color: ${ticker.textColor || '#0F172A'};">${item}</span><span class="top-ticker-separator" style="color: ${ticker.textColor || '#0F172A'}; opacity: 0.6;">✦</span>`)
+        // Ensure at least 4 items so no blank space on wide desktop screens
+        let repeatedItems = [...items];
+        while (repeatedItems.length < 4) {
+          repeatedItems = repeatedItems.concat(items);
+        }
+
+        const singleSetHtml = repeatedItems
+          .map(item => `<span class="top-ticker-item" style="color: ${text} !important;">${item}</span><span class="top-ticker-separator" style="color: ${text} !important; opacity: 0.6;">✦</span>`)
           .join('');
 
+        // Duplicate for seamless 50% infinite translation
         track.innerHTML = singleSetHtml + singleSetHtml;
-        if (ticker.speed) {
-          track.style.animationDuration = ticker.speed;
-        }
+        track.style.setProperty('animation-duration', speed, 'important');
       }
     }
   } catch (err) {
@@ -765,13 +779,37 @@ function initLivePopupsManager() {
       localStorage.setItem('ng_education_popups_list', JSON.stringify(DEFAULT_SITE_POPUPS));
     }
 
+    // Force Test Mode: if URL contains ?test_popup=1 or ?reset_popups=1
+    const urlParams = new URLSearchParams(window.location.search);
+    const forceTestPopup = urlParams.get('test_popup') === '1' || urlParams.get('reset_popups') === '1';
+    if (forceTestPopup) {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith('dismissed_site_popup_')) sessionStorage.removeItem(k);
+      });
+      Object.keys(localStorage).forEach(k => {
+        if (k.startsWith('dismissed_popup_day_') || k.startsWith('dismissed_popup_time_')) localStorage.removeItem(k);
+      });
+    }
+
     // 1. Filter Home Page Popups
     activeHomePopups = popupsList.filter(p => p.isActive && (p.audience === 'home' || p.audience === 'all'));
 
-    // Check if dismissed today
+    // Check dismissal: Allow popup if it was created/updated after last dismissal
     activeHomePopups = activeHomePopups.filter(p => {
+      if (forceTestPopup) return true;
       const sessionDismissed = sessionStorage.getItem('dismissed_site_popup_' + p.id);
       const dayDismissed = localStorage.getItem('dismissed_popup_day_' + p.id);
+      const lastDismissedTime = Number(localStorage.getItem('dismissed_popup_time_' + p.id) || 0);
+      const popupUpdatedTime = p.updatedAt ? new Date(p.updatedAt).getTime() : (p.createdAt ? new Date(p.createdAt).getTime() : 0);
+
+      // Invalidate old dismissal if admin recently updated or saved the popup!
+      if (popupUpdatedTime > lastDismissedTime && lastDismissedTime > 0) {
+        sessionStorage.removeItem('dismissed_site_popup_' + p.id);
+        localStorage.removeItem('dismissed_popup_day_' + p.id);
+        localStorage.removeItem('dismissed_popup_time_' + p.id);
+        return true;
+      }
+
       const todayStr = new Date().toDateString();
       return !sessionDismissed && dayDismissed !== todayStr;
     });
@@ -787,14 +825,13 @@ function initLivePopupsManager() {
     if (activeHomePopups.length > 0) {
       currentSitePopupIndex = 0;
       setTimeout(() => {
-        // Only show if no other modal currently active
         const hasOpenModal = document.querySelector('.modal-overlay.active');
         if (!hasOpenModal) {
           renderCurrentSitePopup();
           const modal = document.getElementById('modalDynamicSitePopup');
           if (modal) modal.classList.add('active');
         }
-      }, 1400);
+      }, 1000);
     }
   } catch (err) {
     console.warn('Popups manager error:', err);
@@ -815,12 +852,12 @@ function renderCurrentSitePopup() {
   if (titleEl) titleEl.textContent = popup.title;
   if (msgEl) msgEl.textContent = popup.message;
 
-  // Image & Badges
+  // Image & Badge
   const imgWrap = document.getElementById('sitePopupImageWrap');
   const imgEl = document.getElementById('sitePopupImage');
   const badgeNoImg = document.getElementById('sitePopupBadgeNoImg');
   const audBadge = document.getElementById('sitePopupAudienceBadge');
-  const audLabel = document.getElementById('sitePopupAudienceLabel');
+  const audLabel = document.getElementById('sitePopupBadgeNoImgLabel');
 
   const audienceText = popup.audience === 'home' ? '🏠 Special Announcement' : (popup.audience === 'students' ? '🎓 Student Notice' : '🌐 Important Update');
   if (audBadge) audBadge.textContent = audienceText;
@@ -840,20 +877,23 @@ function renderCurrentSitePopup() {
   const schedLabel = document.getElementById('sitePopupScheduleLabel');
   const schedValue = document.getElementById('sitePopupScheduleValue');
 
-  if (popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime)) {
+  const hasSched = popup.hasSchedule && (popup.scheduleText || popup.scheduleDate || popup.scheduleTime);
+  if (hasSched) {
     if (schedLabel) schedLabel.textContent = popup.scheduleLabel || 'SCHEDULE';
     
-    let formattedDateTime = '';
-    if (popup.scheduleDate) {
-      try {
-        const d = new Date(popup.scheduleDate);
-        formattedDateTime = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-      } catch (e) {
-        formattedDateTime = popup.scheduleDate;
+    let formattedDateTime = popup.scheduleText || '';
+    if (!formattedDateTime) {
+      if (popup.scheduleDate) {
+        try {
+          const d = new Date(popup.scheduleDate);
+          formattedDateTime = d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        } catch (e) {
+          formattedDateTime = popup.scheduleDate;
+        }
       }
-    }
-    if (popup.scheduleTime) {
-      formattedDateTime += (formattedDateTime ? ' at ' : '') + popup.scheduleTime;
+      if (popup.scheduleTime) {
+        formattedDateTime += (formattedDateTime ? ' at ' : '') + popup.scheduleTime;
+      }
     }
 
     if (schedValue) schedValue.textContent = formattedDateTime;
@@ -875,8 +915,8 @@ function renderCurrentSitePopup() {
   // CTA Action Button
   const btn = document.getElementById('sitePopupActionBtn');
   const btnText = document.getElementById('sitePopupActionBtnText');
-  if (popup.btnText) {
-    if (btnText) btnText.textContent = popup.btnText;
+  if (popup.btnText && popup.btnText.trim()) {
+    if (btnText) btnText.textContent = popup.btnText.trim();
     if (btn) {
       btn.href = popup.btnLink || '#courses';
       btn.style.display = 'flex';
@@ -899,6 +939,8 @@ function dismissSitePopup(foreverToday = false) {
   if (activeHomePopups && activeHomePopups[currentSitePopupIndex]) {
     const currentId = activeHomePopups[currentSitePopupIndex].id;
     sessionStorage.setItem('dismissed_site_popup_' + currentId, 'true');
+    const now = Date.now();
+    localStorage.setItem('dismissed_popup_time_' + currentId, String(now));
     if (foreverToday) {
       localStorage.setItem('dismissed_popup_day_' + currentId, new Date().toDateString());
     }
@@ -918,8 +960,9 @@ function setupStudentNoticeInLogin(popup) {
     msgEl.textContent = popup.message.length > 90 ? popup.message.substring(0, 87) + '...' : popup.message;
   }
   if (schedBadge) {
-    schedBadge.textContent = popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime) 
-      ? `⏰ ${popup.scheduleLabel || 'Date:'} ${popup.scheduleDate || ''}` 
+    const schedInfo = popup.scheduleText || (popup.scheduleDate ? `${popup.scheduleDate} ${popup.scheduleTime || ''}` : '');
+    schedBadge.textContent = popup.hasSchedule && schedInfo 
+      ? `⏰ ${popup.scheduleLabel || 'Date:'} ${schedInfo}` 
       : '⚡ Active';
   }
 
@@ -931,7 +974,6 @@ function openStudentPopupDetail() {
   closeAllModals();
 
   // Populate dynamic modal with student popup data
-  const tempHome = activeHomePopups;
   activeHomePopups = [activeStudentPopup];
   currentSitePopupIndex = 0;
   renderCurrentSitePopup();
@@ -945,7 +987,6 @@ window.navigateSitePopup = navigateSitePopup;
 window.dismissSitePopup = dismissSitePopup;
 window.openStudentPopupDetail = openStudentPopupDetail;
 
-// Re-sync on storage change (if admin modifies in another tab)
 window.addEventListener('storage', (e) => {
   if (e.key === 'ng_education_courses') {
     initLiveCoursesSync();

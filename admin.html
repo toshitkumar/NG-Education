@@ -503,9 +503,15 @@
                 <h3 class="panel-title">Website &amp; Student Popups Manager (मल्टी-टारगेट पॉप-अप्स)</h3>
                 <p class="panel-subtitle">Create and manage multiple active popups with banners, text, dates &amp; times. Target Home Page visitors or Enrolled Students separately.</p>
               </div>
-              <button type="button" class="btn-primary-action" onclick="openCreatePopupModal()">
-                <span>+ Create New Popup</span>
-              </button>
+              <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <button type="button" class="btn-secondary-action" onclick="testLivePopupsOnWebsite()" title="Clear dismissal cache and open website to test popups immediately">
+                  <span>⚡ Test Live on Website</span>
+                  <span>↗</span>
+                </button>
+                <button type="button" class="btn-primary-action" onclick="openCreatePopupModal()">
+                  <span>+ Create New Popup</span>
+                </button>
+              </div>
             </div>
 
             <!-- Popups Audience Filter Tabs -->
@@ -1042,7 +1048,7 @@
        9. CREATE / EDIT POPUP MODAL
        ===================================================================== -->
   <div class="admin-modal-overlay" id="modalAdminPopup">
-    <div class="admin-modal-box" style="max-width: 620px; max-height: 92vh; overflow-y: auto;">
+    <div class="admin-modal-box" style="max-width: 660px; max-height: 92vh; overflow-y: auto;">
       <div class="admin-modal-header">
         <h3 class="admin-modal-title" id="popupModalTitle">Create Announcement Popup</h3>
         <button class="btn-modal-close" onclick="closePopupModal()">&times;</button>
@@ -1055,7 +1061,7 @@
           <!-- 1. Target Audience Selector -->
           <div class="auth-form-group">
             <label class="auth-label">Target Audience (कहाँ और किसको दिखाना है?) *</label>
-            <select id="popupInputAudience" class="auth-input" required onchange="handlePopupAudienceChange()">
+            <select id="popupInputAudience" class="auth-input" required onchange="handlePopupAudienceChange(); updateModalLivePreview();">
               <option value="home">🏠 Home Page Visitors (सार्वजनिक होमपेज विजिटर्स)</option>
               <option value="students">🎓 Enrolled Students Only (लॉगिन किए हुए स्टूडेंट्स पोर्टल)</option>
               <option value="all">🌐 All Visitors &amp; Students (पूरी वेबसाइट पर सभी को)</option>
@@ -1067,17 +1073,37 @@
 
           <!-- 2. Popup Title -->
           <div class="auth-form-group">
-            <label class="auth-label">Popup Title (शीर्षक) *</label>
-            <input type="text" id="popupInputTitle" class="auth-input" placeholder="e.g. 🛸 Drone Making Masterclass 50% Off" required>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label class="auth-label" style="margin-bottom: 0;">Popup Title (शीर्षक) *</label>
+              <div style="display: flex; gap: 4px;">
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('🛸')">🛸</button>
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('🤖')">🤖</button>
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('🎓')">🎓</button>
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('🏆')">🏆</button>
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('⚡')">⚡</button>
+                <button type="button" class="btn-emoji-quick" onclick="insertEmojiToTitle('📢')">📢</button>
+              </div>
+            </div>
+            <input type="text" id="popupInputTitle" class="auth-input" placeholder="e.g. 🛸 Drone Making Masterclass 50% Off" required oninput="updateModalLivePreview()">
           </div>
 
-          <!-- 3. Image URL or File Upload -->
+          <!-- 3. Image Presets & Upload -->
           <div class="auth-form-group">
-            <label class="auth-label">Popup Banner Image (फोटो या बैनर जोड़ें)</label>
+            <label class="auth-label">Choose Banner Photo (Preset चुनें या अपनी फोटो अपलोड करें)</label>
+            
+            <!-- Quick Preset Chips -->
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+              <button type="button" class="btn-img-preset" onclick="applyPopupImagePreset('assets/images/slide1_robotics.webp')">🛸 Drone</button>
+              <button type="button" class="btn-img-preset" onclick="applyPopupImagePreset('assets/images/slide3_stem_lab.webp')">🤖 Robotics</button>
+              <button type="button" class="btn-img-preset" onclick="applyPopupImagePreset('assets/images/slide2_ai.webp')">⚡ Electronics</button>
+              <button type="button" class="btn-img-preset" onclick="applyPopupImagePreset('assets/images/hero_student_cutout.webp')">🎓 Student</button>
+              <button type="button" class="btn-img-preset" onclick="applyPopupImagePreset('')">🚫 No Image (Text Only)</button>
+            </div>
+
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <input type="text" id="popupInputImageUrl" class="auth-input" placeholder="Image URL (e.g. assets/images/slide1_robotics.webp or drive link)" oninput="handlePopupImagePreview(this.value)">
+              <input type="text" id="popupInputImageUrl" class="auth-input" placeholder="Image URL (or click preset above)" oninput="handlePopupImagePreview(this.value); updateModalLivePreview();">
               <button type="button" class="btn-secondary-action" onclick="document.getElementById('popupFileInput').click()" style="flex-shrink: 0; white-space: nowrap;">
-                <span>📁 Upload File</span>
+                <span>📁 Upload Photo</span>
               </button>
               <input type="file" id="popupFileInput" accept="image/*" style="display: none;" onchange="handlePopupFileUpload(event)">
             </div>
@@ -1092,14 +1118,14 @@
           <!-- 4. Popup Message -->
           <div class="auth-form-group">
             <label class="auth-label">Popup Message / Details (विवरण) *</label>
-            <textarea id="popupInputMessage" class="auth-input" style="height: 80px; padding-top: 8px; resize: vertical;" placeholder="Enter event details, offer highlights, instructions or announcement text..." required></textarea>
+            <textarea id="popupInputMessage" class="auth-input" style="height: 80px; padding-top: 8px; resize: vertical;" placeholder="Enter event details, offer highlights, instructions or announcement text..." required oninput="updateModalLivePreview()"></textarea>
           </div>
 
-          <!-- 5. Date & Time Scheduling Section (With or Without Date/Time) -->
+          <!-- 5. Date & Time Scheduling Section (Flexible: With or Without Date/Time) -->
           <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;">
             <div style="display: flex; align-items: center; justify-content: space-between;">
               <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 800; color: #0F172A; cursor: pointer;">
-                <input type="checkbox" id="popupInputHasSchedule" onchange="togglePopupScheduleInputs(this.checked)" style="accent-color: var(--admin-teal); width: 18px; height: 18px;">
+                <input type="checkbox" id="popupInputHasSchedule" onchange="togglePopupScheduleInputs(this.checked); updateModalLivePreview();" style="accent-color: var(--admin-teal); width: 18px; height: 18px;">
                 <span>Include Event Date &amp; Time (तारीख और समय जोड़ें)</span>
               </label>
               <span id="popupScheduleStatusBadge" style="font-size: 0.75rem; font-weight: 800; background: #E2E8F0; color: #64748B; padding: 2px 8px; border-radius: 999px;">Optional</span>
@@ -1107,17 +1133,21 @@
             
             <div id="popupScheduleFieldsWrap" style="display: none; margin-top: 14px; padding-top: 12px; border-top: 1px dashed #CBD5E1;">
               <div class="auth-form-group" style="margin-bottom: 10px;">
-                <label class="auth-label">Schedule Heading / Label</label>
-                <input type="text" id="popupInputScheduleLabel" class="auth-input" value="Event Starts:" placeholder="e.g. Event Starts: or Batch Date: or Submission Deadline:">
+                <label class="auth-label">Schedule Label (हेडिंग)</label>
+                <input type="text" id="popupInputScheduleLabel" class="auth-input" value="Event Starts:" placeholder="e.g. Event Starts: or Batch Date: or Submission Deadline:" oninput="updateModalLivePreview()">
+              </div>
+              <div class="auth-form-group" style="margin-bottom: 10px;">
+                <label class="auth-label">Quick Schedule Text (आसान तरीका - तारीख व समय लिखें)</label>
+                <input type="text" id="popupInputScheduleText" class="auth-input" placeholder="e.g. Sunday, 15th Nov • 11:00 AM (या 'Starting Next Week')" oninput="updateModalLivePreview()">
               </div>
               <div class="modal-form-grid">
                 <div class="auth-form-group">
-                  <label class="auth-label">Date (तारीख)</label>
-                  <input type="date" id="popupInputDate" class="auth-input">
+                  <label class="auth-label">Or Pick Exact Date (कैलेंडर तारीख)</label>
+                  <input type="date" id="popupInputDate" class="auth-input" oninput="updateModalLivePreview()">
                 </div>
                 <div class="auth-form-group">
-                  <label class="auth-label">Time (समय)</label>
-                  <input type="time" id="popupInputTime" class="auth-input">
+                  <label class="auth-label">Or Pick Exact Time (समय)</label>
+                  <input type="time" id="popupInputTime" class="auth-input" oninput="updateModalLivePreview()">
                 </div>
               </div>
             </div>
@@ -1127,7 +1157,7 @@
           <div class="modal-form-grid" style="margin-bottom: 16px;">
             <div class="auth-form-group">
               <label class="auth-label">Button Text (CTA बटन टेक्स्ट)</label>
-              <input type="text" id="popupInputBtnText" class="auth-input" placeholder="e.g. Explore Course (50% OFF) →">
+              <input type="text" id="popupInputBtnText" class="auth-input" placeholder="e.g. Explore Course (50% OFF) →" oninput="updateModalLivePreview()">
             </div>
             <div class="auth-form-group">
               <label class="auth-label">Button Link / Action</label>
@@ -1136,18 +1166,45 @@
           </div>
 
           <!-- 7. Active Status Checkbox -->
-          <div style="margin-top: 6px;">
+          <div style="margin-top: 6px; margin-bottom: 16px;">
             <label style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; cursor: pointer; color: var(--admin-slate);">
               <input type="checkbox" id="popupInputIsActive" checked style="accent-color: var(--admin-teal); width: 18px; height: 18px;">
               <span>Activate this popup immediately (तुरंत एक्टिव और लाइव करें)</span>
             </label>
           </div>
 
+          <!-- 8. Real-time In-Modal Visual Preview -->
+          <div style="background: #F1F5F9; border: 2px dashed #CBD5E1; border-radius: 14px; padding: 14px;">
+            <div style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #64748B; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+              <span>📱 Live Preview (वेबसाइट पर ऐसा दिखेगा)</span>
+              <span id="modalPreviewAudienceBadge" style="font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; background: #0E6258; color: white;">🏠 Home Page</span>
+            </div>
+            
+            <div style="background: white; border-radius: 14px; border: 1.5px solid #CBD5E1; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.06); max-width: 440px; margin: 0 auto;">
+              <div id="modalCardPreviewImgWrap" style="height: 150px; background: #0F172A; display: none; overflow: hidden;">
+                <img id="modalCardPreviewImg" src="" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div style="padding: 16px;">
+                <h4 id="modalCardPreviewTitle" style="font-size: 1.12rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">Your Popup Title Here</h4>
+                <p id="modalCardPreviewMessage" style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin-bottom: 12px;">Your announcement message text will appear here.</p>
+                
+                <div id="modalCardPreviewSchedule" style="display: none; background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; font-size: 0.8rem; font-weight: 700; color: #92400E; align-items: center; gap: 6px;">
+                  <span>⏰</span>
+                  <span id="modalCardPreviewScheduleText">Event Starts: 15 Nov 2026</span>
+                </div>
+
+                <div id="modalCardPreviewBtnWrap" style="display: none;">
+                  <span id="modalCardPreviewBtn" class="btn-primary-action" style="display: block; text-align: center; justify-content: center; font-size: 0.86rem; padding: 8px 16px; pointer-events: none;">Explore Course →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div class="admin-modal-footer">
           <button type="button" class="btn-secondary-action" onclick="closePopupModal()">Cancel</button>
-          <button type="submit" class="btn-primary-action">
+          <button type="submit" class="btn-primary-action" id="popupSubmitBtn">
             <span id="popupSubmitBtnText">Save &amp; Publish Popup</span>
             <span>✨</span>
           </button>

@@ -2109,3 +2109,33 @@ input:checked + .slider-round:before {
     align-items: flex-start;
   }
 }
+
+
+/* Preset Image & Emoji Quick Selectors */
+.btn-img-preset {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1E293B;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-img-preset:hover, .btn-img-preset.active {
+  background: #0E6258;
+  color: #FFFFFF;
+  border-color: #0E6258;
+}
+.btn-emoji-quick {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.btn-emoji-quick:hover {
+  background: #E2E8F0;
+}

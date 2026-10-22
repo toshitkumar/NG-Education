@@ -2564,34 +2564,43 @@ function applyTickerColorPreset(bgColor, textColor) {
 }
 
 function handleSaveTickerSettings(event) {
-  if (event) event.preventDefault();
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
-  const isEnabled = document.getElementById('tickerEnableSwitch')?.checked;
-  const badge = document.getElementById('tickerInputBadge')?.value.trim();
-  const highlight = document.getElementById('tickerInputHighlight')?.value.trim();
-  const msg1 = document.getElementById('tickerInputMsg1')?.value.trim();
-  const msg2 = document.getElementById('tickerInputMsg2')?.value.trim();
-  const msg3 = document.getElementById('tickerInputMsg3')?.value.trim();
-  const bgColor = document.getElementById('tickerInputBgColor')?.value || '#F59E0B';
-  const textColor = document.getElementById('tickerInputTextColor')?.value || '#0F172A';
-  const speed = document.getElementById('tickerInputSpeed')?.value || '28s';
+  try {
+    const isEnabled = document.getElementById('tickerEnableSwitch')?.checked !== false;
+    const badge = document.getElementById('tickerInputBadge')?.value.trim() || '📢 NOTICE';
+    const highlight = document.getElementById('tickerInputHighlight')?.value.trim() || '';
+    const msg1 = document.getElementById('tickerInputMsg1')?.value.trim() || '';
+    const msg2 = document.getElementById('tickerInputMsg2')?.value.trim() || '';
+    const msg3 = document.getElementById('tickerInputMsg3')?.value.trim() || '';
+    const bgColor = document.getElementById('tickerInputBgColor')?.value || '#F59E0B';
+    const textColor = document.getElementById('tickerInputTextColor')?.value || '#0F172A';
+    const speed = document.getElementById('tickerInputSpeed')?.value || '28s';
 
-  const newTicker = {
-    enabled: isEnabled,
-    badgeText: badge,
-    highlightWord: highlight,
-    text1: msg1,
-    text2: msg2,
-    text3: msg3,
-    bgColor: bgColor,
-    textColor: textColor,
-    speed: speed,
-    updatedAt: new Date().toISOString()
-  };
+    const newTicker = {
+      enabled: isEnabled,
+      badgeText: badge,
+      highlightWord: highlight,
+      text1: msg1,
+      text2: msg2,
+      text3: msg3,
+      bgColor: bgColor,
+      textColor: textColor,
+      speed: speed,
+      updatedAt: new Date().toISOString()
+    };
 
-  state.ticker = newTicker;
-  localStorage.setItem(ADMIN_CONFIG.tickerKey, JSON.stringify(newTicker));
-  showToast('✓ Top Scrolling Ticker successfully updated and published to live website!');
+    state.ticker = newTicker;
+    localStorage.setItem(ADMIN_CONFIG.tickerKey, JSON.stringify(newTicker));
+    state.syncToCloud('sync_ticker', { ticker: newTicker });
+    showToast('✓ Top Scrolling Ticker successfully saved & published to website!');
+  } catch (err) {
+    console.error('Error saving ticker:', err);
+    alert('Error saving ticker: ' + err.message);
+  }
 }
 
 function renderPopupsTable(filterAudience = currentPopupFilter) {
@@ -2705,6 +2714,79 @@ function filterPopupsTable(aud) {
   renderPopupsTable(aud);
 }
 
+function applyPopupImagePreset(url) {
+  const input = document.getElementById('popupInputImageUrl');
+  if (input) input.value = url;
+  handlePopupImagePreview(url);
+  updateModalLivePreview();
+}
+
+function insertEmojiToTitle(emoji) {
+  const input = document.getElementById('popupInputTitle');
+  if (input) {
+    input.value = emoji + ' ' + input.value.replace(/^[\p{Emoji}\s]+/u, '');
+    updateModalLivePreview();
+    input.focus();
+  }
+}
+
+function updateModalLivePreview() {
+  const title = document.getElementById('popupInputTitle')?.value.trim() || 'Your Popup Title Here';
+  const msg = document.getElementById('popupInputMessage')?.value.trim() || 'Your announcement message text will appear here.';
+  const imgUrl = document.getElementById('popupInputImageUrl')?.value.trim();
+  const aud = document.getElementById('popupInputAudience')?.value || 'home';
+  const hasSched = document.getElementById('popupInputHasSchedule')?.checked === true;
+  const schedText = document.getElementById('popupInputScheduleText')?.value.trim();
+  const schedDate = document.getElementById('popupInputDate')?.value;
+  const schedTime = document.getElementById('popupInputTime')?.value;
+  const schedLabel = document.getElementById('popupInputScheduleLabel')?.value.trim() || 'Event Starts:';
+  const btnText = document.getElementById('popupInputBtnText')?.value.trim();
+
+  // Update in-modal preview elements
+  const elTitle = document.getElementById('modalCardPreviewTitle');
+  const elMsg = document.getElementById('modalCardPreviewMessage');
+  const elImgWrap = document.getElementById('modalCardPreviewImgWrap');
+  const elImg = document.getElementById('modalCardPreviewImg');
+  const elAud = document.getElementById('modalPreviewAudienceBadge');
+  const elSched = document.getElementById('modalCardPreviewSchedule');
+  const elSchedText = document.getElementById('modalCardPreviewScheduleText');
+  const elBtnWrap = document.getElementById('modalCardPreviewBtnWrap');
+  const elBtn = document.getElementById('modalCardPreviewBtn');
+
+  if (elTitle) elTitle.textContent = title;
+  if (elMsg) elMsg.textContent = msg;
+
+  if (elAud) {
+    elAud.textContent = aud === 'home' ? '🏠 Home Page' : (aud === 'students' ? '🎓 Students Only' : '🌐 All Visitors');
+    elAud.style.background = aud === 'home' ? '#0E6258' : (aud === 'students' ? '#F59E0B' : '#6366F1');
+  }
+
+  if (imgUrl && imgUrl.length > 3) {
+    if (elImg) elImg.src = imgUrl;
+    if (elImgWrap) elImgWrap.style.display = 'block';
+  } else {
+    if (elImgWrap) elImgWrap.style.display = 'none';
+  }
+
+  if (hasSched && (schedText || schedDate || schedTime)) {
+    let finalSched = schedText || '';
+    if (!finalSched && schedDate) {
+      finalSched = `${schedDate} ${schedTime || ''}`.trim();
+    }
+    if (elSchedText) elSchedText.textContent = `${schedLabel} ${finalSched}`;
+    if (elSched) elSched.style.display = 'flex';
+  } else {
+    if (elSched) elSched.style.display = 'none';
+  }
+
+  if (btnText) {
+    if (elBtn) elBtn.textContent = btnText;
+    if (elBtnWrap) elBtnWrap.style.display = 'block';
+  } else {
+    if (elBtnWrap) elBtnWrap.style.display = 'none';
+  }
+}
+
 function openCreatePopupModal() {
   document.getElementById('popupEditForm').reset();
   document.getElementById('popupEditId').value = '';
@@ -2714,6 +2796,7 @@ function openCreatePopupModal() {
   clearPopupImage();
   togglePopupScheduleInputs(false);
   handlePopupAudienceChange();
+  updateModalLivePreview();
 
   const modal = document.getElementById('modalAdminPopup');
   if (modal) modal.classList.add('active');
@@ -2742,17 +2825,17 @@ function openEditPopupModal(popupId) {
   document.getElementById('popupInputHasSchedule').checked = hasSched;
   togglePopupScheduleInputs(hasSched);
 
-  if (hasSched) {
-    document.getElementById('popupInputScheduleLabel').value = popup.scheduleLabel || 'Event Starts:';
-    document.getElementById('popupInputDate').value = popup.scheduleDate || '';
-    document.getElementById('popupInputTime').value = popup.scheduleTime || '';
-  }
+  document.getElementById('popupInputScheduleLabel').value = popup.scheduleLabel || 'Event Starts:';
+  document.getElementById('popupInputScheduleText').value = popup.scheduleText || '';
+  document.getElementById('popupInputDate').value = popup.scheduleDate || '';
+  document.getElementById('popupInputTime').value = popup.scheduleTime || '';
 
   document.getElementById('popupInputBtnText').value = popup.btnText || '';
   document.getElementById('popupInputBtnLink').value = popup.btnLink || '';
   document.getElementById('popupInputIsActive').checked = popup.isActive !== false;
 
   handlePopupAudienceChange();
+  updateModalLivePreview();
 
   const modal = document.getElementById('modalAdminPopup');
   if (modal) modal.classList.add('active');
@@ -2764,138 +2847,194 @@ function closePopupModal() {
 }
 
 function handlePopupAudienceChange() {
-  const sel = document.getElementById('popupInputAudience')?.value;
+  const val = document.getElementById('popupInputAudience')?.value;
   const hint = document.getElementById('popupAudienceHint');
   if (!hint) return;
 
-  if (sel === 'home') {
-    hint.textContent = '✓ यह पॉप-अप सिर्फ वेबसाइट के होम पेज पर आने वाले सामान्य आगंतुकों को दिखेगा।';
-    hint.style.color = '#0E6258';
-  } else if (sel === 'students') {
-    hint.textContent = '🎓 यह पॉप-अप विशेष रूप से स्टूडेंट्स (लॉगिन एवं स्टूडेंट डैशबोर्ड) को दिखेगा।';
-    hint.style.color = '#D97706';
+  if (val === 'home') {
+    hint.textContent = '✓ यह पॉप-अप वेबसाइट के मुख्य होम पेज पर सभी विजिटर्स को दिखेगा।';
+  } else if (val === 'students') {
+    hint.textContent = '✓ यह पॉप-अप स्टूडेंट्स पोर्टल और स्टूडेंट लॉगिन स्क्रीन पर दिखेगा।';
   } else {
-    hint.textContent = '🌐 यह पॉप-अप होमपेज विजिटर्स और स्टूडेंट्स दोनों को दिखेगा।';
-    hint.style.color = '#6D28D9';
+    hint.textContent = '✓ यह पॉप-अप होम पेज और स्टूडेंट्स पोर्टल दोनों जगह दिखेगा।';
   }
 }
 
 function togglePopupScheduleInputs(isChecked) {
   const wrap = document.getElementById('popupScheduleFieldsWrap');
   const badge = document.getElementById('popupScheduleStatusBadge');
+
   if (wrap) wrap.style.display = isChecked ? 'block' : 'none';
   if (badge) {
-    badge.textContent = isChecked ? 'Schedule Active' : 'Without Date/Time';
+    badge.textContent = isChecked ? 'Included' : 'Optional';
     badge.style.background = isChecked ? '#D1FAE5' : '#E2E8F0';
     badge.style.color = isChecked ? '#065F46' : '#64748B';
   }
 }
 
 function handlePopupImagePreview(url) {
-  const previewBox = document.getElementById('popupImagePreviewBox');
-  const previewEl = document.getElementById('popupImagePreviewEl');
-  if (!previewBox || !previewEl) return;
+  const box = document.getElementById('popupImagePreviewBox');
+  const el = document.getElementById('popupImagePreviewEl');
+  if (!box || !el) return;
 
   if (url && url.trim().length > 3) {
-    previewEl.src = url.trim();
-    previewBox.style.display = 'block';
+    el.src = url.trim();
+    box.style.display = 'block';
   } else {
-    previewBox.style.display = 'none';
+    box.style.display = 'none';
   }
 }
 
 function clearPopupImage() {
-  const urlInput = document.getElementById('popupInputImageUrl');
+  const input = document.getElementById('popupInputImageUrl');
+  const box = document.getElementById('popupImagePreviewBox');
   const fileInput = document.getElementById('popupFileInput');
-  const previewBox = document.getElementById('popupImagePreviewBox');
-  if (urlInput) urlInput.value = '';
+  if (input) input.value = '';
+  if (box) box.style.display = 'none';
   if (fileInput) fileInput.value = '';
-  if (previewBox) previewBox.style.display = 'none';
+  updateModalLivePreview();
 }
 
+// Canvas-based image auto-compressor: compresses camera photos to max 800px & ~40KB JPEG
 function handlePopupFileUpload(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
   reader.onload = function(e) {
-    const dataUrl = e.target.result;
-    document.getElementById('popupInputImageUrl').value = dataUrl;
-    handlePopupImagePreview(dataUrl);
+    const img = new Image();
+    img.onload = function() {
+      const maxDim = 800;
+      let width = img.width;
+      let height = img.height;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Lightweight compressed JPEG (~35-60KB)
+      const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+      const urlInput = document.getElementById('popupInputImageUrl');
+      if (urlInput) urlInput.value = compressedDataUrl;
+      handlePopupImagePreview(compressedDataUrl);
+      updateModalLivePreview();
+      showToast('✓ Photo compressed & attached successfully!');
+    };
+    img.src = e.target.result;
   };
   reader.readAsDataURL(file);
 }
 
 function handleSavePopup(event) {
-  if (event) event.preventDefault();
-
-  const editId = document.getElementById('popupEditId')?.value;
-  const audience = document.getElementById('popupInputAudience')?.value || 'home';
-  const title = document.getElementById('popupInputTitle')?.value.trim();
-  const image = document.getElementById('popupInputImageUrl')?.value.trim();
-  const message = document.getElementById('popupInputMessage')?.value.trim();
-
-  const hasSchedule = document.getElementById('popupInputHasSchedule')?.checked === true;
-  const scheduleLabel = document.getElementById('popupInputScheduleLabel')?.value.trim() || 'Scheduled:';
-  const scheduleDate = document.getElementById('popupInputDate')?.value || '';
-  const scheduleTime = document.getElementById('popupInputTime')?.value || '';
-
-  const btnText = document.getElementById('popupInputBtnText')?.value.trim() || '';
-  const btnLink = document.getElementById('popupInputBtnLink')?.value.trim() || '';
-  const isActive = document.getElementById('popupInputIsActive')?.checked === true;
-
-  if (!title || !message) {
-    alert('Please enter Title and Message.');
-    return;
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
 
-  if (!state.popups) state.popups = [];
+  try {
+    const editId = document.getElementById('popupEditId')?.value;
+    const audience = document.getElementById('popupInputAudience')?.value || 'home';
+    const title = document.getElementById('popupInputTitle')?.value.trim();
+    const image = document.getElementById('popupInputImageUrl')?.value.trim();
+    const message = document.getElementById('popupInputMessage')?.value.trim();
 
-  if (editId) {
-    // Update existing
-    const idx = state.popups.findIndex(p => p.id === editId);
-    if (idx !== -1) {
-      state.popups[idx] = {
-        ...state.popups[idx],
+    const hasSchedule = document.getElementById('popupInputHasSchedule')?.checked === true;
+    const scheduleLabel = document.getElementById('popupInputScheduleLabel')?.value.trim() || 'Event Starts:';
+    const scheduleText = document.getElementById('popupInputScheduleText')?.value.trim() || '';
+    const scheduleDate = document.getElementById('popupInputDate')?.value || '';
+    const scheduleTime = document.getElementById('popupInputTime')?.value || '';
+
+    const btnText = document.getElementById('popupInputBtnText')?.value.trim() || '';
+    const btnLink = document.getElementById('popupInputBtnLink')?.value.trim() || '';
+    const isActive = document.getElementById('popupInputIsActive')?.checked === true;
+
+    if (!title) {
+      alert('Please enter a Popup Title.');
+      return;
+    }
+    if (!message) {
+      alert('Please enter Popup Message details.');
+      return;
+    }
+
+    if (!state.popups) state.popups = [];
+
+    const nowIso = new Date().toISOString();
+
+    if (editId) {
+      const idx = state.popups.findIndex(p => p.id === editId);
+      if (idx !== -1) {
+        state.popups[idx] = {
+          ...state.popups[idx],
+          audience,
+          title,
+          image,
+          message,
+          hasSchedule,
+          scheduleLabel,
+          scheduleText,
+          scheduleDate,
+          scheduleTime,
+          btnText,
+          btnLink,
+          isActive,
+          updatedAt: nowIso
+        };
+        showToast('✓ Popup successfully updated!');
+      }
+    } else {
+      const newPopup = {
+        id: 'popup_' + Date.now(),
         audience,
         title,
         image,
         message,
         hasSchedule,
         scheduleLabel,
+        scheduleText,
         scheduleDate,
         scheduleTime,
         btnText,
         btnLink,
         isActive,
-        updatedAt: new Date().toISOString()
+        createdAt: nowIso,
+        updatedAt: nowIso
       };
-      showToast('✓ Popup successfully updated!');
+      state.popups.unshift(newPopup);
+      showToast('✓ New Popup created & published live!');
     }
-  } else {
-    // Create new
-    const newPopup = {
-      id: 'popup_' + Date.now(),
-      audience,
-      title,
-      image,
-      message,
-      hasSchedule,
-      scheduleLabel,
-      scheduleDate,
-      scheduleTime,
-      btnText,
-      btnLink,
-      isActive,
-      createdAt: new Date().toISOString()
-    };
-    state.popups.unshift(newPopup);
-    showToast('✓ New Popup created & published!');
-  }
 
-  localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
-  closePopupModal();
-  renderPopupsTable();
+    // Persist to localStorage safely
+    try {
+      localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+    } catch (quotaErr) {
+      console.warn('Storage quota warning, pruning old inactive entries:', quotaErr);
+      state.popups = state.popups.slice(0, 10);
+      localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+    }
+
+    // Reset dismissal cache so admin immediately sees it on website
+    clearAllPopupDismissals();
+
+    // Cloud sync
+    state.syncToCloud('sync_popups', { popups: state.popups });
+
+    closePopupModal();
+    renderPopupsTable();
+  } catch (err) {
+    console.error('Error saving popup:', err);
+    alert('Could not save popup: ' + err.message);
+  }
 }
 
 function togglePopupStatus(popupId) {
@@ -2903,7 +3042,10 @@ function togglePopupStatus(popupId) {
   if (!popup) return;
 
   popup.isActive = !popup.isActive;
+  popup.updatedAt = new Date().toISOString();
   localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+  clearAllPopupDismissals();
+  state.syncToCloud('sync_popups', { popups: state.popups });
   renderPopupsTable();
   showToast(popup.isActive ? '✓ Popup is now LIVE on website!' : '○ Popup has been deactivated.');
 }
@@ -2913,15 +3055,29 @@ function deletePopup(popupId) {
 
   state.popups = (state.popups || []).filter(p => p.id !== popupId);
   localStorage.setItem(ADMIN_CONFIG.popupsKey, JSON.stringify(state.popups));
+  state.syncToCloud('sync_popups', { popups: state.popups });
   renderPopupsTable();
   showToast('✓ Popup deleted successfully.');
+}
+
+function clearAllPopupDismissals() {
+  Object.keys(sessionStorage).forEach(k => {
+    if (k.startsWith('dismissed_site_popup_')) sessionStorage.removeItem(k);
+  });
+  Object.keys(localStorage).forEach(k => {
+    if (k.startsWith('dismissed_popup_day_') || k.startsWith('dismissed_popup_time_')) localStorage.removeItem(k);
+  });
+}
+
+function testLivePopupsOnWebsite() {
+  clearAllPopupDismissals();
+  window.open('index.html?test_popup=1', '_blank');
 }
 
 function previewPopupModal(popupId) {
   const popup = (state.popups || []).find(p => p.id === popupId);
   if (!popup) return;
 
-  // Uses the existing preview modal
   const modal = document.getElementById('modalContentPreview');
   const titleEl = document.getElementById('previewModalTitle');
   const typeBadge = document.getElementById('previewTypeBadge');
@@ -2936,11 +3092,12 @@ function previewPopupModal(popupId) {
   }
 
   let schedHtml = '';
-  if (popup.hasSchedule && (popup.scheduleDate || popup.scheduleTime)) {
+  const finalSched = popup.scheduleText || (popup.scheduleDate ? `${popup.scheduleDate} ${popup.scheduleTime || ''}` : '');
+  if (popup.hasSchedule && finalSched) {
     schedHtml = `
       <div style="background: #FEF3C7; border: 1.5px solid #F59E0B; border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: #92400E; font-size: 0.88rem; font-weight: 700;">
         <span>⏰</span>
-        <span>${popup.scheduleLabel || 'Date & Time:'} ${popup.scheduleDate || ''} ${popup.scheduleTime || ''}</span>
+        <span>${popup.scheduleLabel || 'Schedule:'} ${finalSched}</span>
       </div>
     `;
   }
