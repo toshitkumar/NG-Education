@@ -152,6 +152,12 @@
           <span>Courses Manager</span>
         </button>
 
+        <button class="nav-tab-btn" id="tabBtn_curriculum" onclick="switchAdminTab('curriculum')">
+          <span>📁</span>
+          <span>Curriculum &amp; Media</span>
+          <span class="nav-tab-badge" id="sidebarCurriculumBadge" style="display: none;">0</span>
+        </button>
+
         <button class="nav-tab-btn" id="tabBtn_orders" onclick="switchAdminTab('orders')">
           <span>💳</span>
           <span>Enrollments &amp; Approvals</span>
@@ -308,6 +314,47 @@
               </table>
             </div>
           </div>
+        </div>
+
+        <!-- ==========================================
+             PANE 2.5: CURRICULUM, MODULES & GOOGLE DRIVE MEDIA
+             ========================================== -->
+        <div class="admin-tab-pane" id="pane_curriculum">
+          
+          <!-- Curriculum Header & Selector Bar -->
+          <div class="curriculum-header-bar">
+            <div class="curriculum-select-row">
+              <div class="curriculum-picker-wrap">
+                <label class="curriculum-picker-label" for="curriculumCourseSelect">Select Course:</label>
+                <select id="curriculumCourseSelect" class="curriculum-course-select" onchange="handleCurriculumCourseChange()"></select>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <a id="btnOpenCourseDrive" href="https://drive.google.com/drive" target="_blank" class="btn-drive-folder-link" title="Open Course Folder in Google Drive">
+                  <span>📂 Course Drive Folder</span>
+                  <span>↗</span>
+                </a>
+                <button class="btn-primary-action" onclick="openAddModuleModal()">+ Add New Module</button>
+              </div>
+            </div>
+
+            <div class="curriculum-actions-row">
+              <div class="curriculum-stats-pills">
+                <span id="curriculumModCount" class="curriculum-stat-pill pill-drive">📁 0 Modules</span>
+                <span id="curriculumPartCount" class="curriculum-stat-pill">📖 0 Lessons</span>
+                <span id="curriculumVideoCount" class="curriculum-stat-pill pill-video">🎥 0 Videos</span>
+                <span id="curriculumPdfCount" class="curriculum-stat-pill pill-pdf">📄 0 PDFs</span>
+                <span id="curriculumNotesCount" class="curriculum-stat-pill pill-notes">📝 0 Notes</span>
+                <span id="curriculumAssignCount" class="curriculum-stat-pill pill-assign">🎯 0 Assignments</span>
+              </div>
+              <div style="font-size: 0.82rem; color: #64748B;">
+                ☁️ All media files auto-organized into <strong>Google Drive &gt; NG Education &gt; [Module]</strong> folders
+              </div>
+            </div>
+          </div>
+
+          <!-- Modules List Container -->
+          <div id="curriculumModulesContainer" class="modules-container"></div>
+
         </div>
 
         <!-- ==========================================
@@ -484,6 +531,235 @@
           <button type="submit" class="btn-primary-action">Save Course</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       5. ADD / EDIT MODULE MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalModule">
+    <div class="admin-modal-box" style="max-width: 540px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="moduleModalTitle">Add Module</h3>
+        <button class="btn-modal-close" onclick="closeModuleModal()">&times;</button>
+      </div>
+      <form id="moduleForm" onsubmit="handleModuleFormSubmit(event)">
+        <input type="hidden" id="moduleEditId">
+        <input type="hidden" id="moduleTargetCourseId">
+        <div class="admin-modal-body">
+          <div class="auth-form-group">
+            <label class="auth-label">Target Course</label>
+            <input type="text" id="moduleCourseNameDisplay" class="auth-input" readonly style="background: #F1F5F9; color: #475569; font-weight: 700;">
+          </div>
+          <div class="modal-form-grid">
+            <div class="auth-form-group">
+              <label class="auth-label">Module Number *</label>
+              <input type="number" id="moduleInputNumber" class="auth-input" placeholder="1" required min="1">
+            </div>
+            <div class="auth-form-group">
+              <label class="auth-label">Estimated Hours</label>
+              <input type="text" id="moduleInputHours" class="auth-input" placeholder="e.g. 2–3 Hours">
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Module Title *</label>
+            <input type="text" id="moduleInputTitle" class="auth-input" placeholder="e.g. Introduction to Embedded C &amp; Hardware Anatomy" required>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Module Summary / Description</label>
+            <textarea id="moduleInputDesc" class="auth-input" style="height: 70px; padding-top: 8px; resize: vertical;" placeholder="What students will learn in this module..."></textarea>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Google Drive Folder Link (Auto-created or Custom)</label>
+            <input type="url" id="moduleInputDriveUrl" class="auth-input" placeholder="https://drive.google.com/drive/folders/...">
+            <p style="font-size: 0.78rem; color: #64748B; margin-top: 4px;">Leave blank to automatically create inside NG Education - Courses on Google Drive.</p>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-secondary-action" onclick="closeModuleModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action">Save Module</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       6. ADD / EDIT PART (LESSON) MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalPart">
+    <div class="admin-modal-box" style="max-width: 500px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="partModalTitle">Add Lesson / Part</h3>
+        <button class="btn-modal-close" onclick="closePartModal()">&times;</button>
+      </div>
+      <form id="partForm" onsubmit="handlePartFormSubmit(event)">
+        <input type="hidden" id="partEditId">
+        <input type="hidden" id="partTargetModuleId">
+        <div class="admin-modal-body">
+          <div class="auth-form-group">
+            <label class="auth-label">Module Destination</label>
+            <input type="text" id="partModuleNameDisplay" class="auth-input" readonly style="background: #F1F5F9; color: #475569; font-weight: 700;">
+          </div>
+          <div class="modal-form-grid">
+            <div class="auth-form-group">
+              <label class="auth-label">Part / Lesson Number *</label>
+              <input type="number" id="partInputNumber" class="auth-input" placeholder="1" required min="1">
+            </div>
+            <div class="auth-form-group">
+              <label class="auth-label">Duration *</label>
+              <input type="text" id="partInputDuration" class="auth-input" placeholder="e.g. 18 min" required>
+            </div>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Part Title *</label>
+            <input type="text" id="partInputTitle" class="auth-input" placeholder="e.g. Pinout Anatomy &amp; Power Circuitry" required>
+          </div>
+          <div class="auth-form-group">
+            <label class="auth-label">Short Overview / Focus</label>
+            <textarea id="partInputOverview" class="auth-input" style="height: 60px; padding-top: 8px; resize: vertical;" placeholder="Quick summary of this specific lesson part..."></textarea>
+          </div>
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-secondary-action" onclick="closePartModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action">Save Lesson Part</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       7. GOOGLE DRIVE UPLOAD / ATTACH CONTENT MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalUploadContent">
+    <div class="admin-modal-box" style="max-width: 600px;">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="uploadModalTitle">Upload Content to Google Drive</h3>
+        <button class="btn-modal-close" onclick="closeUploadContentModal()">&times;</button>
+      </div>
+      <form id="uploadContentForm" onsubmit="handleUploadContentSubmit(event)">
+        <input type="hidden" id="uploadTargetCourseId">
+        <input type="hidden" id="uploadTargetModuleId">
+        <input type="hidden" id="uploadTargetPartId">
+        <input type="hidden" id="uploadSelectedType" value="video">
+
+        <div class="admin-modal-body">
+          <!-- Destination Banner -->
+          <div class="drive-destination-banner">
+            <span class="drive-dest-icon">☁️</span>
+            <div>
+              <div class="drive-dest-title">Google Drive Destination Folder:</div>
+              <div class="drive-dest-path" id="uploadDestPathDisplay">NG Education - Courses / ...</div>
+            </div>
+          </div>
+
+          <!-- Content Type Selector Tabs -->
+          <div class="upload-type-tabs">
+            <button type="button" class="upload-type-btn active" id="typeBtn_video" onclick="selectUploadContentType('video')">🎥 Video Lecture</button>
+            <button type="button" class="upload-type-btn" id="typeBtn_pdf" onclick="selectUploadContentType('pdf')">📄 PDF Doc</button>
+            <button type="button" class="upload-type-btn" id="typeBtn_notes" onclick="selectUploadContentType('notes')">📝 Notes</button>
+            <button type="button" class="upload-type-btn" id="typeBtn_assignment" onclick="selectUploadContentType('assignment')">🎯 Assignment</button>
+          </div>
+
+          <!-- Content Title -->
+          <div class="auth-form-group">
+            <label class="auth-label" id="uploadTitleLabel">Content Title *</label>
+            <input type="text" id="uploadInputTitle" class="auth-input" placeholder="e.g. Arduino Pinouts &amp; Digital I/O Walkthrough" required>
+          </div>
+
+          <!-- Upload Method Choice (Direct Upload vs Drive Link) -->
+          <div class="modal-form-grid" style="margin-bottom: 12px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">
+              <input type="radio" name="uploadMethod" value="file" checked onchange="toggleUploadMethod('file')" style="accent-color: var(--admin-teal);">
+              Direct File Upload to Drive
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 700; cursor: pointer;">
+              <input type="radio" name="uploadMethod" value="link" onchange="toggleUploadMethod('link')" style="accent-color: var(--admin-teal);">
+              Paste Google Drive / Cloud URL
+            </label>
+          </div>
+
+          <!-- Area 1: Direct File Upload Dropzone -->
+          <div id="uploadMethodFileArea">
+            <div class="drive-dropzone" id="driveDropzone" onclick="document.getElementById('driveFileInput').click()">
+              <input type="file" id="driveFileInput" style="display: none;" onchange="handleFileSelected(event)">
+              <span class="drive-dropzone-icon" id="dropzoneIcon">📁</span>
+              <div class="drive-dropzone-title" id="dropzoneTitle">Click to Select or Drag &amp; Drop File</div>
+              <div class="drive-dropzone-hint" id="dropzoneHint">Supported: .mp4, .webm, .pdf, .docx, .txt, .zip (Auto-uploaded to Module Folder)</div>
+            </div>
+            
+            <div id="selectedFilePreview" class="selected-file-preview" style="display: none;">
+              <div>
+                <strong id="selectedFileName" style="font-size: 0.88rem; color: var(--admin-slate);">file.mp4</strong>
+                <div id="selectedFileSize" style="font-size: 0.76rem; color: #64748B;">0 MB</div>
+              </div>
+              <button type="button" class="btn-secondary-action" style="padding: 4px 10px; font-size: 0.76rem; color: #EF4444;" onclick="clearSelectedFile()">Remove</button>
+            </div>
+          </div>
+
+          <!-- Area 2: Direct Google Drive Link Input -->
+          <div id="uploadMethodLinkArea" style="display: none;">
+            <div class="auth-form-group">
+              <label class="auth-label">Google Drive / Cloud Shareable URL</label>
+              <input type="url" id="uploadInputDriveUrl" class="auth-input" placeholder="https://drive.google.com/file/d/.../view?usp=sharing">
+              <p style="font-size: 0.78rem; color: #64748B; margin-top: 4px;">
+                Tip: You can also drag 4K/large videos directly into the module folder on Google Drive and paste the shareable link here.
+              </p>
+            </div>
+          </div>
+
+          <!-- Text Field for Notes / Assignment Instructions -->
+          <div class="auth-form-group" id="uploadNotesTextGroup" style="display: none; margin-top: 14px;">
+            <label class="auth-label" id="uploadNotesTextLabel">Study Notes Content / Assignment Problem</label>
+            <textarea id="uploadInputNotesText" class="auth-input" style="height: 90px; padding-top: 8px; resize: vertical;" placeholder="Enter lesson summary, key code snippets, or assignment instructions..."></textarea>
+          </div>
+
+          <!-- Upload Progress Bar -->
+          <div class="upload-progress-wrap" id="uploadProgressWrap">
+            <div class="upload-progress-bar">
+              <div class="upload-progress-fill" id="uploadProgressFill"></div>
+            </div>
+            <div class="upload-status-text">
+              <span id="uploadStatusMessage">Uploading to Google Drive...</span>
+              <span id="uploadPercentText">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-secondary-action" onclick="closeUploadContentModal()">Cancel</button>
+          <button type="submit" class="btn-primary-action" id="btnSubmitUpload">
+            <span>Upload &amp; Attach to Part</span>
+            <span>☁️</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       8. CONTENT MEDIA PREVIEW MODAL
+       ===================================================================== -->
+  <div class="admin-modal-overlay" id="modalContentPreview">
+    <div class="admin-modal-box" style="max-width: 720px;">
+      <div class="admin-modal-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="previewTypeBadge" class="curriculum-stat-pill pill-video">🎥 Video</span>
+          <h3 class="admin-modal-title" id="previewModalTitle">Preview Content</h3>
+        </div>
+        <button class="btn-modal-close" onclick="closeContentPreviewModal()">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <div id="previewMediaContainer" class="media-preview-box"></div>
+        <div style="margin-top: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 0.85rem; color: #64748B;">
+            <span id="previewFolderLocation">Stored in Google Drive</span>
+          </div>
+          <a id="previewDriveLink" href="#" target="_blank" class="btn-drive-folder-link">
+            <span>Open in Google Drive</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 

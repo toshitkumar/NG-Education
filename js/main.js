@@ -555,8 +555,11 @@ function initLiveCoursesSync() {
           const origFormatted = matchedCourse.originalPrice ? '₹' + Number(matchedCourse.originalPrice).toLocaleString('en-IN') : '';
           const discFormatted = '₹' + Number(matchedCourse.discountPrice).toLocaleString('en-IN');
           
+          const modCount = (matchedCourse.curriculum || []).length;
+          const curriculumTag = modCount > 0 ? `${modCount} Modules • 🎥 Video, PDF, Notes & Labs` : (matchedCourse.duration || '12-16 Modules');
+
           priceWrap.innerHTML = `
-            <span class="sub-duration">${matchedCourse.duration || '12-16 Modules'}</span>
+            <span class="sub-duration">${curriculumTag}</span>
             <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-top:2px;">
               <span class="main-price">${discFormatted}</span>
               ${matchedCourse.originalPrice && matchedCourse.originalPrice > matchedCourse.discountPrice ? `<span style="text-decoration:line-through; font-size:0.85rem; color:#94A3B8; font-weight:600;">${origFormatted}</span>` : ''}
